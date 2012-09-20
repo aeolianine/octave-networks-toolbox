@@ -1,0 +1,24 @@
+##################################################################
+% Returns the total number of edges given the adjacency matrix
+% INPUTs: adjacency matrix, nxn
+% OUTPUTs: m - total number of edges/links
+%
+% Note: Valid for both directed and undirected, simple or general graph
+% Other routines used: selfLoops.m, issymmetric.m
+% GB, last updated Sep 19, 2012
+##################################################################
+
+function m = numEdges(adj)
+
+sl=selfLoops(adj); % counting the number of self-loops
+
+if issymmetric(adj) & sl==0    % undirected simple graph
+    m=sum(sum(adj))/2; 
+    
+elseif issymmetric(adj) & sl>0
+    m=(sum(sum(adj))-sl)/2+sl; % counting the self-loops only once
+
+elseif not(issymmetric(adj))   % directed graph (not necessarily simple)
+    m=sum(sum(adj));
+    
+end
