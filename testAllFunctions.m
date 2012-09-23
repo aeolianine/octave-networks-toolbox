@@ -97,3 +97,210 @@ printf('testing averageDegree.m\n')
 assert(averageDegree(square),2)
 assert(averageDegree(bowtie),2+1.0/3)
 % ================================================
+
+
+% testing numConnComp.m ==========================
+fprintf('testing numConnComp.m\n')
+nc=numConnComp(disconnected_bowtie);
+assert(numConnComp(disconnected_bowtie),2)
+
+randint = randi(51);
+Adj=zeros(randint*30);
+for x=1:randint
+  adj=random_graph(30,0.5);
+  Adj(30*(x-1)+1:30*x,30*(x-1)+1:30*x)=adj;
+end
+assert(numConnComp(Adj),randint)
+% ================================================
+
+
+% testing findConnComp.m =========================
+fprintf('testing findConnComp.m\n')
+
+assert(findConnCompI(disconnected_bowtie,1),[1,2,3])
+assert(findConnComp(disconnected_bowtie),{[1,2,3],[4,5,6]})
+
+clear modules
+modules{1}=[0];
+randint = randi(21);
+Adj = []; adj = [];
+
+% make up a matrix (Adj) of randint disconnected components (adj)
+for x=1:randint
+  randsecint = randi(25)+5;
+  lastnode = modules{length(modules)}(length(modules{length(modules)}));
+  modules{length(modules)+1} = [lastnode+1:lastnode+randsecint]; 
+  while isempty(adj) | not(isconnected(adj)) | not(length(adj)==randsecint); adj=random_graph(randsecint,0.5); end
+
+  Adj(length(Adj)+1:length(Adj)+randsecint,length(Adj)+1:length(Adj)+randsecint)=adj; 
+end
+
+modules=modules(2:length(modules));
+assert(findConnComp(Adj),modules)
+% ================================================
+
+
+% testing giantComponent.m =======================
+fprintf('testing giantComponent.m\n')
+
+clear modules
+modules{1}=[0];
+randint = randi(20)+1;
+Adj = []; adj = [];
+
+% make up a matrix (Adj) of randint disconnected components (adj)
+for x=1:randint
+  randsecint = randi(25)+5;
+  lastnode = modules{length(modules)}(length(modules{length(modules)}));
+  modules{length(modules)+1} = [lastnode+1:lastnode+randsecint]; 
+  while isempty(adj) | not(isconnected(adj)) | not(length(adj)==randsecint); adj=random_graph(randsecint,0.5); end
+  Adj(length(Adj)+1:length(Adj)+randsecint,length(Adj)+1:length(Adj)+randsecint)=adj; 
+end
+modules=modules(2:length(modules));
+L = [];
+for m=1:length(modules); L = [L, length(modules{m})]; end;
+[maxL,maxind] = max(L);
+assert(giantComponent(Adj), subgraph(Adj,modules{maxind}))
+% ================================================
+
+
+
+% ================================================
+% Testing tarjan.m ===============================
+fprintf('testing tarjan.m\n')
+
+L = {}; L{1} = 2; L{2} = 1;
+GSCC = tarjan(L);
+assert(length(GSCC),1)
+assert(GSCC{1},[1,2])
+
+L = {}; L{1} = 2; L{2} = [];
+GSCC = tarjan(L);
+assert(length(GSCC),2)
+assert(GSCC{1},[2])
+assert(GSCC{2},[1])
+
+
+L={}; L{1}=[2,3]; L{2}=[1]; L{3}=[1]; L{4}=[1]; % cherry tree (binary) + extra node
+GSCC = tarjan(L);
+assert(length(GSCC),2)
+assert(GSCC{1},[1,2,3])
+assert(GSCC{2},4)
+
+
+L={}; L{1}=[2,3]; L{2}=[1,3]; L{3}=[1,2]; L{4}=[1]; % triangle with extra node
+GSCC = tarjan(L);
+assert(length(GSCC),2)
+assert(GSCC{1},[1,2,3])
+assert(GSCC{2},4)
+
+
+L={}; L{1}=[2,3]; L{2}=[1,3]; L{3}=[1,2,4]; L{4}=[5,6]; L{5}=[4,6]; L{6}=[4,5];
+GSCC = tarjan(L);
+assert(length(GSCC),2)
+assert(length(GSCC{1}),3)
+assert(length(GSCC{2}),3)
+
+L={}; L{1}=[2,3]; L{2}=[1,3]; L{3}=[1,2]; L{4}=[5,6]; L{5}=[4,6]; L{6}=[4,5];
+GSCC = tarjan(L);
+assert(length(GSCC),2)
+assert(length(GSCC{1}),3)
+assert(length(GSCC{2}),3)
+
+
+for iter=1:100  % completely random matrix testing ....
+
+  
+  % undirected graph testing ========================
+  adj = [0 1; 0 0];  % initialize so that the while loop does not break
+  while not(isconnected(adj)); adj = random_graph(randi(50)+1,rand); end
+
+  L=adj2adjL(adj);
+  GSCC = tarjan(L);
+  assert(length(GSCC),1)
+  assert(GSCC{1},[1:length(adj)])
+  
+  % directed graph testing ==========================
+  adj=random_directed_graph(randi(50)+1,rand);
+  L=adj2adjL(adj);
+  GSCC = tarjan(L);
+  
+  
+  if isconnected(adj) & isconnected(transpose(adj)) & length(adj)>0
+    
+    % there should be one component containing all nodes
+    assert(length(GSCC),1)
+    assert(GSCC{1},[1:length(adj)])
+    
+    
+  else  % disconnected directed graph
+    
+    ll=[];
+    for gg=1:length(GSCC); ll=[ll length(GSCC{gg})]; end;
+    [ml,maxll]=max(ll);
+    
+    assert(isconnected(adj(GSCC{maxll},GSCC{maxll})) | length(GSCC{maxll})==1)
+    
+    for ii=1:length(adj)
+      if isempty(find(GSCC{maxll}==ii))
+        
+        tryGC = [GSCC{maxll}, ii];
+        assert(not(isconnected(adj(tryGC,tryGC))) | not(isconnected(transpose(adj(tryGC,tryGC)))))
+        
+      end
+      
+    end
+    
+  end
+  
+end
+% ================================================
+% ================================================
+
+
+% testing graphComplement.m =====================
+fprintf('testing graphComplement.m\n')
+
+mat = [1 0 0 1 1 1; 0 1 0 1 1 1; 0 0 1 0 1 1; 1 1 0 1 0 0; 1 1 1 0 1 0; 1 1 1 0 0 1];
+assert(graphComplement(bowtie),mat)
+assert(graphComplement(undirected_triangle),eye(3))  
+% ================================================
+
+
+% Testing graphDual.m ============================
+fprintf('testing graphDual.m\n')
+
+gd=graphDual(adj2adjL(bowtie));
+gdT={};
+gdT{1}=[2,3]; gdT{2}=[1,3,4]; gdT{3}=[1,2,4]; gdT{4}=[2,3,5,6]; gdT{5}=[4,6,7]; gdT{6}=[4,5,7]; gdT{7}=[5,6];
+assert(gd,gdT)
+
+gd=graphDual(adj2adjL(undirected_triangle));
+gdT={};
+gdT{1}=[2,3]; gdT{2}=[1,3]; gdT{3}=[1,2];
+assert(gd,gdT)
+
+L={}; LT={}; L{1}=[2]; L{2}=[1]; LT{1}=[];
+assert(LT,graphDual(L))
+% ================================================
+
+% testing subgraph.m =============================
+fprintf('testing subgraph.m\n')
+assert(undirected_triangle,subgraph(bowtie,[1,2,3]))
+% ================================================
+
+% testing leafNodes.m ===========================
+fprintf('testing leafNodes.m\n')
+assert(leafNodes(edgeL2adj(undirected_cherry)),[2,3])
+assert(leafNodes(edgeL2adj(directed_cherry)),[2,3])
+assert(length(leafNodes(undirected_triangle)),0)
+% ================================================
+
+% testing leafEdges.m ===========================
+fprintf('testing leafEdges.m\n')
+assert(leafEdges(edgeL2adj(undirected_cherry)),[1,2;1,3])
+assert(leafEdges(edgeL2adj(directed_cherry)),[1,2;1,3])
+assert(length(leafEdges(undirected_triangle)),0)
+hut = [2,1,1;3,1,1];
+assert(length(leafEdges(edgeL2adj(hut))),0)
+% ================================================

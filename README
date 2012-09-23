@@ -2,6 +2,10 @@ octave-networks-toolbox: A set of graph/networks analysis functions in Octave
 
 Sep 19 2012
 
-This is a repository of functions relevant to network/graph analysis, adapted for Octave. The routines, manual and additional information will be gradually updated/uploaded. No code installation necessary. The code currently runs on GNU Octave Version 3.4.0.
+This is a repository of functions relevant to network/graph analysis, adapted for Octave. The routines, manual and additional information will be gradually updated/uploaded. No installation necessary. The code currently runs on GNU Octave Version 3.4.0.
 
 Contact me if you have comments or questions. Enjoy!
+
+Sep 23 2012
+
+Basic functions have been finished and uploaded.
