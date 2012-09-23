@@ -3,6 +3,7 @@
 clear all
 close all
 
+
 % Set of test graphs, in various formats =========
 one_double_edge = [0 2; 2 0]; 
 bowtie=[0 1 1 0 0 0; 1 0 1 0 0 0; 1 1 0 1 0 0; 0 0 1 0 1 1; 0 0 0 1 0 1; 0 0 0 1 1 0];   % 'adj'
@@ -100,7 +101,7 @@ assert(averageDegree(bowtie),2+1.0/3)
 
 
 % testing numConnComp.m ==========================
-fprintf('testing numConnComp.m\n')
+printf('testing numConnComp.m\n')
 nc=numConnComp(disconnected_bowtie);
 assert(numConnComp(disconnected_bowtie),2)
 
@@ -115,7 +116,7 @@ assert(numConnComp(Adj),randint)
 
 
 % testing findConnComp.m =========================
-fprintf('testing findConnComp.m\n')
+printf('testing findConnComp.m\n')
 
 assert(findConnCompI(disconnected_bowtie,1),[1,2,3])
 assert(findConnComp(disconnected_bowtie),{[1,2,3],[4,5,6]})
@@ -130,7 +131,7 @@ for x=1:randint
   randsecint = randi(25)+5;
   lastnode = modules{length(modules)}(length(modules{length(modules)}));
   modules{length(modules)+1} = [lastnode+1:lastnode+randsecint]; 
-  while isempty(adj) | not(isconnected(adj)) | not(length(adj)==randsecint); adj=random_graph(randsecint,0.5); end
+  while isempty(adj) | not(isConnected(adj)) | not(length(adj)==randsecint); adj=random_graph(randsecint,0.5); end
 
   Adj(length(Adj)+1:length(Adj)+randsecint,length(Adj)+1:length(Adj)+randsecint)=adj; 
 end
@@ -141,7 +142,7 @@ assert(findConnComp(Adj),modules)
 
 
 % testing giantComponent.m =======================
-fprintf('testing giantComponent.m\n')
+printf('testing giantComponent.m\n')
 
 clear modules
 modules{1}=[0];
@@ -153,7 +154,7 @@ for x=1:randint
   randsecint = randi(25)+5;
   lastnode = modules{length(modules)}(length(modules{length(modules)}));
   modules{length(modules)+1} = [lastnode+1:lastnode+randsecint]; 
-  while isempty(adj) | not(isconnected(adj)) | not(length(adj)==randsecint); adj=random_graph(randsecint,0.5); end
+  while isempty(adj) | not(isConnected(adj)) | not(length(adj)==randsecint); adj=random_graph(randsecint,0.5); end
   Adj(length(Adj)+1:length(Adj)+randsecint,length(Adj)+1:length(Adj)+randsecint)=adj; 
 end
 modules=modules(2:length(modules));
@@ -167,7 +168,7 @@ assert(giantComponent(Adj), subgraph(Adj,modules{maxind}))
 
 % ================================================
 % Testing tarjan.m ===============================
-fprintf('testing tarjan.m\n')
+printf('testing tarjan.m\n')
 
 L = {}; L{1} = 2; L{2} = 1;
 GSCC = tarjan(L);
@@ -213,7 +214,7 @@ for iter=1:100  % completely random matrix testing ....
   
   % undirected graph testing ========================
   adj = [0 1; 0 0];  % initialize so that the while loop does not break
-  while not(isconnected(adj)); adj = random_graph(randi(50)+1,rand); end
+  while not(isConnected(adj)); adj = random_graph(randi(50)+1,rand); end
 
   L=adj2adjL(adj);
   GSCC = tarjan(L);
@@ -226,7 +227,7 @@ for iter=1:100  % completely random matrix testing ....
   GSCC = tarjan(L);
   
   
-  if isconnected(adj) & isconnected(transpose(adj)) & length(adj)>0
+  if isConnected(adj) & isConnected(transpose(adj)) & length(adj)>0
     
     % there should be one component containing all nodes
     assert(length(GSCC),1)
@@ -239,13 +240,13 @@ for iter=1:100  % completely random matrix testing ....
     for gg=1:length(GSCC); ll=[ll length(GSCC{gg})]; end;
     [ml,maxll]=max(ll);
     
-    assert(isconnected(adj(GSCC{maxll},GSCC{maxll})) | length(GSCC{maxll})==1)
+    assert(isConnected(adj(GSCC{maxll},GSCC{maxll})) | length(GSCC{maxll})==1)
     
     for ii=1:length(adj)
       if isempty(find(GSCC{maxll}==ii))
         
         tryGC = [GSCC{maxll}, ii];
-        assert(not(isconnected(adj(tryGC,tryGC))) | not(isconnected(transpose(adj(tryGC,tryGC)))))
+        assert(not(isConnected(adj(tryGC,tryGC))) | not(isConnected(transpose(adj(tryGC,tryGC)))))
         
       end
       
@@ -259,7 +260,7 @@ end
 
 
 % testing graphComplement.m =====================
-fprintf('testing graphComplement.m\n')
+printf('testing graphComplement.m\n')
 
 mat = [1 0 0 1 1 1; 0 1 0 1 1 1; 0 0 1 0 1 1; 1 1 0 1 0 0; 1 1 1 0 1 0; 1 1 1 0 0 1];
 assert(graphComplement(bowtie),mat)
@@ -268,7 +269,7 @@ assert(graphComplement(undirected_triangle),eye(3))
 
 
 % Testing graphDual.m ============================
-fprintf('testing graphDual.m\n')
+printf('testing graphDual.m\n')
 
 gd=graphDual(adj2adjL(bowtie));
 gdT={};
@@ -285,22 +286,133 @@ assert(LT,graphDual(L))
 % ================================================
 
 % testing subgraph.m =============================
-fprintf('testing subgraph.m\n')
+printf('testing subgraph.m\n')
 assert(undirected_triangle,subgraph(bowtie,[1,2,3]))
 % ================================================
 
 % testing leafNodes.m ===========================
-fprintf('testing leafNodes.m\n')
+printf('testing leafNodes.m\n')
 assert(leafNodes(edgeL2adj(undirected_cherry)),[2,3])
 assert(leafNodes(edgeL2adj(directed_cherry)),[2,3])
 assert(length(leafNodes(undirected_triangle)),0)
 % ================================================
 
 % testing leafEdges.m ===========================
-fprintf('testing leafEdges.m\n')
+printf('testing leafEdges.m\n')
 assert(leafEdges(edgeL2adj(undirected_cherry)),[1,2;1,3])
 assert(leafEdges(edgeL2adj(directed_cherry)),[1,2;1,3])
 assert(length(leafEdges(undirected_triangle)),0)
 hut = [2,1,1;3,1,1];
 assert(length(leafEdges(edgeL2adj(hut))),0)
+% ================================================
+
+% testing issimple.m =============================
+printf('testing isSimple.m\n')
+
+assert(isSimple(random_graph(randi(5)+20,rand)),true)  % simple graph
+assert(isSimple(edgeL2adj([1,2,2])),false)      % multi-edge
+assert(isSimple( [1 0 0; 0 0 1; 0 1 0]),false)  % matrix with loops
+assert(isSimple([0 1 1; 1 0 0; 0 1 0]),false)   % directed matrix
+% ================================================
+
+% testing isDirected.m ===========================
+printf('testing isDirected.m\n')
+assert(isDirected(random_directed_graph(randi(5)+20,rand)),true)  
+assert(isDirected(random_graph(randi(5)+20,rand)),false)
+% ================================================
+
+
+% testing isSymmetric.m ==========================
+printf('testing isSymmetric.m\n')
+
+for i=1:100
+  assert(isSymmetric(random_graph(randi(5)+20,rand)),true)
+
+  adj = random_directed_graph(randi(5)+20,rand);
+  assert(not(isSymmetric(adj)) | adj==zeros(size(adj)) | adj==ones(size(adj)))
+end
+% ================================================
+
+% testing isConnected.m ==========================
+printf('testing isConnected.m\n')
+assert(isConnected(bowtie),true)
+assert(isConnected(disconnected_bowtie),false)
+% ================================================
+
+% testing isWeighted.m ===========================
+printf('testing isWeighted.m\n')
+assert(isWeighted([1,2,2]),true)
+
+assert(isWeighted(adj2edgeL(random_graph(randi(5)+20,rand))),false)
+  
+assert(isWeighted(adj2edgeL(random_directed_graph(randi(5)+20,rand))),false)
+  
+assert(isWeighted([1,2,0.5; 1,3,1.5; 1,4,1]),true)
+assert(isWeighted([1,2,0.5; 1,3,1; 1,4,1]),true)
+% ================================================
+
+% testing isRegular.m ============================
+printf('testing isRegular.m\n')
+adj = edgeL2adj(canonical_nets(20,'circle'));
+assert(isRegular(adj),true)
+
+adj = edgeL2adj(canonical_nets(20,'tree',3));
+assert(isRegular(adj),false)
+
+assert(isRegular([0 1; 1 0]),true)
+assert(isRegular([0 0; 1 0]),false)
+% ================================================
+
+% testing isComplete.m ============================
+printf('testing isComplete.m\n')
+assert(isComplete([0 1; 1 0]),true)
+
+assert(isComplete(edgeL2adj(directed_cherry)),false)
+
+assert(isComplete(edgeL2adj(undirected_cherry)),false)
+
+randint = randi(10)+10;
+adj = ones(randint)-eye(randint);
+assert(isComplete(adj),true)
+% ================================================
+
+% testing isEulerian.m ===========================
+printf('testing isEulerian.m\n')
+
+adj = edgeL2adj(canonical_nets(10,'circle'));
+assert(isEulerian(adj),true)
+
+adj = edgeL2adj(canonical_nets(10,'tree',3));
+assert(isEulerian(adj),false)
+% ================================================
+
+% ================================================
+printf('testing isTree.m\n')
+adj = edgeL2adj(canonical_nets(randi(10)+10,'tree',2));
+assert(isTree(adj),true)
+
+adj = edgeL2adj(canonical_nets(randi(10)+10,'circle'));
+assert(isTree(adj),false)
+% ================================================
+
+% testing isGraphic.m ============================
+printf('testing isGraphic.m\n')
+for i=1:100
+  adj = giantComponent(random_graph(randi(20)+1,0.5));
+  [deg,~,~] = degrees(adj);
+  assert(isGraphic(deg) | adj==0)
+end
+% ================================================
+
+% testing isBipartite.m ==========================
+printf('testing isBipartite.m\n')
+
+assert(isBipartite(adj2adjL(bowtie)),false)
+assert(isBipartite(edgeL2adjL(undirected_cherry)),true)
+
+even_circle = canonical_nets(2*randi(10),'circle');
+assert(isBipartite(edgeL2adjL(even_circle)),true)
+
+odd_circle = canonical_nets(2*randi(10)+1,'circle');
+assert(isBipartite(edgeL2adjL(odd_circle)),false)
 % ================================================
