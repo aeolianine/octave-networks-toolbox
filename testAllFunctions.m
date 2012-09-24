@@ -416,3 +416,16 @@ assert(isBipartite(edgeL2adjL(even_circle)),true)
 odd_circle = canonical_nets(2*randi(10)+1,'circle');
 assert(isBipartite(edgeL2adjL(odd_circle)),false)
 % ================================================
+
+
+% testing adj2adjL.m =============================
+printf('testing adj2adjL.m\n')
+assert(adj2adjL(bowtie),bowtie_adjL')
+% ================================================
+
+% testing adj2edgeL.m =============================
+printf('testing adj2edgeL.m\n')
+
+assert(sortrows(adj2edgeL(bowtie)),bowtie_edgeL)
+assert(adj2edgeL([0 1 1; 0 0 0; 0 0 0]),directed_cherry)
+% ================================================
