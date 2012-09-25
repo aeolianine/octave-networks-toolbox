@@ -429,3 +429,74 @@ printf('testing adj2edgeL.m\n')
 assert(sortrows(adj2edgeL(bowtie)),bowtie_edgeL)
 assert(adj2edgeL([0 1 1; 0 0 0; 0 0 0]),directed_cherry)
 % ================================================
+
+% testing adj2inc.m ==============================
+printf('testing adj2inc.m\n')
+
+randint = randi(10)+1;
+assert(adj2inc(eye(randint)),eye(randint))
+
+assert(adj2inc([0 1 0; 0 1 0; 1 0 0 ]),[-1 0 1; 1 1 0; 0 0 -1])
+assert(adj2inc([0 2; 0 0]),[-1 -1; 1 1])  % double edge
+% ================================================
+
+% testing inc2adj.m ==============================
+printf('testing inc2adj.m\n')
+
+randint = randi(10)+1;
+assert(inc2adj(eye(randint))==eye(randint))
+
+adj = ones(3) - eye(3);
+assert(inc2adj(adj),adj)
+
+inc = [-1 1; 1 0; 0 -1];  % two edges (1->2, 3->1)
+assert(inc2adj(inc)==[0 1 0; 0 0 0; 1 0 0])
+% ================================================
+
+% testing adj2str.m ==============================
+printf('testing adj2str.m\n')
+
+assert(adj2str(ones(3)-eye(3)),'.2.3,.1.3,.1.2,')
+assert(adj2str(eye(3)),'.1,.2,.3,')
+assert(adj2str([0 2; 0 0]),'.2,,')
+% ================================================
+
+% testing adjL2edgeL.m ===========================
+printf('testing adjL2edgeL.m\n')
+
+assert(adjL2edgeL({[2,3],[],[]}),directed_cherry)
+assert(sortrows(adjL2edgeL(bowtie_adjL)),bowtie_edgeL)
+% ================================================
+
+
+% testing inc2edgeL.m ============================
+printf('testing inc2edgeL.m\n')
+
+assert(inc2edgeL([1 0 0; 0 1 0; 0 0 1]),[1 1 1; 2 2 1; 3 3 1])  % three self-loops
+assert(inc2edgeL([-1 -1; 1 0; 0 1]),[1 2 1; 1 3 1])
+assert(inc2edgeL([-1;1]),[1 2 1])
+% ================================================
+
+
+% testing adj2simple.m ===========================
+printf('testing adj2simple.m\n')
+
+assert(adj2simple(rand(6)),ones(6)-eye(6))
+assert(adj2simple([0 2 0; 1 0 0; 1 2 0]),[0 1 1; 1 0 1; 1 1 0])
+% ================================================
+
+
+% testing edgeL2simple.m =========================
+printf('testing edgeL2simple.m\n')
+
+assert(length(edgeL2simple([1 1 1; 2 2 1; 3 3 1])),0)
+assert(sortrows(edgeL2simple([1 2 1; 1 3 2;4 5 1.4])),[1 2 1; 1 3 1; 2 1 1; 3 1 1; 4 5 1; 5 4 1])
+% ================================================
+
+
+% testing addEdgeWeights.m =======================
+fprintf('testing addEdgeWeights.m\n')
+
+assert([1 2 2; 1 3 1; 3 4 3],addEdgeWeights([1 2 1; 1 2 1; 1 3 1; 3 4 2; 3 4 1]))
+assert([1 2 2; 2 3 4],addEdgeWeights([1 2 2; 2 3 4]))
+% ================================================
