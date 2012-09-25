@@ -423,11 +423,27 @@ printf('testing adj2adjL.m\n')
 assert(adj2adjL(bowtie),bowtie_adjL')
 % ================================================
 
-% testing adj2edgeL.m =============================
+% testing adjL2adj.m =============================
+printf('testing adjL2adj.m\n')
+
+assert(adjL2adj(bowtie_adjL),bowtie)
+
+L = {}; L{1}=[2,3]; L{2}=[]; L{3}=[];
+assert(adjL2adj(L),edgeL2adj(directed_cherry))
+% ================================================
+
+% testing adj2edgeL.m ============================
 printf('testing adj2edgeL.m\n')
 
 assert(sortrows(adj2edgeL(bowtie)),bowtie_edgeL)
 assert(adj2edgeL([0 1 1; 0 0 0; 0 0 0]),directed_cherry)
+% ================================================
+
+% testing edgeL2adj.m ============================
+printf('testing edgeL2adj.m\n')
+
+assert(edgeL2adj(bowtie_edgeL),bowtie)
+assert(edgeL2adj(directed_cherry),[0 1 1; 0 0 0; 0 0 0])
 % ================================================
 
 % testing adj2inc.m ==============================
@@ -461,6 +477,14 @@ assert(adj2str(eye(3)),'.1,.2,.3,')
 assert(adj2str([0 2; 0 0]),'.2,,')
 % ================================================
 
+% testing str2adj.m ==============================
+printf('testing str2adj.m\n')
+
+assert(ones(3)-eye(3),str2adj('.2.3,.1.3,.1.2,'))
+assert(eye(3),str2adj('.1,.2,.3,'))
+assert([0 1 0; 0 0 0; 1 0 0 ],str2adj('.2,,.1,'))
+% ================================================
+
 % testing adjL2edgeL.m ===========================
 printf('testing adjL2edgeL.m\n')
 
@@ -468,6 +492,10 @@ assert(adjL2edgeL({[2,3],[],[]}),directed_cherry)
 assert(sortrows(adjL2edgeL(bowtie_adjL)),bowtie_edgeL)
 % ================================================
 
+% testing edgeL2adjL.m ===========================
+printf('testing edgeL2adjL.m\n')
+assert(edgeL2adjL(directed_cherry),{[2,3],[],[]}')
+% ================================================
 
 % testing inc2edgeL.m ============================
 printf('testing inc2edgeL.m\n')
