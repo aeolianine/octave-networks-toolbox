@@ -528,3 +528,34 @@ fprintf('testing addEdgeWeights.m\n')
 assert([1 2 2; 1 3 1; 3 4 3],addEdgeWeights([1 2 1; 1 2 1; 1 3 1; 3 4 2; 3 4 1]))
 assert([1 2 2; 2 3 4],addEdgeWeights([1 2 2; 2 3 4]))
 % ================================================
+
+% ================================================
+printf('testing degrees.m\n')
+
+assert([2 2 3 3 2 2],degrees(bowtie))
+assert([2 1 1],degrees(edgeL2adj(directed_cherry)))
+assert([2 1 1],degrees(edgeL2adj(undirected_cherry)))
+
+[deg,indeg,outdeg]=degrees(edgeL2adj(directed_cherry));
+assert(deg,[2 1 1])
+assert(indeg,[0 1 1])
+assert(outdeg,[2 0 0])
+
+assert([4 4 4],degrees([0 2 1; 0 0 1; 1 1 0]))
+% ================================================
+
+
+% testing rewire.m ===============================
+printf('testing rewire.m\n')
+
+for x=1:100
+  
+  el = adj2edgeL(random_graph(randi(10)+10,0.4));
+  deg = degrees(edgeL2adj(el));
+  eln = rewire(el,randi(5));
+  degn = degrees(edgeL2adj(eln));
+  
+  assert(deg,degn)
+
+end
+% ================================================
