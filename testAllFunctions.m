@@ -559,3 +559,33 @@ for x=1:100
 
 end
 % ================================================
+
+
+% testing rewireAssort.m =========================
+printf('testing rewireAssort.m\n')
+
+for x=1:100
+  adj = [0 0; 0 0];
+  
+  while not(isConnected(adj)); adj = random_graph(randi(10)+10,0.4); end
+  el = adj2edgeL(adj);
+  eln = rewireAssort(el,randi(5));
+  
+  assert(pearson(edgeL2adj(eln))>=pearson(edgeL2adj(el))-10^(-7))
+end
+% ================================================
+
+
+% testing rewireDisassort.m ======================
+printf('testing rewireDisassort.m\n')
+for x=1:100
+  
+  adj = [0 0; 0 0];
+  while not(isConnected(adj)); adj = random_graph(randi(10)+10,0.4); end
+  el = adj2edgeL(adj);
+  eln = rewireDisassort(el,randi(5));
+
+  assert(pearson(edgeL2adj(eln))<=pearson(edgeL2adj(el))+10^(-7))
+  
+end
+% ================================================
