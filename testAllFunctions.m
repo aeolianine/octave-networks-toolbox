@@ -589,3 +589,26 @@ for x=1:100
   
 end
 % ================================================
+
+
+% testing aveNeighborDeg.m =======================
+printf('testing ave_neighbor_deg.m\n')
+assert(aveNeighborDeg(undirected_triangle),[2 2 2])
+assert(aveNeighborDeg(bowtie),[2.5 2.5 7/3 7/3 2.5 2.5])
+% ================================================
+
+
+% testing closeness.m ============================
+printf('testing closeness.m\n')
+assert(closeness(bowtie)',[1/(1+1+2+3+3), 1/(1+1+2+3+3), 1/(1+1+1+2+2), 1/(1+1+1+2+2), 1/(1+1+2+3+3), 1/(1+1+2+3+3)])
+assert(closeness([0 1 1; 1 0 0; 1 0 0]),[0.5 1/3 1/3]')
+% ================================================
+
+
+% testing nodeBetweennessSlow.m ==================
+printf('testing nodeBetweennessSlow.m\n')
+assert(nodeBetweennessSlow([0 1; 1 0]),[0 0])
+assert(nodeBetweennessSlow([1 1; 0 0]),[0 0])
+assert(nodeBetweennessSlow([0 1 1; 1 0 0; 1 0 0]),[1/3 0 0])
+assert(nodeBetweennessSlow(bowtie),[0 0 0.4 0.4 0 0])
+% ================================================
