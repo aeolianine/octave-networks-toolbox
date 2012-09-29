@@ -627,3 +627,34 @@ for i=1:50
   
 end
 % ================================================
+
+
+% testing edgeBetweenness.m ======================
+printf('testing edgeBetweenness.m\n')
+
+eb_bowtie = adj2edgeL(bowtie);
+eb_bowtie(:,3) = [1/30; 4/30; 1/30; 4/30; 4/30; 4/30; 9/30; 9/30; 4/30; 4/30; 4/30; 1/30; 4/30; 1/30];
+assert(edgeBetweenness(bowtie),eb_bowtie)
+
+if not(isequal(edgeBetweenness(bowtie),eb_bowtie)); fprintf('edge_betweenness.m does not work with bowtie\n'); end
+
+assert(edgeBetweenness(undirected_triangle),[2 1 1/6; 3 1 1/6; 1 2 1/6; 3 2 1/6; 1 3 1/6; 2 3 1/6])
+if not(isequal(edgeBetweenness(undirected_triangle),[2 1 1/6; 3 1 1/6; 1 2 1/6; 3 2 1/6; 1 3 1/6; 2 3 1/6])); fprintf('edge_betweenness.m does not with an undirected_triangle\n'); end
+
+assert(edgeBetweenness([0 1 1 0; 1 0 1 0; 1 1 0 1; 0 0 1 0]),[2 1 1/12; 3 1 1/6; 1 2 1/12; 3 2 1/6; 1 3 1/6; 2 3 1/6; 4 3 3/12; 3 4 3/12])
+if not(isequal(edgeBetweenness([0 1 1 0; 1 0 1 0; 1 1 0 1; 0 0 1 0]),[2 1 1/12; 3 1 1/6; 1 2 1/12; 3 2 1/6; 1 3 1/6; 2 3 1/6; 4 3 3/12; 3 4 3/12])); fprintf('edge_betweenness.m does not work with triangle+edge\n'); end
+% ================================================
+
+
+% testing eigenCentrality.m ======================
+printf('testing eigenCentrality.m\n')
+[v,~]=eig([0 1 1; 1 0 1; 1 1 0]);
+assert(eigenCentrality([0 1 1; 1 0 1; 1 1 0]),v(:,3))
+% ================================================
+
+% testing clustCoeff.m ===========================
+printf('testing clustCoeff.m\n')
+assert(clustCoeff(undirected_triangle),1)
+assert(clustCoeff(edgeL2adj(undirected_cherry)),0)
+assert(clustCoeff(edgeL2adj(canonical_nets(randi(10)+5,'tree',2))),0)
+% ================================================
