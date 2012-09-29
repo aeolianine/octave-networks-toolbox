@@ -612,3 +612,18 @@ assert(nodeBetweennessSlow([1 1; 0 0]),[0 0])
 assert(nodeBetweennessSlow([0 1 1; 1 0 0; 1 0 0]),[1/3 0 0])
 assert(nodeBetweennessSlow(bowtie),[0 0 0.4 0.4 0 0])
 % ================================================
+
+% testing nodeBetweennessFaster.m ================
+printf('testing nodeBetweennessFaster.m\n')
+assert(nodeBetweennessFaster([0 1; 1 0]),[0 0])
+assert(nodeBetweennessFaster([0 1 1; 1 0 0; 1 0 0]),[1/3 0 0])
+assert(nodeBetweennessFaster(bowtie),[0 0 0.4 0.4 0 0])
+
+adj = [0 0; 0 0];
+for i=1:50
+  
+  while not(isConnected(adj)); adj = random_graph(randi(10)+5,rand); end
+  assert(nodeBetweennessSlow(adj),nodeBetweennessFaster(adj))
+  
+end
+% ================================================
