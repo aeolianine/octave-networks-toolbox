@@ -1,6 +1,6 @@
 ##################################################################
 % This function returns the betweenness measure of all vertices.
-% Betweenness centrality measure: number of shortest paths running though a vertex.
+% Betweenness centrality measure: number of shortest paths running through a vertex.
 % Note: Valid for a general graph. Using 'number of shortest paths through a node' definition.
 %
 % INPUTS: adjacency or distances matrix (nxn)

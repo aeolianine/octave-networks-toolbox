@@ -658,3 +658,34 @@ assert(clustCoeff(undirected_triangle),1)
 assert(clustCoeff(edgeL2adj(undirected_cherry)),0)
 assert(clustCoeff(edgeL2adj(canonical_nets(randi(10)+5,'tree',2))),0)
 % ================================================
+
+
+% testing weightedClustCoeff.m ===================
+printf('testing weightedClustCoeff.m\n')
+randint = randi(20);
+assert(length(weightedClustCoeff(random_graph(randint+5,rand))),randint+5)
+% ================================================
+
+
+% testing pearson.m ==============================
+printf('testing pearson.m\n')
+assert( pearson( edgeL2adj( canonical_nets(randi(5)+5,'star') ) ) ,-1 )
+% ================================================
+
+
+% testing richClubMetric.m =======================
+printf('testing richClubMetric.m\n')
+assert(richClubMetric(random_graph(randi(5)+5,rand),12),0)
+assert(richClubMetric(bowtie,2),linkDensity(bowtie))
+
+mat = [0 1 1 0; 1 0 1 0; 1 1 0 1; 0 0 1 0];
+assert(richClubMetric(mat,2),1)
+% ================================================
+
+
+% testing sMetric.m ==============================
+fprintf('testing sMetric.m\n')
+assert(sMetric(undirected_triangle),2*12)
+assert(sMetric(bowtie),2*41)
+assert(sMetric(edgeL2adj(directed_cherry)),4)
+% ================================================

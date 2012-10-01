@@ -1,5 +1,5 @@
 ##################################################################
-% Betweenness centrality measure: number of shortest paths running though a vertex.
+% Betweenness centrality measure: number of shortest paths running through a vertex.
 % Compute for all vertices, using Dijkstra's algorithm, and the 'number of shortest paths through a node' definition.
 % Note: Valid for a general connected graph.
 %
