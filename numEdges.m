@@ -12,13 +12,13 @@ function m = numEdges(adj)
 
 sl=selfLoops(adj); % counting the number of self-loops
 
-if issymmetric(adj) & sl==0    % undirected simple graph
-    m=sum(sum(adj))/2; 
+if isSymmetric(adj) & sl==0    % undirected simple graph
+    m=sum(sum(adj))/2;
     
-elseif issymmetric(adj) & sl>0
+elseif isSymmetric(adj) & sl>0
     m=(sum(sum(adj))-sl)/2+sl; % counting the self-loops only once
 
-elseif not(issymmetric(adj))   % directed graph (not necessarily simple)
+elseif not(isSymmetric(adj))   % directed graph (not necessarily simple)
     m=sum(sum(adj));
     
 end

@@ -12,7 +12,7 @@
 % GB: Sep 29, 2012
 ##################################################################
 
-function [C1,C2,C] = clustCoeff(adj)
+function [C1,C2] = clustCoeff(adj)
 
 n = length(adj);
 adj = adj>0;  % no multiple edges
@@ -29,8 +29,8 @@ for i=1:n
 
   neigh=kneighbors(adj,i,1);
   edges_s=numEdges(subgraph(adj,neigh));
-    
-  C(i)=coeff*edges_s/deg(i)/(deg(i)-1);
+  
+  C(i)=coeff*edges_s/(deg(i)*(deg(i)-1));
 
 end
 
