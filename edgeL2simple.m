@@ -16,4 +16,4 @@ el(:,3)=ones(size(el,1),1);  % make all edge weights 1
 ind=find(not(el(:,1)-el(:,2)==0));  % indices of the "non-self-loops"
 el=el(ind,:);
 
-el = symmetrize_edgeL(el);
+el = symmetrizeEdgeL(el);

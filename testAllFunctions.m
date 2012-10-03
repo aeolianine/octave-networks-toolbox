@@ -9,7 +9,7 @@ one_double_edge = [0 2; 2 0];
 bowtie=[0 1 1 0 0 0; 1 0 1 0 0 0; 1 1 0 1 0 0; 0 0 1 0 1 1; 0 0 0 1 0 1; 0 0 0 1 1 0];   % 'adj'
 disconnected_bowtie =[0 1 1 0 0 0; 1 0 1 0 0 0; 1 1 0 0 0 0; 0 0 0 0 1 1; 0 0 0 1 0 1; 0 0 0 1 1 0];   % 'adj'
 bowtie_edgeL = [1,2,1; 1,3,1; 2,3,1; 3,4,1; 4,5,1; 4,6,1; 5,6,1]; % 'edgelist'
-bowtie_edgeL = sortrows(symmetrize_edgeL(bowtie_edgeL));          % 'edgelist'
+bowtie_edgeL = sortrows(symmetrizeEdgeL(bowtie_edgeL));          % 'edgelist'
 bowtie_edgeL_loop = [bowtie_edgeL; 4 4 1];                        % 'edgelist'
 bowtie_adjL = {[2,3],[1,3],[1,2,4],[3,5,6],[4,6],[4,5]};          % 'adjlist'
 undirected_cherry = [1,2,1; 2,1,1; 1,3,1; 3,1,1];                 %
@@ -519,6 +519,27 @@ printf('testing edgeL2simple.m\n')
 
 assert(length(edgeL2simple([1 1 1; 2 2 1; 3 3 1])),0)
 assert(sortrows(edgeL2simple([1 2 1; 1 3 2;4 5 1.4])),[1 2 1; 1 3 1; 2 1 1; 3 1 1; 4 5 1; 5 4 1])
+% ================================================
+
+
+% testing symmetrize.m ===========================
+printf('testing symmetrize.m\n')
+for i=1:20
+  adj = random_directed_graph(randi(10)+3,rand);
+  assert(isSymmetric(symmetrize(adj)),true)
+end
+
+% testing symmetrizeEdgeL.m ======================
+fprintf('testing symmetrizeEdgeL.m\n')
+
+for x=1:50
+  adj = random_directed_graph(randi(20)+2,rand); % create a random adjacency
+  el = adj2edgeL(adj);
+  if isempty(el); continue; end
+  elsym = symmetrizeEdgeL(el);
+  adjsym = edgeL2adj(elsym);
+  assert(isSymmetric(adjsym),true)
+end
 % ================================================
 
 
