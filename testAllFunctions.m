@@ -613,11 +613,23 @@ end
 
 
 % testing aveNeighborDeg.m =======================
-printf('testing ave_neighbor_deg.m\n')
+printf('testing aveNeighborDeg.m\n')
 assert(aveNeighborDeg(undirected_triangle),[2 2 2])
 assert(aveNeighborDeg(bowtie),[2.5 2.5 7/3 7/3 2.5 2.5])
 % ================================================
 
+% testing sortNodesBySumNeighborDegrees.m ===
+printf('testing sortNodesBySumNeighborDegrees.m\n')
+
+assert(sortNodesBySumNeighborDegrees(bowtie),[4,3,6,5,2,1]')  
+assert(sortNodesBySumNeighborDegrees([0 1 1; 1 0 0; 1 0 0]),[1, 3, 2]')
+% ================================================
+
+% testing sortNodesByMaxNeighborDegree.m ====
+printf('testing sortNodesByMaxNeighborDegree.m\n')
+
+assert(sortNodesByMaxNeighborDegree(bowtie),[4,3,6,5,2,1]')
+assert(sortNodesByMaxNeighborDegree(edgeL2adj(undirected_cherry)),[1,3,2]')
 
 % testing closeness.m ============================
 printf('testing closeness.m\n')
