@@ -757,3 +757,27 @@ assert(p,{[3,1],[3,2],[3]})
 assert(d,[2,1,0,1]);
 assert(p,{[3,2,1],[3,2],[3],[3,4]})
 % ================================================
+
+
+% testing shortestPathDP.m =======================
+printf('testing shortestPathDP.m\n')
+
+[Jb,rb,J,r]=shortestPathDP(bowtie,1,3,size(bowtie,1));
+assert(Jb,1)
+assert(rb,[1,3])
+
+[Jb,rb,J,r]=shortestPathDP(bowtie,1,4,size(bowtie,1));
+assert(Jb,2)
+assert(rb,[1,3,4])
+
+[Jb,rb,J,r]=shortestPathDP(bowtie,1,5,size(bowtie,1));
+assert(Jb,3)
+assert(rb,[1,3,4,5])
+
+[Jb,rb,J,r]=shortestPathDP(edgeL2adj(directed_cherry),1,2,3);
+assert(Jb,1)
+assert(rb,[1,2])
+
+[Jb,rb,J,r]=shortestPathDP(edgeL2adj(directed_cherry),2,3,3);
+assert(Jb,inf)
+% ================================================
