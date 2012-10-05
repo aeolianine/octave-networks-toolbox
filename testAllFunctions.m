@@ -1,25 +1,23 @@
-% Test code for "Octave routines for Network Analysis"
+% Test code for "Octave tools for Network Analysis"
 
 clear all
 close all
 
-
 % Set of test graphs, in various formats =========
 one_double_edge = [0 2; 2 0]; 
-bowtie=[0 1 1 0 0 0; 1 0 1 0 0 0; 1 1 0 1 0 0; 0 0 1 0 1 1; 0 0 0 1 0 1; 0 0 0 1 1 0];   % 'adj'
-disconnected_bowtie =[0 1 1 0 0 0; 1 0 1 0 0 0; 1 1 0 0 0 0; 0 0 0 0 1 1; 0 0 0 1 0 1; 0 0 0 1 1 0];   % 'adj'
-bowtie_edgeL = [1,2,1; 1,3,1; 2,3,1; 3,4,1; 4,5,1; 4,6,1; 5,6,1]; % 'edgelist'
-bowtie_edgeL = sortrows(symmetrizeEdgeL(bowtie_edgeL));          % 'edgelist'
-bowtie_edgeL_loop = [bowtie_edgeL; 4 4 1];                        % 'edgelist'
-bowtie_adjL = {[2,3],[1,3],[1,2,4],[3,5,6],[4,6],[4,5]};          % 'adjlist'
-undirected_cherry = [1,2,1; 2,1,1; 1,3,1; 3,1,1];                 %
-                                                                  % 'edgelist' undirected
-directed_cherry = [1,2,1; 1,3,1];                                 % 'edgelist'
-undirected_triangle=[0 1 1; 1 0 1; 1 1 0];                        % 'adj'
-undirected_triangle_selfloops = [1 1 1; 1 1 1; 1 1 0];            % 'adj'
-undirected_triangle_incidence = [1 1 0; 1 0 1; 0 1 1];            % 'adj'
-directed_triangle=[0 1 0; 0 0 1; 1 0 0];                          % 'adj'
-square = [0 1 0 1; 1 0 1 0; 0 1 0 1; 1 0 1 0];                    % 'adj'
+bowtie=[0 1 1 0 0 0; 1 0 1 0 0 0; 1 1 0 1 0 0; 0 0 1 0 1 1; 0 0 0 1 0 1; 0 0 0 1 1 0];
+disconnected_bowtie =[0 1 1 0 0 0; 1 0 1 0 0 0; 1 1 0 0 0 0; 0 0 0 0 1 1; 0 0 0 1 0 1; 0 0 0 1 1 0];
+bowtie_edgeL = [1,2,1; 1,3,1; 2,3,1; 3,4,1; 4,5,1; 4,6,1; 5,6,1];
+bowtie_edgeL = sortrows(symmetrizeEdgeL(bowtie_edgeL));
+bowtie_edgeL_loop = [bowtie_edgeL; 4 4 1];
+bowtie_adjL = {[2,3],[1,3],[1,2,4],[3,5,6],[4,6],[4,5]};
+undirected_cherry = [1,2,1; 2,1,1; 1,3,1; 3,1,1];
+directed_cherry = [1,2,1; 1,3,1];
+undirected_triangle=[0 1 1; 1 0 1; 1 1 0];
+undirected_triangle_selfloops = [1 1 1; 1 1 1; 1 1 0];
+undirected_triangle_incidence = [1 1 0; 1 0 1; 0 1 1];
+directed_triangle=[0 1 0; 0 0 1; 1 0 0];
+square = [0 1 0 1; 1 0 1 0; 0 1 0 1; 1 0 1 0];
 % ================================================
 
 
@@ -35,6 +33,7 @@ assert(getNodes(directed_cherry,'edgelist'),[1:3])
 assert(getNodes(undirected_cherry,'edgelist'),[1:3])
 assert(getNodes(undirected_triangle_incidence,'inc'),[1:3])
 % ================================================
+
 
 % Testing getEdges.m =============================
 printf('testing getEdges.m\n')
@@ -64,8 +63,7 @@ assert(numEdges(one_double_edge),2)
 assert(numEdges(edgeL2adj(bowtie_edgeL_loop)),8)
 % ================================================
 
-
-% testing linkDensity.m =========================
+% testing linkDensity.m ==========================
 printf('testing linkDensity.m\n')
 
 randint = randi(101);
@@ -91,14 +89,12 @@ assert(multiEdges([0 0 1; 2 0 0; 0 1 0]),2)  % directed triangle with 1 double e
 assert(multiEdges(random_graph(randi(15))),0)
 % ================================================
 
-
 % testing averageDegree.m ========================
 printf('testing averageDegree.m\n')
 
 assert(averageDegree(square),2)
 assert(averageDegree(bowtie),2+1.0/3)
 % ================================================
-
 
 % testing numConnComp.m ==========================
 printf('testing numConnComp.m\n')
@@ -163,7 +159,6 @@ for m=1:length(modules); L = [L, length(modules{m})]; end;
 [maxL,maxind] = max(L);
 assert(giantComponent(Adj), subgraph(Adj,modules{maxind}))
 % ================================================
-
 
 
 % ================================================
@@ -259,7 +254,7 @@ end
 % ================================================
 
 
-% testing graphComplement.m =====================
+% testing graphComplement.m ======================
 printf('testing graphComplement.m\n')
 
 mat = [1 0 0 1 1 1; 0 1 0 1 1 1; 0 0 1 0 1 1; 1 1 0 1 0 0; 1 1 1 0 1 0; 1 1 1 0 0 1];
@@ -285,19 +280,20 @@ L={}; LT={}; L{1}=[2]; L{2}=[1]; LT{1}=[];
 assert(LT,graphDual(L))
 % ================================================
 
+
 % testing subgraph.m =============================
 printf('testing subgraph.m\n')
 assert(undirected_triangle,subgraph(bowtie,[1,2,3]))
 % ================================================
-
-% testing leafNodes.m ===========================
+  
+% testing leafNodes.m ============================
 printf('testing leafNodes.m\n')
 assert(leafNodes(edgeL2adj(undirected_cherry)),[2,3])
 assert(leafNodes(edgeL2adj(directed_cherry)),[2,3])
 assert(length(leafNodes(undirected_triangle)),0)
 % ================================================
 
-% testing leafEdges.m ===========================
+% testing leafEdges.m ============================
 printf('testing leafEdges.m\n')
 assert(leafEdges(edgeL2adj(undirected_cherry)),[1,2;1,3])
 assert(leafEdges(edgeL2adj(directed_cherry)),[1,2;1,3])
@@ -306,7 +302,8 @@ hut = [2,1,1;3,1,1];
 assert(length(leafEdges(edgeL2adj(hut))),0)
 % ================================================
 
-% testing issimple.m =============================
+
+% testing isSimple.m =============================
 printf('testing isSimple.m\n')
 
 assert(isSimple(random_graph(randi(5)+20,rand)),true)  % simple graph
@@ -315,12 +312,12 @@ assert(isSimple( [1 0 0; 0 0 1; 0 1 0]),false)  % matrix with loops
 assert(isSimple([0 1 1; 1 0 0; 0 1 0]),false)   % directed matrix
 % ================================================
 
+  
 % testing isDirected.m ===========================
 printf('testing isDirected.m\n')
 assert(isDirected(random_directed_graph(randi(5)+20,rand)),true)  
 assert(isDirected(random_graph(randi(5)+20,rand)),false)
 % ================================================
-
 
 % testing isSymmetric.m ==========================
 printf('testing isSymmetric.m\n')
@@ -351,6 +348,7 @@ assert(isWeighted([1,2,0.5; 1,3,1.5; 1,4,1]),true)
 assert(isWeighted([1,2,0.5; 1,3,1; 1,4,1]),true)
 % ================================================
 
+
 % testing isRegular.m ============================
 printf('testing isRegular.m\n')
 adj = edgeL2adj(canonical_nets(20,'circle'));
@@ -363,7 +361,8 @@ assert(isRegular([0 1; 1 0]),true)
 assert(isRegular([0 0; 1 0]),false)
 % ================================================
 
-% testing isComplete.m ============================
+
+% testing isComplete.m ===========================
 printf('testing isComplete.m\n')
 assert(isComplete([0 1; 1 0]),true)
 
@@ -376,6 +375,7 @@ adj = ones(randint)-eye(randint);
 assert(isComplete(adj),true)
 % ================================================
 
+
 % testing isEulerian.m ===========================
 printf('testing isEulerian.m\n')
 
@@ -386,7 +386,7 @@ adj = edgeL2adj(canonical_nets(10,'tree',3));
 assert(isEulerian(adj),false)
 % ================================================
 
-% ================================================
+% testing isTree.m ===============================
 printf('testing isTree.m\n')
 adj = edgeL2adj(canonical_nets(randi(10)+10,'tree',2));
 assert(isTree(adj),true)
@@ -403,6 +403,7 @@ for i=1:100
   assert(isGraphic(deg) | adj==0)
 end
 % ================================================
+
 
 % testing isBipartite.m ==========================
 printf('testing isBipartite.m\n')
@@ -432,6 +433,7 @@ L = {}; L{1}=[2,3]; L{2}=[]; L{3}=[];
 assert(adjL2adj(L),edgeL2adj(directed_cherry))
 % ================================================
 
+
 % testing adj2edgeL.m ============================
 printf('testing adj2edgeL.m\n')
 
@@ -439,12 +441,14 @@ assert(sortrows(adj2edgeL(bowtie)),bowtie_edgeL)
 assert(adj2edgeL([0 1 1; 0 0 0; 0 0 0]),directed_cherry)
 % ================================================
 
+
 % testing edgeL2adj.m ============================
 printf('testing edgeL2adj.m\n')
 
 assert(edgeL2adj(bowtie_edgeL),bowtie)
 assert(edgeL2adj(directed_cherry),[0 1 1; 0 0 0; 0 0 0])
 % ================================================
+
 
 % testing adj2inc.m ==============================
 printf('testing adj2inc.m\n')
@@ -455,6 +459,7 @@ assert(adj2inc(eye(randint)),eye(randint))
 assert(adj2inc([0 1 0; 0 1 0; 1 0 0 ]),[-1 0 1; 1 1 0; 0 0 -1])
 assert(adj2inc([0 2; 0 0]),[-1 -1; 1 1])  % double edge
 % ================================================
+
 
 % testing inc2adj.m ==============================
 printf('testing inc2adj.m\n')
@@ -485,6 +490,7 @@ assert(eye(3),str2adj('.1,.2,.3,'))
 assert([0 1 0; 0 0 0; 1 0 0 ],str2adj('.2,,.1,'))
 % ================================================
 
+
 % testing adjL2edgeL.m ===========================
 printf('testing adjL2edgeL.m\n')
 
@@ -492,10 +498,12 @@ assert(adjL2edgeL({[2,3],[],[]}),directed_cherry)
 assert(sortrows(adjL2edgeL(bowtie_adjL)),bowtie_edgeL)
 % ================================================
 
+
 % testing edgeL2adjL.m ===========================
 printf('testing edgeL2adjL.m\n')
 assert(edgeL2adjL(directed_cherry),{[2,3],[],[]}')
 % ================================================
+
 
 % testing inc2edgeL.m ============================
 printf('testing inc2edgeL.m\n')
@@ -529,8 +537,9 @@ for i=1:20
   assert(isSymmetric(symmetrize(adj)),true)
 end
 
+
 % testing symmetrizeEdgeL.m ======================
-fprintf('testing symmetrizeEdgeL.m\n')
+printf('testing symmetrizeEdgeL.m\n')
 
 for x=1:50
   adj = random_directed_graph(randi(20)+2,rand); % create a random adjacency
@@ -544,13 +553,14 @@ end
 
 
 % testing addEdgeWeights.m =======================
-fprintf('testing addEdgeWeights.m\n')
+printf('testing addEdgeWeights.m\n')
 
 assert([1 2 2; 1 3 1; 3 4 3],addEdgeWeights([1 2 1; 1 2 1; 1 3 1; 3 4 2; 3 4 1]))
 assert([1 2 2; 2 3 4],addEdgeWeights([1 2 2; 2 3 4]))
 % ================================================
 
-% ================================================
+
+% testing degrees.m ==============================
 printf('testing degrees.m\n')
 
 assert([2 2 3 3 2 2],degrees(bowtie))
@@ -581,7 +591,6 @@ for x=1:100
 end
 % ================================================
 
-
 % testing rewireAssort.m =========================
 printf('testing rewireAssort.m\n')
 
@@ -611,7 +620,6 @@ for x=1:100
 end
 % ================================================
 
-
 % testing aveNeighborDeg.m =======================
 printf('testing aveNeighborDeg.m\n')
 assert(aveNeighborDeg(undirected_triangle),[2 2 2])
@@ -630,6 +638,8 @@ printf('testing sortNodesByMaxNeighborDegree.m\n')
 
 assert(sortNodesByMaxNeighborDegree(bowtie),[4,3,6,5,2,1]')
 assert(sortNodesByMaxNeighborDegree(edgeL2adj(undirected_cherry)),[1,3,2]')
+% ================================================
+
 
 % testing closeness.m ============================
 printf('testing closeness.m\n')
@@ -646,6 +656,7 @@ assert(nodeBetweennessSlow([0 1 1; 1 0 0; 1 0 0]),[1/3 0 0])
 assert(nodeBetweennessSlow(bowtie),[0 0 0.4 0.4 0 0])
 % ================================================
 
+
 % testing nodeBetweennessFaster.m ================
 printf('testing nodeBetweennessFaster.m\n')
 assert(nodeBetweennessFaster([0 1; 1 0]),[0 0])
@@ -653,7 +664,7 @@ assert(nodeBetweennessFaster([0 1 1; 1 0 0; 1 0 0]),[1/3 0 0])
 assert(nodeBetweennessFaster(bowtie),[0 0 0.4 0.4 0 0])
 
 adj = [0 0; 0 0];
-for i=1:50
+for i=1:100
   
   while not(isConnected(adj)); adj = random_graph(randi(10)+5,rand); end
   assert(nodeBetweennessSlow(adj),nodeBetweennessFaster(adj))
@@ -661,21 +672,15 @@ for i=1:50
 end
 % ================================================
 
-
 % testing edgeBetweenness.m ======================
 printf('testing edgeBetweenness.m\n')
 
 eb_bowtie = adj2edgeL(bowtie);
 eb_bowtie(:,3) = [1/30; 4/30; 1/30; 4/30; 4/30; 4/30; 9/30; 9/30; 4/30; 4/30; 4/30; 1/30; 4/30; 1/30];
+
 assert(edgeBetweenness(bowtie),eb_bowtie)
-
-if not(isequal(edgeBetweenness(bowtie),eb_bowtie)); fprintf('edge_betweenness.m does not work with bowtie\n'); end
-
 assert(edgeBetweenness(undirected_triangle),[2 1 1/6; 3 1 1/6; 1 2 1/6; 3 2 1/6; 1 3 1/6; 2 3 1/6])
-if not(isequal(edgeBetweenness(undirected_triangle),[2 1 1/6; 3 1 1/6; 1 2 1/6; 3 2 1/6; 1 3 1/6; 2 3 1/6])); fprintf('edge_betweenness.m does not with an undirected_triangle\n'); end
-
 assert(edgeBetweenness([0 1 1 0; 1 0 1 0; 1 1 0 1; 0 0 1 0]),[2 1 1/12; 3 1 1/6; 1 2 1/12; 3 2 1/6; 1 3 1/6; 2 3 1/6; 4 3 3/12; 3 4 3/12])
-if not(isequal(edgeBetweenness([0 1 1 0; 1 0 1 0; 1 1 0 1; 0 0 1 0]),[2 1 1/12; 3 1 1/6; 1 2 1/12; 3 2 1/6; 1 3 1/6; 2 3 1/6; 4 3 3/12; 3 4 3/12])); fprintf('edge_betweenness.m does not work with triangle+edge\n'); end
 % ================================================
 
 
@@ -684,6 +689,7 @@ printf('testing eigenCentrality.m\n')
 [v,~]=eig([0 1 1; 1 0 1; 1 1 0]);
 assert(eigenCentrality([0 1 1; 1 0 1; 1 1 0]),v(:,3))
 % ================================================
+
 
 % testing clustCoeff.m ===========================
 printf('testing clustCoeff.m\n')
@@ -719,8 +725,35 @@ assert(richClubMetric(mat,2),1)
 
 
 % testing sMetric.m ==============================
-fprintf('testing sMetric.m\n')
+printf('testing sMetric.m\n')
 assert(sMetric(undirected_triangle),2*12)
 assert(sMetric(bowtie),2*41)
 assert(sMetric(edgeL2adj(directed_cherry)),4)
+% ================================================
+
+
+% testing simpleDijkstra.m =======================
+printf('testing simpleDijkstra.m\n')
+assert(simpleDijkstra(bowtie,1),[0, 1, 1, 2, 3, 3])
+assert(simpleDijkstra(bowtie,3),[1, 1, 0, 1, 2, 2])
+
+mat = [0 3.5 0 1; 3.5 0 1 0; 0 1 0 1.4; 1 0 1.4 0];
+assert(simpleDijkstra(mat,1),[0, 3.4, 2.4, 1])
+assert(simpleDijkstra(edgeL2adj(directed_cherry),1),[0, 1, 1])
+assert(simpleDijkstra(edgeL2adj(directed_cherry),2),[inf, 0, inf])
+% ================================================
+
+% testing dijkstra.m =============================
+printf('testing dijkstra.m\n')
+[d,p]=dijkstra(bowtie,1,5);
+assert(d,3)
+assert(p,[1,3,4,5])
+
+[d,p]=dijkstra(undirected_triangle,3,[]);
+assert(d,[1,1,0])
+assert(p,{[3,1],[3,2],[3]})
+
+[d,p] = dijkstra(square,3,[]);
+assert(d,[2,1,0,1]);
+assert(p,{[3,2,1],[3,2],[3],[3,4]})
 % ================================================
