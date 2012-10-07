@@ -781,3 +781,52 @@ assert(rb,[1,2])
 [Jb,rb,J,r]=shortestPathDP(edgeL2adj(directed_cherry),2,3,3);
 assert(Jb,inf)
 % ================================================
+
+
+% test minSpanTree.m =============================
+printf('testing minSpanTree.m\n')
+for x=1:100
+  
+  adj = [0 1; 0 0];
+  while not(isConnected(adj)); adj = random_graph(randi(50)+5,rand); end
+  
+  tr = minSpanTree(adj);
+  assert(isTree(tr),true)
+  assert(length(tr),length(adj));  % tree should have the same
+                                   % number of nodes as adj
+  
+end
+% ================================================
+
+% test BFS.m =====================================
+printf('testing BFS.m\n')
+
+for x=1:100
+  adj = [0 1; 0 0];
+  while not(isConnected(adj)); adj = random_graph(randi(50)+5,rand); end
+
+  tr = BFS(adj2adjL(adj),randi(length(adj)));
+  tr = symmetrize(adjL2adj(tr));
+  assert(isTree(tr),true)
+  assert(length(tr),length(adj))
+  
+end
+% ================================================
+
+
+% testing kneighbors.m ===========================
+printf('testing kneighbors.m\n')
+
+assert(kneighbors(bowtie,1,3),[1 2 3 4 5 6])
+assert(kneighbors(bowtie,3,1),[1 2 4])
+assert(kneighbors(undirected_triangle,1,2),[1,2,3])
+% ================================================
+
+
+% testing kminNeighbors.m ========================
+fprintf('testing kminNeighbors.m\n')
+
+assert(kminNeighbors(bowtie,1,3),[5, 6])
+assert(kminNeighbors(bowtie,3,1),[1, 2, 4])
+assert(kminNeighbors(bowtie,3,2),[5, 6])
+% ================================================
