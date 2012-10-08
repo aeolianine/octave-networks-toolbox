@@ -830,3 +830,37 @@ assert(kminNeighbors(bowtie,1,3),[5, 6])
 assert(kminNeighbors(bowtie,3,1),[1, 2, 4])
 assert(kminNeighbors(bowtie,3,2),[5, 6])
 % ================================================
+
+
+% testing diameter.m =============================
+printf('testing diameter.m\n')
+
+assert(diameter(undirected_triangle),1)
+assert(diameter(bowtie),3)
+
+el=canonical_nets(randi(10)+5,'line');
+adj = edgeL2adj(el);
+assert(diameter(adj),length(adj)-1)
+
+el=canonical_nets(randi(10)+5,'circle');
+adj = edgeL2adj(el);
+assert(diameter(adj),floor(length(adj)/2))
+% ================================================
+
+
+% testing avePathLength.m ========================
+printf('testing avePathLength.m\n')
+
+assert(avePathLength(bowtie),(0+1+1+2+3+3 +0+1+2+3+3+ 0+1+2+2 +0+1+1 +0+1 +0)/15)
+assert(avePathLength(undirected_triangle),1)
+adj = edgeL2adj(canonical_nets(6,'line'));
+assert(avePathLength(adj),(0+1+2+3+4+5 +0+1+2+3+4 +0+1+2+3 +0+1+2+ 0+1 +0)/15)
+% ================================================
+
+
+% testing smoothDiameter.m =======================
+printf('testing smoothDiameter.m\n')
+
+adj = random_graph(randi(10)+10,rand);
+assert(diameter(adj),smoothDiameter(adj,1))  % should be the same when the fraction is 1
+% ================================================
