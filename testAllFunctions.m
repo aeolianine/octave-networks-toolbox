@@ -861,6 +861,35 @@ assert(avePathLength(adj),(0+1+2+3+4+5 +0+1+2+3+4 +0+1+2+3 +0+1+2+ 0+1 +0)/15)
 % testing smoothDiameter.m =======================
 printf('testing smoothDiameter.m\n')
 
-adj = random_graph(randi(10)+10,rand);
+adj = [0 1; 0 0];
+while not(isConnected(adj)); adj = random_graph(randi(10)+10,rand); end
 assert(diameter(adj),smoothDiameter(adj,1))  % should be the same when the fraction is 1
+% ================================================
+
+
+% testing vertexEccentricity.m ===================
+printf('testing vertexEccentricity.m\n')
+
+assert(vertexEccentricity(bowtie),[3,3,2,2,3,3])
+assert(vertexEccentricity(undirected_triangle),[1,1,1])
+% ================================================
+
+
+% testing graphRadius.m ==========================
+printf('testing graphRadius.m\n')
+
+assert(graphRadius(bowtie),2)
+
+el = canonical_nets(randi(10)+10,'line');
+adj = edgeL2adj(el);
+assert(graphRadius(adj),(size(adj,1)-mod(size(adj,1),2))/2)
+% ================================================
+
+
+% testing distanceDistribution.m =================
+printf('testing distanceDistribution.m\n')
+
+assert(distanceDistribution(bowtie),[7/15, 4/15, 4/15, 0, 0])
+assert(distanceDistribution(undirected_triangle),[1, 0])
+assert(distanceDistribution(edgeL2adj(undirected_cherry)),[2/3,1/3])
 % ================================================
