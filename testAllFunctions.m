@@ -893,3 +893,104 @@ assert(distanceDistribution(bowtie),[7/15, 4/15, 4/15, 0, 0])
 assert(distanceDistribution(undirected_triangle),[1, 0])
 assert(distanceDistribution(edgeL2adj(undirected_cherry)),[2/3,1/3])
 % ================================================
+
+
+% testing numConnTriples.m =======================
+printf('testing numConnTriples.m\n')
+assert(numConnTriples(bowtie),6)
+assert(numConnTriples(undirected_triangle),1)
+assert(numConnTriples(edgeL2adj(undirected_cherry)),1)
+% ================================================
+
+% testing numLoops.m =============================
+printf('testing numLoops.m\n')
+assert(numLoops(undirected_triangle),1)
+assert(numLoops(bowtie),2)
+assert(numLoops(edgeL2adj(undirected_cherry)),0)
+assert(numLoops(square),1)
+% ================================================
+
+% testing loops3.m ===============================
+printf('testing loops3.m\n')
+assert(loops3(bowtie),2)
+assert(loops3(square),0)
+assert(loops3(undirected_triangle),1)
+assert(loops3(edgeL2adj(canonical_nets(randi(10)+3,'btree'))),0)
+assert(loops3(edgeL2adj(canonical_nets(4,'trilattice'))),2)
+% ================================================
+
+
+% testing loops4.m ===============================
+printf('testing loops4.m\n')
+
+assert(loops4(bowtie),{})
+c4 = ones(4)-eye(4); % clique of size 4
+assert(loops4(c4),{'1-2-3-4'})
+c6 = ones(6)-eye(6); % clique of size 6
+assert(length(loops4(c6)),nchoosek(6,4))
+% ================================================
+
+
+% testing numStarMotifs.m ========================
+printf('testing numStarMotifs.m\n')
+
+assert(numStarMotifs(bowtie_adjL,3),4+6)
+assert(numStarMotifs(bowtie_adjL,4),2)
+assert(numStarMotifs(bowtie_adjL,5),0)
+
+assert(numStarMotifs(adj2adjL(undirected_triangle),3),3)
+assert(numStarMotifs(adj2adjL(undirected_triangle),2),6)
+
+assert(numStarMotifs(bowtie_adjL,1),6)   % trivial case
+% ================================================
+
+
+% testing laplacianMatrix.m ======================
+printf('testing laplacianMatrix.m\n')
+
+assert(laplacianMatrix(bowtie),[2 -1 -1 0 0 0; -1 2 -1 0 0 0; -1 -1 3 -1 0 0; 0 0 -1 3 -1 -1; 0 0 0 -1 2 -1; 0 0 0 -1 -1 2])
+assert(laplacianMatrix(undirected_triangle),[2 -1 -1; -1 2 -1; -1 -1 2])
+% ================================================
+
+
+% testing graphSpectrum.m ========================
+printf('testing graphSpectrum.m\n')
+adj = random_graph(randi(50)+10,rand);
+assert(length(graphSpectrum(adj)),length(adj))
+% ================================================
+
+% testing algebraicConnectivity.m ================
+printf('testing algebraicConnectivity.m\n')
+adj = random_graph(randi(50)+10,rand);
+assert(length(algebraicConnectivity(adj)),1)
+% ================================================
+
+% testing fiedlerVector.m ========================
+printf('testing fiedlerVector.m\n')
+adj = random_graph(randi(50)+10,rand);
+assert(length(fiedlerVector(adj)),length(adj))
+% ================================================
+
+% testing graphEnergy.m ==========================
+printf('testing graphEnergy.m\n')
+adj = random_graph(randi(50)+10,rand);
+assert(length(graphEnergy(adj)),1)
+% ================================================
+
+
+% testing simpleSpectralPartitioning.m ===========
+printf('testing simpleSpectralPartitioning.m\n')
+
+for xx=1:50  % do the randomized test 50 times
+  n = randi(99)+11;   % number of nodes
+  adj = random_modular_graph(n,4,0.1,0.9);  % random graph with n nodes
+  num_groups = randi(10)+1;  % number of groups to split the nodes in
+  groups = [];
+  for x=1:length(num_groups)-1; groups = [groups ceil(rand*n/num_groups)+1]; end
+  groups = [groups n-sum(groups)];
+
+  modules = simpleSpectralPartitioning(adj,groups);
+  for m=1:length(modules); assert(length(modules{m}),groups(m)); end
+  
+end % end of 50 iterations
+% ================================================
