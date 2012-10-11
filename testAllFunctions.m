@@ -994,3 +994,11 @@ for xx=1:50  % do the randomized test 50 times
   
 end % end of 50 iterations
 % ================================================
+
+
+% testing newmanGirvan.m =========================
+printf('testing newmanGirvan.m\n')
+modules = newmanGirvan(bowtie,2);
+assert(modules{1}==[1,2,3])
+assert(modules{2}==[4,5,6])
+% ================================================
