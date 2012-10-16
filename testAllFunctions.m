@@ -1050,3 +1050,18 @@ for x=1:100
     
 end
 % ================================================
+
+
+% testing newmanCommFast.m =======================
+printf('testing newmanCommFast.m\n')
+
+[gH,Q]=newmanCommFast(bowtie);
+close all;
+assert(max(Q),Q(6-1));
+
+[gH,Q]=newmanCommFast(random_modular_graph(100,4,0.1,0.9));
+close all;
+assert(length(gH),length(Q))
+[~,ind]=max(Q);
+assert(length(gH{ind}),4)
+% ================================================
