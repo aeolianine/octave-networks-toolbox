@@ -110,9 +110,9 @@ dQ = 2*(e_ij-a_i*a_j);
 
 
 
-function Q=Qfn(modules,adj) % ======== same as modularity_metric.m ======
+function Q=Qfn(modules,adj) % ======== same as modularityMetric.m ======
 
-% computing the modularity for the final module break-down
+% Computing the modularity for the final module break-down
 % Defined as: Q=sum_over_modules_i (eii-ai^2) (eq 5) in Newman and Girvan.
 % eij = fraction of edges that connect community i to community j
 % ai=sum_j (eij)
@@ -123,7 +123,7 @@ Q = 0;
 for m=1:length(modules)  
 
   e_mm=numEdges(adj(modules{m},modules{m}))/nedges;
-  a_m=sum(sum(adj(modules{m},:)))/nedges - e_mm; % counting e_mm only once
+  a_m=sum(sum(adj(modules{m},:)))/nedges - e_mm;  % counting e_mm only once
   
   Q = Q + (e_mm - a_m^2);
 end

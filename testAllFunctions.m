@@ -1065,3 +1065,28 @@ assert(length(gH),length(Q))
 [~,ind]=max(Q);
 assert(length(gH{ind}),4)
 % ================================================
+
+
+% testing modularityMetric.m =====================
+printf('testing modularityMetric.m\n')
+
+for i=1:20
+  
+  adj = [0 1; 0 0];
+  num_modules = randi([2,5]);
+  while not(isConnected(adj)); adj = random_modular_graph(30,num_modules,0.1,0.9); end
+ 
+  % compare to newmanCommFast
+  [mH,Q1] = newmanCommFast(adj);
+  close all;
+  Q2 = [];
+  for mod=1:length(mH); Q2 = [Q2 modularityMetric(mH{mod},adj)]; end
+  
+  assert(Q1,Q2)
+
+  % compare to the newman-girvan routine
+  [modules0,~,Q0] = newmanGirvan(adj,num_modules);
+  assert(Q0,modularityMetric(modules0,adj))
+ 
+end
+% ================================================
