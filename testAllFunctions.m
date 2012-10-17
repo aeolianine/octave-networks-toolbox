@@ -1090,3 +1090,61 @@ for i=1:20
  
 end
 % ================================================
+
+
+% testing louvainCommunityFinding.m ==============
+printf('testing louvainCommunityFinding.m\n');
+
+extended_bowtie0 = [1 2; 2 3; 3 2; 3 4; 4 5; 5 6; 4 6; 6 7; 7 8; 7 9; 8 9];
+extended_bowtie = [];
+for row=1:size(extended_bowtie0,1)
+  extended_bowtie = [extended_bowtie; extended_bowtie0(row,:) 1];
+end
+clear extended_bowtie0
+extended_bowtie = symmetrizeEdgeL(extended_bowtie);
+adj = edgeL2adj(extended_bowtie);
+
+[modules,inmodule]=louvainCommunityFinding(adj);
+assert(length(modules),3)
+assert([inmodule{1},inmodule{2},inmodule{3}],[1,1,1]*inmodule{1})
+assert([inmodule{4},inmodule{5},inmodule{6}],[1,1,1]*inmodule{4})
+assert([inmodule{7},inmodule{8},inmodule{9}],[1,1,1]*inmodule{7})
+
+[modules,inmodule]=louvainCommunityFinding(bowtie);
+assert(length(modules),2)
+assert([inmodule{1},inmodule{2},inmodule{3}],[1,1,1]*inmodule{1})
+assert([inmodule{4},inmodule{5},inmodule{6}],[1,1,1]*inmodule{4})
+
+% concatenate 4 complete graphs: 
+adj = ones(10,10)-eye(10);
+Adj = zeros(40,40);
+
+Adj(1:10,1:10)=adj;
+Adj(11:20,11:20)=adj;
+Adj(21:30,21:30)=adj;
+Adj(31:40,31:40)=adj;
+
+Adj(10,11) = 1; Adj(11,10) = 1;
+Adj(20,21) = 1; Adj(21,20) = 1;
+Adj(30,31) = 1; Adj(31,30) = 1;
+
+[modules,inmodule]=louvainCommunityFinding(Adj);
+assert(length(modules),4)
+
+% concatenate 4 dense graphs
+adj = [0 1; 0 0];
+while not(isConnected(adj)); adj = random_graph(10,0.9); end
+Adj = zeros(40,40);
+
+Adj(1:10,1:10)=adj;
+Adj(11:20,11:20)=adj;
+Adj(21:30,21:30)=adj;
+Adj(31:40,31:40)=adj;
+
+Adj(10,11) = 1; Adj(11,10) = 1;
+Adj(20,21) = 1; Adj(21,20) = 1;
+Adj(30,31) = 1; Adj(31,30) = 1;
+
+[modules,inmodule]=louvainCommunityFinding(Adj);
+assert(length(modules),4)
+% ================================================
