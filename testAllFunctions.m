@@ -27,7 +27,7 @@ printf('testing getNodes.m\n')
 assert(getNodes(bowtie,'adj'), [1:6])
 N = randi(100);
 assert(getNodes(random_directed_graph(N),'adj'),[1:N])
-assert(getNodes(random_graph(10),'adj'),[1:10])
+assert(getNodes(randomGraph(10),'adj'),[1:10])
 assert(getNodes(bowtie_adjL,'adjlist'),[1:6])
 assert(getNodes(directed_cherry,'edgelist'),[1:3])
 assert(getNodes(undirected_cherry,'edgelist'),[1:3])
@@ -49,7 +49,7 @@ assert(getEdges(undirected_triangle_incidence,'inc'),[1,2,1; 1,3,1; 2,1,1; 2,3,1
 printf('testing numNodes.m\n')
 
 randint = randi(101);
-assert(numNodes(random_graph(randint)),randint)
+assert(numNodes(randomGraph(randint)),randint)
 assert(numEdges(edgeL2adj(directed_cherry)),2)
 assert(numNodes(bowtie),6)
 % ================================================
@@ -86,7 +86,7 @@ printf('testing multiEdges.m\n')
 assert(multiEdges(one_double_edge),2)
 assert(multiEdges([0 2 1; 2 0 1; 1 1 0],2))  % triangle with one double edge
 assert(multiEdges([0 0 1; 2 0 0; 0 1 0]),2)  % directed triangle with 1 double edge
-assert(multiEdges(random_graph(randi(15))),0)
+assert(multiEdges(randomGraph(randi(15))),0)
 % ================================================
 
 % testing averageDegree.m ========================
@@ -104,7 +104,7 @@ assert(numConnComp(disconnected_bowtie),2)
 randint = randi(51);
 Adj=zeros(randint*30);
 for x=1:randint
-  adj=random_graph(30,0.5);
+  adj=randomGraph(30,0.5);
   Adj(30*(x-1)+1:30*x,30*(x-1)+1:30*x)=adj;
 end
 assert(numConnComp(Adj),randint)
@@ -127,7 +127,7 @@ for x=1:randint
   randsecint = randi(25)+5;
   lastnode = modules{length(modules)}(length(modules{length(modules)}));
   modules{length(modules)+1} = [lastnode+1:lastnode+randsecint]; 
-  while isempty(adj) | not(isConnected(adj)) | not(length(adj)==randsecint); adj=random_graph(randsecint,0.5); end
+  while isempty(adj) | not(isConnected(adj)) | not(length(adj)==randsecint); adj=randomGraph(randsecint,0.5); end
 
   Adj(length(Adj)+1:length(Adj)+randsecint,length(Adj)+1:length(Adj)+randsecint)=adj; 
 end
@@ -150,7 +150,7 @@ for x=1:randint
   randsecint = randi(25)+5;
   lastnode = modules{length(modules)}(length(modules{length(modules)}));
   modules{length(modules)+1} = [lastnode+1:lastnode+randsecint]; 
-  while isempty(adj) | not(isConnected(adj)) | not(length(adj)==randsecint); adj=random_graph(randsecint,0.5); end
+  while isempty(adj) | not(isConnected(adj)) | not(length(adj)==randsecint); adj=randomGraph(randsecint,0.5); end
   Adj(length(Adj)+1:length(Adj)+randsecint,length(Adj)+1:length(Adj)+randsecint)=adj; 
 end
 modules=modules(2:length(modules));
@@ -209,7 +209,7 @@ for iter=1:100  % completely random matrix testing ....
   
   % undirected graph testing ========================
   adj = [0 1; 0 0];  % initialize so that the while loop does not break
-  while not(isConnected(adj)); adj = random_graph(randi(50)+1,rand); end
+  while not(isConnected(adj)); adj = randomGraph(randi(50)+1,rand); end
 
   L=adj2adjL(adj);
   GSCC = tarjan(L);
@@ -306,7 +306,7 @@ assert(length(leafEdges(edgeL2adj(hut))),0)
 % testing isSimple.m =============================
 printf('testing isSimple.m\n')
 
-assert(isSimple(random_graph(randi(5)+20,rand)),true)  % simple graph
+assert(isSimple(randomGraph(randi(5)+20,rand)),true)  % simple graph
 assert(isSimple(edgeL2adj([1,2,2])),false)      % multi-edge
 assert(isSimple( [1 0 0; 0 0 1; 0 1 0]),false)  % matrix with loops
 assert(isSimple([0 1 1; 1 0 0; 0 1 0]),false)   % directed matrix
@@ -316,14 +316,14 @@ assert(isSimple([0 1 1; 1 0 0; 0 1 0]),false)   % directed matrix
 % testing isDirected.m ===========================
 printf('testing isDirected.m\n')
 assert(isDirected(random_directed_graph(randi(5)+20,rand)),true)  
-assert(isDirected(random_graph(randi(5)+20,rand)),false)
+assert(isDirected(randomGraph(randi(5)+20,rand)),false)
 % ================================================
 
 % testing isSymmetric.m ==========================
 printf('testing isSymmetric.m\n')
 
 for i=1:100
-  assert(isSymmetric(random_graph(randi(5)+20,rand)),true)
+  assert(isSymmetric(randomGraph(randi(5)+20,rand)),true)
 
   adj = random_directed_graph(randi(5)+20,rand);
   assert(not(isSymmetric(adj)) | adj==zeros(size(adj)) | adj==ones(size(adj)))
@@ -340,7 +340,7 @@ assert(isConnected(disconnected_bowtie),false)
 printf('testing isWeighted.m\n')
 assert(isWeighted([1,2,2]),true)
 
-assert(isWeighted(adj2edgeL(random_graph(randi(5)+20,rand))),false)
+assert(isWeighted(adj2edgeL(randomGraph(randi(5)+20,rand))),false)
   
 assert(isWeighted(adj2edgeL(random_directed_graph(randi(5)+20,rand))),false)
   
@@ -398,7 +398,7 @@ assert(isTree(adj),false)
 % testing isGraphic.m ============================
 printf('testing isGraphic.m\n')
 for i=1:100
-  adj = giantComponent(random_graph(randi(20)+1,0.5));
+  adj = giantComponent(randomGraph(randi(20)+1,0.5));
   [deg,~,~] = degrees(adj);
   assert(isGraphic(deg) | adj==0)
 end
@@ -581,7 +581,7 @@ printf('testing rewire.m\n')
 
 for x=1:100
   
-  el = adj2edgeL(random_graph(randi(10)+10,0.4));
+  el = adj2edgeL(randomGraph(randi(10)+10,0.4));
   deg = degrees(edgeL2adj(el));
   eln = rewire(el,randi(5));
   degn = degrees(edgeL2adj(eln));
@@ -597,7 +597,7 @@ printf('testing rewireAssort.m\n')
 for x=1:100
   adj = [0 0; 0 0];
   
-  while not(isConnected(adj)); adj = random_graph(randi(10)+10,0.4); end
+  while not(isConnected(adj)); adj = randomGraph(randi(10)+10,0.4); end
   el = adj2edgeL(adj);
   eln = rewireAssort(el,randi(5));
   
@@ -611,7 +611,7 @@ printf('testing rewireDisassort.m\n')
 for x=1:100
   
   adj = [0 0; 0 0];
-  while not(isConnected(adj)); adj = random_graph(randi(10)+10,0.4); end
+  while not(isConnected(adj)); adj = randomGraph(randi(10)+10,0.4); end
   el = adj2edgeL(adj);
   eln = rewireDisassort(el,randi(5));
 
@@ -666,7 +666,7 @@ assert(nodeBetweennessFaster(bowtie),[0 0 0.4 0.4 0 0])
 adj = [0 0; 0 0];
 for i=1:100
   
-  while not(isConnected(adj)); adj = random_graph(randi(10)+5,rand); end
+  while not(isConnected(adj)); adj = randomGraph(randi(10)+5,rand); end
   assert(nodeBetweennessSlow(adj),nodeBetweennessFaster(adj))
   
 end
@@ -704,7 +704,7 @@ assert([C1,C2],[1/3,7/9])
 % testing weightedClustCoeff.m ===================
 printf('testing weightedClustCoeff.m\n')
 randint = randi(20);
-assert(length(weightedClustCoeff(random_graph(randint+5,rand))),randint+5)
+assert(length(weightedClustCoeff(randomGraph(randint+5,rand))),randint+5)
 % ================================================
 
 
@@ -716,7 +716,7 @@ assert( pearson( edgeL2adj( canonical_nets(randi(5)+5,'star') ) ) ,-1 )
 
 % testing richClubMetric.m =======================
 printf('testing richClubMetric.m\n')
-assert(richClubMetric(random_graph(randi(5)+5,rand),12),0)
+assert(richClubMetric(randomGraph(randi(5)+5,rand),12),0)
 assert(richClubMetric(bowtie,2),linkDensity(bowtie))
 
 mat = [0 1 1 0; 1 0 1 0; 1 1 0 1; 0 0 1 0];
@@ -788,7 +788,7 @@ printf('testing minSpanTree.m\n')
 for x=1:100
   
   adj = [0 1; 0 0];
-  while not(isConnected(adj)); adj = random_graph(randi(50)+5,rand); end
+  while not(isConnected(adj)); adj = randomGraph(randi(50)+5,rand); end
   
   tr = minSpanTree(adj);
   assert(isTree(tr),true)
@@ -803,7 +803,7 @@ printf('testing BFS.m\n')
 
 for x=1:100
   adj = [0 1; 0 0];
-  while not(isConnected(adj)); adj = random_graph(randi(50)+5,rand); end
+  while not(isConnected(adj)); adj = randomGraph(randi(50)+5,rand); end
 
   tr = BFS(adj2adjL(adj),randi(length(adj)));
   tr = symmetrize(adjL2adj(tr));
@@ -862,7 +862,7 @@ assert(avePathLength(adj),(0+1+2+3+4+5 +0+1+2+3+4 +0+1+2+3 +0+1+2+ 0+1 +0)/15)
 printf('testing smoothDiameter.m\n')
 
 adj = [0 1; 0 0];
-while not(isConnected(adj)); adj = random_graph(randi(10)+10,rand); end
+while not(isConnected(adj)); adj = randomGraph(randi(10)+10,rand); end
 assert(diameter(adj),smoothDiameter(adj,1))  % should be the same when the fraction is 1
 % ================================================
 
@@ -955,25 +955,25 @@ assert(laplacianMatrix(undirected_triangle),[2 -1 -1; -1 2 -1; -1 -1 2])
 
 % testing graphSpectrum.m ========================
 printf('testing graphSpectrum.m\n')
-adj = random_graph(randi(50)+10,rand);
+adj = randomGraph(randi(50)+10,rand);
 assert(length(graphSpectrum(adj)),length(adj))
 % ================================================
 
 % testing algebraicConnectivity.m ================
 printf('testing algebraicConnectivity.m\n')
-adj = random_graph(randi(50)+10,rand);
+adj = randomGraph(randi(50)+10,rand);
 assert(length(algebraicConnectivity(adj)),1)
 % ================================================
 
 % testing fiedlerVector.m ========================
 printf('testing fiedlerVector.m\n')
-adj = random_graph(randi(50)+10,rand);
+adj = randomGraph(randi(50)+10,rand);
 assert(length(fiedlerVector(adj)),length(adj))
 % ================================================
 
 % testing graphEnergy.m ==========================
 printf('testing graphEnergy.m\n')
-adj = random_graph(randi(50)+10,rand);
+adj = randomGraph(randi(50)+10,rand);
 assert(length(graphEnergy(adj)),1)
 % ================================================
 
@@ -1013,7 +1013,7 @@ assert(modules{2},[4,5,6])
 assert(modules{1},[1,2,3])
 
 for x=1:100
-  adj = random_graph(randi(10)+5,1);
+  adj = randomGraph(randi(10)+5,1);
   Adj = zeros(4*length(adj));
   Adj(1:length(adj),1:length(adj))=adj;
   Adj(length(adj)+1:2*length(adj),length(adj)+1:2*length(adj))=adj;
@@ -1133,7 +1133,7 @@ assert(length(modules),4)
 
 % concatenate 4 dense graphs
 adj = [0 1; 0 0];
-while not(isConnected(adj)); adj = random_graph(10,0.9); end
+while not(isConnected(adj)); adj = randomGraph(10,0.9); end
 Adj = zeros(40,40);
 
 Adj(1:10,1:10)=adj;
