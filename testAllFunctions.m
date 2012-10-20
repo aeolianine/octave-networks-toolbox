@@ -1148,3 +1148,39 @@ Adj(30,31) = 1; Adj(31,30) = 1;
 [modules,inmodule]=louvainCommunityFinding(Adj);
 assert(length(modules),4)
 % ================================================
+
+
+
+% testing randomGraph.m ==========================
+printf('testing randomGraph.m\n');
+
+% testing the size of the graph
+randint = randi(20)+3;
+assert(size(randomGraph(randint),1),randint)
+assert(size(randomGraph(randint),2),randint)
+
+% testing the default probability of attachment
+for x=1:50
+  randint = randi(50)+50;
+  adj = randomGraph(randint);
+  assert(linkDensity(adj)>0.35);
+  assert(linkDensity(adj)<0.65);
+end
+
+% testing a random probability of attachment
+for x=1:50
+  p = rand;
+  randint = randi(50)+50;
+  adj = randomGraph(randint,p);
+  assert(linkDensity(adj)>p-0.15);
+  assert(linkDensity(adj)<p+0.15);
+end
+
+% testing for the number of edges, E
+for x=1:50
+  randint = randi(50)+50;
+  E = randi([1,randint-1]);
+  adj = randomGraph(randint,[],E);
+  assert(numEdges(adj),E);
+end
+% ================================================
