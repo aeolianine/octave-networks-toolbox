@@ -1199,3 +1199,17 @@ for i=1:30
   assert(size(adj),[n,n]);
 end
 % ================================================
+
+
+% test graphFromDegreeSequence.m =================
+printf('testing graphFromDegreeSequence.m\n')
+
+for x=1:50
+  adj = [0 1; 0 0];
+  while not(isConnected(adj)); adj = randomGraph(randi(50)+50,rand); end
+  adjr=graphFromDegreeSequence(degrees(adj));
+  assert(isSimple(adjr),true)
+  assert(degrees(adj),degrees(adjr))
+  assert(isConnected(adjr),true)
+end
+% ================================================
