@@ -26,7 +26,7 @@ printf('testing getNodes.m\n')
 
 assert(getNodes(bowtie,'adj'), [1:6])
 N = randi(100);
-assert(getNodes(random_directed_graph(N),'adj'),[1:N])
+assert(getNodes(randomDirectedGraph(N),'adj'),[1:N])
 assert(getNodes(randomGraph(10),'adj'),[1:10])
 assert(getNodes(bowtie_adjL,'adjlist'),[1:6])
 assert(getNodes(directed_cherry,'edgelist'),[1:3])
@@ -217,7 +217,7 @@ for iter=1:100  % completely random matrix testing ....
   assert(GSCC{1},[1:length(adj)])
   
   % directed graph testing ==========================
-  adj=random_directed_graph(randi(50)+1,rand);
+  adj=randomDirectedGraph(randi(50)+1,rand);
   L=adj2adjL(adj);
   GSCC = tarjan(L);
   
@@ -315,7 +315,7 @@ assert(isSimple([0 1 1; 1 0 0; 0 1 0]),false)   % directed matrix
   
 % testing isDirected.m ===========================
 printf('testing isDirected.m\n')
-assert(isDirected(random_directed_graph(randi(5)+20,rand)),true)  
+assert(isDirected(randomDirectedGraph(randi(5)+20,rand)),true)  
 assert(isDirected(randomGraph(randi(5)+20,rand)),false)
 % ================================================
 
@@ -325,7 +325,7 @@ printf('testing isSymmetric.m\n')
 for i=1:100
   assert(isSymmetric(randomGraph(randi(5)+20,rand)),true)
 
-  adj = random_directed_graph(randi(5)+20,rand);
+  adj = randomDirectedGraph(randi(5)+20,rand);
   assert(not(isSymmetric(adj)) | adj==zeros(size(adj)) | adj==ones(size(adj)))
 end
 % ================================================
@@ -342,7 +342,7 @@ assert(isWeighted([1,2,2]),true)
 
 assert(isWeighted(adj2edgeL(randomGraph(randi(5)+20,rand))),false)
   
-assert(isWeighted(adj2edgeL(random_directed_graph(randi(5)+20,rand))),false)
+assert(isWeighted(adj2edgeL(randomDirectedGraph(randi(5)+20,rand))),false)
   
 assert(isWeighted([1,2,0.5; 1,3,1.5; 1,4,1]),true)
 assert(isWeighted([1,2,0.5; 1,3,1; 1,4,1]),true)
@@ -533,7 +533,7 @@ assert(sortrows(edgeL2simple([1 2 1; 1 3 2;4 5 1.4])),[1 2 1; 1 3 1; 2 1 1; 3 1 
 % testing symmetrize.m ===========================
 printf('testing symmetrize.m\n')
 for i=1:20
-  adj = random_directed_graph(randi(10)+3,rand);
+  adj = randomDirectedGraph(randi(10)+3,rand);
   assert(isSymmetric(symmetrize(adj)),true)
 end
 
@@ -542,7 +542,7 @@ end
 printf('testing symmetrizeEdgeL.m\n')
 
 for x=1:50
-  adj = random_directed_graph(randi(20)+2,rand); % create a random adjacency
+  adj = randomDirectedGraph(randi(20)+2,rand); % create a random adjacency
   el = adj2edgeL(adj);
   if isempty(el); continue; end
   elsym = symmetrizeEdgeL(el);
@@ -1182,5 +1182,20 @@ for x=1:50
   E = randi([1,randint-1]);
   adj = randomGraph(randint,[],E);
   assert(numEdges(adj),E);
+end
+% ================================================
+
+
+% testing randomDirectedGraph.m ==================
+printf('testing randomDirectedGraph.m\n');
+
+for i=1:30
+  p=rand;
+  n = randi(40)+40;
+  adj = randomDirectedGraph(n,p);
+  assert(linkDensity(adj)>p-0.15)
+  assert(linkDensity(adj)<p+0.15)
+
+  assert(size(adj),[n,n]);
 end
 % ================================================

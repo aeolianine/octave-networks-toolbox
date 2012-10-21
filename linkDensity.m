@@ -6,7 +6,7 @@
 % Outputs: link density, a float between 0 and 1
 %
 % Note: The graph has to be non-trivial (more than 1 node).
-% Other routines used: numNodes.m, numEdges.m
+% Other routines used: numNodes.m, numEdges.m, isDirected.m
 % GB: last update Sep 19, 2012
 ##################################################################
 
@@ -14,4 +14,8 @@
 function d=linkDensity(adj)
 
 n = numNodes(adj);
-d = 2*numEdges(adj)/(n*(n-1));
+
+coeff = 2;
+if isDirected(adj); coeff = 1; end
+
+d = coeff*numEdges(adj)/(n*(n-1));
