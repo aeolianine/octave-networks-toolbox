@@ -7,10 +7,13 @@
 %
 % INPUTs: L - (cost/path lengths matrix), s - (start/source node), 
 %                                       t - (end/destination node)
+%                                 steps - number of arcs allowable
 % OUTPUTS: 
 %       route - sequence of nodes on optimal path, at current stage
-%       ex: route(i,j) - best route from j to destination in (i) steps
-%       Jo - optimal cost function (path length)
+%       route(k,i).path - best route from "i" to destination "t" in "k" steps
+%       route_st - best route from "s" to "t"
+%       J_st - optimal cost function (path length) from "s" to "t"
+%       J(1,i) - distance from node "i" to "t" in "k" steps
 %
 % GB: last updated, Oct 5 2012
 ##################################################################
@@ -37,7 +40,7 @@ for p=1:steps-1
   
 end
 
-[J_st,step_ind] = min(J(:,s));
-route_st = [s, route(step_ind,s).path];
-J=J(sort(1:n,'descend'),:);
-route=route(sort(1:n,'descend'),:);
+[J_st,step_ind] = min(J(:,s));               % the shortest path (min cost) from s to t
+route_st = [s, route(step_ind,s).path];      % the shortest path route from s to t
+J=J(sort(1:min([n,steps]),'descend'),:);
+route=route(sort(1:min([n,steps]),'descend'),:);
