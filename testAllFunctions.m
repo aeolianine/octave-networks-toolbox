@@ -4,6 +4,7 @@ clear all
 close all
 
 % Set of test graphs, in various formats =========
+one_directed_edge = [0 1; 0 0];
 one_double_edge = [0 2; 2 0]; 
 bowtie=[0 1 1 0 0 0; 1 0 1 0 0 0; 1 1 0 1 0 0; 0 0 1 0 1 1; 0 0 0 1 0 1; 0 0 0 1 1 0];
 disconnected_bowtie =[0 1 1 0 0 0; 1 0 1 0 0 0; 1 1 0 0 0 0; 0 0 0 0 1 1; 0 0 0 1 0 1; 0 0 0 1 1 0];
@@ -18,6 +19,7 @@ undirected_triangle_selfloops = [1 1 1; 1 1 1; 1 1 0];
 undirected_triangle_incidence = [1 1 0; 1 0 1; 0 1 1];
 directed_triangle=[0 1 0; 0 0 1; 1 0 0];
 square = [0 1 0 1; 1 0 1 0; 0 1 0 1; 1 0 1 0];
+star = edgeL2adj(canonical_nets(5,'star'));      % adjacency matrix
 % ================================================
 
 
@@ -710,6 +712,7 @@ assert(length(weightedClustCoeff(randomGraph(randint+5,rand))),randint+5)
 
 % testing pearson.m ==============================
 printf('testing pearson.m\n')
+assert(pearson(star),-1)
 assert( pearson( edgeL2adj( canonical_nets(randi(5)+5,'star') ) ) ,-1 )
 % ================================================
 
@@ -729,6 +732,7 @@ printf('testing sMetric.m\n')
 assert(sMetric(undirected_triangle),2*12)
 assert(sMetric(bowtie),2*41)
 assert(sMetric(edgeL2adj(directed_cherry)),4)
+assert(sMetric(one_directed_edge),1)
 % ================================================
 
 
