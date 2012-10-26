@@ -593,6 +593,33 @@ for x=1:100
 end
 % ================================================
 
+
+% testing rewireThisEdge.m =======================
+printf('testing rewireThisEdge.m\n')
+
+for x=1:100
+  
+  adj = [0 1; 0 0];
+  while not(isConnected(adj)); adj = randomGraph(randi(10)+10,rand); end
+  el = adj2edgeL(adj);
+  deg = degrees(edgeL2adj(el));
+  
+  edgeind = randi([1,length(el)]);
+  eln = rewireThisEdge(el,el(edgeind,1),el(edgeind,2));
+  if isempty(eln); continue; end
+  
+  adjn = edgeL2adj(eln);
+  degn = degrees(adjn);
+  
+  assert(deg,degn)
+  assert(isSimple(adjn),true)
+
+ 
+end
+% ================================================
+
+
+
 % testing rewireAssort.m =========================
 printf('testing rewireAssort.m\n')
 
@@ -1215,5 +1242,22 @@ for x=1:50
   assert(isSimple(adjr),true)
   assert(degrees(adj),degrees(adjr))
   assert(isConnected(adjr),true)
+end
+% ================================================
+
+
+% test randomGraphFromDegreeSequence.m ===========
+printf('testing randomGraphFromDegreeSequence.m\n')
+
+for x=1:100
+  
+  adj = [0 1; 0 0];
+  N = randi(50)+10;
+  while not(isConnected(adj)); adj = randomGraph(N,log(N)/N); end
+  
+  adjr = randomGraphFromDegreeSequence(degrees(adj));
+  
+  assert(isSimple(adjr),true)
+  assert(degrees(adj),degrees(adjr))
 end
 % ================================================

@@ -7,6 +7,8 @@
 %
 % Note: There are cases when rewiring is not possible, while
 %       keeping the graph simple, so an empty edge list is returned.
+% 
+% Other routines used: edgeL2adj.m, kneighbors.m
 % GB: last updated, Oct 25, 2012
 ##################################################################
 
