@@ -19,7 +19,7 @@ undirected_triangle_selfloops = [1 1 1; 1 1 1; 1 1 0];
 undirected_triangle_incidence = [1 1 0; 1 0 1; 0 1 1];
 directed_triangle=[0 1 0; 0 0 1; 1 0 0];
 square = [0 1 0 1; 1 0 1 0; 0 1 0 1; 1 0 1 0];
-star = edgeL2adj(canonical_nets(5,'star'));      % adjacency matrix
+star = edgeL2adj(canonicalNets(5,'star'));      % adjacency matrix
 % ================================================
 
 
@@ -69,7 +69,7 @@ assert(numEdges(edgeL2adj(bowtie_edgeL_loop)),8)
 printf('testing linkDensity.m\n')
 
 randint = randi(101);
-assert(linkDensity(edgeL2adj(canonical_nets(randint,'tree',2))),2/randint)
+assert(linkDensity(edgeL2adj(canonicalNets(randint,'tree',2))),2/randint)
 assert(linkDensity(bowtie),2.0*7/(6*5))
 % ================================================
 
@@ -353,10 +353,10 @@ assert(isWeighted([1,2,0.5; 1,3,1; 1,4,1]),true)
 
 % testing isRegular.m ============================
 printf('testing isRegular.m\n')
-adj = edgeL2adj(canonical_nets(20,'circle'));
+adj = edgeL2adj(canonicalNets(20,'circle'));
 assert(isRegular(adj),true)
 
-adj = edgeL2adj(canonical_nets(20,'tree',3));
+adj = edgeL2adj(canonicalNets(20,'tree',3));
 assert(isRegular(adj),false)
 
 assert(isRegular([0 1; 1 0]),true)
@@ -381,19 +381,19 @@ assert(isComplete(adj),true)
 % testing isEulerian.m ===========================
 printf('testing isEulerian.m\n')
 
-adj = edgeL2adj(canonical_nets(10,'circle'));
+adj = edgeL2adj(canonicalNets(10,'circle'));
 assert(isEulerian(adj),true)
 
-adj = edgeL2adj(canonical_nets(10,'tree',3));
+adj = edgeL2adj(canonicalNets(10,'tree',3));
 assert(isEulerian(adj),false)
 % ================================================
 
 % testing isTree.m ===============================
 printf('testing isTree.m\n')
-adj = edgeL2adj(canonical_nets(randi(10)+10,'tree',2));
+adj = edgeL2adj(canonicalNets(randi(10)+10,'tree',2));
 assert(isTree(adj),true)
 
-adj = edgeL2adj(canonical_nets(randi(10)+10,'circle'));
+adj = edgeL2adj(canonicalNets(randi(10)+10,'circle'));
 assert(isTree(adj),false)
 % ================================================
 
@@ -413,10 +413,10 @@ printf('testing isBipartite.m\n')
 assert(isBipartite(adj2adjL(bowtie)),false)
 assert(isBipartite(edgeL2adjL(undirected_cherry)),true)
 
-even_circle = canonical_nets(2*randi(10),'circle');
+even_circle = canonicalNets(2*randi(10),'circle');
 assert(isBipartite(edgeL2adjL(even_circle)),true)
 
-odd_circle = canonical_nets(2*randi(10)+1,'circle');
+odd_circle = canonicalNets(2*randi(10)+1,'circle');
 assert(isBipartite(edgeL2adjL(odd_circle)),false)
 % ================================================
 
@@ -724,7 +724,7 @@ assert(eigenCentrality([0 1 1; 1 0 1; 1 1 0]),v(:,3))
 printf('testing clustCoeff.m\n')
 assert(clustCoeff(undirected_triangle),1)
 assert(clustCoeff(edgeL2adj(undirected_cherry)),0)
-assert(clustCoeff(edgeL2adj(canonical_nets(randi(10)+5,'tree',2))),0)
+assert(clustCoeff(edgeL2adj(canonicalNets(randi(10)+5,'tree',2))),0)
 [C1,C2] = clustCoeff(bowtie);
 assert([C1,C2],[1/3,7/9])
 % ================================================
@@ -740,7 +740,7 @@ assert(length(weightedClustCoeff(randomGraph(randint+5,rand))),randint+5)
 % testing pearson.m ==============================
 printf('testing pearson.m\n')
 assert(pearson(star),-1)
-assert( pearson( edgeL2adj( canonical_nets(randi(5)+5,'star') ) ) ,-1 )
+assert( pearson( edgeL2adj( canonicalNets(randi(5)+5,'star') ) ) ,-1 )
 % ================================================
 
 
@@ -869,11 +869,11 @@ printf('testing diameter.m\n')
 assert(diameter(undirected_triangle),1)
 assert(diameter(bowtie),3)
 
-el=canonical_nets(randi(10)+5,'line');
+el=canonicalNets(randi(10)+5,'line');
 adj = edgeL2adj(el);
 assert(diameter(adj),length(adj)-1)
 
-el=canonical_nets(randi(10)+5,'circle');
+el=canonicalNets(randi(10)+5,'circle');
 adj = edgeL2adj(el);
 assert(diameter(adj),floor(length(adj)/2))
 % ================================================
@@ -884,7 +884,7 @@ printf('testing avePathLength.m\n')
 
 assert(avePathLength(bowtie),(0+1+1+2+3+3 +0+1+2+3+3+ 0+1+2+2 +0+1+1 +0+1 +0)/15)
 assert(avePathLength(undirected_triangle),1)
-adj = edgeL2adj(canonical_nets(6,'line'));
+adj = edgeL2adj(canonicalNets(6,'line'));
 assert(avePathLength(adj),(0+1+2+3+4+5 +0+1+2+3+4 +0+1+2+3 +0+1+2+ 0+1 +0)/15)
 % ================================================
 
@@ -911,7 +911,7 @@ printf('testing graphRadius.m\n')
 
 assert(graphRadius(bowtie),2)
 
-el = canonical_nets(randi(10)+10,'line');
+el = canonicalNets(randi(10)+10,'line');
 adj = edgeL2adj(el);
 assert(graphRadius(adj),(size(adj,1)-mod(size(adj,1),2))/2)
 % ================================================
@@ -946,8 +946,8 @@ printf('testing loops3.m\n')
 assert(loops3(bowtie),2)
 assert(loops3(square),0)
 assert(loops3(undirected_triangle),1)
-assert(loops3(edgeL2adj(canonical_nets(randi(10)+3,'btree'))),0)
-assert(loops3(edgeL2adj(canonical_nets(4,'trilattice'))),2)
+assert(loops3(edgeL2adj(canonicalNets(randi(10)+3,'btree'))),0)
+assert(loops3(edgeL2adj(canonicalNets(4,'trilattice'))),2)
 % ================================================
 
 
@@ -1241,7 +1241,6 @@ for x=1:50
   adjr=graphFromDegreeSequence(degrees(adj));
   assert(isSimple(adjr),true)
   assert(degrees(adj),degrees(adjr))
-  assert(isConnected(adjr),true)
 end
 % ================================================
 
@@ -1259,5 +1258,100 @@ for x=1:100
   
   assert(isSimple(adjr),true)
   assert(degrees(adj),degrees(adjr))
+end
+% ================================================
+
+
+% test canonicalNets.m ===========================
+printf('testing canonicalNets.m\n');
+
+for x=1:20
+  N = randi(50)+10;
+  
+  elLine = canonicalNets(N,'line'); % test line
+  adj = edgeL2adj(elLine);
+  assert(numNodes(adj),N);
+  assert(isConnected(adj),true)
+  assert(degrees(adj),[1 2*ones(1,N-2) 1])
+  assert(isTree(adj),true)
+  
+  elC = canonicalNets(N,'circle'); % test circle
+  adj = edgeL2adj(elC);
+  assert(numNodes(adj),N);
+  assert(isConnected(adj),true)
+  assert(degrees(adj),2*ones(1,N))
+  assert(isTree(adj),false)
+  
+  elS = canonicalNets(N,'star'); % test star
+  adj = edgeL2adj(elS);
+  assert(numNodes(adj),N);
+  assert(isConnected(adj),true)
+  assert(degrees(adj),[N-1 ones(1,N-1)])
+  assert(isTree(adj),true)
+    
+  elCl = canonicalNets(N,'clique'); % test clique
+  adj = edgeL2adj(elCl);
+  assert(numNodes(adj),N)
+  assert(isComplete(adj),true)
+  assert(degrees(adj),(N-1)*ones(1,N))
+  
+  
+  elBT = canonicalNets(N,'btree'); % test binary tree
+  adj = edgeL2adj(elBT);
+  assert(numNodes(adj),N)
+  assert(isTree(adj),true)
+  deg = degrees(adj);
+  assert(max(deg),3)
+  assert(deg(1),2)
+  assert(deg(N),1)
+  
+  b = randi([3,6]);
+  elT = canonicalNets(N,'tree',b); % test general tree
+  adj = edgeL2adj(elT);
+  assert(numNodes(adj),N)
+  assert(isTree(adj),true)
+  deg = degrees(adj);
+  assert(max(deg)<=b+1,true)
+  assert(deg(1),b)
+  assert(deg(N),1)
+  
+  assert(edgeL2adj(canonicalNets(N,'tree',2)),edgeL2adj(canonicalNets(N,'btree')))
+  
+  b = randi([3,6]);
+  elH = canonicalNets(N,'hierarchy',b); % test hierarchy
+  adj = edgeL2adj(elH);  
+  assert(numNodes(adj),N)
+  assert(isTree(adj),false)
+  deg = degrees(adj);
+  assert(max(deg)<=b+3,true)
+  assert(deg(1),b)
+  
+  
+  eltr = canonicalNets(N,'trilattice');  % test triangular lattice
+  adj = edgeL2adj(eltr);
+  assert(numNodes(adj),N)
+  assert(isTree(adj),false)
+  assert(isComplete(adj),false)
+  assert(max(degrees(adj))<=6,true)
+  assert(isConnected(adj),true)
+
+  
+  elsq = canonicalNets(N,'sqlattice');  % test triangular lattice
+  adj = edgeL2adj(elsq);
+  assert(numNodes(adj),N)
+  assert(isTree(adj),false)
+  assert(isComplete(adj),false)
+  assert(max(degrees(adj))<=4,true)
+  assert(isConnected(adj),true)
+
+  elhex = canonicalNets(N,'hexlattice');  % test triangular lattice
+  adj = edgeL2adj(elhex);
+  assert(numNodes(adj),N)
+  assert(isTree(adj),false)
+  assert(isComplete(adj),false)
+  assert(max(degrees(adj))<=3,true)
+  assert(isConnected(adj),true)
+
+  
 end
 % ================================================
