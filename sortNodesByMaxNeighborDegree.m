@@ -3,7 +3,7 @@
 % Ideas from Guo, Chen, Zhou, "Fingerprint for Network Topologies"
 %
 % INPUTS: adjacency matrix, 0s and 1s, nxn
-% OUTPUTS: sorted sequence of nodal indices (nx1)
+% OUTPUTS: sorted (decreasing) sequence of nodal indices (nx1)
 %
 % Other routines used: degrees.m, kneighbors.m
 % GB: last updated, Oct 4, 2012
@@ -23,5 +23,5 @@ for x=1:size(adj,1)   % across all nodes
     
 end
 
-[sortmat,I]=sortrows(degmat);
-I=I(end:-1:1);
+[sortmat,I]=sortrows(degmat);   % increasing sorting
+I=I(end:-1:1);  % decreasing sorting

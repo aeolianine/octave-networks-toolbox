@@ -5,8 +5,8 @@
 % and Guo, Chen, Zhou, "Fingerprint for Network Topologies"
 %
 % INPUTS: adjacency matrix, 0s and 1s, nxn
-% OUTPUTS: sorted sequence (nx1), where n is the number of
-%                               rows/cols of the adjacency
+% OUTPUTS: sorted (decreasing) sequence (nx1), where n is the number of
+%                                           rows/cols of the adjacency
 %
 % Other routines used: degrees.m, kneighbors.m
 % GB: last update, Oct 4, 2012
@@ -27,4 +27,5 @@ for x=1:size(adj,1)   % across all nodes
 end
 
 [sortmat,I]=sortrows(degmat);
+degmat
 I=I(end:-1:1);
