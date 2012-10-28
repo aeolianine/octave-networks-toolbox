@@ -1111,7 +1111,7 @@ for i=1:20
   [mH,Q1] = newmanCommFast(adj);
   close all;
   Q2 = [];
-  for mod=1:length(mH); Q2 = [Q2 modularityMetric(mH{mod},adj)]; end
+  for m=1:length(mH); Q2 = [Q2 modularityMetric(mH{m},adj)]; end
   
   assert(Q1,Q2)
 
@@ -1353,5 +1353,20 @@ for x=1:20
   assert(isConnected(adj),true)
 
   
+end
+% ================================================
+
+
+% test kregular.m ================================
+printf('testing kregular.m\n');
+for x=1:30
+  
+  n = randi(20)+5;   % random integer between 6 and 25
+  k = randi(n-2)+1;  % randon integer between 2 and n-1
+  if mod(k,2)==1 & mod(n,2)==1; continue; end  % no solution for this case
+  el = kregular(n,k);
+  adj = edgeL2adj(el);
+  assert(degrees(adj),k*ones(1,length(adj)))
+
 end
 % ================================================

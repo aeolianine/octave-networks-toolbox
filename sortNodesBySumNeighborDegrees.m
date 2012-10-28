@@ -27,5 +27,4 @@ for x=1:size(adj,1)   % across all nodes
 end
 
 [sortmat,I]=sortrows(degmat);
-degmat
 I=I(end:-1:1);
