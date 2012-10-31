@@ -2,7 +2,8 @@
 % Check if a graph is Eulerian, i.e. it has an Eulerian circuit
 % "A connected undirected graph is Eulerian if and only if every graph vertex has an even degree."
 % "A connected directed graph is Eulerian if and only if every graph vertex has equal in- and out- degree."
-% Note: Assume that the graph is connected.
+% Note 1: Assume that the graph is connected.
+% Note 2: If there is an Eulerian trail, it is reported.
 %
 % INPUTS: adjacency matrix, nxn
 % OUTPUTS: Boolean variable, 0 or 1
