@@ -26,7 +26,6 @@ cnt=0;
   
 while sum(stubs)>0   % while no more stubs are left to connect
   
-  
   if sum(stubs)==2 & cnt>5  % rewire the last edge when stuck
     
     el = adj2edgeL(adj);

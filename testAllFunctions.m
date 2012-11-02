@@ -1370,3 +1370,50 @@ for x=1:30
 
 end
 % ================================================
+
+
+% test randomGraphDegreeDist.m ===================
+printf('testing randomGraphDegreeDist.m\n')
+
+N = randi(20)+10;
+adj = randomGraphDegreeDist(N,'uniform');
+assert(numNodes(adj),N)
+assert(isSimple(adj),true)
+
+adj = randomGraphDegreeDist(N,'normal');
+assert(numNodes(adj),N)
+assert(isSimple(adj),true)
+
+adj = randomGraphDegreeDist(N,'binomial');
+assert(numNodes(adj),N)
+assert(isSimple(adj),true)
+
+adj = randomGraphDegreeDist(N,'exponential');
+assert(numNodes(adj),N)
+assert(isSimple(adj),true)
+
+%adj = randomGraphDegreeDist(6,'custom',[1/5 1/5 1/5 1/5 1/5]);
+%assert(numNodes(adj),6)
+%assert(isSimple(adj),true)
+
+adj = randomGraphDegreeDist(N,'custom');
+assert(isempty(adj),true)
+
+adj = randomGraphDegreeDist(N,'anything here');
+assert(isempty(adj),true)
+% ================================================
+  
+
+% testing weightedRandomSample.m =================
+printf('testing weightedRandomSample.m\n');
+
+for x=1:20
+  n=randi(10)+1;  % number of draws
+  P = [1:randi(7)+10];  % population to draw from
+  W = rand(1,length(P));
+  W = W/sum(W);         % normalize to create weights that sum to 1
+  s = weightedRandomSample(n,P,W);
+  assert(length(s),n)
+  assert(intersect(P,s),unique(s))   % test that all draws exist in the population                                     
+end
+% ================================================
