@@ -1014,7 +1014,7 @@ printf('testing simpleSpectralPartitioning.m\n')
 
 for xx=1:50  % do the randomized test 50 times
   n = randi(99)+11;   % number of nodes
-  adj = random_modular_graph(n,4,0.1,0.9);  % random graph with n nodes
+  adj = randomModularGraph(n,4,0.1,3);  % random graph with n nodes
   num_groups = randi(10)+1;  % number of groups to split the nodes in
   groups = [];
   for x=1:length(num_groups)-1; groups = [groups ceil(rand*n/num_groups)+1]; end
@@ -1064,7 +1064,7 @@ for x=1:100
   
   n = randi(50)+50;
   adj = [];
-  while not(isConnected(adj)); adj = random_modular_graph(n,prescribed,0.9*log(n)/n,1-0.3*rand); end
+  while not(isConnected(adj)); adj = randomModularGraph(n,prescribed,0.9*log(n)/n,2+0.3*rand); end
   modules = newmanEigenvectorMethod(adj);
   
   sumnodes = 0;
@@ -1090,7 +1090,7 @@ printf('testing newmanCommFast.m\n')
 close all;
 assert(max(Q),Q(6-1));
 
-[gH,Q]=newmanCommFast(random_modular_graph(100,4,0.1,0.9));
+[gH,Q]=newmanCommFast(randomModularGraph(100,4,0.1,5));
 close all;
 assert(length(gH),length(Q))
 [~,ind]=max(Q);
@@ -1105,7 +1105,7 @@ for i=1:20
   
   adj = [0 1; 0 0];
   num_modules = randi([2,5]);
-  while not(isConnected(adj)); adj = random_modular_graph(30,num_modules,0.1,0.9); end
+  while not(isConnected(adj)); adj = randomModularGraph(30,num_modules,0.1,5); end
  
   % compare to newmanCommFast
   [mH,Q1] = newmanCommFast(adj);
@@ -1403,6 +1403,18 @@ adj = randomGraphDegreeDist(N,'anything here');
 assert(isempty(adj),true)
 % ================================================
   
+
+% test randomModularGraph.m ======================
+fprintf('testing randomModularGraph.m\n');
+for x=1:20
+  N = randi(50)+10;
+  c = randi(5)+1;
+  [adj, modules] = randomModularGraph(N,c,0.2,4);
+  assert(numNodes(adj),N)
+  assert(length(modules),c)
+end
+% ================================================
+
 
 % testing weightedRandomSample.m =================
 printf('testing weightedRandomSample.m\n');
