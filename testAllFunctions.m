@@ -1460,3 +1460,20 @@ for x=1:20
   assert(numNodes(adj),randint)    
 end
 % ================================================
+
+
+% testing preferentialAttachment.m ===============
+printf('testing preferentialAttachment.m\n')
+for x=1:10
+  el = preferentialAttachment(randi(10)+10,1);
+  adj = edgeL2adj(el);
+  assert(isTree(adj),true)
+  assert(isSimple(adj),true)
+  
+  randint = randi(30)+5;
+  el = preferentialAttachment(randint,2);
+  adj = edgeL2adj(el);
+  assert(numEdges(adj),1+2*(length(adj)-2))
+    
+end
+% ================================================
