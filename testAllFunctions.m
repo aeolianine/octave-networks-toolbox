@@ -1380,13 +1380,13 @@ adj = randomGraphDegreeDist(N,'uniform');
 assert(numNodes(adj),N)
 assert(isSimple(adj),true)
 
-adj = randomGraphDegreeDist(N,'normal');
-assert(numNodes(adj),N)
-assert(isSimple(adj),true)
+%adj = randomGraphDegreeDist(N,'normal');
+%assert(numNodes(adj),N)
+%assert(isSimple(adj),true)
 
-adj = randomGraphDegreeDist(N,'binomial');
-assert(numNodes(adj),N)
-assert(isSimple(adj),true)
+%adj = randomGraphDegreeDist(N,'binomial');
+%assert(numNodes(adj),N)
+%assert(isSimple(adj),true)
 
 adj = randomGraphDegreeDist(N,'exponential');
 assert(numNodes(adj),N)
@@ -1402,7 +1402,7 @@ assert(isempty(adj),true)
 adj = randomGraphDegreeDist(N,'anything here');
 assert(isempty(adj),true)
 % ================================================
-  
+
 
 % test randomModularGraph.m ======================
 fprintf('testing randomModularGraph.m\n');
@@ -1475,5 +1475,56 @@ for x=1:10
   adj = edgeL2adj(el);
   assert(numEdges(adj),1+2*(length(adj)-2))
     
+end
+% ================================================
+
+
+% testing exponentialGrowthModel.m ===============
+printf('testing exponentialGrowthModel.m\n')
+for x=1:10
+  el = exponentialGrowthModel(randi(100));
+  adj=edgeL2adj(el);
+  assert(isConnected(adj),true)
+  assert(isTree(adj),true)
+end
+% ================================================
+
+% testing masterEquation.m =======================
+printf('testing masterEquation.m\n')
+for x=1:30
+  randint = randi(100)+3;
+  adj = masterEquationGrowthModel(randint,1,0);
+  assert(isTree(adj),true)
+  
+  adj = masterEquationGrowthModel(randint,2,0);
+  assert(isTree(adj),false)
+  
+  adj = masterEquationGrowthModel(randint,2,2);
+  assert(isSimple(adj),true)
+  
+end
+% ================================================
+
+
+% testing newmanGastner.m ========================
+printf('testing newmanGastner.m\n')
+
+for x=1:10
+  N = randi(100)+10;
+  el = newmanGastner(N,rand,[],'off');  % no plot
+  adj = symmetrize(edgeL2adj(el));
+  assert(numNodes(adj),N);
+  assert(isSimple(adj),true)
+end
+% ================================================
+
+
+% testing fabrikantModel.m =======================
+printf('testing fabrikantModel.m\n')
+for x=1:20
+  adj = fabrikantModel(randi(30)+10,rand*10,'off');
+  assert(isConnected(adj),true)
+  assert(isTree(adj),true)
+  assert(isSimple(adj),true)
 end
 % ================================================
