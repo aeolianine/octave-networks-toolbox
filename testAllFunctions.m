@@ -1541,3 +1541,14 @@ for x=1:40
   assert(isSimple(adj),true)  
 end
 % ================================================
+
+
+% testing pdfCdfRank.m ===========================
+printf('testing pdfCdfRank.m\n');
+adj = randomGraph(randi(30)+30,0.2);
+[xp,yp,xc,yc,lk,lx] = pdfCdfRank(degrees(adj),'off');
+assert(length(xp),length(xc))
+assert(length(xp),length(yp))
+assert(length(yp),length(yc))
+assert(length(lk),length(lx))
+% ================================================
