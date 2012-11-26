@@ -1538,8 +1538,16 @@ for x=1:40
   assert(numEdges(adj),m+randint-1)
   assert(isTree(adj),false)
   assert(isConnected(adj),true)
-  assert(isSimple(adj),true)  
+  assert(isSimple(adj),true)
 end
+% ================================================
+
+% testing nestedHierarchiesModel.m ===============
+fprintf('testing nestedHierarchiesModel.m\n')
+
+el = nestedHierarchiesModel(640,3,[10, 20, 40],10);
+adj = edgeL2adj(el);
+assert(isSimple(adj));
 % ================================================
 
 
