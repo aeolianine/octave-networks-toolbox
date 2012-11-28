@@ -1090,7 +1090,7 @@ printf('testing newmanCommFast.m\n')
 close all;
 assert(max(Q),Q(6-1));
 
-[gH,Q]=newmanCommFast(randomModularGraph(100,4,0.1,5));
+[gH,Q]=newmanCommFast(randomModularGraph(100,4,0.1,10));
 close all;
 assert(length(gH),length(Q))
 [~,ind]=max(Q);
@@ -1550,6 +1550,19 @@ adj = edgeL2adj(el);
 assert(isSimple(adj));
 % ================================================
 
+
+% testing forestFireModel.m ======================
+printf('testing forestFireModel.m\n');
+
+for x=1:20
+  randint = randi(20)+5;
+  L = forestFireModel(randint,rand,10*rand);
+  adj = symmetrize(adjL2adj(L));
+  assert(isSimple(adj),true)
+  assert(randint,numNodes(L))
+
+end
+% ================================================
 
 % testing pdfCdfRank.m ===========================
 printf('testing pdfCdfRank.m\n');
