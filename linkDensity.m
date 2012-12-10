@@ -5,7 +5,9 @@
 % Inputs: adjacency matrix, nxn
 % Outputs: link density, a float between 0 and 1
 %
-% Note: The graph has to be non-trivial (more than 1 node).
+% Note 1: The graph has to be non-trivial (more than 1 node).
+% Note 2: Routine works for both directed and undirected graphs.
+%
 % Other routines used: numNodes.m, numEdges.m, isDirected.m
 % GB: last update Sep 19, 2012
 ##################################################################
