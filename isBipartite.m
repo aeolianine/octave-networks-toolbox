@@ -3,7 +3,7 @@
 % A bipartite graph is a graph for which the nodes can be split in two sets A and B, 
 % such that there are no edges that connect nodes within A or within B.
 % 
-% Inputs: graph in the form of adjancency list (neighbor list, see adj2adjL.m)
+% Inputs: graph in the form of adjacency list (neighbor list, see adj2adjL.m)
 % Outputs: true/false (boolean), empty set (if false) or two sets of vertices
 %
 % Note: This only works for undirected graphs.

@@ -1,6 +1,8 @@
 ##################################################################
-% Check whether a sequence of number is graphical, i.e. a graph with this degree sequence exists
-% Source: Erdős, P. and Gallai, T. "Graphs with Prescribed Degrees of Vertices" [Hungarian]. Mat. Lapok. 11, 264-274, 1960.
+% Check whether a sequence of number is graphic, i.e. 
+%            a graph with this degree sequence exists
+% Source: Erdős, P. and Gallai, T. "Graphs with Prescribed Degrees 
+%          of Vertices" [Hungarian]. Mat. Lapok. 11, 264-274, 1960.
 %
 % INPUTs: a sequence (vector) of numbers
 % OUTPUTs: boolean, true or false
