@@ -2,7 +2,7 @@
 % Convert an edge list of a general graph to the edge list of a 
 % simple graph (no loops, no double edges, no edge weights, symmetric)
 %
-% INPUTS: edgelist (mx3), m - number of edges
+% INPUTS: edge list (mx3), m - number of edges
 % OUTPUTs: edge list of the corresponding simple graph
 %
 % Note: Assumes all node pairs [n1,n2,x] occur once; if else see addEdgeWeights.m

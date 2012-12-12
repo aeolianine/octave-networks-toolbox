@@ -4,7 +4,7 @@
 % Source: Li et al "Towards a Theory of Scale-Free Graphs"
 %
 % INPUTs: degree sequence: 1xn vector of positive integers (graphic)
-% OUTPUTs: edgelist of the s-max graph, mx3
+% OUTPUTs: edge list of the s-max graph, mx3
 %
 % GB: last updated, November 9 2012
 ##################################################################
@@ -30,7 +30,7 @@ B = setdiff([1:length(deg)],maxdegind);
 wA=deg(maxdegind);  % remaining stubs in A
 dB=sum(deg(B));     % total degree of unattached vertices in B
 
-gA=[];              % initialize empty edgelist
+gA=[];              % initialize empty edge list
 
 while sum(w)>0      % while there are still stubs to connect
     

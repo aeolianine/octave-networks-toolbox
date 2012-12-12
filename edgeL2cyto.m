@@ -5,7 +5,7 @@
 % Note: In Cytoscape the column separator option is semi-colon ";". 
 %             If desired, this is easy to change below in line 20.
 %
-% INPUTs: edgelist - mx3 matrix, m = number of edges, file name text string
+% INPUTs: edge list - mx3 matrix, m = number of edges, file name text string
 % OUTPUTs: text file in Cytoscape format with a semicolon column separator
 ##################################################################
 

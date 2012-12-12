@@ -1,5 +1,5 @@
 ##################################################################
-% Making an edgelist (representation of a graph) symmetric,
+% Making an edge list (representation of a graph) symmetric,
 % i.e. if [n1,n2] is in the edge list, so is [n2,n1].
 %
 % INPUTs: edge list, mx3

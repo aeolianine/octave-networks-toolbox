@@ -1,5 +1,5 @@
 ##################################################################
-% Converts adjacency matrix (nxn) to edge list (mx3)
+% Convert adjacency matrix (nxn) to edge list (mx3)
 %
 % INPUTS: adjacency matrix: nxn
 % OUTPUTS: edge list: mx3

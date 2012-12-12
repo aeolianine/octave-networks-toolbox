@@ -2,8 +2,8 @@
 % Degree-preserving random rewiring.
 % Note 1: Assume unweighted undirected graph.
 % 
-% INPUTS: edgelist, el (mx3) and number of rewirings, k (integer)
-% OUTPUTS: rewired edgelist
+% INPUTS: edge list, el (mx3) and number of rewirings, k (integer)
+% OUTPUTS: rewired edge list
 %
 % GB: last updated, Sep 26, 2012
 ##################################################################

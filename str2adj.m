@@ -1,5 +1,5 @@
 ##################################################################
-% Converts a string graph representation to an adjacency matrix
+% Convert a string graph representation to an adjacency matrix
 %                                          (see also adj2str.m)
 %
 % INPUTs: string graph representation: .i1.j1.k1,.i2.j2.k2,....

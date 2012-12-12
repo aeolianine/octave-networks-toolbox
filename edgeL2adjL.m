@@ -1,5 +1,5 @@
 ##################################################################
-% Converts an edge list to an adjacency list.
+% Convert an edge list to an adjacency list.
 % 
 % INPUTS: edge list, mx3, m - number of edges
 % OUTPUTS: adjacency list

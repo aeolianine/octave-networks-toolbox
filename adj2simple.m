@@ -1,5 +1,5 @@
 ##################################################################
-% Converts an adjacency matrix of a general graph to the adjacency matrix of
+% Convert an adjacency matrix of a general graph to the adjacency matrix of
 %          a simple graph (symmetric, no loops, no double edges, no weights)
 %
 % INPUTS: adjacency matrix, nxn

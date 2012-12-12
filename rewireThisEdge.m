@@ -2,8 +2,8 @@
 % Degree-preserving rewiring of 1 given edge.
 % Note 1: Assume unweighted undirected graph.
 % 
-% INPUTS: edgelist, el (mx3) and the two nodes of the edge to be rewired.
-% OUTPUTS: rewired edgelist, same size and same degree distribution
+% INPUTS: edge list, el (mx3) and the two nodes of the edge to be rewired.
+% OUTPUTS: rewired edge list, same size and same degree distribution
 %
 % Note: There are cases when rewiring is not possible, while
 %       keeping the graph simple, so an empty edge list is returned.

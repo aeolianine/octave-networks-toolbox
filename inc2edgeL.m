@@ -1,5 +1,5 @@
 ##################################################################
-% Converts an incidence matrix to an edge list.
+% Convert an incidence matrix to an edge list.
 % 
 % Inputs: inc - incidence matrix nxm (number of nodes x number of edges)
 % Outputs: edge list - mx3, m x (node 1, node 2, edge weight)
@@ -11,7 +11,7 @@
 function el = inc2edgeL(inc)
 
 m = size(inc,2); % number of edges
-el = zeros(m,3); % initialize edgelist [n1, n2, weight]
+el = zeros(m,3); % initialize edge list [n1, n2, weight]
 
 for e=1:m
     ind_m1 = find(inc(:,e)==-1);

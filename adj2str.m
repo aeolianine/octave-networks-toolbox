@@ -1,5 +1,5 @@
 ##################################################################
-% Converts an adjacency matrix to a one-line string representation of a graph.
+% Convert an adjacency matrix to a one-line string representation of a graph.
 %
 % INPUTS: adjacency matrix, nxn
 % OUTPUTS: string

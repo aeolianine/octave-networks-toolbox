@@ -1,7 +1,7 @@
 ##################################################################
-% Converts edge list to adjacency matrix.
+% Convert edge list to adjacency matrix.
 % 
-% INPUTS: edgelist: mx3, m - number of edges
+% INPUTS: edge list: mx3, m - number of edges
 % OUTPUTS: adjacency matrix nxn, n - number of nodes
 %
 % Note: information about nodes is lost: indices only (i1,...in) remain

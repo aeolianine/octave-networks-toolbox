@@ -13,7 +13,7 @@
 
 function ew = edgeBetweenness(adj)
 
-el=adj2edgeL(adj);  % the corresponding edgelist
+el=adj2edgeL(adj);  % the corresponding edge list
 n = numNodes(adj);  % number of nodes
 m = numEdges(adj);  % number of edges
 

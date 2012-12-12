@@ -1,5 +1,5 @@
 ##################################################################
-% Converts adjacency matrix to an incidence matrix
+% Convert adjacency matrix to an incidence matrix
 % Note: Valid for directed/undirected, simple/not simple graphs
 %
 % INPUTs: adjacency matrix, nxn

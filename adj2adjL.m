@@ -1,5 +1,5 @@
 ##################################################################
-% Converts an adjacency graph representation to an adjacency list.
+% Convert an adjacency graph representation to an adjacency list.
 % Note 1: Valid for a general (directed, not simple) graph.
 % Note 2: Edge weights (if any) get lost in the conversion.
 %

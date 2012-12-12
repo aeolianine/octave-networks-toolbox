@@ -2,7 +2,7 @@
 % Plot a graph for which nodes have given coordinates. Apply color
 %           scheme and thicker lines if edges have varying weights.
 %
-% INPUTS: extended edgelist el[i,:]=[n1 n2 m x1 y1 x2 y2]
+% INPUTS: extended edge list el[i,:]=[n1 n2 m x1 y1 x2 y2]
 % OUTPUTS: geometry plot, higher-weight links are thicker and lighter in color
 %
 % Note 1: m - edge weight; (x1,y1) are the Euclidean coordinates of n1, (x2,y2) - n2
