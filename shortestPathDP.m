@@ -1,7 +1,7 @@
 ##################################################################
 % Shortest path algorithm using dynamic programming.
-% Note: Valid for directed/undirected network.
-% Disclaimer: if links have weights, they are treated as distances.
+% Note 1: Valid for directed/undirected network.
+% Note 2: if links have weights, they are treated as distances.
 % Source: D. P. Bertsekas, Dynamic Programming and Optimal Control, 
 %                             Athena Scientific, 2005 (3rd edition)
 %

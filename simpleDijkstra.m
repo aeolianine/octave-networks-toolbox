@@ -1,9 +1,9 @@
 ##################################################################
-% Implements a simple version of the Dijkstra shortest path algorithm
+% Implementation of a simple version of the Dijkstra shortest path algorithm
 % Returns the distances from a single vertex to all others, doesn't save the path
 %
 % INPUTS: adjacency matrix, adj (nxn), start node s (index between 1 and n)
-% OUTPUTS: shortest path length from start node to all other nodes, 1xn
+% OUTPUTS: shortest path length from the start node to all other nodes, 1xn
 %
 % Note: Works for a weighted/directed graph.
 % GB: last updated, September 28, 2012

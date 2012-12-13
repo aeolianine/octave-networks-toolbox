@@ -1,5 +1,5 @@
 ##################################################################
-% Computes the average degree of neighboring nodes for every vertex.
+% Compute the average degree of neighboring nodes for every vertex.
 % Note: Works for weighted degrees (graphs) also.
 %
 % INPUTs: adjacency matrix, nxn

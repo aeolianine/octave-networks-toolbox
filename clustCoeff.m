@@ -1,5 +1,5 @@
 ##################################################################
-% Computes two clustering coefficients, based on triangle motifs count and local clustering
+% Compute two clustering coefficients, based on triangle motifs count and local clustering
 % C1 = number of triangle loops / number of connected triples
 % C2 = the average local clustering, where Ci = (number of triangles connected to i) / (number of triples centered on i)
 % Ref: M. E. J. Newman, "The structure and function of complex networks"
