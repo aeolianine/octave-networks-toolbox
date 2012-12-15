@@ -1,5 +1,5 @@
 ##################################################################
-% Finds cycles of length 4 in a graph; 
+% Find cycles of length 4 in a graph; 
 % Note 1: Quite basic and slow.
 % Note 2: Assumes undirected graph.
 % 

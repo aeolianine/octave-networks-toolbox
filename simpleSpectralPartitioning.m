@@ -9,7 +9,7 @@
 % Example:
 % simpleSpectralPartitioning(random_modular_graph(100,4,0.15,0.9),
 %                                                  [25 25 25 25])
-% Other functions used: fiedler_vector.m
+% Other functions used: fiedlerVector.m
 % Note: To save the plot at the end of the routine, uncomment:
 %                   print filename.pdf (or filename.extension)
 % GB: last updated, Oct 10 2012

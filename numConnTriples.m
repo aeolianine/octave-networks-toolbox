@@ -1,5 +1,5 @@
 ##################################################################
-% Counts the number of connected triples in a graph.
+% Count the number of connected triples in a graph.
 % Note: works for undirected graphs only
 %
 % INPUTs: adjacency matrix, nxn

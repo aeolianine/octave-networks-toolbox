@@ -1,5 +1,5 @@
 ##################################################################
-% Calculates number of loops/cycles of length 3
+% Calculate number of loops/cycles of length 3
 %
 % INPUTs: adj - adjacency matrix, nxn
 % OUTPUTs: L3 - number of triangles (loops of length 3)

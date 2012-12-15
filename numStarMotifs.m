@@ -1,5 +1,5 @@
 ##################################################################
-% Calculates the number of star motifs of given (subgraph) size.
+% Calculate the number of star motifs of given (subgraph) size.
 % Note 1: Easily extendible to return the actual stars as k-tuples of nodes.
 % Note 2: Star of size 1 is the trivial case of a single node.
 %
