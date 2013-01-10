@@ -1,7 +1,7 @@
 ##################################################################
 % Weighted random sampling.
 % 
-% INPUTs: number of draws from the sample (n)
+% INPUTs: number of draws from a discrete distribution (n)
 %         possible values to pick from, (P)
 %         set of normalized weights/probabilities, (W)
 % OUTPUTs: s - set of n numbers drawn from P

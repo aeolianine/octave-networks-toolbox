@@ -1,5 +1,5 @@
 ##################################################################
-% Constructs a random graph given a degree distribution.
+% Construct a random graph given a degree distribution.
 % The algorithm first generates the degree sequence by
 %       drawing numbers from the specified distribution.
 %

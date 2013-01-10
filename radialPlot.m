@@ -1,14 +1,13 @@
 ##################################################################
-% Plots nodes radially out from a given center. Equidistant nodes
+% Plot nodes radially out from a given center. Equidistant nodes
 % have the same radius, but different angles. Works best as a quick
 % visualization for trees, or very sparse graphs.
 %
-% Note 1: No spring-energy method implemented.
-% Note 2: If a center node is not specified, the nodes are ordered by
+% Note 1: If a center node is not specified, the nodes are ordered by
 %   sum of neighbor degrees, and the node with highest sum is plotted
 %   in the center.
-% Note 3: The graph has to be connected.
-% Note 4: To change the color scheme, modify lines: 91, 98, 104 and 118
+% Note 2: The graph has to be connected.
+% Note 3: To change the color scheme, modify lines: 91, 98, 104 and 118
 %
 % Inputs: adjacency matrix (nxn), and center node (optional)
 % Outputs: plot
