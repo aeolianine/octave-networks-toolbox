@@ -1,43 +1,41 @@
-octave-networks-toolbox: A set of graph/networks analysis functions in Octave
+octave-networks-toolbox: A set of graph/networks analysis functions in Octave, 2012-2013
 
-Sep 19 2012
+Quick description
+-----------------
+This is a repository of functions relevant to network/graph analysis, organized by functionality. These routines are useful for someone who wants to start hands-on work with networks fairly quickly, explore simple graph statistics, distributions, simple visualization and compute common network theory metrics.
 
-This is a repository of functions relevant to network/graph analysis, adapted for Octave. The routines, manual and additional information will be gradually updated/uploaded. No installation necessary. The code currently runs on GNU Octave Version 3.4.0 with Gnuplot 4.2.5.
+History
+-------
+The original (2006-2011) version of these routines was written in Matlab, and is still hosted by strategic.mit.edu (http://strategic.mit.edu/downloads.php?page=matlab_networks). The octave-networks-toolbox inherits the original BSD open source license and copyright, provided at the end of this file. Many of the routines might still be compatible with Matlab. For Octave/Matlab differences, see http://en.wikibooks.org/wiki/MATLAB_Programming/Differences_between_Octave_and_MATLAB.
 
-Contact me if you have comments or questions. Enjoy!
+Installation
+------------
+The code currently runs on GNU Octave Version 3.4.0 with Gnuplot 4.2.5. No specific library installation necessary. Interdependencies between functions are well-documented in the function headers. The routines can be called directly from the Octave prompt, either in the same directory or from anywhere if the toolbox folder is added to the path. For example:
 
-Sep 23 2012
+# running numNodes.m
+octave-3.4.0:1> numNodes([0 1 1; 1 0 1; 1 1 0])
+ans =  3
 
-Basic functions have been finished and uploaded.
+Authorship
+----------
+This code is written and currently maintained by Gergana Bounova. It is undergoing continuous expansion and development. Collaborators are very welcome. Contact via github for comments, questions, suggestions, corrections or simply join!
 
-Sep 24 2012
+Organization
+------------
+The functions are organized in 11 categories: basic routines, diagnostic routines, conversion routines, centralities, distances, simple motif routines, linear algebra functions, modularity routines, graph construction models, visualization and auxiliary. These categories reflect roles/functionality and topics in the literature, but they are arbitrary, and mostly used for documentation purposes.
 
-Diagnostic routines have been finished and uploaded.
+Documentation
+-------------
+Documentation is available in the Functions Manual (https://github.com/aeolianine/octave-networks-toolbox/blob/master/functions_manual.pdf). The manual contains general background information, function headers, code examples, and references. For some functions, additional background, definitions or derivations are included.
 
-Sep 25 2012
+License/Copyright
+-----------------
+Copyright (c) 2013, Massachusetts Institute of Technology.
+All rights reserved.
+Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
 
-Conversion routines have been finished and uploaded. 40 out of 123 functions available.
+- Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+- Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
+- Neither the name of the Massachusetts Institute of Technology nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.
 
-Oct 1 2012
-
-Centrality functions finished and uploaded. 60 out of 123 functions available.
-
-Oct 5 2012
-
-Simple motif routines are uploaded. "Distances" section in progress. 70 out of 123 functions available.
-
-Oct 10 2012
-
-Distances section finished. 78 out of 123 functions available.
-
-Oct 10 2012
-
-Spectral properties have been added. "Modularity" section in progress. 87 out of 123 functions available.
-
-Oct 17 2012
-
-The modularity section is finished. Starting "Building graphs". 92 out of 123 functions available.
-
-Nov 28 2012
-
-"Construction routines" is mostly finished. 116 out of 127 functions available.
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
