@@ -1,13 +1,19 @@
 ##################################################################
 % This function returns the betweenness measure of all vertices.
 % Betweenness centrality measure: number of shortest paths running through a vertex.
-% Note: Valid for a general graph. Using 'number of shortest paths through a node' definition.
+% 
+% Note 1: Valid for a general graph.
+% Note 2: Bug: currently the routine does not return the correct
+%       betweenness values for all nodes if the graph contains an even
+%       cycle. That is because an even cycle results in multiple shortest
+%       paths between some of the nodes, and this function chooses one
+%       shortest path for every pair of nodes. Fix TBA.
 %
 % INPUTS: adjacency or distances matrix (nxn)
 % OUTPUTS: betweeness vector for all vertices (1xn)
 %
 % Other routines used: numNodes.m, shortestPathDP.m
-% GB: Sep 28, 2012
+% GB: June 4, 2013
 ##################################################################
 
 function betw = nodeBetweennessSlow(adj)

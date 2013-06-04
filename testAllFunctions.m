@@ -683,6 +683,9 @@ assert(nodeBetweennessSlow([0 1; 1 0]),[0 0])
 assert(nodeBetweennessSlow([1 1; 0 0]),[0 0])
 assert(nodeBetweennessSlow([0 1 1; 1 0 0; 1 0 0]),[1/3 0 0])
 assert(nodeBetweennessSlow(bowtie),[0 0 0.4 0.4 0 0])
+% need to test an even cycle eventually: when that works!
+% bw = nodeBetweennessSlow(edgeL2adj(canonicalNets(2*randi(10)+2,'circle')));
+% assert(bw(1)*ones(1,length(bw)),bw)
 % ================================================
 
 
@@ -699,6 +702,9 @@ for i=1:100
   assert(nodeBetweennessSlow(adj),nodeBetweennessFaster(adj))
   
 end
+% need to test an even cycle eventually: when that works!
+% bw = nodeBetweennessFaster(edgeL2adj(canonicalNets(2*randi(10)+2,'circle')));
+% assert(bw(1)*ones(1,length(bw)),bw)
 % ================================================
 
 % testing edgeBetweenness.m ======================
@@ -1040,8 +1046,9 @@ printf('testing newmanEigenvectorMethod.m\n')
 
 modules = newmanEigenvectorMethod(bowtie);
 assert(length(modules),2)
-assert(modules{2},[4,5,6])
-assert(modules{1},[1,2,3])
+assert(modules{1},[4,5,6])
+assert(modules{2},[1,2,3])
+
 
 for x=1:100
   adj = randomGraph(randi(10)+5,1);

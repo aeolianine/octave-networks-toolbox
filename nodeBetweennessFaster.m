@@ -1,13 +1,19 @@
 ##################################################################
 % Betweenness centrality measure: number of shortest paths running through a vertex.
-% Compute for all vertices, using Dijkstra's algorithm, and the 'number of shortest paths through a node' definition.
-% Note: Valid for a general connected graph.
+% Compute for all vertices, using Dijkstra's algorithm, and the number
+%                        of shortest paths through a node' definition.
+% Note 1: The graph has to be connected.
+% Note 2: Bug: currently the routine does not return the correct
+%       betweenness values for all nodes if the graph contains an even
+%       cycle. That is because an even cycle results in multiple shortest
+%       paths between some of the nodes, and this function chooses one
+%       shortest path for every pair of nodes. Fix TBA.
 %
 % INPUTS: adjacency or distances matrix, nxn
 % OUTPUTS: betweeness vector for all vertices (1xn)
 %
 % Other routines used: dijkstra.m
-% GB: Sep 29 2012
+% GB: June 4 2013
 ##################################################################
 
 function betw = nodeBetweennessFaster(adj)
@@ -29,8 +35,9 @@ for k=1:n-1
  
 end
 
+clear adjk
 
-betw = zeros(1,n);  
+betw = zeros(1,n);
 for i=1:n
     [dist,P]=dijkstra(adj,i,[]);
 
