@@ -732,7 +732,7 @@ assert(clustCoeff(undirected_triangle),1)
 assert(clustCoeff(edgeL2adj(undirected_cherry)),0)
 assert(clustCoeff(edgeL2adj(canonicalNets(randi(10)+5,'tree',2))),0)
 [C1,C2] = clustCoeff(bowtie);
-assert([C1,C2],[1/3,7/9])
+assert([C1,C2],[3/5,7/9])
 % ================================================
 
 

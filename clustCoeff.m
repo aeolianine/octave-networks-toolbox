@@ -9,7 +9,8 @@
 % OUTPUT: two graph average clustering coefficients (C1, C2) and clustering coefficient vector C (where mean(C) = C2)
 %
 % Other routines used: degrees.m, isDirected.m, kneighbors.m, numEdges.m, subgraph.m, loops3.m, numConnTriples.m
-% GB: Sep 29, 2012
+% GB, Last updated: Mar 1, 2014
+% Input [in definition of C1] by Dimitris Maniadakis.
 ##################################################################
 
 function [C1,C2] = clustCoeff(adj)
@@ -34,5 +35,5 @@ for i=1:n
 
 end
 
-C1=loops3(adj)/numConnTriples(adj);
+C1=3*loops3(adj)/(numConnTriples(adj)+2*loops3(adj));
 C2=sum(C)/n;
