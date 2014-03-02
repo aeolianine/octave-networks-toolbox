@@ -1,4 +1,4 @@
-octave-networks-toolbox: A set of graph/networks analysis functions in Octave, 2012-2013
+octave-networks-toolbox: A set of graph/networks analysis functions in Octave, 2012-2014
 
 Quick description
 -----------------
@@ -18,7 +18,7 @@ ans =  3
 
 Authorship
 ----------
-This code is written and currently maintained by Gergana Bounova. It is undergoing continuous expansion and development. Collaborators are very welcome. Contact via github for comments, questions, suggestions, corrections or simply join!
+This code was originally posted by Gergana Bounova. It is undergoing continuous expansion and development. Thank you for all comments so far! Collaborators are very welcome. Contact via github for comments, questions, suggestions, corrections or simply join.
 
 Organization
 ------------
