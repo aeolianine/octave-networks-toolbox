@@ -677,35 +677,17 @@ assert(closeness([0 1 1; 1 0 0; 1 0 0]),[0.5 1/3 1/3]')
 % ================================================
 
 
-% testing nodeBetweennessSlow.m ==================
-printf('testing nodeBetweennessSlow.m\n')
-assert(nodeBetweennessSlow([0 1; 1 0]),[0 0])
-assert(nodeBetweennessSlow([1 1; 0 0]),[0 0])
-assert(nodeBetweennessSlow([0 1 1; 1 0 0; 1 0 0]),[1/3 0 0])
-assert(nodeBetweennessSlow(bowtie),[0 0 0.4 0.4 0 0])
+% testing nodeBetweenness.m ==================
+printf('testing nodeBetweenness.m\n')
+assert(nodeBetweenness([0 1; 1 0]),[0 0])
+assert(nodeBetweenness([1 1; 0 0]),[0 0])
+assert(nodeBetweenness([0 1 1; 1 0 0; 1 0 0]),[1/3 0 0])
+assert(nodeBetweenness(bowtie),[0 0 0.4 0.4 0 0])
 % need to test an even cycle eventually: when that works!
-% bw = nodeBetweennessSlow(edgeL2adj(canonicalNets(2*randi(10)+2,'circle')));
-% assert(bw(1)*ones(1,length(bw)),bw)
+bw = nodeBetweenness(edgeL2adj(canonicalNets(2*randi(10)+2,'circle')));
+assert(bw(1)*ones(1,length(bw)),bw)
 % ================================================
 
-
-% testing nodeBetweennessFaster.m ================
-printf('testing nodeBetweennessFaster.m\n')
-assert(nodeBetweennessFaster([0 1; 1 0]),[0 0])
-assert(nodeBetweennessFaster([0 1 1; 1 0 0; 1 0 0]),[1/3 0 0])
-assert(nodeBetweennessFaster(bowtie),[0 0 0.4 0.4 0 0])
-
-adj = [0 0; 0 0];
-for i=1:100
-  
-  while not(isConnected(adj)); adj = randomGraph(randi(10)+5,rand); end
-  assert(nodeBetweennessSlow(adj),nodeBetweennessFaster(adj))
-  
-end
-% need to test an even cycle eventually: when that works!
-% bw = nodeBetweennessFaster(edgeL2adj(canonicalNets(2*randi(10)+2,'circle')));
-% assert(bw(1)*ones(1,length(bw)),bw)
-% ================================================
 
 % testing edgeBetweenness.m ======================
 printf('testing edgeBetweenness.m\n')
@@ -818,6 +800,58 @@ assert(rb,[1,2])
 [Jb,rb,J,r]=shortestPathDP(edgeL2adj(directed_cherry),2,3,3);
 assert(Jb,inf)
 % ================================================
+
+
+% testing findAllShortestPaths.m .................
+adjL = {}; adjL{1} = [2]; adjL{2} = [];  % 1-2 edge
+[allPaths, shortestPathLength] = findAllShortestPaths(adjL,1,2, allPaths={});
+assert(shortestPathLength,1)
+assert(allPaths{1},'-1-2')
+assert(length(allPaths),1)
+
+[allPaths, shortestPathLength] = findAllShortestPaths(adjL,2,1, allPaths={});
+assert(shortestPathLength,1)  % not updated, equal to length(adjL)-1
+assert(allPaths, {})
+assert(length(allPaths),0)
+
+% two alternative paths (1-2-4 and 1-3-4)
+adjL = {}; adjL{1} = [2,3]; adjL{2} = [4]; adjL{3} = [4]; adjL{4}=[];
+[allPaths, shortestPathLength] = findAllShortestPaths(adjL,1,4, allPaths={});
+assert(shortestPathLength,2)
+assert(length(allPaths),2)
+assert(allPaths{1},'-1-2-4')
+assert(allPaths{2},'-1-3-4')
+
+[allPaths, shortestPathLength] = findAllShortestPaths(adjL,4,2, allPaths={});
+assert(shortestPathLength,3) % not updated, equal to length(adjL)-1
+assert(length(allPaths),0)
+
+% a one-directional loop
+adjL={}; adjL{1}=[2]; adjL{2}=[3]; adjL{3}=[4]; adjL{4}=[1];
+[allPaths, shortestPathLength] = findAllShortestPaths(adjL,1,4, allPaths={});
+assert(shortestPathLength,3)
+assert(length(allPaths),1)
+assert(allPaths{1},'-1-2-3-4')
+
+[allPaths, shortestPathLength] = findAllShortestPaths(adjL,4,3, allPaths={});
+assert(shortestPathLength,3)
+assert(length(allPaths),1)
+assert(allPaths{1},'-4-1-2-3')
+
+% non-directed loop
+adjL={}; adjL{1}=[2,4]; adjL{2}=[3,1]; adjL{3}=[2,4]; adjL{4}=[1,3];
+[allPaths, shortestPathLength] = findAllShortestPaths(adjL,2,4, allPaths={});
+assert(shortestPathLength,2)
+assert(length(allPaths),2)
+assert(allPaths{1},'-2-1-4')
+assert(allPaths{2},'-2-3-4')
+
+[allPaths, shortestPathLength] = findAllShortestPaths(adjL,3,1, allPaths={});
+assert(shortestPathLength,2)
+assert(length(allPaths),2)
+assert(allPaths{1},'-3-2-1')
+assert(allPaths{2},'-3-4-1')
+% ................................................
 
 
 % test minSpanTree.m =============================
