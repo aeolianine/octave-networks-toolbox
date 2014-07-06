@@ -1445,7 +1445,7 @@ assert(isempty(adj),true)
 % ================================================
 
 
-% test randomModularGraph.m ======================
+% test randomModularGraph.m ......................
 fprintf('testing randomModularGraph.m\n');
 for x=1:20
   N = randi(50)+10;
@@ -1454,7 +1454,23 @@ for x=1:20
   assert(numNodes(adj),N)
   assert(length(modules),c)
 end
-% ================================================
+% testing with fixed labels
+[adj, modules] = randomModularGraph(5,2,0.2,0.9,[1,1,2,3,4]);
+mods = {}; mods{1} = [1,2]; mods{2} = [3]; mods{3} = [4]; mods{4} = 5;
+assert( modules, mods )
+[adj, modules] = randomModularGraph(6,0,0.2,0.8,[1,1,1,2,2,2]);
+mods = {}; mods{1} = [1,2,3]; mods{2} = [4,5,6];
+assert( modules, mods )
+[adj, modules] = randomModularGraph(4,0,0.2,0.5,[1,2,3,4]);
+mods = {}; mods{1} = 1; mods{2} = 2; mods{3} = 3; mods{4} = 4;
+assert( modules, mods )
+[adj, modules] = randomModularGraph(4,0,0.2,0.5,[1,1,1,1]);
+mods = {}; mods{1} = [1,2,3,4];
+assert( modules, mods )
+[adj, modules] = randomModularGraph(75,4,0.2,0.5,[ones(1,20),2*ones(1,20),3*ones(1,20),4*ones(1,15)]);
+mods = {}; mods{1} = [1:20]; mods{2} = [21:40]; mods{3} = [41:60]; mods{4} = [61:75];
+assert( modules, mods )
+% ................................................
 
 
 % testing weightedRandomSample.m =================

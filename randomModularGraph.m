@@ -1,26 +1,45 @@
-##################################################################
-% Build a random modular graph, given number of modules, and link densities
+% Build a random modular graph, given number of modules, and link densities.
 %
 % INPUTs: number of nodes (n), number of modules (c), total link density (p),
 %         and ratio of nodal degree to nodes within the same module
-%         to the degree to nodes in other modules (r)
+%         to the degree to nodes in other modules (r);
+%         if specified, "labels" overwrites the random node
+%         assignment to clusters, eg: labels = [1,1,2,3,3,4]
 % OUTPUTs: adjacency matrix, modules to which the nodes are assigned
 %
-% GB: last updated, November 4, 2012
-##################################################################
+% Idea and code about pre-specified labels by Jonathan Hadida, June 12, 2014
+% GB: last updated, July 6, 2014
 
-function [adj, modules] = randomModularGraph(n,c,p,r)
+
+function [adj, modules] = randomModularGraph(n,c,p,r, labels)
 
 % n - number of nodes
 % c - number of clusters/modules
 % p - overall probability of attachment
 % r - proportion of links within modules
-
+% labels - pre-specified cluster assignments
 
 % assign nodes to modules: 1 -> n/c, n/c+1 -> 2n/c, ... , (c-1)n/c -> c(n/c);
-modules={};
-for k=1:c; modules{k}=round((k-1)*n/c+1):round(k*n/c); end
-
+if nargin<5
+    
+    % equal, up to rounding assignment of nodes to clusters
+    modules={};
+    for k=1:c; modules{k}=round((k-1)*n/c+1):round(k*n/c); end
+    
+elseif nargin==5
+    
+    assert( length(labels) == n )
+    
+    % pre-specified clusters with "labels"
+    md=[0,find(diff(labels)),n]';
+    md=[md(1:end-1)+1,md(2:end)];
+    c = length(unique(labels));  % overwrite "c", the number of clusters, if needed
+    
+    modules = {};
+    for k=1:c; modules{k}= md(k,1):md(k,2); end
+end
+    
+    
 adj=zeros(n); % initialize adjacency matrix
 
 % DERIVATION of probabilities
