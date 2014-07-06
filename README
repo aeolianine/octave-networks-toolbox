@@ -28,6 +28,12 @@ Documentation
 -------------
 Documentation is available in the Functions Manual (https://github.com/aeolianine/octave-networks-toolbox/blob/master/functions_manual.pdf). The manual contains general background information, function headers, code examples, and references. For some functions, additional background, definitions or derivations are included.
 
+Citation
+--------
+If you want to refer to this code in your citations list, you can use:
+[![DOI](https://zenodo.org/badge/doi/10.5281/zenodo.10778.png)](http://dx.doi.org/10.5281/zenodo.10778)
+
+
 License/Copyright
 -----------------
 Copyright (c) 2013, Massachusetts Institute of Technology.
