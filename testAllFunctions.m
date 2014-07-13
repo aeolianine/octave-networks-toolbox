@@ -75,3 +75,15 @@ for i=1:10
 end
 assert(strcmp(getNodes([],'rgegaerger'),'invalid graph type'))
 % ................................................
+
+% Testing getEdges.m ............................
+printf('testing getEdges.m\n')
+
+for i=1:length(T)
+    edges1 = sortrows( T{i}{5} );
+    edges2 = sortrows( getEdges(T{i}{2},T{i}{3}) );
+    
+    assert( edges1(size(edges1)(1),1:2), edges2(size(edges2)(1),1:2) )
+end
+assert(strcmp(getEdges([],'rgegfgdfgrger'),'invalid graph type'))
+% ...............................................
