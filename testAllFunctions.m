@@ -38,26 +38,30 @@ T{10} = {'undirected_tree_3nodes', undirected_tree3, 'edgelist', 1:3, undirected
 directed_tree3 = [1,2,1; 1,3,1];
 T{11} = {'directed_tree_3nodes', directed_tree3, 'edgelist', 1:3, directed_tree3, 3, 2};
 
+directed_tree3_adjL = {}; directed_tree3_adjL{1}=[2,3]; directed_tree3_adjL{2}=[]; directed_tree3_adjL{3}=[];
+T{12} = {'directed_tree_3_adjL', directed_tree3_adjL, 'adjlist', 1:3, directed_tree3, 3, 2};
+
+
 undirected_3cycle=[0 1 1; 1 0 1; 1 1 0];
-T{12} = {'undirected_3cycle', undirected_3cycle, 'adjacency', 1:3, [1 2; 2 1; 1 3; 3 1; 2 3; 3 2], 3, 3};
+T{13} = {'undirected_3cycle', undirected_3cycle, 'adjacency', 1:3, [1 2; 2 1; 1 3; 3 1; 2 3; 3 2], 3, 3};
 
 undirected_3cycle_selfloops = [1 1 1; 1 1 1; 1 1 0];
-T{13} = {'undirected_3cycle_selfloops', undirected_3cycle_selfloops, 'adjacency', 1:3, [1 1; 1 2; 1 3; 2 1; 2 2; 2 3; 3 1; 3 2], 3, 5};
+T{14} = {'undirected_3cycle_selfloops', undirected_3cycle_selfloops, 'adjacency', 1:3, [1 1; 1 2; 1 3; 2 1; 2 2; 2 3; 3 1; 3 2], 3, 5};
 
 undirected_3cycle_incidence = [1 1 0; 1 0 1; 0 1 1];
-T{14} = {'undirected_3cycle_incidence', undirected_3cycle_incidence, 'incidence', 1:3, [1 2; 2 1; 1 3; 3 1; 2 3; 3 2], 1:3, 3, 3};
+T{15} = {'undirected_3cycle_incidence', undirected_3cycle_incidence, 'incidence', 1:3, [1 2; 2 1; 1 3; 3 1; 2 3; 3 2], 1:3, 3, 3};
 
 directed_3cycle=[0 1 0; 0 0 1; 1 0 0];
-T{14} = {'directed_3cycle', directed_3cycle, 'adjacency', 1:3, [1 2; 2 3; 3 1], 3, 3};
+T{16} = {'directed_3cycle', directed_3cycle, 'adjacency', 1:3, [1 2; 2 3; 3 1], 3, 3};
 
 directed_3cycle_adjL={[2], [3], [1]};
-T{15} = {'directed_3cycle_adjL', directed_3cycle_adjL, 'adjlist', 1:3, [1 2; 2 3; 3 1], 3, 3};
+T{17} = {'directed_3cycle_adjL', directed_3cycle_adjL, 'adjlist', 1:3, [1 2; 2 3; 3 1], 3, 3};
 
 fourCycle = [0 1 0 1; 1 0 1 0; 0 1 0 1; 1 0 1 0];
-T{16} = {'4-cycle', fourCycle, 'adjacency', 1:4, [1 2; 1 4; 2 1; 2 3; 3 2; 3 4; 4 1; 4 3], 4, 4};
+T{18} = {'4-cycle', fourCycle, 'adjacency', 1:4, [1 2; 1 4; 2 1; 2 3; 3 2; 3 4; 4 1; 4 3], 4, 4};
 
 star = canonicalNets(5,'star');
-T{17} = {'5-star', star, 'edgelist', 1:5, [1 2; 1 3; 1 4; 1 5; 2 1; 3 1; 4 1; 5 1], 5, 4};
+T{19} = {'5-star', star, 'edgelist', 1:5, [1 2; 1 3; 1 4; 1 5; 2 1; 3 1; 4 1; 5 1], 5, 4};
 
 % add another graph test here ....
 % ................................................
@@ -69,9 +73,18 @@ T{17} = {'5-star', star, 'edgelist', 1:5, [1 2; 1 3; 1 4; 1 5; 2 1; 3 1; 4 1; 5 
 
 % Testing adj2adjL.m .............................
 printf('testing adj2adjL.m\n')
-assert(adj2adjL( T{4}{2} ),T{9}{2}')
-assert(adj2adjL( T{14}{2} ),T{15}{2}')
+assert(adj2adjL( T{4}{2} ),T{9}{2}')     % "bowtie" graph
+assert(adj2adjL( T{16}{2} ),T{17}{2}')   % directed 3-cycle
 % ................................................
+
+
+% Testing adjL2adj.m .............................
+printf('testing adjL2adj.m\n')
+assert(adjL2adj( T{9}{2} ),T{4}{2} )      % "bowtie" graph
+assert(adjL2adj( T{17}{2} ),T{16}{2} )    % directed 3-cycle
+assert(adjL2adj( T{12}{2} ), edgeL2adj(T{11}{2}) )
+% ................................................
+
 
 
 % ................................................
