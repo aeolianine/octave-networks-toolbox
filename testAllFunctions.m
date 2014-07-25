@@ -86,6 +86,20 @@ assert(adjL2adj( T{12}{2} ), edgeL2adj(T{11}{2}) )
 % ................................................
 
 
+% Testing adj2edgeL.m ............................
+printf('testing adj2edgeL.m\n')
+
+for i=1:length(T)
+    if not(strcmp( T{i}{3}, 'adjacency' )); continue; end
+    edgeL1 = sortrows( adj2edgeL(T{i}{2}) );
+    edgeL2 = sortrows( T{i}{5} );
+    
+    assert(edgeL1(:,1:2), edgeL2(:,1:2))
+end
+% ................................................
+
+
+
 
 % ................................................
 % ... basic network theory functions .............
