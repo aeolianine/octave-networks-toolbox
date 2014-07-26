@@ -98,6 +98,19 @@ for i=1:length(T)
 end
 % ................................................
 
+% Testing edgeL2adj.m ............................
+printf('testing edgeL2adj.m\n')
+
+for i=1:length(T)
+    if not(strcmp( T{i}{3}, 'adjacency' )); continue; end
+    edgeL = T{i}{5};
+    % adding 1s to get the expected edge list dimensions right
+    if size(edgeL)(2)==2
+        edgeL = [edgeL ones(size(edgeL)(1),1)];
+    end
+    assert(T{i}{2}, edgeL2adj( edgeL ))
+end
+% ................................................
 
 
 

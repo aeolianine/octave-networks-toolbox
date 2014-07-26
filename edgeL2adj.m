@@ -1,4 +1,3 @@
-##################################################################
 % Convert edge list to adjacency matrix.
 % 
 % INPUTS: edge list: mx3, m - number of edges
@@ -6,7 +5,6 @@
 %
 % Note: information about nodes is lost: indices only (i1,...in) remain
 % GB: last updated, Sep 25, 2012
-##################################################################
 
 function adj=edgeL2adj(el)
 
