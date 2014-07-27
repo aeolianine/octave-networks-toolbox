@@ -1,4 +1,3 @@
-##################################################################
 % Convert adjacency matrix to an incidence matrix
 % Note: Valid for directed/undirected, simple/not simple graphs
 %
@@ -7,7 +6,6 @@
 %
 % Other routines used: isDirected.m
 % GB: last updated, Sep 25 2012
-##################################################################
 
 function inc = adj2inc(adj)
 

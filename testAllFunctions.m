@@ -112,6 +112,39 @@ for i=1:length(T)
 end
 % ................................................
 
+% Testing adj2inc.m ..............................
+printf('testing adj2inc.m\n')
+
+randint = randi(10)+1;
+assert(adj2inc(eye(randint)),eye(randint))
+
+assert(adj2inc(T{13}{2}), T{15}{2})   % directed 3-cycle
+
+% 1->2, 2->2, 3->1
+assert(adj2inc([0 1 0; 0 1 0; 1 0 0 ]),[-1 0 1; 1 1 0; 0 0 -1])
+assert(adj2inc([0 2; 0 0]),[-1 -1; 1 1])  % directed double edge
+assert(adj2inc(T{1}{2}), [-1 1]')          % one directed edge
+% ................................................
+
+
+% testing inc2adj.m ..............................
+printf('testing inc2adj.m\n')
+
+randint = randi(10)+1;
+assert(inc2adj(eye(randint))==eye(randint))
+
+adj = ones(3) - eye(3);
+assert(inc2adj(adj),adj)
+
+% 1->2, 2->2, 3->1
+assert([0 1 0; 0 1 0; 1 0 0 ],inc2adj([-1 0 1; 1 1 0; 0 0 -1]))
+assert([0 2; 0 0],inc2adj([-1 -1; 1 1]))  % directed double edge
+assert(T{1}{2}, inc2adj([-1 1]'))          % one directed edge
+
+inc = [-1 1; 1 0; 0 -1];  % two edges (1->2, 3->1)
+assert(inc2adj(inc)==[0 1 0; 0 0 0; 1 0 0])
+% ................................................
+
 
 
 % ................................................
