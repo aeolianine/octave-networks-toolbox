@@ -127,7 +127,7 @@ assert(adj2inc(T{1}{2}), [-1 1]')          % one directed edge
 % ................................................
 
 
-% testing inc2adj.m ..............................
+% Testing inc2adj.m ..............................
 printf('testing inc2adj.m\n')
 
 randint = randi(10)+1;
@@ -143,6 +143,30 @@ assert(T{1}{2}, inc2adj([-1 1]'))          % one directed edge
 
 inc = [-1 1; 1 0; 0 -1];  % two edges (1->2, 3->1)
 assert(inc2adj(inc)==[0 1 0; 0 0 0; 1 0 0])
+% ................................................
+
+
+% Testing adj2str.m ..............................
+printf('testing adj2str.m\n')
+
+assert(adj2str(ones(3)-eye(3)),'.2.3,.1.3,.1.2,')
+assert(adj2str(eye(3)),'.1,.2,.3,')
+assert(adj2str([0 2; 0 0]),'.2,,')
+
+assert(adj2str(T{4}{2}),'.2.3,.1.3,.1.2.4,.3.5.6,.4.6,.4.5,')
+assert(adj2str(T{16}{2}),'.2,.3,.1,')
+% ................................................
+
+
+% Testing str2adj.m ..............................
+printf('testing str2adj.m\n')
+
+assert(ones(3)-eye(3),str2adj('.2.3,.1.3,.1.2,'))
+assert(eye(3),str2adj('.1,.2,.3,'))
+assert([0 1 0; 0 0 0; 1 0 0 ],str2adj('.2,,.1,'))
+
+assert('.2.3,.1.3,.1.2.4,.3.5.6,.4.6,.4.5,', adj2str(T{4}{2}))
+assert('.2,.3,.1,', adj2str(T{16}{2}))
 % ................................................
 
 

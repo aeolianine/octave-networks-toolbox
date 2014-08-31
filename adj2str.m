@@ -1,4 +1,3 @@
-##################################################################
 % Convert an adjacency matrix to a one-line string representation of a graph.
 %
 % INPUTS: adjacency matrix, nxn
@@ -13,7 +12,6 @@
 %
 % Other routines used: kneighbors.m
 % GB: last updated, Sep 25 2012
-##################################################################
 
 
 function str=adj2str(adj)
