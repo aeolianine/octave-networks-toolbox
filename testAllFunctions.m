@@ -169,6 +169,14 @@ assert('.2.3,.1.3,.1.2.4,.3.5.6,.4.6,.4.5,', adj2str(T{4}{2}))
 assert('.2,.3,.1,', adj2str(T{16}{2}))
 % ................................................
 
+% Testing adjL2edgeL.m ...........................
+printf('testing adjL2edgeL.m\n')
+
+assert(adjL2edgeL(T{12}{2}),T{11}{5})           % directed 3-tree
+assert(sortrows(adjL2edgeL(T{9}{2}))(1:14,1:2),sortrows(T{4}{5}))   % bowtie graph
+assert(sortrows(adjL2edgeL(T{17}{2}))(1:3,1:2),T{16}{5})     % directed 3-cycle
+% ................................................
+
 
 
 % ................................................
