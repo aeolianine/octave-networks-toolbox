@@ -1,4 +1,3 @@
-##################################################################
 % Convert an edge list to an adjacency list.
 % 
 % INPUTS: edge list, mx3, m - number of edges
@@ -6,7 +5,6 @@
 %
 % Note: Information about edge weights (if any) is lost.
 % GB: last updated, September 25, 2012
-##################################################################
 
 function adjL = edgeL2adjL(el)
 
