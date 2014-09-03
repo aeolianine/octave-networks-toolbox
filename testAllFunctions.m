@@ -184,6 +184,17 @@ assert(edgeL2adjL(sortrows(T{4}{5})),T{9}{2}')
 assert(edgeL2adjL(T{16}{5}),T{17}{2}')
 % ................................................
 
+% Testing inc2edgeL.m ............................
+printf('testing inc2edgeL.m\n')
+
+assert(inc2edgeL([1 0 0; 0 1 0; 0 0 1]),[1 1 1; 2 2 1; 3 3 1])  % three self-loops
+assert(inc2edgeL([-1 -1; 1 0; 0 1]),[1 2 1; 1 3 1])   % tree 3 nodes
+assert(inc2edgeL([-1;1]),T{1}{5})                     % one directed edge
+assert(inc2edgeL([ 1;1]),T{2}{5})                     % one undirected edge
+assert(inc2edgeL([1 1; 1 1]),[1 2 1; 1 2 1; 2 1 1; 2 1 1])     % one double edge
+assert(sortrows(inc2edgeL(T{15}{2})(1:length(T{15}{5}),1:2)),sortrows(T{15}{5}))
+% ................................................
+
 
 % ................................................
 % ... basic network theory functions .............

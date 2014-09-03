@@ -1,4 +1,3 @@
-##################################################################
 % Convert an incidence matrix to an edge list.
 % 
 % Inputs: inc - incidence matrix nxm (number of nodes x number of edges)
@@ -6,7 +5,6 @@
 %
 % Example: [-1; 1] <=> [1,2,1], one directed (1->2) edge
 % GB: last updated, Sep 25 2012
-##################################################################
 
 function el = inc2edgeL(inc)
 
