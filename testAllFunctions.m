@@ -210,6 +210,16 @@ assert(length(edgeL2simple([1 1 1; 2 2 1; 3 3 1])),0)
 assert(sortrows(edgeL2simple([1 2 1; 1 3 2; 4 5 1.4])),[1 2 1; 1 3 1; 2 1 1; 3 1 1; 4 5 1; 5 4 1])
 % ................................................
 
+% Testing symmetrize.m ...........................
+printf('testing symmetrize.m\n')
+for i=1:20
+  adj = randomDirectedGraph(randi(10)+3,rand);
+  assert(isSymmetric(symmetrize(adj)),true)
+end
+assert(symmetrize(T{1}{2}),T{2}{2})
+assert(symmetrize(edgeL2adj(T{11}{2})),edgeL2adj(T{10}{2}))
+assert(symmetrize(T{16}{2}),T{13}{2})
+% ................................................
 
 
 % ................................................
