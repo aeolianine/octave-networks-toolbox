@@ -222,6 +222,24 @@ assert(symmetrize(T{16}{2}),T{13}{2})
 % ................................................
 
 
+% Testing symmetrizeEdgeL.m ......................
+printf('testing symmetrizeEdgeL.m\n')
+
+for x=1:20
+  adj = randomDirectedGraph(randi(20)+2,rand); % create a random adjacency
+  el = adj2edgeL(adj);
+  if isempty(el); continue; end
+  elsym = symmetrizeEdgeL(el);
+  adjsym = edgeL2adj(elsym);
+  assert(isSymmetric(adjsym),true)
+end
+
+assert(sortrows(symmetrizeEdgeL(T{1}{5}))(1:2,1:2), sortrows(T{2}{5})(1:2,1:2))
+assert(sortrows(symmetrizeEdgeL(T{6}{5}))(1:14,1:2), sortrows(T{4}{5})(1:14,1:2) )
+% ................................................
+
+
+
 % ................................................
 % ... basic network theory functions .............
 % ................................................

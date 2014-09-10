@@ -1,4 +1,3 @@
-##################################################################
 % Making an edge list (representation of a graph) symmetric,
 % i.e. if [n1,n2] is in the edge list, so is [n2,n1].
 %
@@ -6,7 +5,6 @@
 % OUTPUTs: symmetrized edge list, mx3
 %
 % GB: last updated, October 3, 2012
-##################################################################
 
 function el=symmetrizeEdgeL(el)
 
