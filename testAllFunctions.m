@@ -238,6 +238,15 @@ assert(sortrows(symmetrizeEdgeL(T{1}{5}))(1:2,1:2), sortrows(T{2}{5})(1:2,1:2))
 assert(sortrows(symmetrizeEdgeL(T{6}{5}))(1:14,1:2), sortrows(T{4}{5})(1:14,1:2) )
 % ................................................
 
+% Testing addEdgeWeights.m .......................
+fprintf('testing addEdgeWeights.m\n')
+
+assert([1 2 2; 1 3 1; 3 4 3],addEdgeWeights([1 2 1; 1 2 1; 1 3 1; 3 4 2; 3 4 1]))
+assert([1 2 2; 2 3 4],addEdgeWeights([1 2 2; 2 3 4]))
+assert([1 2 1; 2 1 1],addEdgeWeights([1 2 1; 2 1 1]))
+assert([1 2 1; 2 1 1],addEdgeWeights([1 2 1; 2 1 1]))
+assert([1 2 1; 2 1 2],addEdgeWeights([1 2 1; 2 1 1; 2 1 1]))
+% ................................................
 
 
 % ................................................
@@ -271,3 +280,5 @@ for i=1:length(T)
 end
 assert(strcmp(getEdges([],'rgegfgdfgrger'),'invalid graph type'))
 % ...............................................
+
+
