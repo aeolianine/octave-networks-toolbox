@@ -282,3 +282,15 @@ assert(strcmp(getEdges([],'rgegfgdfgrger'),'invalid graph type'))
 % ...............................................
 
 
+% Testing numNodes.m ............................
+printf('testing numNodes.m\n')
+
+randint = randi(101);
+assert(numNodes(randomGraph(randint)),randint)
+
+for i=1:length(T)
+    if strcmp(T{i}{3},'adjacency')
+        assert( numNodes(T{i}{2}), T{i}{6} )
+    end
+end
+% ...............................................
