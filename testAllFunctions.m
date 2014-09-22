@@ -294,3 +294,14 @@ for i=1:length(T)
     end
 end
 % ...............................................
+
+
+% Testing numEdges.m ...........................
+printf('testing numEdges.m\n')
+
+for i=1:length(T)
+    if strcmp(T{i}{3},'adjacency')
+        assert( numEdges(T{i}{2}), T{i}{7} )
+    end
+end
+% ...............................................

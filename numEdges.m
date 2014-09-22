@@ -1,12 +1,10 @@
-##################################################################
 % Returns the total number of edges given the adjacency matrix
 % INPUTs: adjacency matrix, nxn
 % OUTPUTs: m - total number of edges/links
 %
 % Note: Valid for both directed and undirected, simple or general graph
-% Other routines used: selfLoops.m, issymmetric.m
+% Other routines used: selfLoops.m, isSymmetric.m
 % GB, last updated Sep 19, 2012
-##################################################################
 
 function m = numEdges(adj)
 
