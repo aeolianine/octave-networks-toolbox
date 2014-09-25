@@ -1,4 +1,3 @@
-##################################################################
 % Computes the link density of a graph, defined as the number of edges divided by 
 % number_of_nodes(number_of_nodes-1)/2 where the latter is the maximum possible number of edges.
 %
@@ -10,7 +9,6 @@
 %
 % Other routines used: numNodes.m, numEdges.m, isDirected.m
 % GB: last update Sep 19, 2012
-##################################################################
 
 
 function d=linkDensity(adj)

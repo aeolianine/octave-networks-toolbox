@@ -305,3 +305,19 @@ for i=1:length(T)
     end
 end
 % ...............................................
+
+
+% Testing linkDensity.m .........................
+printf('testing linkDensity.m\n')
+
+randint = randi(101);
+assert(linkDensity(edgeL2adj(canonicalNets(randint,'tree',2))),2/randint)
+
+for i=1:length(T)
+    if strcmp(T{i}{3},'adjacency')
+        coeff = 2;
+        if isDirected(T{i}{2}); coeff = 1; end
+        assert( linkDensity(T{i}{2}), coeff*T{i}{7}/(T{i}{6}*(T{i}{6}-1)) )
+    end
+end
+% ...............................................
