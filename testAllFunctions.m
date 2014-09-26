@@ -321,3 +321,23 @@ for i=1:length(T)
     end
 end
 % ...............................................
+
+
+% Testing selfLoops.m ...........................
+printf('testing selfLoops.m\n')
+
+assert( selfLoops( edgeL2adj( T{8}{2} ) ), 1 )
+assert( selfLoops( T{14}{2} ), 2 )
+assert(selfLoops(bowtie),0)
+% ...............................................
+
+
+% Testing multiEdges.m ..........................
+printf('testing multiEdges.m\n')
+
+assert(multiEdges(T{3}{2}),1)
+assert(multiEdges([0 2 1; 2 0 1; 1 1 0],1))  % triangle with one double edge
+assert(multiEdges([0 0 1; 2 0 0; 0 1 0]),1)  % directed triangle with 1 double edge
+assert(multiEdges(randomGraph(randi(15))),0)
+assert(multiEdges([0 0 1; 2 0 0; 0 2 0]),2)  % directed triangle with 2 double edges
+% ...............................................
