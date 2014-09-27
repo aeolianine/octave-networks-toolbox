@@ -310,7 +310,7 @@ end
 % Testing linkDensity.m .........................
 printf('testing linkDensity.m\n')
 
-randint = randi(101);
+randint = randi(101)+1;
 assert(linkDensity(edgeL2adj(canonicalNets(randint,'tree',2))),2/randint)
 
 for i=1:length(T)
@@ -340,4 +340,27 @@ assert(multiEdges([0 2 1; 2 0 1; 1 1 0],1))  % triangle with one double edge
 assert(multiEdges([0 0 1; 2 0 0; 0 1 0]),1)  % directed triangle with 1 double edge
 assert(multiEdges(randomGraph(randi(15))),0)
 assert(multiEdges([0 0 1; 2 0 0; 0 2 0]),2)  % directed triangle with 2 double edges
+% ...............................................
+
+
+% Testing averageDegree.m .......................
+printf('testing averageDegree.m\n')
+
+assert(averageDegree(T{2}{2}),1)
+assert(averageDegree(T{4}{2}),2+1.0/3)
+assert(averageDegree(T{18}{2}),2)
+% ...............................................
+
+
+% Testing numConnComp.m .........................
+printf('testing numConnComp.m\n')
+assert(numConnComp(T{5}{2}),2)
+
+randint = randi(51);
+Adj=zeros(randint*30);
+for x=1:randint
+  adj=randomGraph(30,0.5);
+  Adj(30*(x-1)+1:30*x,30*(x-1)+1:30*x)=adj;
+end
+assert(numConnComp(Adj),randint)
 % ...............................................

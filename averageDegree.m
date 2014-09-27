@@ -1,4 +1,3 @@
-##################################################################
 % Computes the average degree of a node in a graph, defined as
 % 2 times the number of edges divided by the number of nodes (every edge is counted in degrees twice).
 %
@@ -10,7 +9,6 @@
 % 
 % Other routines used: numNodes.m, numEdges.m
 % GB: last update, September 20, 2012
-##################################################################
 
 function k=averageDegree(adj)
 
