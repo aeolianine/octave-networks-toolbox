@@ -364,3 +364,47 @@ for x=1:randint
 end
 assert(numConnComp(Adj),randint)
 % ...............................................
+
+
+% Testing findConnCompI.m ........................
+printf('testing findConnCompI.m\n')
+
+assert(findConnCompI(T{5}{2},1),[1,2,3])
+assert(findConnCompI(T{5}{2},2),[1,2,3])
+assert(findConnCompI(T{5}{2},3),[1,2,3])
+assert(findConnCompI(T{5}{2},4),[4,5,6])
+assert(findConnCompI(T{5}{2},5),[4,5,6])
+assert(findConnCompI(T{5}{2},6),[4,5,6])
+assert(findConnCompI([0 1 0; 1 0 0; 0 0 0],1),[1,2])
+assert(findConnCompI([0 1 0; 1 0 0; 0 0 0],2),[1,2])
+assert(findConnCompI([0 1 0; 1 0 0; 0 0 0],3),[3])
+% ...............................................
+
+
+% Testing findConnComp.m ........................
+printf('testing findConnComp.m\n')
+
+assert(findConnComp(T{5}{2}),{[1,2,3],[4,5,6]})
+
+clear modules
+modules{1}=[0];
+randint = randi(21);
+Adj = []; adj = [];
+
+% make up a matrix (Adj) of randint disconnected components (adj)
+for x=1:randint
+  randsecint = randi(5)+5;
+  
+  % remember the disconnected components in "modules"
+  lastnode = modules{length(modules)}(length(modules{length(modules)}));
+  modules{length(modules)+1} = [lastnode+1:lastnode+randsecint]; 
+  
+  % make sure adj is not empty, is connected and the number of nodes is "randsecint"
+  while isempty(adj) | not(isConnected(adj)) | not(length(adj)==randsecint); adj=randomGraph(randsecint,0.5); end
+
+  Adj(length(Adj)+1:length(Adj)+randsecint,length(Adj)+1:length(Adj)+randsecint)=adj; 
+end
+
+modules=modules(2:length(modules));
+assert(findConnComp(Adj),modules)
+% ...............................................

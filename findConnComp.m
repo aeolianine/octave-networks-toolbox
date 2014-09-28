@@ -1,13 +1,11 @@
-##################################################################
 % Algorithm for finding connected components in a graph
-% Note: Valid for undirected graphs only
+% Note: Valid for undirected graphs only.
 %
 % INPUTS: adj - adjacency matrix, nxn
 % OUTPUTS: a list of the components comp{i}=[j1,j2,...jk]
 %
 % Other routines used: findConnCompI.m, degrees.m
 % GB: last updated, September 22, 2012
-##################################################################
 
 
 function comp_mat = findConnComp(adj)
@@ -32,6 +30,5 @@ for i=1:length(deg)
     elseif deg(i)==0
         comp_mat{length(comp_mat)+1}=[i];
     end
-
     
 end
