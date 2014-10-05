@@ -546,3 +546,20 @@ assert(graphComplement(T{4}{2}),mat)
 assert(graphComplement(T{13}{2}),eye(3))
 assert(graphComplement([0 1 1; 1 0 0; 1 0 0]), [1 0 0; 0 1 1; 0 1 1])
 % ...............................................
+
+% Testing graphDual.m ...........................
+printf('testing graphDual.m\n')
+
+gd=graphDual(adj2adjL(T{4}{2}));
+gdT={};
+gdT{1}=[2,3]; gdT{2}=[1,3,4]; gdT{3}=[1,2,4]; gdT{4}=[2,3,5,6]; gdT{5}=[4,6,7]; gdT{6}=[4,5,7]; gdT{7}=[5,6];
+assert(gd,gdT)
+
+gd=graphDual(adj2adjL(T{13}{2}));
+gdT={};
+gdT{1}=[2,3]; gdT{2}=[1,3]; gdT{3}=[1,2];
+assert(gd,gdT)
+
+L={}; LT={}; L{1}=[2]; L{2}=[1]; LT{1}=[];
+assert(LT,graphDual(L))
+% ...............................................

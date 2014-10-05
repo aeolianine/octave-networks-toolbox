@@ -1,4 +1,3 @@
-##################################################################
 % Finds the dual of a graph; a dual is the inverted nodes-edges graph
 % This is also called the line graph, adjoint graph or the edges adjacency
 % 
@@ -7,7 +6,6 @@
 %
 % Note: This routine only works for undirected, simple graphs.
 % GB: last updated, Sep 23 2012
-##################################################################
 
 function [dL,edge_array] = graphDual(L)
 
