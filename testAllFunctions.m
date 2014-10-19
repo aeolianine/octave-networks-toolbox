@@ -563,3 +563,12 @@ assert(gd,gdT)
 L={}; LT={}; L{1}=[2]; L{2}=[1]; LT{1}=[];
 assert(LT,graphDual(L))
 % ...............................................
+
+% Testing subgraph.m ............................
+fprintf('testing subgraph.m\n')
+assert(T{13}{2},subgraph(T{4}{2},[1,2,3]))
+assert(T{13}{2},subgraph(T{4}{2},[4,5,6]))
+assert(T{2}{2},subgraph(T{4}{2},[4,5]))
+assert(T{2}{2},subgraph(T{4}{2},[1,2]))
+assert(T{2}{2},subgraph(T{4}{2},[3,4]))
+% ...............................................
