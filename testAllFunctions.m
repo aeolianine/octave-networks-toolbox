@@ -572,3 +572,14 @@ assert(T{2}{2},subgraph(T{4}{2},[4,5]))
 assert(T{2}{2},subgraph(T{4}{2},[1,2]))
 assert(T{2}{2},subgraph(T{4}{2},[3,4]))
 % ...............................................
+
+% Testing leafNodes.m ...........................
+fprintf('testing leafNodes.m\n')
+assert(leafNodes(edgeL2adj(T{10}{2})),[2,3])
+assert(leafNodes(edgeL2adj(T{11}{2})),[2,3])
+assert(length(leafNodes(T{13}{2})),0)
+assert(leafNodes(T{2}{2}),[1,2])
+assert(leafNodes(T{1}{2}),[2])
+assert(length(leafNodes(T{4}{2})),0)
+assert(leafNodes(edgeL2adj(T{19}{2})),[2,3,4,5])
+% ...............................................

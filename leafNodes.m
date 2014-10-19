@@ -1,4 +1,3 @@
-##################################################################
 % Return the indices of the leaf nodes of the graph, i.e. all nodes of degree 1
 % 
 % Note 1: For a directed graph, leaf nodes are those with a single incoming edge
@@ -9,7 +8,6 @@
 % Output: indices of leaf nodes
 %
 % GB: last updated, Sep 23, 2012
-##################################################################
 
 function leaves=leafNodes(adj)
 
