@@ -1,4 +1,3 @@
-##################################################################
 % Prim's minimal spanning tree algorithm
 % Prim's alg idea:
 %  start at any node, find closest neighbor and mark edges
@@ -10,7 +9,6 @@
 %
 % Other routines used: isConnected.m
 % GB: Oct 7, 2012
-##################################################################
 
 function tr = minSpanTree(adj)
 

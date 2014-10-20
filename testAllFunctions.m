@@ -593,3 +593,17 @@ assert(length(leafEdges(edgeL2adj([2,1,1;3,1,1]))),0)
 assert(length(leafEdges(T{4}{2})),0)
 assert(leafEdges(edgeL2adj(T{19}{2})),[1, 2; 1, 3; 1, 4; 1, 5])
 % ...............................................
+
+% Testing minSpanTree.m .........................
+printf('testing minSpanTree.m\n')
+for x=1:100
+  adj = [0 1; 0 0];                % initialize
+  while not(isConnected(adj)); adj = randomGraph(randi(30)+5,rand); end
+  
+  tr = minSpanTree(adj);
+  assert(isTree(tr),true)
+  assert(length(tr),length(adj));  % tree should have the same
+                                   % number of nodes as adj
+end
+% ...............................................
+
