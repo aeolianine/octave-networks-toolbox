@@ -583,3 +583,13 @@ assert(leafNodes(T{1}{2}),[2])
 assert(length(leafNodes(T{4}{2})),0)
 assert(leafNodes(edgeL2adj(T{19}{2})),[2,3,4,5])
 % ...............................................
+
+% Testing leafEdges.m ...........................
+fprintf('testing leafEdges.m\n')
+assert(leafEdges(edgeL2adj(T{10}{2})),[1,2;1,3])
+assert(leafEdges(edgeL2adj(T{10}{2})),[1,2;1,3])
+assert(length(leafEdges(T{13}{2})),0)
+assert(length(leafEdges(edgeL2adj([2,1,1;3,1,1]))),0)
+assert(length(leafEdges(T{4}{2})),0)
+assert(leafEdges(edgeL2adj(T{19}{2})),[1, 2; 1, 3; 1, 4; 1, 5])
+% ...............................................
