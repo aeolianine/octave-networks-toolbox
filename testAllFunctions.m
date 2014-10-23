@@ -607,3 +607,20 @@ for x=1:100
 end
 % ...............................................
 
+
+% ................................................
+% ................................................
+% ................................................
+
+
+% Testing isSimple.m .............................
+fprintf('testing isSimple.m\n')
+
+assert(isSimple(T{1}{2}),false)
+assert(isSimple(T{2}{2}),true)
+assert(isSimple(T{3}{2}),false)
+assert(isSimple(randomGraph(randi(5)+20,rand)),true)  % simple graph
+assert(isSimple(edgeL2adj([1,2,2])),false)      % multi-edge
+assert(isSimple( [1 0 0; 0 0 1; 0 1 0]),false)  % matrix with loops
+assert(isSimple([0 1 1; 1 0 0; 0 1 0]),false)   % directed matrix
+% ................................................

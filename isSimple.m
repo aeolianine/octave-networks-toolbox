@@ -1,4 +1,3 @@
-##################################################################
 % Checks whether a graph is simple (undirected, no self-loops, no multiple edges, no weighted edges)
 %
 % INPUTs: adj - adjacency matrix
@@ -6,7 +5,6 @@
 %
 % Other routines used: selfLoops.m, multiEdges.m, isDirected.m
 % GB: last updated, September 23, 2012
-##################################################################
 
 function S = isSimple(adj)
 
