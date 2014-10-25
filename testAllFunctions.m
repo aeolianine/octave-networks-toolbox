@@ -624,3 +624,25 @@ assert(isSimple(edgeL2adj([1,2,2])),false)      % multi-edge
 assert(isSimple( [1 0 0; 0 0 1; 0 1 0]),false)  % matrix with loops
 assert(isSimple([0 1 1; 1 0 0; 0 1 0]),false)   % directed matrix
 % ................................................
+
+% Testing isDirected.m ...........................
+fprintf('testing isDirected.m\n')
+assert(isDirected(randomDirectedGraph(randi(5)+20,rand)),true)  
+assert(isDirected(randomGraph(randi(5)+20,rand)),false)
+assert(isDirected(T{1}{2}), true)
+assert(isDirected(T{2}{2}), false)
+assert(isDirected(T{3}{2}), false)
+assert(isDirected(T{16}{2}), true)
+% ................................................
+
+
+% Testing isSymmetric.m ..........................
+fprintf('testing isSymmetric.m\n')
+
+for i=1:100
+  assert(isSymmetric(randomGraph(randi(5)+20,rand)),true)
+
+  adj = randomDirectedGraph(randi(5)+20,rand);
+  assert(not(isSymmetric(adj)) | adj==zeros(size(adj)) | adj==ones(size(adj)))
+end
+% ................................................
