@@ -1,14 +1,13 @@
-##################################################################
 % Determine if a graph is connected
-% Idea by Ed Scheinerman, circa 2006, source: http://www.ams.jhu.edu/~ers/matgraph/
-%                                     routine: matgraph/@graph/isconnected.m
+% Idea by Ed Scheinerman, circa 2006, 
+%         source: http://www.ams.jhu.edu/~ers/matgraph/
+%         routine: matgraph/@graph/isconnected.m
 %
 % INPUTS: adjacency matrix, nxn
 % OUTPUTS: Boolean variable, 0 or 1
 %
 % Note: This function works only for undirected graphs.
 % GB: last updated, Sep 23 2012
-##################################################################
 
 function S = isConnected(adj)
 
@@ -30,12 +29,12 @@ S = true;
 if sum(x)<n; S = false; end
 
 
-% Alternative 1 ==========================================================
+% Alternative 1 ..........................................................
 % If the algebraic connectivity is > 0 then the graph is connected
 % a=algebraic_connectivity(adj);
 % S = false; if a>0; S = true; end
 
-% Alternative 2 ==========================================================
+% Alternative 2 ..........................................................
 % Uses the fact that multiplying the adj matrix to itself k times give the
 % number of ways to get from i to j in k steps. If the end of the
 % multiplication in the sum of all matrices there are 0 entries then the
@@ -61,6 +60,6 @@ if sum(x)<n; S = false; end
 %         end
 %     end
 
-% Alternative 3 ==========================================================
+% Alternative 3 ............................................................
 % Find all connected components, if their number is 1, the graph is
 % connected. Use find_conn_comp(adj).

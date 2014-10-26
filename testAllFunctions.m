@@ -646,3 +646,26 @@ for i=1:100
   assert(not(isSymmetric(adj)) | adj==zeros(size(adj)) | adj==ones(size(adj)))
 end
 % ................................................
+
+% Testing isConnected.m ..........................
+fprintf('testing isConnected.m\n')
+assert(isConnected(T{1}{2}),false)
+assert(isConnected(T{2}{2}),true)
+assert(isConnected(T{4}{2}),true)
+assert(isConnected(T{5}{2}),false)
+assert(isConnected(transpose(T{5}{2})),false)
+assert(isConnected(T{13}{2}),true)
+assert(isConnected(T{14}{2}),true)
+
+for x=1:10
+  adj = [0 1; 0 0];                % initialize
+  while isConnected(adj); adj = randomGraph(randi(30)+5,0.001); end
+  assert(isConnected(adj),false)
+  assert(transpose(isConnected(adj)),false)
+  
+  while not(isConnected(adj)); adj = randomGraph(randi(30)+5,0.2); end
+  assert(isConnected(adj),true)
+  assert(transpose(isConnected(adj)),true)
+  
+end
+% ................................................
