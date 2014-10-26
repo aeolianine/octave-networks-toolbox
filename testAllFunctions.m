@@ -607,9 +607,40 @@ for x=1:100
 end
 % ...............................................
 
+% Testing DFS.m .................................
+printf('testing DFS.m\n')
+allPaths = DFS(T{1}{2}, 1, 2, allPaths = {}, path = [], upperBound = 2);
+assert(allPaths, {[1 2]})
+allPaths = DFS(T{1}{2}, 2, 1, allPaths = {}, path = [], upperBound = 2);
+assert(allPaths, {})
+
+allPaths = DFS(T{2}{2}, 1, 2, allPaths = {}, path = [], upperBound = 2);
+assert(allPaths, {[1 2]})
+allPaths = DFS(T{2}{2}, 2, 1, allPaths = {}, path = [], upperBound = 2);
+assert(allPaths, {[2 1]})
+
+allPaths = DFS(T{4}{2}, 1, 5, allPaths = {}, path = [], upperBound = 1);
+assert(allPaths, {})
+allPaths = DFS(T{4}{2}, 1, 5, allPaths = {}, path = [], upperBound = 3);
+assert(allPaths, {[1 3 4 5]})
+
+allPaths = DFS(T{5}{2}, 1, 5, allPaths = {}, path = [], upperBound = 4);
+assert(allPaths, {})
+allPaths = DFS(T{5}{2}, 1, 3, allPaths = {}, path = [], upperBound = 3);
+assert(allPaths, {[1 2 3], [1 3]})
+
+allPaths = DFS(T{5}{2}, 1, 3, allPaths = {}, path = [], upperBound = 1);
+assert(allPaths, {[1 3]})
+
+allPaths = DFS([0 1 0 1; 1 0 1 0; 0 1 0 1; 1 0 1 0], 1, 3, allPaths = {}, path = [], upperBound = 3);
+assert(allPaths, {[1 2 3], [1 4 3]})
+allPaths = DFS([0 1 0 1; 1 0 1 0; 0 1 0 1; 1 0 1 0], 4, 2, allPaths = {}, path = [], upperBound = 3);
+assert(allPaths, {[4 1 2], [4 3 2]})
+% ...............................................
+
 
 % ................................................
-% ................................................
+% ........ diagnostic functions ..................
 % ................................................
 
 
