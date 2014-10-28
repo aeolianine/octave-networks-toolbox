@@ -726,3 +726,15 @@ assert(isRegular(adj),false)
 assert(isRegular([0 1; 1 0]),true)
 assert(isRegular([0 0; 1 0]),false)
 % ................................................
+
+% Testing isComplete.m ...........................
+printf('testing isComplete.m\n')
+assert(isComplete([0 1; 1 0]),true)
+assert(isComplete(T{2}{2}),true)
+assert(isComplete(T{3}{2}),true)
+assert(isComplete(T{4}{2}),false)
+
+randint = randi(10)+10;
+adj = ones(randint)-eye(randint);
+assert(isComplete(adj),true)
+% ................................................
