@@ -1,4 +1,3 @@
-##################################################################
 % Checks whether a graph is regular, i.e. whether every node has the same degree.
 %
 % INPUTS: adjacency matrix, nxn
@@ -6,7 +5,6 @@
 %
 % Note: Defined for unweighted graphs only.
 % GB: last updated, Sep 23, 2012
-##################################################################
 
 function S=isRegular(adj)
 

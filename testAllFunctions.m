@@ -714,3 +714,15 @@ assert(isWeighted(adj2edgeL(randomDirectedGraph(randi(5)+20,rand+0.1))),false)
 assert(isWeighted([1,2,0.5; 1,3,1.5; 1,4,1]),true)
 assert(isWeighted([1,2,0.5; 1,3,1; 1,4,1]),true)
 % ................................................
+
+% Testing isRegular.m ............................
+fprintf('testing isRegular.m\n')
+adj = edgeL2adj(canonicalNets(20,'circle'));
+assert(isRegular(adj),true)
+
+adj = edgeL2adj(canonicalNets(20,'tree',3));
+assert(isRegular(adj),false)
+
+assert(isRegular([0 1; 1 0]),true)
+assert(isRegular([0 0; 1 0]),false)
+% ................................................
