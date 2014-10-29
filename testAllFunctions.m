@@ -738,3 +738,14 @@ randint = randi(10)+10;
 adj = ones(randint)-eye(randint);
 assert(isComplete(adj),true)
 % ................................................
+
+
+% Testing isEulerian.m ...........................
+printf('testing isEulerian.m\n')
+
+adj = edgeL2adj(canonicalNets(10,'circle'));
+assert(isEulerian(adj),true)
+
+adj = edgeL2adj(canonicalNets(10,'tree',3));
+assert(isEulerian(adj),false)
+% ................................................

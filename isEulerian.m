@@ -1,4 +1,3 @@
-##################################################################
 % Check if a graph is Eulerian, i.e. it has an Eulerian circuit
 % "A connected undirected graph is Eulerian if and only if every graph vertex has an even degree."
 % "A connected directed graph is Eulerian if and only if every graph vertex has equal in- and out- degree."
@@ -10,7 +9,6 @@
 %
 % Other routines used: degrees.m, isDirected.m
 % GB: last updated, Sep 23, 2012
-##################################################################
 
 function S=isEulerian(adj)
 
