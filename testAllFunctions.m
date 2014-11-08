@@ -773,3 +773,17 @@ assert(isTree(adj),false)
 adj = edgeL2adj(canonicalNets(randi(10)+10,'hierarchy', b=3));
 assert(isTree(adj),false)
 % ................................................
+
+% Testing isGraphic.m ............................
+printf('testing isGraphic.m\n')
+for i=1:20
+  adj = giantComponent(randomGraph(randi(20)+1,0.5));
+  [deg,~,~] = degrees(adj);
+  assert(isGraphic(deg) | adj==0)
+end
+
+assert(isGraphic([0 1]), false)
+assert(isGraphic([2 1]), false)
+assert(isGraphic([1 1 4]), false)
+assert(isGraphic([1 4 4 100]), false)
+% ................................................

@@ -1,4 +1,3 @@
-##################################################################
 % Check whether a sequence of number is graphic, i.e. 
 %            a graph with this degree sequence exists
 % Source: Erdős, P. and Gallai, T. "Graphs with Prescribed Degrees 
@@ -9,7 +8,6 @@
 %
 % Note: Not generalized to directed graph degree sequences.
 % GB: last updated, Sep 24, 2012
-##################################################################
 
 function B = isGraphic(seq)
 
