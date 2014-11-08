@@ -1,5 +1,4 @@
-##################################################################
-% Check whether a graph is a tree
+% Check whether a graph is a tree.
 % A tree is a connected graph with n nodes and (n-1) edges.
 % Source: "Intro to Graph Theory" by Bela Bollobas
 % 
@@ -8,7 +7,6 @@
 %
 % Other routines used: isConnected.m, numEdges.m, numNodes.m
 % GB: last updated, Sep 24, 2012
-##################################################################
 
 function S=isTree(adj)
 
