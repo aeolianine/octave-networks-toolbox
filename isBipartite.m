@@ -1,4 +1,3 @@
-##################################################################
 % Test whether a graph is bipartite. If so, return the two vertex sets.
 % A bipartite graph is a graph for which the nodes can be split in two sets A and B, 
 % such that there are no edges that connect nodes within A or within B.
@@ -8,7 +7,6 @@
 %
 % Note: This only works for undirected graphs.
 % GB: last updated, Sep 24, 2012
-##################################################################
 
 function [isit,A,B]=isBipartite(L)
 
@@ -41,9 +39,9 @@ while not(isempty(queue))
   
   queue=queue(2:length(queue)); % remove the visited node
   
-  % if A and B overlap, return false, [],[] ====
+  % if A and B overlap, return false, [],[] ....
   A=unique(A); B=unique(B);
   if not(isempty(intersect(A,B))); isit=false; A=[]; B=[]; return; end
-  % ============================================
+  % ............................................
   
 end

@@ -845,3 +845,30 @@ assert(isGraphic([2 1]), false)
 assert(isGraphic([1 1 4]), false)
 assert(isGraphic([1 4 4 100]), false)
 % ................................................
+
+
+% Testing isBipartite.m ..........................
+printf('testing isBipartite.m\n')
+
+assert(isBipartite(adj2adjL(T{4}{2})),false)
+[isit, A, B] = isBipartite(edgeL2adjL(T{10}{2}));
+assert(isit,true)
+assert(A, 1)
+assert(B, [2 3])
+
+even_circle = canonicalNets(2*randi(10),'circle');
+[isit, A, B] = isBipartite(edgeL2adjL(even_circle));
+assert(isit,true)
+assert(length(A), length(B))
+assert(mod(A,2), ones(1,length(A)))
+assert(mod(B,2), zeros(1,length(B)))
+
+odd_circle = canonicalNets(2*randi(10)+1,'circle');
+assert(isBipartite(edgeL2adjL(odd_circle)),false)
+% ................................................
+
+
+% ................................................
+% ........ centrality measures ...................
+% ................................................
+
