@@ -872,3 +872,24 @@ assert(isBipartite(edgeL2adjL(odd_circle)),false)
 % ........ centrality measures ...................
 % ................................................
 
+
+% Testing degrees.m ..............................
+printf('testing degrees.m\n')
+
+assert(degrees(T{1}{2}), [1 1])
+assert(degrees(T{2}{2}), [1 1])
+assert(degrees(T{3}{2}), [2 2])
+assert([2 2 3 3 2 2],degrees(T{4}{2}))
+assert([2 1 1],degrees(edgeL2adj(T{10}{2})))
+
+[deg,indeg,outdeg]=degrees(edgeL2adj(T{11}{2}));
+assert(deg,[2 1 1])
+assert(indeg,[0 1 1])
+assert(outdeg,[2 0 0])
+
+assert(degrees(T{13}{2}, [2 2 2]))
+assert(degrees(T{14}{2}, [3 3 2]))
+assert(degrees(T{18}{2}, [3 3 3 3]))
+
+assert([4 4 4],degrees([0 2 1; 0 0 1; 1 1 0]))
+% ................................................

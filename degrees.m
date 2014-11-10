@@ -1,4 +1,3 @@
-##################################################################
 % Compute the total degree, in-degree and out-degree of a graph based on the adjacency matrix; 
 % Note: Returns weighted degrees, if the input matrix is weighted
 %
@@ -7,7 +6,6 @@
 %
 % Other routines used: isDirected.m
 % GB: last updated, Sep 26, 2012
-##################################################################
 
 function [deg,indeg,outdeg]=degrees(adj)
 
