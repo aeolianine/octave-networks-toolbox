@@ -893,3 +893,22 @@ assert(degrees(T{18}{2}, [3 3 3 3]))
 
 assert([4 4 4],degrees([0 2 1; 0 0 1; 1 1 0]))
 % ................................................
+
+% Testing rewire.m ...............................
+printf('testing rewire.m\n')
+
+for x=1:100
+  
+  el = adj2edgeL(randomGraph(randi(10)+10,0.4));
+  deg = degrees(edgeL2adj(el));
+  rew = randi(5);
+  eln = rewire(el,rew);
+  degn = degrees(edgeL2adj(eln));
+  
+  assert(deg,degn)
+  eq = eln(:,1:2) == el(:,1:2);
+  preservedEdges = sum(sum(transpose(eq))==2);
+  assert( preservedEdges >= size(eln)(1) - 4*rew )
+
+end
+% ................................................

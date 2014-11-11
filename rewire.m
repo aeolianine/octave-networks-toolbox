@@ -1,4 +1,3 @@
-##################################################################
 % Degree-preserving random rewiring.
 % Note 1: Assume unweighted undirected graph.
 % 
@@ -6,7 +5,6 @@
 % OUTPUTS: rewired edge list
 %
 % GB: last updated, Sep 26, 2012
-##################################################################
 
 function el = rewire(el,k)
 
@@ -52,7 +50,7 @@ while rew<k
       rew = rew + 1;
       
     else
-      'creates a double edge';
+      'rewire(): creates a double edge'
       continue
     end
 
