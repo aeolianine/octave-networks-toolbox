@@ -912,3 +912,30 @@ for x=1:100
 
 end
 % ................................................
+
+% Testing rewireThisEdge.m .......................
+printf('testing rewireThisEdge.m\n')
+
+for x=1:100
+  
+  adj = [0 1; 0 0];
+  while not(isConnected(adj)); adj = randomGraph(randi(10)+10,0.3); end
+  el = adj2edgeL(adj);
+  deg = degrees(edgeL2adj(el));
+  
+  edgeind = randi([1,length(el)]);
+  eln = rewireThisEdge(el,el(edgeind,1),el(edgeind,2));
+  if isempty(eln); continue; end  % could not rewire, eln=[]
+  
+  adjn = edgeL2adj(eln);
+  degn = degrees(adjn);
+  
+  assert(deg,degn)
+  assert(isSimple(adjn),true)
+
+  eq = eln(:,1:2) == el(:,1:2);
+  preservedEdges = sum(sum(transpose(eq))==2);
+  assert( preservedEdges == size(eln)(1) - 4 )
+
+end
+% ................................................

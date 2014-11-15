@@ -1,16 +1,14 @@
-##################################################################
 % Degree-preserving rewiring of 1 given edge.
 % Note 1: Assume unweighted undirected graph.
 % 
 % INPUTS: edge list, el (mx3) and the two nodes of the edge to be rewired.
 % OUTPUTS: rewired edge list, same size and same degree distribution
 %
-% Note: There are cases when rewiring is not possible, while
+% Note: There are cases when rewiring is not possible with simultaneously
 %       keeping the graph simple, so an empty edge list is returned.
 % 
 % Other routines used: edgeL2adj.m, kneighbors.m
 % GB: last updated, Oct 25, 2012
-##################################################################
 
 function el = rewireThisEdge(el,i1,i2)
 
@@ -28,7 +26,7 @@ for e=1:length(el)
 end
 
 if isempty(disjoint_edges)
-  printf('cannot rewire this graph without adding a double edge or a loop\n');
+  printf('rewireThisEdge(): cannot rewire this graph without adding a double edge or a loop\n');
   el = [];
   return
 end
