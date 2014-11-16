@@ -974,3 +974,9 @@ for x=1:100
   assert(pearson(edgeL2adj(eln))<=(pearson(edgeL2adj(el))-10^(-7)) | (pearson(edgeL2adj(eln))-10^(-7))<=pearson(edgeL2adj(el)))
 end
 % ................................................
+
+% Testing aveNeighborDeg.m .......................
+printf('testing aveNeighborDeg.m\n')
+assert(aveNeighborDeg(T{13}{2}),[2 2 2])
+assert(aveNeighborDeg(T{4}{2}),[2.5 2.5 7/3 7/3 2.5 2.5])
+% ................................................

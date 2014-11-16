@@ -1,4 +1,3 @@
-##################################################################
 % Compute the average degree of neighboring nodes for every vertex.
 % Note: Works for weighted degrees (graphs) also.
 %
@@ -7,7 +6,6 @@
 %
 % Other routines used: degrees.m, kneighbors.m
 % GB: last updated, Sep 28, 2012
-##################################################################
 
 function ave_n_deg=aveNeighborDeg(adj)
 
