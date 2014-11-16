@@ -939,3 +939,38 @@ for x=1:100
 
 end
 % ................................................
+
+% Testing rewireAssort.m .........................
+printf('testing rewireAssort.m\n')
+
+for x=1:100
+  adj = [0 0; 0 0];
+  
+  while not(isConnected(adj)); adj = randomGraph(randi(10)+10,0.4); end
+  el = adj2edgeL(adj);
+  eln = rewireAssort(el,randi(5));
+
+  adjn = edgeL2adj(eln);
+  assert(degrees(adj),degrees(adjn))
+
+  assert(pearson(edgeL2adj(eln))>=(pearson(edgeL2adj(el))-10^(-7)) | (pearson(edgeL2adj(eln))-10^(-7))>=pearson(edgeL2adj(el)))
+end
+% ................................................
+
+
+% Testing rewireDisassort.m ......................
+printf('testing rewireDisassort.m\n')
+
+for x=1:100
+  adj = [0 0; 0 0];
+  
+  while not(isConnected(adj)); adj = randomGraph(randi(10)+10,0.4); end
+  el = adj2edgeL(adj);
+  eln = rewireDisassort(el,randi(5));
+
+  adjn = edgeL2adj(eln);
+  assert(degrees(adj),degrees(adjn))
+
+  assert(pearson(edgeL2adj(eln))<=(pearson(edgeL2adj(el))-10^(-7)) | (pearson(edgeL2adj(eln))-10^(-7))<=pearson(edgeL2adj(el)))
+end
+% ................................................

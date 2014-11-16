@@ -1,4 +1,3 @@
-##################################################################
 % Degree-preserving random rewiring.
 % Every rewiring decreases the assortativity (pearson coefficient).
 %
@@ -8,7 +7,6 @@
 % INPUTS: edge list, el and number of rewirings, k (integer)
 % OUTPUTS: rewired edge list
 % GB: last updated, Sep 27 2012
-##################################################################
 
 function el = rewireDisassort(el,k)
 
