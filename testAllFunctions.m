@@ -980,3 +980,15 @@ printf('testing aveNeighborDeg.m\n')
 assert(aveNeighborDeg(T{13}{2}),[2 2 2])
 assert(aveNeighborDeg(T{4}{2}),[2.5 2.5 7/3 7/3 2.5 2.5])
 % ................................................
+
+
+% Testing sortNodesBySumNeighborDegrees.m ........
+printf('testing sortNodesBySumNeighborDegrees.m\n')
+
+assert(sortNodesBySumNeighborDegrees(T{1}{2}),[1, 2]')
+assert(sortNodesBySumNeighborDegrees(T{2}{2}),[2, 1]')
+assert(sortNodesBySumNeighborDegrees(T{4}{2}),[4,3,6,5,2,1]')  
+assert(sortNodesBySumNeighborDegrees(edgeL2adj(T{10}{2})),[1, 3, 2]')
+assert(sortNodesBySumNeighborDegrees(T{13}{2}),[3, 2, 1]')
+assert(sortNodesBySumNeighborDegrees(adjL2adj(T{17}{2})),[3, 2, 1]')
+% ................................................
