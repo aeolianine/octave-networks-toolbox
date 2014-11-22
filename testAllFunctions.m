@@ -992,3 +992,14 @@ assert(sortNodesBySumNeighborDegrees(edgeL2adj(T{10}{2})),[1, 3, 2]')
 assert(sortNodesBySumNeighborDegrees(T{13}{2}),[3, 2, 1]')
 assert(sortNodesBySumNeighborDegrees(adjL2adj(T{17}{2})),[3, 2, 1]')
 % ................................................
+
+
+% Testing sortNodesByMaxNeighborDegree.m .........
+printf('testing sortNodesByMaxNeighborDegree.m\n')
+
+assert(sortNodesByMaxNeighborDegree(T{2}{2}),[2, 1]')
+assert(sortNodesByMaxNeighborDegree(T{4}{2}),[4,3,6,5,2,1]')  
+assert(sortNodesByMaxNeighborDegree(edgeL2adj(T{10}{2})),[1, 3, 2]')
+assert(sortNodesByMaxNeighborDegree(T{13}{2}),[3, 2, 1]')
+assert(sortNodesByMaxNeighborDegree(adjL2adj(T{17}{2})),[3, 2, 1]')
+% ................................................

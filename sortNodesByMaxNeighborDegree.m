@@ -1,13 +1,12 @@
-##################################################################
 % Sort nodes by degree, and where there's equality, by maximum neighbor degree
 % Ideas from Guo, Chen, Zhou, "Fingerprint for Network Topologies"
 %
 % INPUTS: adjacency matrix, 0s and 1s, nxn
 % OUTPUTS: sorted (decreasing) sequence of nodal indices (nx1)
 %
+% Note: Works for undirected graphs only.
 % Other routines used: degrees.m, kneighbors.m
-% GB: last updated, Oct 4, 2012
-##################################################################
+% GB: last updated, Nov 24, 2014
 
 function I=sortNodesByMaxNeighborDegree(adj)
 
