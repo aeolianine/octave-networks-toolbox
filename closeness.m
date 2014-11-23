@@ -1,4 +1,3 @@
-##################################################################
 % Computes the closeness centrality for every vertex: 1/sum(dist to all other nodes)
 %
 % INPUTs: adjacency matrix, nxn
@@ -7,7 +6,6 @@
 % Source: social networks literature (example: Wasserman, Faust, "Social Networks Analysis")
 % Other routines used: simpleDijkstra.m 
 % GB: last updated, Sep 28, 2012
-##################################################################
 
 function C=closeness(adj)
 
