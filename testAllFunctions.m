@@ -1038,3 +1038,27 @@ assert(edgeBetweenness(T{4}{2}),eb_bowtie)
 assert(edgeBetweenness(T{13}{2}),[2 1 1/6; 3 1 1/6; 1 2 1/6; 3 2 1/6; 1 3 1/6; 2 3 1/6])
 assert(edgeBetweenness([0 1 1 0; 1 0 1 0; 1 1 0 1; 0 0 1 0]),[2 1 1/12; 3 1 1/6; 1 2 1/12; 3 2 1/6; 1 3 1/6; 2 3 1/6; 4 3 3/12; 3 4 3/12])
 % ................................................
+
+
+% Testing eigenCentrality.m ......................
+printf('testing eigenCentrality.m\n')
+[v,~]=eig([0 1 1; 1 0 1; 1 1 0]);
+assert(eigenCentrality([0 1 1; 1 0 1; 1 1 0]),v(:,3))   % "3" is the number of nodes
+
+[v,~]=eig(T{4}{2});
+assert( eigenCentrality( T{4}{2} ),v(:,size(T{4}{2},1)) )
+
+[v,~]=eig(T{13}{2});
+assert( eigenCentrality( T{13}{2} ),v(:,size(T{13}{2},1)) )
+
+[v,~]=eig(T{18}{2});
+ec = v(:,size(T{18}{2},1));
+assert( eigenCentrality( T{18}{2} ), ec )
+assert( norm( ec(1)*ones(length(ec),1) - ec) < 1*e^(-20) )
+
+adj = edgeL2adj( canonicalNets(randi(10)+2, 'circle') );
+[v,~]=eig(adj);
+ec = v(:,size(adj,1));
+assert( eigenCentrality( adj ), ec )
+assert( norm( ec(1)*ones(length(ec),1) - ec) < 1*e^(-20) )
+% ................................................
