@@ -1026,3 +1026,15 @@ x = edgeL2adj(canonicalNets(2*randi(10)+1,'circle'));
 bw = nodeBetweenness(x);
 assert(bw(1)*ones(1,length(bw)),bw)  % the betweennesses should be all the same
 % ................................................
+
+
+% Testing edgeBetweenness.m ......................
+printf('testing edgeBetweenness.m\n')
+
+eb_bowtie = adj2edgeL(T{4}{2});
+eb_bowtie(:,3) = [1/30; 4/30; 1/30; 4/30; 4/30; 4/30; 9/30; 9/30; 4/30; 4/30; 4/30; 1/30; 4/30; 1/30];
+
+assert(edgeBetweenness(T{4}{2}),eb_bowtie)
+assert(edgeBetweenness(T{13}{2}),[2 1 1/6; 3 1 1/6; 1 2 1/6; 3 2 1/6; 1 3 1/6; 2 3 1/6])
+assert(edgeBetweenness([0 1 1 0; 1 0 1 0; 1 1 0 1; 0 0 1 0]),[2 1 1/12; 3 1 1/6; 1 2 1/12; 3 2 1/6; 1 3 1/6; 2 3 1/6; 4 3 3/12; 3 4 3/12])
+% ................................................
