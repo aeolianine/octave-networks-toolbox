@@ -1011,3 +1011,18 @@ assert(closeness(T{4}{2})',[1/(1+1+2+3+3), 1/(1+1+2+3+3), 1/(1+1+1+2+2), 1/(1+1+
 assert(closeness([0 1 1; 1 0 0; 1 0 0]),[0.5 1/3 1/3]')
 assert(closeness(T{13}{2}),[1/(1+1), 1/(1+1), 1/(1+1)]')
 % ................................................
+
+
+% Testing nodeBetweenness.m ......................
+printf('testing nodeBetweenness.m\n')
+assert(nodeBetweenness([0 1; 1 0]),[0 0])
+assert(nodeBetweenness([1 1; 0 0]),[0 0])
+assert(nodeBetweenness([0 1 1; 1 0 0; 1 0 0]),[1/3 0 0])
+assert(nodeBetweenness(T{4}{2}),[0 0 0.4 0.4 0 0])
+x = edgeL2adj(canonicalNets(2*randi(10)+2,'circle'));
+bw = nodeBetweenness(x);
+assert(bw(1)*ones(1,length(bw)),bw)  % the betweennesses should be all the same
+x = edgeL2adj(canonicalNets(2*randi(10)+1,'circle'));
+bw = nodeBetweenness(x);
+assert(bw(1)*ones(1,length(bw)),bw)  % the betweennesses should be all the same
+% ................................................

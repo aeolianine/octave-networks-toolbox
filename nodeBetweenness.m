@@ -1,4 +1,3 @@
-##################################################################
 % This function returns the betweenness measure of all vertices.
 % Betweenness centrality measure: number of shortest paths running through a vertex.
 % 
@@ -9,7 +8,6 @@
 %
 % Other routines used: numNodes.m, findAllShortestPaths.m
 % GB: July 3, 2014
-##################################################################
 
 function betw = nodeBetweenness(adj)
 
