@@ -1,4 +1,3 @@
-##################################################################
 % Shortest path algorithm using dynamic programming.
 % Note 1: Valid for directed/undirected network.
 % Note 2: if links have weights, they are treated as distances.
@@ -16,7 +15,7 @@
 %       J(1,i) - distance from node "i" to "t" in "k" steps
 %
 % GB: last updated, Oct 5 2012
-##################################################################
+
 
 function [J_st,route_st,J,route]=shortestPathDP(L,s,t,steps)
 
