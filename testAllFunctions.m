@@ -1062,3 +1062,24 @@ ec = v(:,size(adj,1));
 assert( eigenCentrality( adj ), ec )
 assert( norm( ec(1)*ones(length(ec),1) - ec) < 1*e^(-20) )
 % ................................................
+
+
+% Testing clustCoeff.m ...........................
+printf('testing clustCoeff.m\n')
+assert(clustCoeff(T{13}{2}),1)
+assert(clustCoeff(edgeL2adj(T{10}{2})),0)
+assert(clustCoeff(edgeL2adj(canonicalNets(randi(10)+5,'tree',2))),0)
+[aveC,C] = clustCoeff(T{4}{2});
+assert(aveC,(4+2/3)/6)
+assert(C, [1 1 1/3 1/3 1 1]')
+% ................................................
+
+
+% Testing transitivity.m .........................
+printf('testing transitivity.m\n')
+assert(clustCoeff(T{13}{2}),1)
+assert(clustCoeff(edgeL2adj(T{10}{2})),0)
+assert(clustCoeff(edgeL2adj(canonicalNets(randi(10)+5,'tree',2))),0)
+C = transitivity(T{4}{2});
+assert(C,0.6)
+% ................................................
