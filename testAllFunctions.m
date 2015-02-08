@@ -1083,3 +1083,18 @@ assert(clustCoeff(edgeL2adj(canonicalNets(randi(10)+5,'tree',2))),0)
 C = transitivity(T{4}{2});
 assert(C,0.6)
 % ................................................
+
+
+% testing weightedClustCoeff.m ...................
+printf('testing weightedClustCoeff.m\n')
+randint = randi(20);
+assert(length(weightedClustCoeff(randomGraph(randint+5,rand))),randint+5)
+
+adj = [0 2 1; 2 0 0; 1 0 0];
+wC = weightedClustCoeff(adj);
+assert(wC, [0 0 0]')
+
+adj = [0 2 1; 2 0 1; 1 1 0];
+wC = weightedClustCoeff(adj);
+assert(wC, [1 1 1]')
+% ................................................

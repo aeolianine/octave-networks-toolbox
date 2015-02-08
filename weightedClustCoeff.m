@@ -1,13 +1,11 @@
-##################################################################
-% Weighted clustering coefficient.
-% Source: Barrat et al, The architecture of complex weighted networks
+% Weighted clustering coefficient (edge-weights).
+% Source: Barrat et al, The architecture of complex weighted networks.
 %
 % INPUTS: weighted adjacency matrix, nxn
 % OUTPUTs: vector of node weighted clustering coefficients, nx1
 %
 % Other routines used: degrees.m, kneighbors.m
 % GB: last updated, Sep 30 2012
-##################################################################
 
 function wC=weightedClustCoeff(adj)
 
@@ -32,7 +30,7 @@ for i=1:n % across all nodes
 end
 
 
-% % ALTERNATIVE  =========================================================
+% % ALTERNATIVE  ...........................
 % wadj=adj;
 % adj=adj>0;
 % 
@@ -53,3 +51,4 @@ end
 % 
 %     wC(i)=s/(wdeg(i)*(deg(i)-1));
 % end
+% ..........................................
