@@ -1,4 +1,3 @@
-##################################################################
 % Calculating the Pearson coefficient for a degree sequence.
 % Source: "Assortative Mixing in Networks", M.E.J. Newman, Phys Rev Let 2002
 %
@@ -6,8 +5,8 @@
 % OUTPUTs: r - Pearson coefficient
 %
 % Other routines used: degrees.m, numEdges.m, adj2inc.m
+% See also pearsonW.m
 % GB: last updated, October 1, 2012
-##################################################################
 
 function r = pearson(M)
  
