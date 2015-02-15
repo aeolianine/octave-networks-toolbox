@@ -1113,3 +1113,14 @@ for i=1:50
   assert( abs(pearson(adj)-pearsonW(adj))<10**(-6)  )
 end
 % ................................................
+
+% Testing richClubMetric.m .......................
+printf('testing richClubMetric.m\n')
+assert(richClubMetric(randomGraph(randi(5)+5,rand),12),0)
+assert(richClubMetric(T{4}{2},2),linkDensity(T{4}{2}))
+assert(richClubMetric(T{4}{2},3),1)
+assert(richClubMetric(T{4}{2},4),0)
+
+mat = [0 1 1 0; 1 0 1 0; 1 1 0 1; 0 0 1 0];
+assert(richClubMetric(mat,2),1)
+% ................................................
