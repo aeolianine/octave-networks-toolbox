@@ -1,4 +1,3 @@
-##################################################################
 % The sum of products of degrees across all edges.
 % Source: "Towards a Theory of Scale-Free Graphs: Definition, Properties, and Implications", by Li, Alderson, Doyle, Willinger
 % Note: The total degree is used regardless of whether the graph is directed or not.
@@ -8,7 +7,6 @@
 %
 % Other routines used: degrees.m
 % GB: last updated, Oct 1 2012
-##################################################################
 
 function s=sMetric(adj)
 
@@ -22,7 +20,7 @@ for e=1:length(edges)
 end
 
 
-% ALTERNATIVE ================
+% ALTERNATIVE ....................
 % [deg,~,~]=degrees(adj);
 % el=adj2edgeL(adj);
 % 
@@ -34,3 +32,4 @@ end
 %         s=s+deg(el(e,1))*deg(el(e,2))*el(e,3);  % multiply by the weight for edges with weights
 %     end
 % end
+% ................................

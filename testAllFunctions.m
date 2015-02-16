@@ -1124,3 +1124,11 @@ assert(richClubMetric(T{4}{2},4),0)
 mat = [0 1 1 0; 1 0 1 0; 1 1 0 1; 0 0 1 0];
 assert(richClubMetric(mat,2),1)
 % ................................................
+
+% Testing sMetric.m ..............................
+printf('testing sMetric.m\n')
+assert(sMetric(T{13}{2}),2*12)
+assert(sMetric(T{4}{2}),2*41)
+assert(sMetric(edgeL2adj(T{11}{2})),4)
+assert(sMetric(T{1}{2}),1)
+% ................................................
