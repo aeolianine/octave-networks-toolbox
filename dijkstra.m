@@ -37,7 +37,7 @@ while length(Q)>0 % while not empty
         S{u}=[t S{u}];
         t=previous(t,2);
     end
-    if length(target)>0 & u==target
+    if length(target)>0 && u==target
         dist=dist(u); P=S{u};
         return
     end            
