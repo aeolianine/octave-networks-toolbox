@@ -10,10 +10,10 @@ The original (2006-2011) version of these routines was written in Matlab, and is
 
 Installation
 ------------
-The code currently runs on GNU Octave Version 3.4.0 with Gnuplot 4.2.5. No specific library installation necessary. Interdependencies between functions are well-documented in the function headers. The routines can be called directly from the Octave prompt, either in the same directory or from anywhere if the toolbox folder is added to the path. For example:
+The code currently runs on GNU Octave Version 3.6.4 with Gnuplot 4.6. No specific library installation necessary. Interdependencies between functions are well-documented in the function headers. The routines can be called directly from the Octave prompt, either in the same directory or from anywhere if the toolbox folder is added to the path. For example:
 
 # running numNodes.m
-octave-3.4.0:1> numNodes([0 1 1; 1 0 1; 1 1 0])
+octave:1> numNodes([0 1 1; 1 0 1; 1 1 0])
 ans =  3
 
 Matlab compatibility
@@ -32,7 +32,7 @@ Documentation
 -------------
 Documentation is available in the Functions Manual (https://github.com/aeolianine/octave-networks-toolbox/blob/master/functions_manual.pdf). The manual contains general background information, function headers, code examples, and references. For some functions, additional background, definitions or derivations are included. 
 
-Sep 27 2014: The documentation is currently undergoing a major overhaul. That includes the functions manual, function headers and test code.
+Sep 27 2014 - present: The documentation is currently undergoing a major overhaul. That includes the functions manual, function headers and test code.
 
 Citation
 --------
