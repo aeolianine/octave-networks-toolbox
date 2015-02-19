@@ -1132,3 +1132,21 @@ assert(sMetric(T{4}{2}),2*41)
 assert(sMetric(edgeL2adj(T{11}{2})),4)
 assert(sMetric(T{1}{2}),1)
 % ................................................
+
+
+% ................................................
+% .............. distances .......................
+% ................................................
+
+
+% Testing simpleDijkstra.m .......................
+printf('testing simpleDijkstra.m\n')
+assert(simpleDijkstra(T{4}{2},1),[0, 1, 1, 2, 3, 3])
+assert(simpleDijkstra(T{4}{2},3),[1, 1, 0, 1, 2, 2])
+
+mat = [0 3.5 0 1; 3.5 0 1 0; 0 1 0 1.4; 1 0 1.4 0];
+assert(simpleDijkstra(mat,1),[0, 3.4, 2.4, 1])
+
+assert(simpleDijkstra(edgeL2adj(T{11}{2}),1),[0, 1, 1])
+assert(simpleDijkstra(edgeL2adj(T{11}{2}),2),[inf, 0, inf])
+% ................................................
