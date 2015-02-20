@@ -1151,7 +1151,6 @@ assert(simpleDijkstra(edgeL2adj(T{11}{2}),1),[0, 1, 1])
 assert(simpleDijkstra(edgeL2adj(T{11}{2}),2),[inf, 0, inf])
 % ................................................
 
-
 % Testing dijkstra.m .............................
 printf('testing dijkstra.m\n')
 [d,p]=dijkstra(T{4}{2},1,5);
@@ -1165,4 +1164,27 @@ assert(p,{[3,1],[3,2],[3]})
 [d,p] = dijkstra(T{18}{2},3,[]);
 assert(d,[2,1,0,1]);
 assert(p,{[3,2,1],[3,2],[3],[3,4]})
+% ................................................
+
+% Testing shortestPathDP.m .......................
+printf('testing shortestPathDP.m\n')
+
+[Jb,rb,J,r]=shortestPathDP(T{4}{2},1,3,size(bowtie,1));
+assert(Jb,1)
+assert(rb,[1,3])
+
+[Jb,rb,J,r]=shortestPathDP(T{4}{2},1,4,size(bowtie,1));
+assert(Jb,2)
+assert(rb,[1,3,4])
+
+[Jb,rb,J,r]=shortestPathDP(T{4}{2},1,5,size(bowtie,1));
+assert(Jb,3)
+assert(rb,[1,3,4,5])
+
+[Jb,rb,J,r]=shortestPathDP(edgeL2adj(T{11}{2}),1,2,3);
+assert(Jb,1)
+assert(rb,[1,2])
+
+[Jb,rb,J,r]=shortestPathDP(edgeL2adj(T{11}{2}),2,3,3);
+assert(Jb,inf)
 % ................................................

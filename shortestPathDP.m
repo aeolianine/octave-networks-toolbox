@@ -16,7 +16,6 @@
 %
 % GB: last updated, Oct 5 2012
 
-
 function [J_st,route_st,J,route]=shortestPathDP(L,s,t,steps)
 
 n = size(L,2);
