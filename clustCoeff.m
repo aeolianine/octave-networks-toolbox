@@ -24,7 +24,7 @@ if isDirected(adj); coeff=1; end
 
 for i=1:n
   
-  if deg(i)==1 | deg(i)==0; C(i)=0; continue; end
+  if deg(i)==1 || deg(i)==0; C(i)=0; continue; end
 
   neigh=kneighbors(adj,i,1);
   edges_s=numEdges(subgraph(adj,neigh));

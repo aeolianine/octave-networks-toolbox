@@ -17,7 +17,7 @@ T = 1:n;    % node set with shortest paths not found yet
 while not(isempty(T))
     [dmin,ind] = min(d(T));
     for j=1:length(T)
-        if adj(T(ind),T(j))>0 & d(T(j))>d(T(ind))+adj(T(ind),T(j))
+        if adj(T(ind),T(j))>0 && d(T(j))>d(T(ind))+adj(T(ind),T(j))
             d(T(j))=d(T(ind))+adj(T(ind),T(j));
         end
     end 
