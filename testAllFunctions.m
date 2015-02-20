@@ -400,7 +400,7 @@ for x=1:randint
   modules{length(modules)+1} = [lastnode+1:lastnode+randsecint]; 
   
   % make sure adj is not empty, is connected and the number of nodes is "randsecint"
-  while isempty(adj) | not(isConnected(adj)) | not(length(adj)==randsecint); adj=randomGraph(randsecint,0.5); end
+  while isempty(adj) || not(isConnected(adj)) || not(length(adj)==randsecint); adj=randomGraph(randsecint,0.5); end
 
   Adj(length(Adj)+1:length(Adj)+randsecint,length(Adj)+1:length(Adj)+randsecint)=adj; 
 end
@@ -426,7 +426,7 @@ for x=1:randint
   lastnode = modules{length(modules)}(length(modules{length(modules)}));
   modules{length(modules)+1} = [lastnode+1:lastnode+randsecint]; 
   % make sure adj is not empty, is connected and the number of nodes is "randsecint"
-  while isempty(adj) | not(isConnected(adj)) | not(length(adj)==randsecint); adj=randomGraph(randsecint,0.5); end
+  while isempty(adj) || not(isConnected(adj)) || not(length(adj)==randsecint); adj=randomGraph(randsecint,0.5); end
   Adj(length(Adj)+1:length(Adj)+randsecint,length(Adj)+1:length(Adj)+randsecint)=adj; 
 end
 
@@ -506,7 +506,7 @@ for iter=1:100  % random graph testing ....
   GSCC = tarjan(L);
   
   
-  if isConnected(adj) & isConnected(transpose(adj)) & length(adj)>0
+  if isConnected(adj) && isConnected(transpose(adj)) && length(adj)>0
     
     % there should be one component containing all nodes
     assert(length(GSCC),1)
@@ -1149,4 +1149,20 @@ assert(simpleDijkstra(mat,1),[0, 3.4, 2.4, 1])
 
 assert(simpleDijkstra(edgeL2adj(T{11}{2}),1),[0, 1, 1])
 assert(simpleDijkstra(edgeL2adj(T{11}{2}),2),[inf, 0, inf])
+% ................................................
+
+
+% Testing dijkstra.m .............................
+printf('testing dijkstra.m\n')
+[d,p]=dijkstra(T{4}{2},1,5);
+assert(d,3)
+assert(p,[1,3,4,5])
+
+[d,p]=dijkstra(T{13}{2},3,[]);
+assert(d,[1,1,0])
+assert(p,{[3,1],[3,2],[3]})
+
+[d,p] = dijkstra(T{18}{2},3,[]);
+assert(d,[2,1,0,1]);
+assert(p,{[3,2,1],[3,2],[3],[3,4]})
 % ................................................

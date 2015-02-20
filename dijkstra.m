@@ -1,4 +1,3 @@
-##################################################################
 % Dijkstra's algorithm.
 % 
 % INPUTS: adj - adjacency matrix (nxn), s - source node, target - target node
@@ -7,7 +6,6 @@
 % Note: if target==[], then dist and P include all distances and paths from s
 % Other routines used: adj2adjL.m
 % GB: last updated, Oct 5, 2012
-##################################################################
 
 function [dist,P]=dijkstra(adj,s,target)
 
@@ -42,7 +40,7 @@ while length(Q)>0 % while not empty
         return
     end            
     
-    % =====================================================
+    % path book-keeping
     Q = setdiff(Q,u);         % remove u from Q
     
     for v=1:length(adjL{u})   % across all neighbors of u
