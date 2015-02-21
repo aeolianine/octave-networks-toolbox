@@ -1188,3 +1188,13 @@ assert(rb,[1,2])
 [Jb,rb,J,r]=shortestPathDP(edgeL2adj(T{11}{2}),2,3,3);
 assert(Jb,inf)
 % ................................................
+
+% Testing kneighbors.m ...........................
+printf('testing kneighbors.m\n')
+
+assert(kneighbors(T{4}{2},1,3),[1 2 3 4 5 6])
+assert(kneighbors(T{4}{2},3,1),[1 2 4])
+assert(kneighbors(T{13}{2},2,1),[1,3])
+assert(kneighbors(T{13}{2},1,2),[1,2,3])
+% ................................................
+
