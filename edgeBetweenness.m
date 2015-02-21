@@ -34,7 +34,7 @@ for s=1:n % across all (source) nodes
         for x=1:length(neigh)  % add to queue if unvisited
             nei=neigh(x);
             
-            if isempty(find(visited==nei)) & isempty(find(queue==nei)); queue=[queue nei]; end
+            if isempty(find(visited==nei)) && isempty(find(queue==nei)); queue=[queue nei]; end
         
         end
         for x=1:length(neigh)
@@ -43,9 +43,9 @@ for s=1:n % across all (source) nodes
             if d(nei)==inf   % not assigned yet
                 d(nei)=1+d(j);
                 w(nei)=w(j);
-            elseif d(nei)<inf & d(nei)==d(j)+1  % assigned already, add the new path
+            elseif d(nei)<inf && d(nei)==d(j)+1  % assigned already, add the new path
                 w(nei)=w(nei)+w(j);
-            elseif d(nei)<inf & d(nei)<d(j)+1
+            elseif d(nei)<inf && d(nei)<d(j)+1
                 'do nothing';
             end
         end
