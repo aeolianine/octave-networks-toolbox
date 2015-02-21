@@ -1198,3 +1198,10 @@ assert(kneighbors(T{13}{2},2,1),[1,3])
 assert(kneighbors(T{13}{2},1,2),[1,2,3])
 % ................................................
 
+% testing kminNeighbors.m ........................
+fprintf('testing kminNeighbors.m\n')
+
+assert(kminNeighbors(T{4}{2},1,3),[5, 6])
+assert(kminNeighbors(T{4}{2},3,1),[1, 2, 4])
+assert(kminNeighbors(T{4}{2},3,2),[5, 6])
+% ................................................
