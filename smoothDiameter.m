@@ -1,4 +1,3 @@
-##################################################################
 % A relaxed/smoothed definition of diameter: the number "d" at which
 % a threshold fraction "p" of pairs of nodes are at distance at most
 %                       "d". Can be non-integer using interpolation.
@@ -9,9 +8,9 @@
 % Input: adjacency matrix of graph and diameter threshold, p in [0,1]
 % Output: relaxed or "effective" diameter
 %
-% Other routines used: simpleDijkstra.m 
+% Other routines used: simpleDijkstra.m
 % GB: last updated, Oct 8 2012
-##################################################################
+
 
 function diam = smoothDiameter(adj,p)
 

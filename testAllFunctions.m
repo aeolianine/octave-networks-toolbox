@@ -1198,7 +1198,7 @@ assert(kneighbors(T{13}{2},2,1),[1,3])
 assert(kneighbors(T{13}{2},1,2),[1,2,3])
 % ................................................
 
-% testing kminNeighbors.m ........................
+% Testing kminNeighbors.m ........................
 fprintf('testing kminNeighbors.m\n')
 
 assert(kminNeighbors(T{4}{2},1,3),[5, 6])
@@ -1222,11 +1222,38 @@ assert(diameter(adj),floor(length(adj)/2))
 % ................................................
 
 
-% testing avePathLength.m ........................
+% Testing avePathLength.m ........................
 printf('testing avePathLength.m\n')
 
 assert(avePathLength(T{4}{2}),(0+1+1+2+3+3 +0+1+2+3+3+ 0+1+2+2 +0+1+1 +0+1 +0)/15)
 assert(avePathLength(T{13}{2}),1)
 adj = edgeL2adj(canonicalNets(6,'line'));
 assert(avePathLength(adj),(0+1+2+3+4+5 +0+1+2+3+4 +0+1+2+3 +0+1+2+ 0+1 +0)/15)
+% ................................................
+
+
+% Testing smoothDiameter.m .......................
+printf('testing smoothDiameter.m\n')
+
+adj = [0 1; 0 0];
+while not(isConnected(adj)); adj = randomGraph(randi(10)+10,rand); end
+assert(diameter(adj),smoothDiameter(adj,1))  % should be the same when the fraction is 1
+
+assert( smoothDiameter(T{13}{2},1), 1 )
+assert( smoothDiameter(T{13}{2},0.9999), 0 )
+assert( smoothDiameter(T{13}{2},0.5), 0 )
+assert( smoothDiameter(T{13}{2},0.1), 0 )
+assert( smoothDiameter(T{13}{2},0), 0 )
+
+assert( smoothDiameter(T{4}{2},1), 3 )
+assert( smoothDiameter(T{4}{2}, 11/15), 2 ) % 7 node pairs at
+                                            % diameter-2
+assert( smoothDiameter(T{4}{2}, (7/15+11/15)/2), 1.5 )   % half
+                                                        % between 1
+                                                        % and 2
+assert( smoothDiameter(T{4}{2}, 7/15), 1 )  % 7 node pairs at
+                                            % diameter-1
+assert( smoothDiameter(T{4}{2}, 6/15), 0 )
+assert( smoothDiameter(T{4}{2}, 5/15), 0 )
+assert( smoothDiameter(T{4}{2}, 0), 0 )
 % ................................................
