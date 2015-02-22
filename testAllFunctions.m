@@ -1205,3 +1205,18 @@ assert(kminNeighbors(T{4}{2},1,3),[5, 6])
 assert(kminNeighbors(T{4}{2},3,1),[1, 2, 4])
 assert(kminNeighbors(T{4}{2},3,2),[5, 6])
 % ................................................
+
+% Testing diameter.m .............................
+printf('testing diameter.m\n')
+
+assert(diameter(T{13}{2}),1)
+assert(diameter(T{4}{2}),3)
+
+el=canonicalNets(randi(10)+5,'line');
+adj = edgeL2adj(el);
+assert(diameter(adj),length(adj)-1)
+
+el=canonicalNets(randi(10)+5,'circle');
+adj = edgeL2adj(el);
+assert(diameter(adj),floor(length(adj)/2))
+% ................................................
