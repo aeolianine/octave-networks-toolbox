@@ -37,9 +37,9 @@ else                           % directed graph (there are "-1"
     ind1=find(inc(:,e)==1);
     indm1=find(inc(:,e)==-1);
     
-    if isempty(indm1) & length(ind1)==1  % selfloop
+    if isempty(indm1) && length(ind1)==1  % selfloop
       adj(ind1,ind1) = adj(ind1,ind1) + 1;
-    elseif length(indm1)==1 & length(ind1)==1
+    elseif length(indm1)==1 && length(ind1)==1
       adj(indm1,ind1) = adj(indm1,ind1) + 1;
     else
       fprintf('inc2adj(): invalid incidence matrix.\n')
