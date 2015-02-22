@@ -16,7 +16,7 @@
 
 function nodes = getNodes(graph,type)
 
-if strcmp(type,'adjacency') | strcmp(type,'adjlist')
+if strcmp(type,'adjacency') || strcmp(type,'adjlist')
     nodes=[1:max([size(graph,1) size(graph,2)])];
  
 elseif strcmp(type,'edgelist')
