@@ -28,7 +28,7 @@ while rew<k
     [~,Y]=sort(deg(nodes));
     
     % connect nodes(Y(1))-nodes(Y(2)) and nodes(Y(3))-nodes(Y(4))
-    if ismember([nodes(Y(1)),nodes(Y(2)),1],el,'rows') | ismember([nodes(Y(3)),nodes(Y(4)),1],el,'rows'); continue; end   
+    if ismember([nodes(Y(1)),nodes(Y(2)),1],el,'rows') || ismember([nodes(Y(3)),nodes(Y(4)),1],el,'rows'); continue; end   
     
     el(ind(1),:)=[nodes(Y(3)),nodes(Y(4)),1];
     el(ind(2),:)=[nodes(Y(1)),nodes(Y(2)),1];
