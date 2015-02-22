@@ -19,7 +19,7 @@ while rew<k
     if length(intersect(edge1(1:2),edge2(1:2)))>0; continue; end % the two edges cannot overlap
     
     % else: rewire
-    if not(ismember([edge1(1),edge2(2),1],el,'rows')) & not(ismember([edge1(2),edge2(1),1],el,'rows'))
+    if not(ismember([edge1(1),edge2(2),1],el,'rows')) && not(ismember([edge1(2),edge2(1),1],el,'rows'))
       
       % first possibility: (e11,e22) & (e12,e21)
       el(ind(1),:)=[edge1(1),edge2(2),1];
@@ -34,7 +34,7 @@ while rew<k
 
       rew = rew + 1;
       
-    elseif not(ismember([edge1(1),edge2(1),1],el,'rows')) & not(ismember([edge1(2),edge2(2),1],el,'rows'))
+    elseif not(ismember([edge1(1),edge2(1),1],el,'rows')) && not(ismember([edge1(2),edge2(2),1],el,'rows'))
       
       % second possibility: (e11,e21) & (e12,e22)
       el(ind(1),:)=[edge1(1),edge2(1),1];
