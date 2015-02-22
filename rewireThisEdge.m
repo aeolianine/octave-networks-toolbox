@@ -20,7 +20,7 @@ neighbors = [neighbors kneighbors(adj,i2,1)];
 
 disjoint_edges = [];
 for e=1:length(el)
-  if sum(ismember(neighbors,el(e,1)))==0 & sum(ismember(neighbors,el(e,2)))==0
+  if sum(ismember(neighbors,el(e,1)))==0 && sum(ismember(neighbors,el(e,2)))==0
     disjoint_edges = [disjoint_edges; el(e,:)];
   end
 end
