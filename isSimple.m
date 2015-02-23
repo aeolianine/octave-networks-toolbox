@@ -10,4 +10,4 @@ function S = isSimple(adj)
 
 S=true;
 
-if isDirected(adj) | selfLoops(adj)>0 | multiEdges(adj)>0 | length(find(adj>1)); S=false; end
+if isDirected(adj) || selfLoops(adj)>0 || multiEdges(adj)>0 || length(find(adj>1)); S=false; end

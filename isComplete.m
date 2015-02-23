@@ -14,4 +14,4 @@ adj=adj>0;  % remove weights
 n=length(adj);
 
 % all degrees "n-1" or "n" or w/ n selfloops
-if sum(adj)==ones(1,n)*(n-1) | sum(adj)==ones(1,n)*n; S=true; end
+if sum(adj)==ones(1,n)*(n-1) || sum(adj)==ones(1,n)*n; S=true; end

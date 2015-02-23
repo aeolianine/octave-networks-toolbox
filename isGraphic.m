@@ -11,7 +11,7 @@
 
 function B = isGraphic(seq)
 
-if not(isempty(find(seq<=0))) | mod(sum(seq),2)==1
+if not(isempty(find(seq<=0))) || mod(sum(seq),2)==1
     % there are non-positive degrees or their sum is odd
     B = false; return;
 end

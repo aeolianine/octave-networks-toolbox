@@ -17,10 +17,10 @@ S=false;
 [degs,indeg,outdeg]=degrees(adj);
 odd=find(mod(degs,2)==1);
 
-if not(isDirected(adj)) & isempty(odd) % if undirected and all degrees are even
+if not(isDirected(adj)) && isempty(odd) % if undirected and all degrees are even
   S=true;
 
-elseif isDirected(adj) & indeg==outdeg % directed and in-degrees equal out-degrees
+elseif isDirected(adj) && indeg==outdeg % directed and in-degrees equal out-degrees
   S=true;
 
 elseif numel(odd)==2

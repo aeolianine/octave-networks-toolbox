@@ -12,4 +12,4 @@ function S=isTree(adj)
 
 S=false;
 
-if isConnected(adj) & numEdges(adj)==numNodes(adj)-1; S=true; end
+if isConnected(adj) && numEdges(adj)==numNodes(adj)-1; S=true; end
