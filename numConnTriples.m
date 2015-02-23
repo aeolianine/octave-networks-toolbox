@@ -1,4 +1,3 @@
-##################################################################
 % Count the number of connected triples in a graph.
 % Note: works for undirected graphs only
 %
@@ -7,7 +6,6 @@
 %
 % Other routines used: kneighbors.m, loops3.m
 % GB: last updated, October 4, 2012
-##################################################################
 
 function c=numConnTriples(adj)
 
@@ -30,7 +28,6 @@ c=c-2*loops3(adj); % due to the symmetry triangles repeat 3 times
 % % outputs: number of connected triples
 % 
 % c=0;      % initialize number of connected triples
-% l3 = 0;   % initialize number of loops of size 3
 % 
 % for i=1:length(L)
 %   neigh = L{i}
