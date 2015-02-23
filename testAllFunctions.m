@@ -1257,3 +1257,32 @@ assert( smoothDiameter(T{4}{2}, 6/15), 0 )
 assert( smoothDiameter(T{4}{2}, 5/15), 0 )
 assert( smoothDiameter(T{4}{2}, 0), 0 )
 % ................................................
+
+% Testing vertexEccentricity.m ...................
+printf('testing vertexEccentricity.m\n')
+
+assert(vertexEccentricity(T{4}{2}),[3,3,2,2,3,3])
+assert(vertexEccentricity(T{13}{2}),[1,1,1])
+assert(vertexEccentricity(T{1}{2}),[1,inf])
+assert(vertexEccentricity(edgeL2adj(T{11}{2})), [1, inf, inf])
+% ................................................
+
+% Testing graphRadius.m ..........................
+printf('testing graphRadius.m\n')
+
+assert(graphRadius(T{4}{2}),2)
+assert(graphRadius(edgeL2adj(T{11}{2})),1)
+
+el = canonicalNets(randi(10)+10,'line');
+adj = edgeL2adj(el);
+assert(graphRadius(adj),(size(adj,1)-mod(size(adj,1),2))/2)
+% ................................................
+
+% Testing distanceDistribution.m .................
+printf('testing distanceDistribution.m\n')
+
+assert(distanceDistribution(T{4}{2}),[7/15, 4/15, 4/15, 0, 0])
+assert(distanceDistribution(T{13}{2}),[1, 0])
+assert(distanceDistribution(edgeL2adj(T{10}{2})),[2/3,1/3])
+% ................................................
+

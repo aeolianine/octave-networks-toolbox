@@ -1,4 +1,3 @@
-##################################################################
 % Vertex eccentricity - the maximum distance to any other vertex.
 %
 % Input: adjacency matrix, nxn
@@ -6,7 +5,6 @@
 %
 % Other routines used: simpleDijkstra.m
 % GB: last updated, Oct 10, 2012
-##################################################################
 
 function ec=vertexEccentricity(adj)
 
