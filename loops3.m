@@ -1,4 +1,3 @@
-##################################################################
 % Calculate number of loops/cycles of length 3
 %
 % INPUTs: adj - adjacency matrix, nxn
@@ -6,7 +5,6 @@
 %
 % Note: Valid for an undirected network.
 % GB: last updated, Oct 5, 2012
-##################################################################
 
 function L3 = loops3(adj)
 

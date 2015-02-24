@@ -1307,3 +1307,12 @@ assert(numLoops(T{4}{2}),2)
 assert(numLoops(edgeL2adj(T{10}{2})),0)
 assert(numLoops(T{18}{2}),1)
 % ................................................
+
+% Testing loops3.m ...............................
+printf('testing loops3.m\n')
+assert(loops3(T{4}{2}),2)
+assert(loops3(T{18}{2}),0)
+assert(loops3(T{13}{2}),1)
+assert(loops3(edgeL2adj(canonicalNets(randi(10)+3,'btree'))),0)
+assert(loops3(edgeL2adj(canonicalNets(4,'trilattice'))),2)
+% ................................................
