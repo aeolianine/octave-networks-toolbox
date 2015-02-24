@@ -1299,3 +1299,11 @@ assert(numConnTriples(edgeL2adj(T{10}{2})),1)
 assert(numConnTriples(T{2}{2}),0)
 assert(numConnTriples(T{18}{2}),4)
 % ................................................
+
+% Testing numLoops.m .............................
+printf('testing numLoops.m\n')
+assert(numLoops(T{13}{2}),1)
+assert(numLoops(T{4}{2}),2)
+assert(numLoops(edgeL2adj(T{10}{2})),0)
+assert(numLoops(T{18}{2}),1)
+% ................................................
