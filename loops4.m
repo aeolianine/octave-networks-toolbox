@@ -1,4 +1,3 @@
-##################################################################
 % Find cycles of length 4 in a graph; 
 % Note 1: Quite basic and slow.
 % Note 2: Assumes undirected graph.
@@ -9,7 +8,6 @@
 %
 % Other functions used: adj2adjL.m
 % GB: last updated, Oct 5 2012
-##################################################################
 
 function l4 = loops4(adj)
 

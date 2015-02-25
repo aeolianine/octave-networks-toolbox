@@ -1316,3 +1316,13 @@ assert(loops3(T{13}{2}),1)
 assert(loops3(edgeL2adj(canonicalNets(randi(10)+3,'btree'))),0)
 assert(loops3(edgeL2adj(canonicalNets(4,'trilattice'))),2)
 % ................................................
+
+% Testing loops4.m ...............................
+printf('testing loops4.m\n')
+
+assert(loops4(T{4}{2}),{})
+c4 = ones(4)-eye(4); % clique of size 4
+assert(loops4(c4),{'1-2-3-4'})
+c6 = ones(6)-eye(6); % clique of size 6
+assert(length(loops4(c6)),nchoosek(6,4))
+% ................................................
