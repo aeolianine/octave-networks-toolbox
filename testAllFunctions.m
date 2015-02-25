@@ -1326,3 +1326,16 @@ assert(loops4(c4),{'1-2-3-4'})
 c6 = ones(6)-eye(6); % clique of size 6
 assert(length(loops4(c6)),nchoosek(6,4))
 % ................................................
+
+% Testing numStarMotifs.m ........................
+printf('testing numStarMotifs.m\n')
+
+assert(numStarMotifs(T{9}{2},3),4+6)
+assert(numStarMotifs(T{9}{2},4),2)
+assert(numStarMotifs(T{9}{2},5),0)
+
+assert(numStarMotifs(adj2adjL(T{13}{2}),3),3)
+assert(numStarMotifs(adj2adjL(T{13}{2}),2),6)
+
+assert(numStarMotifs(T{9}{2},1),6)   % trivial case
+% ................................................
