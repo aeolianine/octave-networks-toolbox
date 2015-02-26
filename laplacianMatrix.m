@@ -1,4 +1,3 @@
-##################################################################
 % The Laplacian matrix defined for a *simple* graph 
 % Def: the difference b/w the diagonal degree and the adjacency matrices
 % Note: This is not the normalized Laplacian
@@ -7,14 +6,13 @@
 % OUTPUTs: Laplacian matrix, nxn
 % 
 % GB: last updated, Oct 10 2012
-##################################################################
 
 function L=laplacianMatrix(adj)
 
 L=diag(sum(adj))-adj;
 
 
-% NORMALIZED Laplacian =============
+% NORMALIZED Laplacian .............
 
 % def normLaplacianMatrix(adj):
 
