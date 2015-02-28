@@ -1189,6 +1189,60 @@ assert(rb,[1,2])
 assert(Jb,inf)
 % ................................................
 
+% Testing findAllShortestPaths.m .................
+printf('testing findAllShortestPaths.m\n')
+
+adjL = {}; adjL{1} = [2]; adjL{2} = [];  % 1-2 edge
+[allPaths, shortestPathLength] = findAllShortestPaths(adjL,1,2, allPaths={});
+assert(shortestPathLength,1)
+assert(allPaths{1},'-1-2')
+assert(length(allPaths),1)
+
+[allPaths, shortestPathLength] = findAllShortestPaths(adjL,2,1, allPaths={});
+assert(shortestPathLength,1)  % not updated, equal to length(adjL)-1
+assert(allPaths, {})
+assert(length(allPaths),0)
+
+% two alternative paths (1-2-4 and 1-3-4)
+adjL = {}; adjL{1} = [2,3]; adjL{2} = [4]; adjL{3} = [4]; adjL{4}=[];
+[allPaths, shortestPathLength] = findAllShortestPaths(adjL,1,4, allPaths={});
+assert(shortestPathLength,2)
+assert(length(allPaths),2)
+assert(allPaths{1},'-1-2-4')
+assert(allPaths{2},'-1-3-4')
+
+[allPaths, shortestPathLength] = findAllShortestPaths(adjL,4,2, allPaths={});
+assert(shortestPathLength,3) % not updated, equal to length(adjL)-1
+assert(length(allPaths),0)
+
+% a one-directional cycle
+adjL={}; adjL{1}=[2]; adjL{2}=[3]; adjL{3}=[4]; adjL{4}=[1];
+[allPaths, shortestPathLength] = findAllShortestPaths(adjL,1,4, allPaths={});
+assert(shortestPathLength,3)
+assert(length(allPaths),1)
+assert(allPaths{1},'-1-2-3-4')
+
+[allPaths, shortestPathLength] = findAllShortestPaths(adjL,4,3, allPaths={});
+assert(shortestPathLength,3)
+assert(length(allPaths),1)
+assert(allPaths{1},'-4-1-2-3')
+
+% undirected cycle
+adjL={}; adjL{1}=[2,4]; adjL{2}=[3,1]; adjL{3}=[2,4]; adjL{4}=[1,3];
+[allPaths, shortestPathLength] = findAllShortestPaths(adjL,2,4, allPaths={});
+assert(shortestPathLength,2)
+assert(length(allPaths),2)
+assert(allPaths{1},'-2-1-4')
+assert(allPaths{2},'-2-3-4')
+
+[allPaths, shortestPathLength] = findAllShortestPaths(adjL,3,1, allPaths={});
+assert(shortestPathLength,2)
+assert(length(allPaths),2)
+assert(allPaths{1},'-3-2-1')
+assert(allPaths{2},'-3-4-1')
+% ................................................
+
+
 % Testing kneighbors.m ...........................
 printf('testing kneighbors.m\n')
 

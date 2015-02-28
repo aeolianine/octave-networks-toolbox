@@ -1,12 +1,11 @@
 % Return all shortest paths from a start to an end node, given a graph.
 %
-% Note: This function uses recursion. 
-%
 % INPUTS: adjacency list, adjL (1xn), start node "s" (index between 1 and n), 
 %         end node "t" (index between 1 and n)
 % OUTPUTS: list of all shortest paths between "s" and "t"
 %
-% Note: Works for a un/directed, unweighted graph.
+% Note 1: Works for a un/directed, unweighted graph.
+% Note 2: This function uses recursion. 
 % GB: last updated, June 30, 2014
 
 function [allPaths, upperBound] = findAllShortestPaths(adjL,s,t, allPaths={}, path = [], upperBound = length(adjL)-1)
