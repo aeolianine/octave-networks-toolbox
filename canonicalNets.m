@@ -1,15 +1,13 @@
-##################################################################
-% Build edge lists for simple canonical graphs, ex: trees and lattices 
+% Constructing edge lists for simple canonical graphs, ex: trees and lattices.
 %
 % INPUTS: number of nodes, network type, branch factor (for trees only).
-%         Network types can be 'line','circle','star','btree','tree',
+%         Network types can be 'line','cycle','star','btree','tree',
 %            'hierarchy','trilattice','sqlattice','hexlattice', 'clique'
 % OUTPUTS: edge list (mx3)
 %
 % Note: Produces undirected graphs, i.e. symmetric edge lists.
 % Other functions used: symmetrizeEdgeL.m, adj2edgeL.m
 % GB: last updated: Oct 27 2012
-##################################################################
 
 
 function el=canonicalNets(n,type,b)
@@ -17,8 +15,8 @@ function el=canonicalNets(n,type,b)
 if strcmp(type,'line')
     el=buildLine(n);
     
-elseif strcmp(type,'circle')
-    el=buildCircle(n);
+elseif strcmp(type,'cycle')
+    el=buildCycle(n);
     
 elseif strcmp(type,'star')
     el=buildStar(n);
@@ -46,37 +44,38 @@ elseif strcmp(type,'hexlattice')
     
 else
   printf('invalid network type; see canonicalNets.m header\n');
+  el = 'invalid network type';
   return
 end
 
 %---- canonical nets functions -----------------------------------
 
-function el_line=buildLine(n) % line =============================
+function el_line=buildLine(n) % line .............................
 
 el_line = [[1:n-1]' [2:n]' ones(n-1,1)];
 el_line = symmetrizeEdgeL(el_line);
 
 
-function el_cir=buildCircle(n) % circle ==========================
+function el_cyc=buildCycle(n) % cycle ...........................
 
-el_cir = [[1:n-1]' [2:n]' ones(n-1,1)];
-el_cir = [el_cir; 1 n 1];
-el_cir = symmetrizeEdgeL(el_cir);
+el_cyc = [[1:n-1]' [2:n]' ones(n-1,1)];
+el_cyc = [el_cyc; 1 n 1];
+el_cyc = symmetrizeEdgeL(el_cyc);
 
 
-function el_star=buildStar(n) % star =============================
+function el_star=buildStar(n) % star .............................
 
 el_star = [ones(n-1,1) [2:n]' ones(n-1,1)]; 
 el_star = symmetrizeEdgeL(el_star);
 
 
-function el_clique = buildClique(n) % clique =====================
+function el_clique = buildClique(n) % clique .....................
 
 % clique:= complete graph with "n" nodes
 el_clique = adj2edgeL(ones(n)-eye(n));
 
 
-function el_bt=buildBinaryTree(n) % binary tree ==================
+function el_bt=buildBinaryTree(n) % binary tree ..................
 
 el_bt=[];
 
@@ -91,7 +90,7 @@ end
 el_bt=symmetrizeEdgeL(el_bt);
 
 
-function el=buildTree(n,b)  % a general tree =====================
+function el=buildTree(n,b)  % a general tree .....................
 
 % tree with n "nodes" and branch factor "b"
 
@@ -120,7 +119,7 @@ end
 el=symmetrizeEdgeL(el);
 
 
-function el=buildHierarchy(n,b)  % a hierarchy ===================
+function el=buildHierarchy(n,b)  % a hierarchy ...................
 
 % build a tree with n nodes and b as a branch factor, 
 %             where nodes on one level are connected
@@ -137,7 +136,7 @@ for k=1:L
     start_node=1+round((b^(k-1)-1)/(b-1));
   
     for bb=1:b^(k-1)-1
-        if start_node+bb-1>n | start_node+bb>n
+        if start_node+bb-1>n || start_node+bb>n
             el=symmetrizeEdgeL(el);
             return
         end
@@ -296,7 +295,7 @@ end
 el_sq=symmetrizeEdgeL(el_sq);
 
 
-function el_hex=buildHexagonalLattice(n)  % hexagonal lattice ===========
+function el_hex=buildHexagonalLattice(n)  % hexagonal lattice .......
 
 
 % construct subgraph of the triangular lattice, f1xf2
@@ -336,21 +335,21 @@ for ff=1:fmin  % from 1 to fmin
       el_hex=[el_hex; (ff-1)*fmax+gg,(ff-1)*fmax+gg+1,1];
     end
 
-    if ff<fmin & mod(gg,4)==1      %  gg%4==1
+    if ff<fmin && mod(gg,4)==1      %  gg%4==1
       
       % connect (ff-1)*fmax+gg to ff*fmax+gg+1
       % and (ff-1)*fmax+gg+3 to ff*fmax+gg+2
       n1=(ff-1)*fmax+gg;
       n2=ff*fmax+gg+1;
     
-      if n1<fmin*fmax & n2<fmin*fmax & gg+1<=fmax
+      if n1<fmin*fmax && n2<fmin*fmax && gg+1<=fmax
         el_hex=[el_hex; n1 n2 1];
       end
       
       n1=(ff-1)*fmax+gg+3;
       n2=ff*fmax+gg+2;
       
-      if n1<fmin*fmax & n2<fmin*fmax & gg+3<=fmax
+      if n1<fmin*fmax && n2<fmin*fmax && gg+3<=fmax
         el_hex=[el_hex; n1 n2 1];
       end
       
