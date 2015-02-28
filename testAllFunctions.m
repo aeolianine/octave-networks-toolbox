@@ -1367,3 +1367,22 @@ adj = randomGraph(randi(50)+10,rand);
 assert(length(algebraicConnectivity(adj)),1)
 assert( algebraicConnectivity(adj), graphSpectrum(adj)(length(adj)-1) ) 
 % ................................................
+
+% Testing fiedlerVector.m ........................
+printf('testing fiedlerVector.m\n')
+adj = randomGraph(randi(50)+10,rand);
+assert(length(fiedlerVector(adj)),length(adj))
+[V,D]=eig(laplacianMatrix(adj));
+[~,Y]=sort(diag(D));
+fv=V(:,Y(2));
+assert(fv, fiedlerVector(adj))
+% ................................................
+
+% Testing graphEnergy.m ..........................
+printf('testing graphEnergy.m\n')
+adj = randomGraph(randi(50)+10,rand);
+assert(length(graphEnergy(adj)),1)
+[~,e]=eig(adj);  % e are the eigenvalues
+G=sum(abs(real(diag(e))));
+assert(G, graphEnergy(adj))
+% ................................................
