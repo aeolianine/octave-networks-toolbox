@@ -1350,3 +1350,20 @@ printf('testing laplacianMatrix.m\n')
 assert(laplacianMatrix(T{4}{2}),[2 -1 -1 0 0 0; -1 2 -1 0 0 0; -1 -1 3 -1 0 0; 0 0 -1 3 -1 -1; 0 0 0 -1 2 -1; 0 0 0 -1 -1 2])
 assert(laplacianMatrix(T{13}{2}),[2 -1 -1; -1 2 -1; -1 -1 2])
 % ................................................
+
+
+% Testing graphSpectrum.m ........................
+printf('testing graphSpectrum.m\n')
+adj = randomGraph(randi(50)+10,rand);
+assert(length(graphSpectrum(adj)),length(adj))
+L = laplacianMatrix(adj);
+[~,d] = eig(L);
+assert( sort(graphSpectrum(adj)), sort(diag(d)) )
+% ................................................
+
+% Testing algebraicConnectivity.m ................
+printf('testing algebraicConnectivity.m\n')
+adj = randomGraph(randi(50)+10,rand);
+assert(length(algebraicConnectivity(adj)),1)
+assert( algebraicConnectivity(adj), graphSpectrum(adj)(length(adj)-1) ) 
+% ................................................
