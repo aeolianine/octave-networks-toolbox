@@ -1,4 +1,3 @@
-##################################################################
 % Create a k-regular graph.
 % Note: No solution for k and n both odd.
 %
@@ -7,14 +6,13 @@
 %
 % Other routines used: symmetrizeEdgeL.m
 % GB: last updated, Oct 28 2012
-##################################################################
 
 function el = kregular(n,k)
 
 el=[];
 
 if k>n-1; fprintf('a simple graph with n nodes and k>n-1 does not exist\n'); return; end
-if mod(k,2)==1 & mod(n,2)==1; fprintf('no solution for *n* and *k* both odd\n'); return; end
+if mod(k,2)==1 && mod(n,2)==1; fprintf('no solution for *n* and *k* both odd\n'); return; end
 
 
 half_degree=floor(k/2);  % k/2 if k even, else (k-1)/2
@@ -41,7 +39,7 @@ for node=1:n
     end
 end
 
-if mod(k,2)==1 & mod(n,2)==0
+if mod(k,2)==1 && mod(n,2)==0
     % connect mirror nodes
     for node=1:n/2
         
@@ -52,7 +50,7 @@ if mod(k,2)==1 & mod(n,2)==0
           el = [el; node node_m 1];
         end
         
-    end 
+    end
 end
 
 

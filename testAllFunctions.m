@@ -1559,3 +1559,18 @@ for x=1:10
   
 end
 % ................................................
+
+% test kregular.m ................................
+printf('testing kregular.m\n');
+for x=1:30
+  
+  n = randi(20)+5;   % random integer between 6 and 25
+  k = randi(n-2)+1;  % randon integer between 2 and n-1
+  if mod(k,2)==1 && mod(n,2)==1; continue; end  % no solution for this case
+  el = kregular(n,k);
+  adj = edgeL2adj(el);
+  assert(degrees(adj),k*ones(1,length(adj)))
+
+end
+% ................................................
+
