@@ -1,4 +1,3 @@
-##################################################################
 % Random graph construction routine.
 % Note 1: Default is Erdos-Renyi graph G(n,0.5)
 % Note 2: Generates undirected, simple graphs only
@@ -10,7 +9,6 @@
 %
 % Other routines: numEdges.m
 % GB: last updated, Oct 20, 2012
-##################################################################
 
 function adj = randomGraph(n,p,E)
 
@@ -39,7 +37,7 @@ switch nargin   % number of function arguments
   
   while numEdges(adj) < E
     i=randi(n); j=randi(n);  % pick two random nodes
-    if i==j | adj(i,j)>0; continue; end  % do not allow self-loops or double edges
+    if i==j || adj(i,j)>0; continue; end  % do not allow self-loops or double edges
     adj(i,j)=adj(i,j)+1; adj(j,i)=adj(i,j);
   end
     
