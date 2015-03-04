@@ -1607,3 +1607,17 @@ for x=1:50
   assert(numEdges(adj),E);
 end
 % ................................................
+
+% Testing randomDirectedGraph.m ..................
+printf('testing randomDirectedGraph.m\n');
+
+for i=1:30
+  p=rand;
+  n = randi(40)+40;
+  adj = randomDirectedGraph(n,p);
+  assert(linkDensity(adj)>p-0.05)
+  assert(linkDensity(adj)<p+0.05)
+  assert(isDirected(adj))
+  assert(size(adj),[n,n]);
+end
+% ................................................

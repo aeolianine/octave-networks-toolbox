@@ -1,4 +1,3 @@
-##################################################################
 % Random directed graph construction
 % Note 1: if p is omitted, p=0.5 is default
 % Note 2: no self-loops, no double edges
@@ -8,7 +7,6 @@
 % Output: adjacency matrix, nxn
 %
 % GB: last updated, Oct 21 2012
-##################################################################
 
 function adj = randomDirectedGraph(n,p)
 
