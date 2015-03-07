@@ -1633,3 +1633,20 @@ for x=1:40
   assert(degrees(adj),degrees(adjr))
 end
 % ................................................
+
+
+% Testing randomGraphFromDegreeSequence.m ........
+printf('testing randomGraphFromDegreeSequence.m\n')
+
+for x=1:40
+  
+  adj = [0 1; 0 0];
+  N = randi(50)+10;
+  while not(isConnected(adj)); adj = randomGraph(N,log(N)/N); end
+  
+  adjr = randomGraphFromDegreeSequence(degrees(adj));
+  
+  assert(isSimple(adjr),true)
+  assert(degrees(adj),degrees(adjr))
+end
+% ................................................
