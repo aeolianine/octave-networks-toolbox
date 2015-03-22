@@ -1652,6 +1652,57 @@ end
 % ................................................
 
 
+% Testing randomGraphDegreeDist.m ................
+printf('testing randomGraphDegreeDist.m\n')
+
+N = randi(80)+30;
+adj = randomGraphDegreeDist(N,'uniform');
+assert(numNodes(adj),N)
+assert(isSimple(adj),true)
+
+[xpdf,ypdf,xcdf,ycdf,logk,logx]=pdfCdfRank(degrees(adj),'noplot');
+plot(xpdf, ypdf, color = 'k')
+text(5,0.01,strcat('constructing graphs with different degree distributions, N=  ', num2str(N)))
+hold off; hold on;
+
+adj = randomGraphDegreeDist(N,'normal');
+assert(numNodes(adj),N)
+assert(isSimple(adj),true)
+
+[xpdf,ypdf,xcdf,ycdf,logk,logx]=pdfCdfRank(degrees(adj),'noplot');
+plot(xpdf, ypdf, color = 'b')
+hold off; hold on;
+
+adj = randomGraphDegreeDist(N,'binomial');
+assert(numNodes(adj),N)
+assert(isSimple(adj),true)
+
+[xpdf,ypdf,xcdf,ycdf,logk,logx]=pdfCdfRank(degrees(adj),'noplot');
+plot(xpdf, ypdf, color = 'y')
+hold off; hold on;
+
+adj = randomGraphDegreeDist(N,'exponential');
+assert(numNodes(adj),N)
+assert(isSimple(adj),true)
+
+[xpdf,ypdf,xcdf,ycdf,logk,logx]=pdfCdfRank(degrees(adj),'noplot');
+plot(xpdf, ypdf, color = 'r')
+
+legend('uniform','normal','binomial','exponential')
+
+hold off;
+
+adj = randomGraphDegreeDist(6,'custom',[1/5 1/5 1/5 1/5 1/5]);
+assert(numNodes(adj),6)
+assert(isSimple(adj),true)
+
+adj = randomGraphDegreeDist(N,'custom');
+assert(isempty(adj),true)
+
+adj = randomGraphDegreeDist(N,'anything here');
+assert(isempty(adj),true)
+% ................................................
+
 % ................................................
 % ......... simple matrix/graph viz ..............
 % ................................................
