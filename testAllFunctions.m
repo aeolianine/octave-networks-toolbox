@@ -1650,3 +1650,24 @@ for x=1:40
   assert(degrees(adj),degrees(adjr))
 end
 % ................................................
+
+
+% ................................................
+% ......... simple matrix/graph viz ..............
+% ................................................
+
+
+% Testing pdfCdfRank.m ...........................
+printf('testing pdfCdfRank.m\n');
+adj = randomGraph(randi(30)+30,0.2);
+[xp,yp,xc,yc,lk,lx] = pdfCdfRank(degrees(adj),'off');
+assert(length(xp),length(xc))
+assert(length(xp),length(yp))
+assert(length(yp),length(yc))
+assert(length(lk),length(lx))
+[xp,yp,xc,yc,lk,lx] = pdfCdfRank(degrees(adj),'off', bin=5);
+assert(length(xp),length(xc))
+assert(length(xp),length(yp))
+assert(length(yp),length(yc))
+assert(length(lk),length(lx))
+% ................................................

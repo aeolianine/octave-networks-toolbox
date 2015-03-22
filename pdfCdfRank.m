@@ -1,20 +1,19 @@
-##################################################################
-% Compute the pdf, cdf and rank distributions for a sequence of numbers
+% Compute the pdf, cdf and rank distributions for a sequence of numbers.
 %
-% INPUTS: sequence of values: x, (1xn), 'plot' - 'on' or 'off'
+% INPUTS: sequence of values: x, (1xn), 'plt' - 'on' or 'off'
+%         bin - bin size, default is [], then it gets selected
+%         automatically
 % OUTPUTS: pdf, cdf and rank distribution values, plot is optional
 %
 % Note: pdf = frequency distribution, cdf = cumulative frequency, 
 %       rank = log-log scale of the sorted sequence
 % GB: last updated, November 24 2012
-##################################################################
 
-function [xpdf,ypdf,xcdf,ycdf,logk,logx]=pdfCdfRank(x,plt)
+function [xpdf,ypdf,xcdf,ycdf,logk,logx]=pdfCdfRank(x,plt='off',bin=[])
 
 xx=unique(x);
 
-bin = 100; % arbitrary, change if xx has few values
-if length(xx)<100; bin = 10; end;
+if length(bin)==0; bin = length(xx)/5; end
 
 
 for ii=1:numel(xx)
