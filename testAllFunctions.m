@@ -1784,6 +1784,25 @@ hold off;
 
 % .... end of test of randomModularGraph.m .......
 
+% Testing buildSmaxGraph.m .......................
+printf('testing buildSmaxGraph.m\n');
+
+for x=1:50
+  adj  = [];
+  while not(isConnected(adj)); adj = randomGraph(20,0.1); end
+  sm = sMetric(adj);
+  elmax1 = buildSmaxGraph(degrees(adj));
+  adjmax1 = symmetrize(edgeL2adj(elmax1));
+  
+  smax = sMetric(adjmax1);
+  assert(degrees(adjmax1),degrees(adj))
+  assert(smax>=sm,true)
+  
+  elmax2 = buildSmaxGraph(degrees(adj));
+  assert(elmax2,elmax1)
+end
+% ................................................
+
 
 % ................................................
 % ......... simple matrix/graph viz ..............

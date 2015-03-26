@@ -1,4 +1,3 @@
-##################################################################
 % Construct the graph with the maximum possible s-metric, given the degree
 % sequence; the s-metric is the sum of products of degrees across all edges
 % Source: Li et al "Towards a Theory of Scale-Free Graphs"
@@ -7,7 +6,6 @@
 % OUTPUTs: edge list of the s-max graph, mx3
 %
 % GB: last updated, November 9 2012
-##################################################################
 
 function gA=buildSmaxGraph(deg)
 
@@ -94,7 +92,7 @@ while sum(w)>0      % while there are still stubs to connect
     % eliminate zero stubs in didj
     didj_new=[];
     for ii=1:size(didj,1)
-        if w(didj(ii,6))>0 & w(didj(ii,7))>0
+        if w(didj(ii,6))>0 && w(didj(ii,7))>0
             didj_new=[didj_new; didj(ii,:)];
         end
     end
@@ -107,11 +105,11 @@ while sum(w)>0      % while there are still stubs to connect
     
         edge=[didj(ii,6), didj(ii,7)];
         
-        if length(find(A==edge(1)))>0 & length(find(A==edge(2)))>0
+        if length(find(A==edge(1)))>0 && length(find(A==edge(2)))>0
             didj(ii,:)=[didj(ii,1),100,w(edge(1)),w(edge(2)),100,edge(1),edge(2)];
-        elseif length(find(A==edge(1)))>0 & length(find(B==edge(2)))>0
+        elseif length(find(A==edge(1)))>0 && length(find(B==edge(2)))>0
             didj(ii,:)=[didj(ii,1),100,w(edge(1)),w(edge(2)),2,edge(1),edge(2)];
-        elseif length(find(B==edge(1)))>0 & length(find(A==edge(2)))>0
+        elseif length(find(B==edge(1)))>0 && length(find(A==edge(2)))>0
             didj(ii,:)=[didj(ii,1),2,w(edge(1)),w(edge(2)),1,edge(1),edge(2)];
             didj(ii,:)=[didj(ii,1),100,w(edge(2)),w(edge(1)),2,edge(2),edge(1)];
         else
@@ -129,13 +127,13 @@ while sum(w)>0      % while there are still stubs to connect
     n2=link_select(2);
     
     % if (n1 in A and n2 in B) or (n1 in B and n2 in A)
-    if (length(find(A==n1))>0 & length(find(B==n2))>0) | (length(find(B==n1))>0 & length(find(A==n2))>0)
+    if (length(find(A==n1))>0 && length(find(B==n2))>0) || (length(find(B==n1))>0 && length(find(A==n2))>0)
         gA=[gA; n1, n2, 1];
-        if length(find(A==n1))>0 & length(find(B==n2))>0
+        if length(find(A==n1))>0 && length(find(B==n2))>0
             B = setdiff(B,n2);
             A=[A; n2];
         end
-        if length(find(B==n1))>0 & length(find(A==n2))>0
+        if length(find(B==n1))>0 && length(find(A==n2))>0
             B = setdiff(B,n1);
             A=[A; n1];
         end
@@ -147,12 +145,12 @@ while sum(w)>0      % while there are still stubs to connect
         
         didj=didj(2:size(didj,1),:); % remove link from top
     
-    elseif length(find(A==n1))>0 & length(find(A==n2))>0
+    elseif length(find(A==n1))>0 && length(find(A==n2))>0
         % check the tree condition
         if dB==2*length(B)-wA
             didj=didj(2:size(didj,1),:);
             
-        elseif wA==2 & length(B)>0 % results in a disconnected graph
+        elseif wA==2 && length(B)>0 % results in a disconnected graph
             didj=didj(2:size(didj,1),:);
             
         else  % add it!
