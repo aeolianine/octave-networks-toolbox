@@ -1803,6 +1803,16 @@ for x=1:50
 end
 % ................................................
 
+% Testing PriceModel.m ...........................
+printf('testing PriceModel.m\n')
+for x=1:20
+  randint = randi(10)+10;
+  adj = PriceModel(randint);
+  assert(isDirected(adj),true)
+  assert(numNodes(adj),randint)    
+end
+% ................................................
+
 
 % ................................................
 % ......... simple matrix/graph viz ..............
