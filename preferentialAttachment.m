@@ -1,4 +1,3 @@
-##################################################################
 % Routine implementing simple preferential attachment for network growth.
 % The probability that a new vertex attaches to a given old vertex
 %                           is proportional to the (total) vertex degree.
@@ -13,7 +12,6 @@
 %
 % Other routines used: weightedRandomSample.m
 % GB: last updated, November 9, 2012
-##################################################################
 
 function el = preferentialAttachment(n,m)
 
