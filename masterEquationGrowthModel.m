@@ -1,4 +1,3 @@
-##################################################################
 % "Master equation" growth model, as presented in 
 %                   "Evolution of Networks" by Dorogovtsev, Mendez
 % Note: probability of attachment: (q(i)+ma)/((1+a)mt), 
@@ -9,13 +8,12 @@
 %
 % Other routines used: weightedRandomSample.m
 % GB: last updated, Nov 11, 2012
-##################################################################
 
 function adj=masterEquationGrowthModel(n,m,a)
 
 adj=zeros(n); adj(1,2)=2; adj(2,1)=2; % initial condition
 vertices = 2; 
-if nargin==2 | a==[]; a = 2; end      % pick a constant
+if nargin==2 || a==[]; a = 2; end      % pick a constant
 
 while vertices < n
   

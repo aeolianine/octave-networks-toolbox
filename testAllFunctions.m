@@ -1829,6 +1829,31 @@ for x=1:10
 end
 % ................................................
 
+% Testing exponentialGrowthModel.m ...............
+printf('testing exponentialGrowthModel.m\n')
+for x=1:10
+  el = exponentialGrowthModel(randi(100));
+  adj=edgeL2adj(el);
+  assert(isConnected(adj),true)
+  assert(isTree(adj),true)
+end
+% ................................................
+
+% Testing masterEquation.m .......................
+printf('testing masterEquation.m\n')
+for x=1:30
+  randint = randi(100)+3;
+  adj = masterEquationGrowthModel(randint,1,0);
+  assert(isTree(adj),true)
+  
+  adj = masterEquationGrowthModel(randint,2,0);
+  assert(isTree(adj),false)
+  
+  adj = masterEquationGrowthModel(randint,2,2);
+  assert(isSimple(adj),true)
+  
+end
+% ................................................
 
 
 % ................................................
