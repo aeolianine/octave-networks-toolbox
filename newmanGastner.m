@@ -1,15 +1,13 @@
-##################################################################
 % Implements the Newman-Gastner model for spatially distributed networks.
 % Source: Newman, Gastner, "Shape and efficiency in spatial distribution networks"
 % Note 1: minimize: wij = dij + beta x (dj0)
-% Note 2: To save output plot, use "print filename.ext" (see line 65)
+% Note 2: To save output plot, use "print filename.ext" (see line 63)
 %
 % Inputs: n - number of points/nodes, beta - parameter in [0,1], 
 %         points: point coordinates (nx2) or empty; plot - 'on' or 'off'
 % Outputs: graph (edge list), point coordinates and plot [optional]
 %
 % GB: last updated: November 11 2012
-##################################################################
 
 function [el,points]=newmanGastner(n,beta,points,plt)
 

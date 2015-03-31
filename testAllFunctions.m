@@ -1855,6 +1855,18 @@ for x=1:30
 end
 % ................................................
 
+% Testing newmanGastner.m ........................
+printf('testing newmanGastner.m\n')
+
+for x=1:10
+  N = randi(100)+10;
+  el = newmanGastner(N,rand,[],'off');  % no plot
+  adj = symmetrize(edgeL2adj(el));
+  assert(numNodes(adj),N);
+  assert(isSimple(adj),true)
+end
+% ................................................
+
 
 % ................................................
 % ......... simple matrix/graph viz ..............
