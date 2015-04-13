@@ -1,4 +1,3 @@
-##################################################################
 % Implements the network growth model from: Fabrikant et al, 
 %                  "Heuristically Optimized Trade-offs: A New Paradigm
 %                                       for Power Laws in the Internet"
@@ -10,7 +9,7 @@
 %
 % Other functions used: simpleDijkstra.m
 % GB: last updated: November 14, 2012
-##################################################################
+
 
 function [adj,p]=fabrikantModel(n,alpha,plt)
 
@@ -46,7 +45,7 @@ for i=2:n   % a new point arrives at each iteration
   
 end
 
-if nargin<=2 | not(strcmp(plt,'on')); return; end
+if nargin<=2 || not(strcmp(plt,'on')); return; end
 
 set(gcf,'color',[1,1,1])
 for i=1:n

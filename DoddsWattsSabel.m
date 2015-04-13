@@ -1,4 +1,3 @@
-##################################################################
 % Add random cross-links on top of a perfect hierarchy.
 % Non-backbone edges are added with probability 
 %                             P(i,j)=e^(-Dij/lambda)*e^(-xij/ksi),
@@ -14,7 +13,6 @@
 %
 % Other routines used: edgeL2adj.m, canonicalNets.m, dijkstra.m
 % GB: last updated, November 23 2012
-##################################################################
 
 function adj = DoddsWattsSabel(N,b,m,lam,ksi)
 
@@ -29,7 +27,7 @@ while edges<m
     ind1=randi(N); ind2=randi(N);
     
     % if same node or already connected, keep going
-    if ind1==ind2 | adj(ind1,ind2)+adj(ind2,ind1)>0; continue; end
+    if ind1==ind2 || adj(ind1,ind2)+adj(ind2,ind1)>0; continue; end
     
     % find di,dj and Dij
     [d1,path1]=dijkstra(adj0,ind1,1);  % adjacency, source, target
