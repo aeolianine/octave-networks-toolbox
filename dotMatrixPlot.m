@@ -1,17 +1,15 @@
-##################################################################
-% Draws the matrix as a column/row sorted square dot-matrix pattern
+% Draws the matrix as a column/row sorted square dot-matrix pattern.
 %
 % INPUTs: adj (nxn) - adjacency matrix representation of the graph
 % OUTPUTs: plot
 %
-% Note 1: Change colors and marker types in lines 66, 73, 94 and 101
+% Note 1: Change colors and marker types in lines 64, 71, 78, 85 and 92, 99
 % Note 2: Easy to add/remove different node orderings to/from the plot
 %
 % Other routines used: degrees.m, sortNodesByMaxNeighborDegree.m,
 %                      eigenCentrality.m, newmanEigenvectorMethod.m,
-%                      nodeBetweennessFaster.m, newmanGirvan.m
-% GB: last updated, November 25 2012
-##################################################################
+%                      nodeBetweenness.m, newmanGirvan.m, closeness.m
+% GB: last updated, April 14 2015
 
 function [] = dotMatrixPlot(adj)
 
@@ -21,7 +19,7 @@ markersize=3;
 deg = degrees(adj);
 
 Yd = sortNodesByMaxNeighborDegree(adj); % degree centrality
-[~, Yb] = sort(nodeBetweennessFaster(adj)); % node betweenness centrality
+[~, Yb] = sort(nodeBetweenness(adj)); % node betweenness centrality
 [~,Yec] = sort(eigenCentrality(adj)); % eigen-centrality
 [~,Yc] = sort(closeness(adj)); % closeness
 
@@ -45,6 +43,7 @@ for mm=1:length(modules)
 end
 
 mods = newmanGirvan(adj,4);   % enter the expected number of communities
+
 % sort modules by length
 mL=zeros(1,length(mods));
 for i=1:length(mods); mL(i)=length(mods{i}); end
@@ -59,7 +58,6 @@ for mm=1:length(mods)
         Ymb=[Ymb module_sorted(xx)];
     end
 end
-
 
 set(gcf,'Color',[1 1 1])
 subplot(3,2,1)
