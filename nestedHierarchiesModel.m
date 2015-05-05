@@ -1,4 +1,3 @@
-##################################################################
 % Based on: Sales-Pardo et al, "Extracting the hierarchical organization 
 %                of complex systems", PNAS, Sep 25, 2007; vol.104; no.39 
 % Supplementary material: 
@@ -14,14 +13,13 @@
 %
 % Other routines used: symmetrizeEdgeL.m
 % GB: last updated, November 24 2012
-##################################################################
 
 
 function eL = nestedHierarchiesModel(N,L,G,kbar,rho)
 
-% first check whether the inputs are of the right size/type =============
+% first check whether the inputs are of the right size/type
 
-if length(G)~=L; printf('the number of levels do not match'); return; end
+if length(G)~=L; printf('The number of levels do not match. length(G) should be L');  return; end
 
 for x=2:L
     if G(x)/G(x-1)~=ceil(G(x)/G(x-1)); printf('number of groups not an integer at level %2i\n',x); return ; end
@@ -33,9 +31,10 @@ if N/G(L)~=ceil(N/G(L)); printf('number of groups not an integer at level %2i\n'
 if nargin<5; rho = kbar/(G(L)-1) - 1 + 0.05; end;  % set to lower bound
 
 if rho < kbar/(G(L)-1) - 1; printf('rho is below its theoretical lower bound, given kbar and G(L)\n'); return; end
-% =======================================================================
+% ..........................................................
 
-% create node membership to various nested groups =======================
+
+% create node membership to various nested groups 
 
 belongsto = {};
 for ii=1:N; belongsto{ii} = zeros(1,L);  end % the level 1, 2, 3,... groups ii belongs to
@@ -52,7 +51,7 @@ for ii=1:N  % across all nodes
     
   end
 end
-% =======================================================================
+% ..........................................................
 
 
 eL = [];
