@@ -1899,6 +1899,19 @@ adj = edgeL2adj(el);
 assert(isSimple(adj));
 % ................................................
 
+% Testing forestFireModel.m ......................
+printf('testing forestFireModel.m\n');
+
+for x=1:20
+  randint = randi(20)+5;
+  L = forestFireModel(randint,rand,10*rand);
+  adj = symmetrize(adjL2adj(L));
+  assert(isSimple(adj),true)
+  assert(randint,numNodes(L))
+
+end
+% ................................................
+
 
 % ................................................
 % ......... simple matrix/graph viz ..............

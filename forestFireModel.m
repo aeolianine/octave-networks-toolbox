@@ -1,4 +1,3 @@
-##################################################################
 % Implementation of the forest fire model by Leskovec et al
 %                 "Graphs over Time: Densification Laws, Shrinking 
 %                             Diameters and Possible Explanations"
@@ -10,7 +9,6 @@
 %
 % Other routines used: weightedRandomSample.m
 % GB: last updated, November 28, 2012
-##################################################################
 
 
 function L = forestFireModel(T,p,r)
