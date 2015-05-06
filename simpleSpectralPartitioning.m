@@ -1,19 +1,19 @@
-##################################################################
-% Uses the fiedler vector to assign nodes to groups.
+% Uses the sorted fiedler vector to assign nodes to groups.
 %
 % INPUTS: adjacency matrix (nxn), k - desired number 
 %         of nodes in groups [n1, n2, ..], [optional].
 %         The default k is 2.
-% OUTPUTs: modules - [k] partitioned groups of nodes
+% OUTPUTs: modules - vector of size 1x(number of desired modules);
+%                    each entry contains the number of nodes in
+%                    that module
 %
 % Example:
-% simpleSpectralPartitioning(random_modular_graph(100,4,0.15,0.9),
+% simpleSpectralPartitioning(randomModularGraph(100,4,0.15,0.9),
 %                                                  [25 25 25 25])
 % Other functions used: fiedlerVector.m
 % Note: To save the plot at the end of the routine, uncomment:
 %                   print filename.pdf (or filename.extension)
-% GB: last updated, Oct 10 2012
-##################################################################
+% GB: last updated, May 6 2015
 
 function modules = simpleSpectralPartitioning(adj,k)
 
@@ -34,16 +34,18 @@ end
 
 if nargin==2
 
-  k = [0 k];
-    
+  k = [0 k];  % adding 0 to aid indexing in line 43
+  
   for kk=1:length(k)
-        
+    
     modules{kk}=[];
-    for x=1:k(kk); modules{kk} = [modules{kk} I(x+k(kk-1))]; end
+    for x=1:k(kk); 
+        modules{kk} = [modules{kk} I( x+sum(k(1:(kk-1))) )]; 
+    end
          
   end
 
-  modules = modules(2:length(modules));
+  modules = modules(2:length(modules));  % removing the "0" module
 end
 
 set(gcf,'Color',[1 1 1])

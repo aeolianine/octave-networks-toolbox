@@ -1912,6 +1912,32 @@ for x=1:20
 end
 % ................................................
 
+% ................................................
+% ......... modularity functions .................
+% ................................................
+
+
+% Testing simpleSpectralPartitioning.m ...........
+printf('testing simpleSpectralPartitioning.m\n')
+
+for xx=1:50  % do the randomized test 50 times
+  n = randi(99)+11;   % number of nodes
+  adj = randomModularGraph(n,4,0.1,3);  % random graph with n nodes
+  num_groups = randi(10)+1;  % number of groups to split the nodes in
+  groups = [];
+  for x=1:length(num_groups)-1; groups = [groups ceil(rand*n/num_groups)+1]; end
+  groups = [groups n-sum(groups)];
+
+  modules = simpleSpectralPartitioning(adj,groups);
+  allnodes = [];
+  for m=1:length(modules); 
+      assert(length(modules{m}),groups(m)); 
+      allnodes = [allnodes modules{m}];
+  end
+  assert( sort(allnodes), 1:n )
+end
+% ................................................
+
 
 % ................................................
 % ......... simple matrix/graph viz ..............
