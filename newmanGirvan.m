@@ -1,4 +1,3 @@
-##################################################################
 % Newman-Girvan community finding algorithm
 % Source: Newman, Girvan, "Finding and evaluating 
 %                          community structure in networks"
@@ -15,7 +14,6 @@
 % Other routines used: edgeBetweenness.m, isConnected.m,
 %                findConnComp.m, subgraph.m, numEdges.m
 % GB: last updated, Oct 11 2012
-##################################################################
 
 
 function [modules,module_hist,Q] = newmanGirvan(adj,k)

@@ -1938,6 +1938,23 @@ for xx=1:50  % do the randomized test 50 times
 end
 % ................................................
 
+% Testing newmanGirvan.m .........................
+printf('testing newmanGirvan.m\n')
+[modules, moduleHist, Q] = newmanGirvan(T{4}{2},2);
+assert(modules{1}==[1,2,3])
+assert(modules{2}==[4,5,6])
+assert(moduleHist{1}==[1,2,3,4,5,6])
+assert(moduleHist{2}==[1,2,3])
+assert(abs(Q-0.20408)<10^(-5))
+
+[modules, moduleHist, Q] = newmanGirvan(edgeL2adj(T{19}{2}),2);
+assert(modules{1}==[1,3,4,5])
+assert(modules{2}==[2])
+assert(moduleHist{1}==[1,2,3,4,5])
+assert(moduleHist{2}==[1,3,4,5])
+assert(abs(Q+0.31250)<10^(-5))
+% ................................................
+
 
 % ................................................
 % ......... simple matrix/graph viz ..............
