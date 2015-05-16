@@ -1955,6 +1955,50 @@ assert(moduleHist{2}==[1,3,4,5])
 assert(abs(Q+0.31250)<10^(-5))
 % ................................................
 
+% Testing newmanEigenvectorMethod.m ..............
+printf('testing newmanEigenvectorMethod.m\n')
+
+modules = newmanEigenvectorMethod(T{4}{2});
+assert(length(modules),2)
+assert(modules{1},[4,5,6])
+assert(modules{2},[1,2,3])
+
+for x=1:50
+  adj = randomGraph(randi(10)+5,1);
+  Adj = zeros(4*length(adj));
+  Adj(1:length(adj),1:length(adj))=adj;
+  Adj(length(adj)+1:2*length(adj),length(adj)+1:2*length(adj))=adj;
+  Adj(2*length(adj)+1:3*length(adj),2*length(adj)+1:3*length(adj))=adj;
+  Adj(3*length(adj)+1:4*length(adj),3*length(adj)+1:4*length(adj))=adj;
+
+  Adj(5,length(adj)+5)=1; Adj(length(adj)+5,5)=1; 
+  Adj(length(adj)+6,2*length(adj)+6)=1; Adj(2*length(adj)+6,length(adj)+6)=1; 
+  Adj(2*length(adj)+7,3*length(adj)+7)=1; Adj(3*length(adj)+7,2*length(adj)+7)=1; 
+  Adj(3*length(adj)+1,1)=1; Adj(1,3*length(adj)+1)=1; 
+
+  modules = newmanEigenvectorMethod(Adj);
+  assert(length(modules),4)
+
+  prescribed = randi(6)+2;
+  
+  n = randi(50)+50;
+  adj = [];
+  while not(isConnected(adj)); adj = randomModularGraph(n,prescribed,0.9*log(n)/n,2+0.3*rand); end
+  modules = newmanEigenvectorMethod(adj);
+  
+  sumnodes = 0;
+  for m=1:length(modules); sumnodes = sumnodes + length(modules{m}); end
+  assert(sumnodes,n)
+  
+  for m1=1:length(modules)
+    for m2=m1+1:length(modules)
+      assert(length(intersect(modules{m1},modules{m2})),0)     
+    end
+  end
+   
+end
+% ................................................
+
 
 % ................................................
 % ......... simple matrix/graph viz ..............

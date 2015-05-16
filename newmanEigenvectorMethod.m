@@ -1,4 +1,3 @@
-##################################################################
 % Find the "optimal" number of communities given a network using an eigenvector method
 % Source: MEJ Newman: Finding community structure using the eigenvectors of matrices, 
 %                                                               arXiv:physics/0605087
@@ -18,7 +17,6 @@
 % 
 % Other functions used: numEdges.m, degrees.m, subgraph.m, isConnected.m
 % GB: last modified, Oct 12, 2012
-##################################################################
 
 function modules=newmanEigenvectorMethod(adj)
 
@@ -62,7 +60,7 @@ while length(queue)>0  % while there is always a divisible subgraph
     u1=V(:,indmax);
     comm1=find(u1>0); comm2=find(u1<0);  % indices in G
     
-    if not(isConnected(adj(G(comm1),G(comm1)))) | not(isConnected(adj(G(comm2),G(comm2))))
+    if not(isConnected(adj(G(comm1),G(comm1)))) || not(isConnected(adj(G(comm2),G(comm2))))
       
       queue=queue(2:length(queue));   % remove(G)
       modules={modules{1:length(modules)} G};            % keep original G as indivisible
