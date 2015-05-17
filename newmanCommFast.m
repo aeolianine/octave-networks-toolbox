@@ -1,4 +1,3 @@
-##################################################################
 % Fast community finding algorithm by M. Newman
 % Source: "Fast algorithm for detecting community 
 %                   structure in networks", Mark Newman
@@ -12,7 +11,6 @@
 %       uncomment "print newmanCommFast_example.pdf"
 %
 % GB: last updated, Oct 12 2012
-##################################################################
 
 function [groups_hist,Q]=newmanCommFast(adj)
 
@@ -47,7 +45,7 @@ for s=1:n-1 % all possible iterations
 	connected=1;
       end
       
-      if connected & not(isempty(group_i)) & not(isempty(group_j))
+      if connected && not(isempty(group_i)) && not(isempty(group_j))
 	% join groups i and j?
 	dQ(i,j)=deltaQ(groups,adj,i,j);
       end
@@ -110,7 +108,7 @@ dQ = 2*(e_ij-a_i*a_j);
 
 
 
-function Q=Qfn(modules,adj) % ======== same as modularityMetric.m ======
+function Q=Qfn(modules,adj) % ....... same as modularityMetric.m ........
 
 % Computing the modularity for the final module break-down
 % Defined as: Q=sum_over_modules_i (eii-ai^2) (eq 5) in Newman and Girvan.

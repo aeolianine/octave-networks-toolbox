@@ -1617,7 +1617,7 @@ for i=1:30
   adj = randomDirectedGraph(n,p);
   assert(linkDensity(adj)>p-0.05)
   assert(linkDensity(adj)<p+0.05)
-  assert(isDirected(adj))
+  assert(sum(adj)==0 || isDirected(adj))
   assert(size(adj),[n,n]);
 end
 % ................................................
@@ -1997,6 +1997,20 @@ for x=1:50
   end
    
 end
+% ................................................
+
+% Testing newmanCommFast.m .......................
+printf('testing newmanCommFast.m\n')
+
+[gH,Q]=newmanCommFast(bowtie);
+close all;
+assert(max(Q),Q(6-1));
+
+[gH,Q]=newmanCommFast(randomModularGraph(100,4,0.1,5));
+close all;
+assert(length(gH),length(Q))
+[~,ind]=max(Q);
+assert(length(gH{ind}),4)
 % ................................................
 
 
