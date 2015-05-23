@@ -1,4 +1,3 @@
-##################################################################
 % Draw a circular representation of a graph with the nodes ordered by degree
 % Strategy: position vertices in a regular n-polygon
 %
@@ -7,7 +6,6 @@
 %
 % Other routines used: degrees.m
 % GB: last updated, Nov 29 2012
-##################################################################
 
 function [] = drawCircGraph(adj)
 
@@ -23,7 +21,7 @@ end
 % regulate the font size with respect to graph size
 if n<=50;
   fontsize = 10;
-elseif n>50 & n<=150
+elseif n>50 && n<=150
   fontsize = 8;
 else
   fontsize = 6;
