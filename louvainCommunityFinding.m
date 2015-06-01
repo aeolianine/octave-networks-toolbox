@@ -1,11 +1,10 @@
-##################################################################
 % Implementation of a community finding algorithm by Blondel et al
 % Source: "Fast unfolding of communities in large networks", July 2008
 %          https://sites.google.com/site/findcommunities/
-% Note 1: This is just the first step of the Louvain community finding 
+% Note 1: This is just the first step of the Louvain community finding
 %         algorithm. To extract fewer communities, need to repeat with 
 %         the resulting modules themselves.
-% Note 2: This works for undirected graphs only.
+% Note 2: Works for undirected graphs only.
 % Note 3: Permuting randomly the node order at every step helps the
 %         algorithm performance. Unfortunately, node order in this
 %         algorithm affects the results.
@@ -15,7 +14,6 @@
 %
 % Other routines used: numEdges.m, kneighbors.m
 % GB: last updated, Oct 17 2012
-##################################################################
 
 function [modules,inmodule] = louvainCommunityFinding(adj)
 
@@ -69,7 +67,7 @@ while not(converged)
       
     end
     
-    % ====== print for debugging purposes =======================
+    % ...... print for debugging purposes ........................
     %printf('current node %2i\n',i)
     %printf('current dQ\n');
     %dQ
@@ -77,7 +75,7 @@ while not(converged)
     %printf('new modules\n');
     %modules
     %printf('new inmodule membership of i: %2i\n',inmodule{i});
-    % ===========================================================
+    % ............................................................
     
           
   end  % loop across all nodes
