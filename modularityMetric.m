@@ -1,5 +1,4 @@
-##################################################################
-% Computing the modularity for a given module/commnunity break-down
+% Computing the modularity for a given module/commnunity partition.
 % Defined as: Q=sum_over_modules_i (eii-ai^2) (eq 5) in Newman and Girvan.
 % eij = fraction of edges that connect community i to community j, ai=sum_j (eij)
 %
@@ -13,7 +12,6 @@
 % Note: This computation makes sense for undirected graphs only.
 % Other functions used: numEdges.m
 % GB: last updated, October 16, 2012
-##################################################################
 
 function Q=modularityMetric(modules,adj)
 
