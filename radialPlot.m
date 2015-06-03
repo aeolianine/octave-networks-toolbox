@@ -1,4 +1,3 @@
-##################################################################
 % Plot nodes radially out from a given center. Equidistant nodes
 % have the same radius, but different angles. Works best as a quick
 % visualization for trees, or very sparse graphs.
@@ -7,7 +6,6 @@
 %   sum of neighbor degrees, and the node with highest sum is plotted
 %   in the center.
 % Note 2: The graph has to be connected.
-% Note 3: To change the color scheme, modify lines: 91, 98, 104 and 118
 %
 % Inputs: adjacency matrix (nxn), and center node (optional)
 % Outputs: plot
@@ -15,7 +13,6 @@
 % Other routines used: sortNodesBySumNeighborDegrees.m,
 %                      adj2adjL.m, diameter.m, kminNeighbors.m
 % GB: last updated, December 6 2012
-##################################################################
 
 
 function [] = radialPlot(adj,i0)
@@ -69,7 +66,7 @@ while not(isempty(queue))
   % select neighbours that have not been visited
   neigh=[];
   for ll=1:length(L{node})
-    if sum(find(visited==L{node}(ll)))==0 & sum(find(queue==L{node}(ll)))==0; 
+    if sum(find(visited==L{node}(ll)))==0 && sum(find(queue==L{node}(ll)))==0; 
       neigh=[neigh L{node}(ll)]; end;
   end
   
