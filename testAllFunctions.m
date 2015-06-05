@@ -2114,3 +2114,12 @@ assert(length(xp),length(yp))
 assert(length(yp),length(yc))
 assert(length(lk),length(lx))
 % ................................................
+
+% Testing el2geom.m ..............................
+fprintf('testing el2geom.m\n')
+[el,p] = newmanGastner(1000,0.5,[],'off');
+elnew = [];
+for e=1:size(el,1); elnew = [elnew; el(e,1), el(e,2), randi(9), p(el(e,1),1), p(el(e,1),2), p(el(e,2),1), p(el(e,2),2)]; end
+figure
+el2geom(elnew)
+% ................................................
