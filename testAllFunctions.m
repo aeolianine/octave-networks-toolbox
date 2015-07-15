@@ -1,5 +1,4 @@
 % Test code for "Octave tools for Network Analysis"
-% Note: Matlab-style warnings are not silenced; Matlab-style short-circuit operators occur in the code.
 
 clear all
 close all
@@ -74,6 +73,7 @@ T{19} = {'5-star', star, 'edgelist', 1:5, [1 2; 1 3; 1 4; 1 5; 2 1; 3 1; 4 1; 5 
 % Testing adj2adjL.m .............................
 printf('testing adj2adjL.m\n')
 assert(adj2adjL( T{4}{2} ),T{9}{2}')     % "bowtie" graph
+% assert(adj2adjL( edgeL2adj(T{11}{2}) ),T{12}{2})   % directed binary tree
 assert(adj2adjL( T{16}{2} ),T{17}{2}')   % directed 3-cycle
 % ................................................
 
@@ -241,11 +241,11 @@ assert(sortrows(symmetrizeEdgeL(T{6}{5}))(1:14,1:2), sortrows(T{4}{5})(1:14,1:2)
 % Testing addEdgeWeights.m .......................
 fprintf('testing addEdgeWeights.m\n')
 
-assert([1 2 2; 1 3 1; 3 4 3],addEdgeWeights([1 2 1; 1 2 1; 1 3 1; 3 4 2; 3 4 1]))
-assert([1 2 2; 2 3 4],addEdgeWeights([1 2 2; 2 3 4]))
-assert([1 2 1; 2 1 1],addEdgeWeights([1 2 1; 2 1 1]))
-assert([1 2 1; 2 1 1],addEdgeWeights([1 2 1; 2 1 1]))
-assert([1 2 1; 2 1 2],addEdgeWeights([1 2 1; 2 1 1; 2 1 1]))
+assert([1 2 2; 1 3 1; 3 4 3], addEdgeWeights([1 2 1; 1 2 1; 1 3 1; 3 4 2; 3 4 1]))
+assert([1 2 2; 2 3 4], addEdgeWeights([1 2 2; 2 3 4]))
+assert([1 2 1; 2 1 1], addEdgeWeights([1 2 1; 2 1 1]))
+assert([1 2 1; 2 1 1], addEdgeWeights([1 2 1; 2 1 1]))
+assert([1 2 1; 2 1 2], addEdgeWeights([1 2 1; 2 1 1; 2 1 1]))
 % ................................................
 
 
@@ -695,8 +695,6 @@ assert(tt{2},[])
 assert(tt{1},[])
 % ...............................................
 
-
-
 % ................................................
 % ........ diagnostic functions ..................
 % ................................................
@@ -866,7 +864,6 @@ assert(mod(B,2), zeros(1,length(B)))
 odd_cycle = canonicalNets(2*randi(10)+1,'cycle');
 assert(isBipartite(edgeL2adjL(odd_cycle)),false)
 % ................................................
-
 
 % ................................................
 % ........ centrality measures ...................
@@ -1133,7 +1130,6 @@ assert(sMetric(edgeL2adj(T{11}{2})),4)
 assert(sMetric(T{1}{2}),1)
 % ................................................
 
-
 % ................................................
 % .............. distances .......................
 % ................................................
@@ -1189,53 +1185,54 @@ assert(rb,[1,2])
 assert(Jb,inf)
 % ................................................
 
+
 % Testing findAllShortestPaths.m .................
 printf('testing findAllShortestPaths.m\n')
 
 adjL = {}; adjL{1} = [2]; adjL{2} = [];  % 1-2 edge
-[allPaths, shortestPathLength] = findAllShortestPaths(adjL,1,2, allPaths={});
+[allPaths, shortestPathLength] = findAllShortestPaths(adjL,1,2, 2, allPaths={});
 assert(shortestPathLength,1)
 assert(allPaths{1},'-1-2')
 assert(length(allPaths),1)
 
-[allPaths, shortestPathLength] = findAllShortestPaths(adjL,2,1, allPaths={});
-assert(shortestPathLength,1)  % not updated, equal to length(adjL)-1
+[allPaths, shortestPathLength] = findAllShortestPaths(adjL,2,1, 2, allPaths={});
+assert(shortestPathLength,2)  % not updated, equal to length(adjL)-1
 assert(allPaths, {})
 assert(length(allPaths),0)
 
 % two alternative paths (1-2-4 and 1-3-4)
 adjL = {}; adjL{1} = [2,3]; adjL{2} = [4]; adjL{3} = [4]; adjL{4}=[];
-[allPaths, shortestPathLength] = findAllShortestPaths(adjL,1,4, allPaths={});
+[allPaths, shortestPathLength] = findAllShortestPaths(adjL,1,4, 5, allPaths={});
 assert(shortestPathLength,2)
 assert(length(allPaths),2)
 assert(allPaths{1},'-1-2-4')
 assert(allPaths{2},'-1-3-4')
 
-[allPaths, shortestPathLength] = findAllShortestPaths(adjL,4,2, allPaths={});
-assert(shortestPathLength,3) % not updated, equal to length(adjL)-1
+[allPaths, shortestPathLength] = findAllShortestPaths(adjL,4,2, 4, allPaths={});
+assert(shortestPathLength,4) % not updated, equal to length(adjL)-1
 assert(length(allPaths),0)
 
 % a one-directional cycle
 adjL={}; adjL{1}=[2]; adjL{2}=[3]; adjL{3}=[4]; adjL{4}=[1];
-[allPaths, shortestPathLength] = findAllShortestPaths(adjL,1,4, allPaths={});
+[allPaths, shortestPathLength] = findAllShortestPaths(adjL,1,4, 4, allPaths={});
 assert(shortestPathLength,3)
 assert(length(allPaths),1)
 assert(allPaths{1},'-1-2-3-4')
 
-[allPaths, shortestPathLength] = findAllShortestPaths(adjL,4,3, allPaths={});
+[allPaths, shortestPathLength] = findAllShortestPaths(adjL,4,3, 4, allPaths={});
 assert(shortestPathLength,3)
 assert(length(allPaths),1)
 assert(allPaths{1},'-4-1-2-3')
 
 % undirected cycle
 adjL={}; adjL{1}=[2,4]; adjL{2}=[3,1]; adjL{3}=[2,4]; adjL{4}=[1,3];
-[allPaths, shortestPathLength] = findAllShortestPaths(adjL,2,4, allPaths={});
+[allPaths, shortestPathLength] = findAllShortestPaths(adjL,2,4, 4, allPaths={});
 assert(shortestPathLength,2)
 assert(length(allPaths),2)
 assert(allPaths{1},'-2-1-4')
 assert(allPaths{2},'-2-3-4')
 
-[allPaths, shortestPathLength] = findAllShortestPaths(adjL,3,1, allPaths={});
+[allPaths, shortestPathLength] = findAllShortestPaths(adjL,3,1, 3, allPaths={});
 assert(shortestPathLength,2)
 assert(length(allPaths),2)
 assert(allPaths{1},'-3-2-1')
@@ -1339,6 +1336,7 @@ assert(distanceDistribution(T{4}{2}),[7/15, 4/15, 4/15, 0, 0])
 assert(distanceDistribution(T{13}{2}),[1, 0])
 assert(distanceDistribution(edgeL2adj(T{10}{2})),[2/3,1/3])
 % ................................................
+
 
 % ................................................
 % ....... simple motifs ..........................
