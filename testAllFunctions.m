@@ -65,30 +65,33 @@ T{19} = {'5-star', star, 'edgelist', 1:5, [1 2; 1 3; 1 4; 1 5; 2 1; 3 1; 4 1; 5 
 % add another graph test here ....
 % ................................................
 
-
 % ................................................
 % ... graph representation functions .............
 % ................................................
 
 % Testing adj2adjL.m .............................
 printf('testing adj2adjL.m\n')
+tic
 assert(adj2adjL( T{4}{2} ),T{9}{2}')     % "bowtie" graph
 % assert(adj2adjL( edgeL2adj(T{11}{2}) ),T{12}{2})   % directed binary tree
 assert(adj2adjL( T{16}{2} ),T{17}{2}')   % directed 3-cycle
+printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 
 
 % Testing adjL2adj.m .............................
 printf('testing adjL2adj.m\n')
+tic
 assert(adjL2adj( T{9}{2} ),T{4}{2} )      % "bowtie" graph
 assert(adjL2adj( T{17}{2} ),T{16}{2} )    % directed 3-cycle
 assert(adjL2adj( T{12}{2} ), edgeL2adj(T{11}{2}) )
+printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 
 
 % Testing adj2edgeL.m ............................
 printf('testing adj2edgeL.m\n')
-
+tic
 for i=1:length(T)
     if not(strcmp( T{i}{3}, 'adjacency' )); continue; end
     edgeL1 = sortrows( adj2edgeL(T{i}{2}) );
@@ -96,11 +99,12 @@ for i=1:length(T)
     
     assert(edgeL1(:,1:2), edgeL2(:,1:2))
 end
+printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 
 % Testing edgeL2adj.m ............................
 printf('testing edgeL2adj.m\n')
-
+tic
 for i=1:length(T)
     if not(strcmp( T{i}{3}, 'adjacency' )); continue; end
     edgeL = T{i}{5};
@@ -110,11 +114,12 @@ for i=1:length(T)
     end
     assert(T{i}{2}, edgeL2adj( edgeL ))
 end
+printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 
 % Testing adj2inc.m ..............................
 printf('testing adj2inc.m\n')
-
+tic
 randint = randi(10)+1;
 assert(adj2inc(eye(randint)),eye(randint))
 
@@ -124,12 +129,13 @@ assert(adj2inc(T{13}{2}), T{15}{2})   % directed 3-cycle
 assert(adj2inc([0 1 0; 0 1 0; 1 0 0 ]),[-1 0 1; 1 1 0; 0 0 -1])
 assert(adj2inc([0 2; 0 0]),[-1 -1; 1 1])  % directed double edge
 assert(adj2inc(T{1}{2}), [-1 1]')          % one directed edge
+printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 
 
 % Testing inc2adj.m ..............................
 printf('testing inc2adj.m\n')
-
+tic
 randint = randi(10)+1;
 assert(inc2adj(eye(randint))==eye(randint))
 
@@ -143,75 +149,85 @@ assert(T{1}{2}, inc2adj([-1 1]'))          % one directed edge
 
 inc = [-1 1; 1 0; 0 -1];  % two edges (1->2, 3->1)
 assert(inc2adj(inc)==[0 1 0; 0 0 0; 1 0 0])
+printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 
 
 % Testing adj2str.m ..............................
 printf('testing adj2str.m\n')
-
+tic
 assert(adj2str(ones(3)-eye(3)),'.2.3,.1.3,.1.2,')
 assert(adj2str(eye(3)),'.1,.2,.3,')
 assert(adj2str([0 2; 0 0]),'.2,,')
 
 assert(adj2str(T{4}{2}),'.2.3,.1.3,.1.2.4,.3.5.6,.4.6,.4.5,')
 assert(adj2str(T{16}{2}),'.2,.3,.1,')
+printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 
 
 % Testing str2adj.m ..............................
 printf('testing str2adj.m\n')
-
+tic
 assert(ones(3)-eye(3),str2adj('.2.3,.1.3,.1.2,'))
 assert(eye(3),str2adj('.1,.2,.3,'))
 assert([0 1 0; 0 0 0; 1 0 0 ],str2adj('.2,,.1,'))
 
 assert('.2.3,.1.3,.1.2.4,.3.5.6,.4.6,.4.5,', adj2str(T{4}{2}))
 assert('.2,.3,.1,', adj2str(T{16}{2}))
+printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 
 % Testing adjL2edgeL.m ...........................
 printf('testing adjL2edgeL.m\n')
-
+tic
 assert(adjL2edgeL(T{12}{2}),T{11}{5})           % directed 3-tree
 assert(sortrows(adjL2edgeL(T{9}{2}))(1:14,1:2),sortrows(T{4}{5}))   % bowtie graph
 assert(sortrows(adjL2edgeL(T{17}{2}))(1:3,1:2),T{16}{5})     % directed 3-cycle
+printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 
 % Testing edgeL2adjL.m ...........................
 printf('testing edgeL2adjL.m\n')
+tic
 assert(edgeL2adjL(T{11}{5}),T{12}{2}')
 assert(edgeL2adjL(sortrows(T{4}{5})),T{9}{2}')
 assert(edgeL2adjL(T{16}{5}),T{17}{2}')
+printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 
 % Testing inc2edgeL.m ............................
 printf('testing inc2edgeL.m\n')
-
+tic
 assert(inc2edgeL([1 0 0; 0 1 0; 0 0 1]),[1 1 1; 2 2 1; 3 3 1])  % three self-loops
 assert(inc2edgeL([-1 -1; 1 0; 0 1]),[1 2 1; 1 3 1])   % tree 3 nodes
 assert(inc2edgeL([-1;1]),T{1}{5})                     % one directed edge
 assert(inc2edgeL([ 1;1]),T{2}{5})                     % one undirected edge
 assert(inc2edgeL([1 1; 1 1]),[1 2 1; 1 2 1; 2 1 1; 2 1 1])     % one double edge
 assert(sortrows(inc2edgeL(T{15}{2})(1:length(T{15}{5}),1:2)),sortrows(T{15}{5}))
+printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 
 % Testing adj2simple.m ...........................
 printf('testing adj2simple.m\n')
-
+tic
 assert(adj2simple(rand(6)),ones(6)-eye(6))
 assert(adj2simple([0 2 0; 1 0 0; 1 2 0]),[0 1 1; 1 0 1; 1 1 0])
 assert(isSymmetric(adj2simple(rand(7))),true)
+printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 
 % Testing edgeL2simple.m .........................
 printf('testing edgeL2simple.m\n')
-
+tic
 assert(length(edgeL2simple([1 1 1; 2 2 1; 3 3 1])),0)
 assert(sortrows(edgeL2simple([1 2 1; 1 3 2; 4 5 1.4])),[1 2 1; 1 3 1; 2 1 1; 3 1 1; 4 5 1; 5 4 1])
+printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 
 % Testing symmetrize.m ...........................
 printf('testing symmetrize.m\n')
+tic
 for i=1:20
   adj = randomDirectedGraph(randi(10)+3,rand);
   assert(isSymmetric(symmetrize(adj)),true)
@@ -219,12 +235,13 @@ end
 assert(symmetrize(T{1}{2}),T{2}{2})
 assert(symmetrize(edgeL2adj(T{11}{2})),edgeL2adj(T{10}{2}))
 assert(symmetrize(T{16}{2}),T{13}{2})
+printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 
 
 % Testing symmetrizeEdgeL.m ......................
 printf('testing symmetrizeEdgeL.m\n')
-
+tic
 for x=1:20
   adj = randomDirectedGraph(randi(20)+2,rand); % create a random adjacency
   el = adj2edgeL(adj);
@@ -236,16 +253,18 @@ end
 
 assert(sortrows(symmetrizeEdgeL(T{1}{5}))(1:2,1:2), sortrows(T{2}{5})(1:2,1:2))
 assert(sortrows(symmetrizeEdgeL(T{6}{5}))(1:14,1:2), sortrows(T{4}{5})(1:14,1:2) )
+printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 
 % Testing addEdgeWeights.m .......................
 fprintf('testing addEdgeWeights.m\n')
-
+tic
 assert([1 2 2; 1 3 1; 3 4 3], addEdgeWeights([1 2 1; 1 2 1; 1 3 1; 3 4 2; 3 4 1]))
 assert([1 2 2; 2 3 4], addEdgeWeights([1 2 2; 2 3 4]))
 assert([1 2 1; 2 1 1], addEdgeWeights([1 2 1; 2 1 1]))
 assert([1 2 1; 2 1 1], addEdgeWeights([1 2 1; 2 1 1]))
 assert([1 2 1; 2 1 2], addEdgeWeights([1 2 1; 2 1 1; 2 1 1]))
+printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 
 
@@ -256,7 +275,7 @@ assert([1 2 1; 2 1 2], addEdgeWeights([1 2 1; 2 1 1; 2 1 1]))
 
 % Testing getNodes.m .............................
 fprintf('testing getNodes.m\n')
-
+tic
 for i=1:length(T); assert( getNodes(T{i}{2},T{i}{3}), T{i}{4} ); end
 
 % randomized test
@@ -267,11 +286,12 @@ for i=1:10
     assert(getNodes(randomGraph(n),'adjacency'), 1:n)
 end
 assert(strcmp(getNodes([],'rgegaerger'),'invalid graph type'))
+printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 
 % Testing getEdges.m ............................
 printf('testing getEdges.m\n')
-
+tic
 for i=1:length(T)
     edges1 = sortrows( T{i}{5} );
     edges2 = sortrows( getEdges(T{i}{2},T{i}{3}) );
@@ -279,12 +299,13 @@ for i=1:length(T)
     assert( edges1(size(edges1)(1),1:2), edges2(size(edges2)(1),1:2) )
 end
 assert(strcmp(getEdges([],'rgegfgdfgrger'),'invalid graph type'))
+printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ...............................................
 
 
 % Testing numNodes.m ............................
 printf('testing numNodes.m\n')
-
+tic
 randint = randi(101);
 assert(numNodes(randomGraph(randint)),randint)
 
@@ -293,23 +314,25 @@ for i=1:length(T)
         assert( numNodes(T{i}{2}), T{i}{6} )
     end
 end
+printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ...............................................
 
 
 % Testing numEdges.m ...........................
 printf('testing numEdges.m\n')
-
+tic
 for i=1:length(T)
     if strcmp(T{i}{3},'adjacency')
         assert( numEdges(T{i}{2}), T{i}{7} )
     end
 end
+printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ...............................................
 
 
 % Testing linkDensity.m .........................
 printf('testing linkDensity.m\n')
-
+tic
 randint = randi(101)+1;
 assert(linkDensity(edgeL2adj(canonicalNets(randint,'tree',2))),2/randint)
 
@@ -320,40 +343,45 @@ for i=1:length(T)
         assert( linkDensity(T{i}{2}), coeff*T{i}{7}/(T{i}{6}*(T{i}{6}-1)) )
     end
 end
+printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ...............................................
 
 
 % Testing selfLoops.m ...........................
 printf('testing selfLoops.m\n')
-
+tic
 assert( selfLoops( edgeL2adj( T{8}{2} ) ), 1 )
 assert( selfLoops( T{14}{2} ), 2 )
 assert(selfLoops(bowtie),0)
+printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ...............................................
 
 
 % Testing multiEdges.m ..........................
 printf('testing multiEdges.m\n')
-
+tic
 assert(multiEdges(T{3}{2}),1)
 assert(multiEdges([0 2 1; 2 0 1; 1 1 0],1))  % triangle with one double edge
 assert(multiEdges([0 0 1; 2 0 0; 0 1 0]),1)  % directed triangle with 1 double edge
 assert(multiEdges(randomGraph(randi(15))),0)
 assert(multiEdges([0 0 1; 2 0 0; 0 2 0]),2)  % directed triangle with 2 double edges
+printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ...............................................
 
 
 % Testing averageDegree.m .......................
 printf('testing averageDegree.m\n')
-
+tic
 assert(averageDegree(T{2}{2}),1)
 assert(averageDegree(T{4}{2}),2+1.0/3)
 assert(averageDegree(T{18}{2}),2)
+printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ...............................................
 
 
 % Testing numConnComp.m .........................
 printf('testing numConnComp.m\n')
+tic
 assert(numConnComp(T{5}{2}),2)
 
 randint = randi(51);
@@ -363,12 +391,13 @@ for x=1:randint
   Adj(30*(x-1)+1:30*x,30*(x-1)+1:30*x)=adj;
 end
 assert(numConnComp(Adj),randint)
+printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ...............................................
 
 
 % Testing findConnCompI.m ........................
 printf('testing findConnCompI.m\n')
-
+tic
 assert(findConnCompI(T{5}{2},1),[1,2,3])
 assert(findConnCompI(T{5}{2},2),[1,2,3])
 assert(findConnCompI(T{5}{2},3),[1,2,3])
@@ -378,12 +407,13 @@ assert(findConnCompI(T{5}{2},6),[4,5,6])
 assert(findConnCompI([0 1 0; 1 0 0; 0 0 0],1),[1,2])
 assert(findConnCompI([0 1 0; 1 0 0; 0 0 0],2),[1,2])
 assert(findConnCompI([0 1 0; 1 0 0; 0 0 0],3),[3])
+printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ...............................................
 
 
 % Testing findConnComp.m ........................
 printf('testing findConnComp.m\n')
-
+tic
 assert(findConnComp(T{5}{2}),{[1,2,3],[4,5,6]})
 
 clear modules
@@ -407,12 +437,13 @@ end
 
 modules=modules(2:length(modules));
 assert(findConnComp(Adj),modules)
+printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ...............................................
 
 
 % Testing giantComponent.m ......................
 printf('testing giantComponent.m\n')
-
+tic
 assert(giantComponent([0 1 0; 1 0 0; 0 0 0],3),[0 1; 1 0])
 
 clear modules
@@ -437,12 +468,13 @@ for m=1:length(modules); L = [L, length(modules{m})]; end;
 [GC, GCnodes] = giantComponent(Adj);
 assert(GC, subgraph(Adj,modules{maxind}))
 assert(GCnodes, modules{maxind})
+printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ...............................................
 
 
 % Testing tarjan.m ..............................
 printf('testing tarjan.m\n')
-
+tic
 L = {}; L{1} = 2; L{2} = 1;
 GSCC = tarjan(L);
 assert(length(GSCC),1)
@@ -536,20 +568,22 @@ for iter=1:100  % random graph testing ....
   end
   
 end
+printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ...............................................
 
 % Testing graphComplement.m .....................
 printf('testing graphComplement.m\n')
-
+tic
 mat = [1 0 0 1 1 1; 0 1 0 1 1 1; 0 0 1 0 1 1; 1 1 0 1 0 0; 1 1 1 0 1 0; 1 1 1 0 0 1];
 assert(graphComplement(T{4}{2}),mat)
 assert(graphComplement(T{13}{2}),eye(3))
 assert(graphComplement([0 1 1; 1 0 0; 1 0 0]), [1 0 0; 0 1 1; 0 1 1])
+printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ...............................................
 
 % Testing graphDual.m ...........................
 printf('testing graphDual.m\n')
-
+tic
 gd=graphDual(adj2adjL(T{4}{2}));
 gdT={};
 gdT{1}=[2,3]; gdT{2}=[1,3,4]; gdT{3}=[1,2,4]; gdT{4}=[2,3,5,6]; gdT{5}=[4,6,7]; gdT{6}=[4,5,7]; gdT{7}=[5,6];
@@ -562,19 +596,23 @@ assert(gd,gdT)
 
 L={}; LT={}; L{1}=[2]; L{2}=[1]; LT{1}=[];
 assert(LT,graphDual(L))
+printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ...............................................
 
 % Testing subgraph.m ............................
 fprintf('testing subgraph.m\n')
+tic
 assert(T{13}{2},subgraph(T{4}{2},[1,2,3]))
 assert(T{13}{2},subgraph(T{4}{2},[4,5,6]))
 assert(T{2}{2},subgraph(T{4}{2},[4,5]))
 assert(T{2}{2},subgraph(T{4}{2},[1,2]))
 assert(T{2}{2},subgraph(T{4}{2},[3,4]))
+printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ...............................................
 
 % Testing leafNodes.m ...........................
 fprintf('testing leafNodes.m\n')
+tic
 assert(leafNodes(edgeL2adj(T{10}{2})),[2,3])
 assert(leafNodes(edgeL2adj(T{11}{2})),[2,3])
 assert(length(leafNodes(T{13}{2})),0)
@@ -582,20 +620,24 @@ assert(leafNodes(T{2}{2}),[1,2])
 assert(leafNodes(T{1}{2}),[2])
 assert(length(leafNodes(T{4}{2})),0)
 assert(leafNodes(edgeL2adj(T{19}{2})),[2,3,4,5])
+printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ...............................................
 
 % Testing leafEdges.m ...........................
 fprintf('testing leafEdges.m\n')
+tic
 assert(leafEdges(edgeL2adj(T{10}{2})),[1,2;1,3])
 assert(leafEdges(edgeL2adj(T{10}{2})),[1,2;1,3])
 assert(length(leafEdges(T{13}{2})),0)
 assert(length(leafEdges(edgeL2adj([2,1,1;3,1,1]))),0)
 assert(length(leafEdges(T{4}{2})),0)
 assert(leafEdges(edgeL2adj(T{19}{2})),[1, 2; 1, 3; 1, 4; 1, 5])
+printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ...............................................
 
 % Testing minSpanTree.m .........................
 printf('testing minSpanTree.m\n')
+tic
 for x=1:100
   adj = [0 1; 0 0];                % initialize
   while not(isConnected(adj)); adj = randomGraph(randi(30)+5,rand); end
@@ -605,10 +647,12 @@ for x=1:100
   assert(length(tr),length(adj));  % tree should have the same
                                    % number of nodes as adj
 end
+printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ...............................................
 
 % Testing DFS.m .................................
 printf('testing DFS.m\n')
+tic
 allPaths = DFS(T{1}{2}, 1, 2, allPaths = {}, path = [], upperBound = 2);
 assert(allPaths, {[1 2]})
 allPaths = DFS(T{1}{2}, 2, 1, allPaths = {}, path = [], upperBound = 2);
@@ -636,11 +680,12 @@ allPaths = DFS([0 1 0 1; 1 0 1 0; 0 1 0 1; 1 0 1 0], 1, 3, allPaths = {}, path =
 assert(allPaths, {[1 2 3], [1 4 3]})
 allPaths = DFS([0 1 0 1; 1 0 1 0; 0 1 0 1; 1 0 1 0], 4, 2, allPaths = {}, path = [], upperBound = 3);
 assert(allPaths, {[4 1 2], [4 3 2]})
+printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ...............................................
 
 % Testing BFS.m .................................
 printf('testing BFS.m\n')
-
+tic
 adjL = {1:2, 2:[]};
 tt = BFS(adjL, 1, 1);
 assert(tt, {[], []})
@@ -693,7 +738,9 @@ assert(tt{4},[3])
 assert(tt{3},[1 2])
 assert(tt{2},[])
 assert(tt{1},[])
+printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ...............................................
+
 
 % ................................................
 % ........ diagnostic functions ..................
@@ -702,7 +749,7 @@ assert(tt{1},[])
 
 % Testing isSimple.m .............................
 fprintf('testing isSimple.m\n')
-
+tic
 assert(isSimple(T{1}{2}),false)
 assert(isSimple(T{2}{2}),true)
 assert(isSimple(T{3}{2}),false)
@@ -710,32 +757,37 @@ assert(isSimple(randomGraph(randi(5)+20,rand)),true)  % simple graph
 assert(isSimple(edgeL2adj([1,2,2])),false)      % multi-edge
 assert(isSimple( [1 0 0; 0 0 1; 0 1 0]),false)  % matrix with loops
 assert(isSimple([0 1 1; 1 0 0; 0 1 0]),false)   % directed matrix
+printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 
 % Testing isDirected.m ...........................
 fprintf('testing isDirected.m\n')
+tic
 assert(isDirected(randomDirectedGraph(randi(5)+20,rand)),true)  
 assert(isDirected(randomGraph(randi(5)+20,rand)),false)
 assert(isDirected(T{1}{2}), true)
 assert(isDirected(T{2}{2}), false)
 assert(isDirected(T{3}{2}), false)
 assert(isDirected(T{16}{2}), true)
+printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 
 
 % Testing isSymmetric.m ..........................
 fprintf('testing isSymmetric.m\n')
-
+tic
 for i=1:100
   assert(isSymmetric(randomGraph(randi(5)+20,rand)),true)
 
   adj = randomDirectedGraph(randi(5)+20,rand);
   assert(not(isSymmetric(adj)) | adj==zeros(size(adj)) | adj==ones(size(adj)))
 end
+printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 
 % Testing isConnected.m ..........................
 fprintf('testing isConnected.m\n')
+tic
 assert(isConnected(T{1}{2}),false)
 assert(isConnected(T{2}{2}),true)
 assert(isConnected(T{4}{2}),true)
@@ -755,11 +807,13 @@ for x=1:10
   assert(transpose(isConnected(adj)),true)
   
 end
+printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 
 
 % Testing isWeighted.m ...........................
 fprintf('testing isWeighted.m\n')
+tic
 assert(isWeighted(adj2edgeL(T{2}{2})),false)
 assert(isWeighted(adj2edgeL(T{3}{2})),true)
 
@@ -769,10 +823,12 @@ assert(isWeighted(adj2edgeL(randomDirectedGraph(randi(5)+20,rand+0.1))),false)
   
 assert(isWeighted([1,2,0.5; 1,3,1.5; 1,4,1]),true)
 assert(isWeighted([1,2,0.5; 1,3,1; 1,4,1]),true)
+printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 
 % Testing isRegular.m ............................
 fprintf('testing isRegular.m\n')
+tic
 adj = edgeL2adj(canonicalNets(20,'cycle'));
 assert(isRegular(adj),true)
 
@@ -781,10 +837,12 @@ assert(isRegular(adj),false)
 
 assert(isRegular([0 1; 1 0]),true)
 assert(isRegular([0 0; 1 0]),false)
+printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 
 % Testing isComplete.m ...........................
 printf('testing isComplete.m\n')
+tic
 assert(isComplete([0 1; 1 0]),true)
 assert(isComplete(T{2}{2}),true)
 assert(isComplete(T{3}{2}),true)
@@ -793,22 +851,24 @@ assert(isComplete(T{4}{2}),false)
 randint = randi(10)+10;
 adj = ones(randint)-eye(randint);
 assert(isComplete(adj),true)
+printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 
 
 % Testing isEulerian.m ...........................
 printf('testing isEulerian.m\n')
-
+tic
 adj = edgeL2adj(canonicalNets(10,'cycle'));
 assert(isEulerian(adj),true)
 
 adj = edgeL2adj(canonicalNets(10,'tree',3));
 assert(isEulerian(adj),false)
+printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 
 % Testing isTree.m ...............................
 printf('testing isTree.m\n')
-
+tic
 assert(isTree(T{1}{2}), false)
 assert(isTree(T{2}{2}), true)
 assert(isTree(T{3}{2}), false)
@@ -828,10 +888,12 @@ adj = edgeL2adj(canonicalNets(randi(10)+10,'trilattice'));
 assert(isTree(adj),false)
 adj = edgeL2adj(canonicalNets(randi(10)+10,'hierarchy', b=3));
 assert(isTree(adj),false)
+printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 
 % Testing isGraphic.m ............................
 printf('testing isGraphic.m\n')
+tic
 for i=1:20
   adj = giantComponent(randomGraph(randi(20)+1,0.5));
   [deg,~,~] = degrees(adj);
@@ -842,12 +904,13 @@ assert(isGraphic([0 1]), false)
 assert(isGraphic([2 1]), false)
 assert(isGraphic([1 1 4]), false)
 assert(isGraphic([1 4 4 100]), false)
+printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 
 
 % Testing isBipartite.m ..........................
 printf('testing isBipartite.m\n')
-
+tic
 assert(isBipartite(adj2adjL(T{4}{2})),false)
 [isit, A, B] = isBipartite(edgeL2adjL(T{10}{2}));
 assert(isit,true)
@@ -863,6 +926,7 @@ assert(mod(B,2), zeros(1,length(B)))
 
 odd_cycle = canonicalNets(2*randi(10)+1,'cycle');
 assert(isBipartite(edgeL2adjL(odd_cycle)),false)
+printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 
 % ................................................
@@ -872,7 +936,7 @@ assert(isBipartite(edgeL2adjL(odd_cycle)),false)
 
 % Testing degrees.m ..............................
 printf('testing degrees.m\n')
-
+tic
 assert(degrees(T{1}{2}), [1 1])
 assert(degrees(T{2}{2}), [1 1])
 assert(degrees(T{3}{2}), [2 2])
@@ -889,11 +953,12 @@ assert(degrees(T{14}{2}, [3 3 2]))
 assert(degrees(T{18}{2}, [3 3 3 3]))
 
 assert([4 4 4],degrees([0 2 1; 0 0 1; 1 1 0]))
+printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 
 % Testing rewire.m ...............................
 printf('testing rewire.m\n')
-
+tic
 for x=1:100
   
   el = adj2edgeL(randomGraph(randi(10)+10,0.4));
@@ -908,11 +973,12 @@ for x=1:100
   assert( preservedEdges >= size(eln)(1) - 4*rew )
 
 end
+printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 
 % Testing rewireThisEdge.m .......................
 printf('testing rewireThisEdge.m\n')
-
+tic
 for x=1:100
   
   adj = [0 1; 0 0];
@@ -935,11 +1001,12 @@ for x=1:100
   assert( preservedEdges == size(eln)(1) - 4 )
 
 end
+printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 
 % Testing rewireAssort.m .........................
 printf('testing rewireAssort.m\n')
-
+tic
 for x=1:100
   adj = [0 0; 0 0];
   
@@ -952,12 +1019,13 @@ for x=1:100
 
   assert(pearson(edgeL2adj(eln))>=(pearson(edgeL2adj(el))-10^(-7)) | (pearson(edgeL2adj(eln))-10^(-7))>=pearson(edgeL2adj(el)))
 end
+printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 
 
 % Testing rewireDisassort.m ......................
 printf('testing rewireDisassort.m\n')
-
+tic
 for x=1:100
   adj = [0 0; 0 0];
   
@@ -970,48 +1038,56 @@ for x=1:100
 
   assert(pearson(edgeL2adj(eln))<=(pearson(edgeL2adj(el))-10^(-7)) | (pearson(edgeL2adj(eln))-10^(-7))<=pearson(edgeL2adj(el)))
 end
+printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 
 % Testing aveNeighborDeg.m .......................
 printf('testing aveNeighborDeg.m\n')
+tic
 assert(aveNeighborDeg(T{13}{2}),[2 2 2])
 assert(aveNeighborDeg(T{4}{2}),[2.5 2.5 7/3 7/3 2.5 2.5])
+printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 
 
 % Testing sortNodesBySumNeighborDegrees.m ........
 printf('testing sortNodesBySumNeighborDegrees.m\n')
-
+tic
 assert(sortNodesBySumNeighborDegrees(T{1}{2}),[1, 2]')
 assert(sortNodesBySumNeighborDegrees(T{2}{2}),[2, 1]')
 assert(sortNodesBySumNeighborDegrees(T{4}{2}),[4,3,6,5,2,1]')  
 assert(sortNodesBySumNeighborDegrees(edgeL2adj(T{10}{2})),[1, 3, 2]')
 assert(sortNodesBySumNeighborDegrees(T{13}{2}),[3, 2, 1]')
 assert(sortNodesBySumNeighborDegrees(adjL2adj(T{17}{2})),[3, 2, 1]')
+printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 
 
 % Testing sortNodesByMaxNeighborDegree.m .........
 printf('testing sortNodesByMaxNeighborDegree.m\n')
-
+tic
 assert(sortNodesByMaxNeighborDegree(T{2}{2}),[2, 1]')
 assert(sortNodesByMaxNeighborDegree(T{4}{2}),[4,3,6,5,2,1]')  
 assert(sortNodesByMaxNeighborDegree(edgeL2adj(T{10}{2})),[1, 3, 2]')
 assert(sortNodesByMaxNeighborDegree(T{13}{2}),[3, 2, 1]')
 assert(sortNodesByMaxNeighborDegree(adjL2adj(T{17}{2})),[3, 2, 1]')
+printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 
 
 % Testing closeness.m ............................
 printf('testing closeness.m\n')
+tic
 assert(closeness(T{4}{2})',[1/(1+1+2+3+3), 1/(1+1+2+3+3), 1/(1+1+1+2+2), 1/(1+1+1+2+2), 1/(1+1+2+3+3), 1/(1+1+2+3+3)])
 assert(closeness([0 1 1; 1 0 0; 1 0 0]),[0.5 1/3 1/3]')
 assert(closeness(T{13}{2}),[1/(1+1), 1/(1+1), 1/(1+1)]')
+printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 
 
 % Testing nodeBetweenness.m ......................
 printf('testing nodeBetweenness.m and nodeBetweennessFaster\n')
+tic
 assert(nodeBetweenness([0 1; 1 0]),[0 0])
 assert(nodeBetweennessFaster([0 1; 1 0]),[0 0])
 
@@ -1041,23 +1117,26 @@ while not(isConnected(adj)); adj = randomGraph(20,log(20)/20); end
 bw = nodeBetweenness(adj);
 bwF = nodeBetweennessFaster(adj);
 assert(norm(bw-bwF)<10^(-10))
+printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 
 
 % Testing edgeBetweenness.m ......................
 printf('testing edgeBetweenness.m\n')
-
+tic
 eb_bowtie = adj2edgeL(T{4}{2});
 eb_bowtie(:,3) = [1/30; 4/30; 1/30; 4/30; 4/30; 4/30; 9/30; 9/30; 4/30; 4/30; 4/30; 1/30; 4/30; 1/30];
 
 assert(edgeBetweenness(T{4}{2}),eb_bowtie)
 assert(edgeBetweenness(T{13}{2}),[2 1 1/6; 3 1 1/6; 1 2 1/6; 3 2 1/6; 1 3 1/6; 2 3 1/6])
 assert(edgeBetweenness([0 1 1 0; 1 0 1 0; 1 1 0 1; 0 0 1 0]),[2 1 1/12; 3 1 1/6; 1 2 1/12; 3 2 1/6; 1 3 1/6; 2 3 1/6; 4 3 3/12; 3 4 3/12])
+printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 
 
 % Testing eigenCentrality.m ......................
 printf('testing eigenCentrality.m\n')
+tic
 [v,~]=eig([0 1 1; 1 0 1; 1 1 0]);
 assert(eigenCentrality([0 1 1; 1 0 1; 1 1 0]),v(:,3))   % "3" is the number of nodes
 
@@ -1077,32 +1156,38 @@ adj = edgeL2adj( canonicalNets(randi(10)+2, 'cycle') );
 ec = v(:,size(adj,1));
 assert( eigenCentrality( adj ), ec )
 assert( norm( ec(1)*ones(length(ec),1) - ec) < 1*e^(-20) )
+printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 
 
 % Testing clustCoeff.m ...........................
 printf('testing clustCoeff.m\n')
+tic
 assert(clustCoeff(T{13}{2}),1)
 assert(clustCoeff(edgeL2adj(T{10}{2})),0)
 assert(clustCoeff(edgeL2adj(canonicalNets(randi(10)+5,'tree',2))),0)
 [aveC,C] = clustCoeff(T{4}{2});
 assert(aveC,(4+2/3)/6)
 assert(C, [1 1 1/3 1/3 1 1]')
+printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 
 
 % Testing transitivity.m .........................
 printf('testing transitivity.m\n')
+tic
 assert(clustCoeff(T{13}{2}),1)
 assert(clustCoeff(edgeL2adj(T{10}{2})),0)
 assert(clustCoeff(edgeL2adj(canonicalNets(randi(10)+5,'tree',2))),0)
 C = transitivity(T{4}{2});
 assert(C,0.6)
+printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 
 
 % testing weightedClustCoeff.m ...................
 printf('testing weightedClustCoeff.m\n')
+tic
 randint = randi(20);
 assert(length(weightedClustCoeff(randomGraph(randint+5,rand))),randint+5)
 
@@ -1113,11 +1198,13 @@ assert(wC, [0 0 0]')
 adj = [0 2 1; 2 0 1; 1 1 0];
 wC = weightedClustCoeff(adj);
 assert(wC, [1 1 1]')
+printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 
 
 % Testing pearson.m ..............................
 printf('testing pearson.m\n')
+tic
 assert(pearson( edgeL2adj(T{10}{2}) ),-1)
 assert(pearson( edgeL2adj(T{19}{2}) ),-1)
 assert( pearson( edgeL2adj( canonicalNets(randi(5)+5,'star') ) ) ,-1 )
@@ -1147,6 +1234,7 @@ assert(sMetric(T{13}{2}),2*12)
 assert(sMetric(T{4}{2}),2*41)
 assert(sMetric(edgeL2adj(T{11}{2})),4)
 assert(sMetric(T{1}{2}),1)
+printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 
 % ................................................
@@ -1156,6 +1244,7 @@ assert(sMetric(T{1}{2}),1)
 
 % Testing simpleDijkstra.m .......................
 printf('testing simpleDijkstra.m\n')
+tic
 assert(simpleDijkstra(T{4}{2},1),[0, 1, 1, 2, 3, 3])
 assert(simpleDijkstra(T{4}{2},3),[1, 1, 0, 1, 2, 2])
 
@@ -1164,10 +1253,12 @@ assert(simpleDijkstra(mat,1),[0, 3.4, 2.4, 1])
 
 assert(simpleDijkstra(edgeL2adj(T{11}{2}),1),[0, 1, 1])
 assert(simpleDijkstra(edgeL2adj(T{11}{2}),2),[inf, 0, inf])
+printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 
 % Testing dijkstra.m .............................
 printf('testing dijkstra.m\n')
+tic
 [d,p]=dijkstra(T{4}{2},1,5);
 assert(d,3)
 assert(p,[1,3,4,5])
@@ -1179,11 +1270,12 @@ assert(p,{[3,1],[3,2],[3]})
 [d,p] = dijkstra(T{18}{2},3,[]);
 assert(d,[2,1,0,1]);
 assert(p,{[3,2,1],[3,2],[3],[3,4]})
+printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 
 % Testing shortestPathDP.m .......................
 printf('testing shortestPathDP.m\n')
-
+tic
 [Jb,rb,J,r]=shortestPathDP(T{4}{2},1,3,size(bowtie,1));
 assert(Jb,1)
 assert(rb,[1,3])
@@ -1202,12 +1294,13 @@ assert(rb,[1,2])
 
 [Jb,rb,J,r]=shortestPathDP(edgeL2adj(T{11}{2}),2,3,3);
 assert(Jb,inf)
+printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 
 
 % Testing findAllShortestPaths.m .................
 printf('testing findAllShortestPaths.m\n')
-
+tic
 adjL = {}; adjL{1} = [2]; adjL{2} = [];  % 1-2 edge
 [allPaths, shortestPathLength] = findAllShortestPaths(adjL,1,2, 2, allPaths={});
 assert(shortestPathLength,1)
@@ -1256,29 +1349,32 @@ assert(shortestPathLength,2)
 assert(length(allPaths),2)
 assert(allPaths{1},'-3-2-1')
 assert(allPaths{2},'-3-4-1')
+printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 
 
 % Testing kneighbors.m ...........................
 printf('testing kneighbors.m\n')
-
+tic
 assert(kneighbors(T{4}{2},1,3),[1 2 3 4 5 6])
 assert(kneighbors(T{4}{2},3,1),[1 2 4])
 assert(kneighbors(T{13}{2},2,1),[1,3])
 assert(kneighbors(T{13}{2},1,2),[1,2,3])
+printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 
 % Testing kminNeighbors.m ........................
 fprintf('testing kminNeighbors.m\n')
-
+tic
 assert(kminNeighbors(T{4}{2},1,3),[5, 6])
 assert(kminNeighbors(T{4}{2},3,1),[1, 2, 4])
 assert(kminNeighbors(T{4}{2},3,2),[5, 6])
+printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 
 % Testing diameter.m .............................
 printf('testing diameter.m\n')
-
+tic
 assert(diameter(T{13}{2}),1)
 assert(diameter(T{4}{2}),3)
 
@@ -1289,22 +1385,24 @@ assert(diameter(adj),length(adj)-1)
 el=canonicalNets(randi(10)+5,'cycle');
 adj = edgeL2adj(el);
 assert(diameter(adj),floor(length(adj)/2))
+printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 
 
 % Testing avePathLength.m ........................
 printf('testing avePathLength.m\n')
-
+tic
 assert(avePathLength(T{4}{2}),(0+1+1+2+3+3 +0+1+2+3+3+ 0+1+2+2 +0+1+1 +0+1 +0)/15)
 assert(avePathLength(T{13}{2}),1)
 adj = edgeL2adj(canonicalNets(6,'line'));
 assert(avePathLength(adj),(0+1+2+3+4+5 +0+1+2+3+4 +0+1+2+3 +0+1+2+ 0+1 +0)/15)
+printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 
 
 % Testing smoothDiameter.m .......................
 printf('testing smoothDiameter.m\n')
-
+tic
 adj = [0 1; 0 0];
 while not(isConnected(adj)); adj = randomGraph(randi(10)+10,rand); end
 assert(diameter(adj),smoothDiameter(adj,1))  % should be the same when the fraction is 1
@@ -1326,34 +1424,38 @@ assert( smoothDiameter(T{4}{2}, 7/15), 1 )  % 7 node pairs at
 assert( smoothDiameter(T{4}{2}, 6/15), 0 )
 assert( smoothDiameter(T{4}{2}, 5/15), 0 )
 assert( smoothDiameter(T{4}{2}, 0), 0 )
+printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 
 % Testing vertexEccentricity.m ...................
 printf('testing vertexEccentricity.m\n')
-
+tic
 assert(vertexEccentricity(T{4}{2}),[3,3,2,2,3,3])
 assert(vertexEccentricity(T{13}{2}),[1,1,1])
 assert(vertexEccentricity(T{1}{2}),[1,inf])
 assert(vertexEccentricity(edgeL2adj(T{11}{2})), [1, inf, inf])
+printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 
 % Testing graphRadius.m ..........................
 printf('testing graphRadius.m\n')
-
+tic
 assert(graphRadius(T{4}{2}),2)
 assert(graphRadius(edgeL2adj(T{11}{2})),1)
 
 el = canonicalNets(randi(10)+10,'line');
 adj = edgeL2adj(el);
 assert(graphRadius(adj),(size(adj,1)-mod(size(adj,1),2))/2)
+printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 
 % Testing distanceDistribution.m .................
 printf('testing distanceDistribution.m\n')
-
+tic
 assert(distanceDistribution(T{4}{2}),[7/15, 4/15, 4/15, 0, 0])
 assert(distanceDistribution(T{13}{2}),[1, 0])
 assert(distanceDistribution(edgeL2adj(T{10}{2})),[2/3,1/3])
+printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 
 
@@ -1364,43 +1466,50 @@ assert(distanceDistribution(edgeL2adj(T{10}{2})),[2/3,1/3])
 
 % Testing numConnTriples.m .......................
 printf('testing numConnTriples.m\n')
+tic
 assert(numConnTriples(T{4}{2}),6)
 assert(numConnTriples(T{13}{2}),1)
 assert(numConnTriples(edgeL2adj(T{10}{2})),1)
 assert(numConnTriples(T{2}{2}),0)
 assert(numConnTriples(T{18}{2}),4)
+printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 
 % Testing numLoops.m .............................
 printf('testing numLoops.m\n')
+tic
 assert(numLoops(T{13}{2}),1)
 assert(numLoops(T{4}{2}),2)
 assert(numLoops(edgeL2adj(T{10}{2})),0)
 assert(numLoops(T{18}{2}),1)
+printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 
 % Testing loops3.m ...............................
 printf('testing loops3.m\n')
+tic
 assert(loops3(T{4}{2}),2)
 assert(loops3(T{18}{2}),0)
 assert(loops3(T{13}{2}),1)
 assert(loops3(edgeL2adj(canonicalNets(randi(10)+3,'btree'))),0)
 assert(loops3(edgeL2adj(canonicalNets(4,'trilattice'))),2)
+printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 
 % Testing loops4.m ...............................
 printf('testing loops4.m\n')
-
+tic
 assert(loops4(T{4}{2}),{})
 c4 = ones(4)-eye(4); % clique of size 4
 assert(loops4(c4),{'1-2-3-4'})
 c6 = ones(6)-eye(6); % clique of size 6
 assert(length(loops4(c6)),nchoosek(6,4))
+printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 
 % Testing numStarMotifs.m ........................
 printf('testing numStarMotifs.m\n')
-
+tic
 assert(numStarMotifs(T{9}{2},3),4+6)
 assert(numStarMotifs(T{9}{2},4),2)
 assert(numStarMotifs(T{9}{2},5),0)
@@ -1409,6 +1518,7 @@ assert(numStarMotifs(adj2adjL(T{13}{2}),3),3)
 assert(numStarMotifs(adj2adjL(T{13}{2}),2),6)
 
 assert(numStarMotifs(T{9}{2},1),6)   % trivial case
+printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 
 % ................................................
@@ -1417,45 +1527,54 @@ assert(numStarMotifs(T{9}{2},1),6)   % trivial case
 
 % Testing laplacianMatrix.m ......................
 printf('testing laplacianMatrix.m\n')
-
+tic
 assert(laplacianMatrix(T{4}{2}),[2 -1 -1 0 0 0; -1 2 -1 0 0 0; -1 -1 3 -1 0 0; 0 0 -1 3 -1 -1; 0 0 0 -1 2 -1; 0 0 0 -1 -1 2])
 assert(laplacianMatrix(T{13}{2}),[2 -1 -1; -1 2 -1; -1 -1 2])
+printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 
 
 % Testing graphSpectrum.m ........................
 printf('testing graphSpectrum.m\n')
+tic
 adj = randomGraph(randi(50)+10,rand);
 assert(length(graphSpectrum(adj)),length(adj))
 L = laplacianMatrix(adj);
 [~,d] = eig(L);
 assert( sort(graphSpectrum(adj)), sort(diag(d)) )
+printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 
 % Testing algebraicConnectivity.m ................
 printf('testing algebraicConnectivity.m\n')
+tic
 adj = randomGraph(randi(50)+10,rand);
 assert(length(algebraicConnectivity(adj)),1)
 assert( algebraicConnectivity(adj), graphSpectrum(adj)(length(adj)-1) ) 
+printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 
 % Testing fiedlerVector.m ........................
 printf('testing fiedlerVector.m\n')
+tic
 adj = randomGraph(randi(50)+10,rand);
 assert(length(fiedlerVector(adj)),length(adj))
 [V,D]=eig(laplacianMatrix(adj));
 [~,Y]=sort(diag(D));
 fv=V(:,Y(2));
 assert(fv, fiedlerVector(adj))
+printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 
 % Testing graphEnergy.m ..........................
 printf('testing graphEnergy.m\n')
+tic
 adj = randomGraph(randi(50)+10,rand);
 assert(length(graphEnergy(adj)),1)
 [~,e]=eig(adj);  % e are the eigenvalues
 G=sum(abs(real(diag(e))));
 assert(G, graphEnergy(adj))
+printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 
 % ................................................
@@ -1465,7 +1584,7 @@ assert(G, graphEnergy(adj))
 
 % Testing weightedRandomSample.m .................
 printf('testing weightedRandomSample.m\n');
-
+tic
 for x=1:20
   n=randi(10)+1;  % number of draws
   P = [1:randi(7)+10];  % population to draw from
@@ -1475,6 +1594,7 @@ for x=1:20
   assert(length(s),n)
   assert(intersect(P,s),unique(s))   % test that all draws exist in the population                                     
 end
+printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 
 
@@ -1485,7 +1605,7 @@ end
 
 % Testing canonicalNets.m ........................
 printf('testing canonicalNets.m\n');
-
+tic
 for x=1:10
   N = randi(50)+10;
   
@@ -1575,10 +1695,12 @@ for x=1:10
 
   
 end
+printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 
 % test kregular.m ................................
 printf('testing kregular.m\n');
+tic
 for x=1:30
   
   n = randi(20)+5;   % random integer between 6 and 25
@@ -1589,11 +1711,12 @@ for x=1:30
   assert(degrees(adj),k*ones(1,length(adj)))
 
 end
+printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 
 % Testing randomGraph.m ..........................
 printf('testing randomGraph.m\n');
-
+tic
 % testing the size of the graph
 randint = randi(20)+3;
 assert(size(randomGraph(randint),1),randint)
@@ -1623,11 +1746,12 @@ for x=1:50
   adj = randomGraph(randint,[],E);
   assert(numEdges(adj),E);
 end
+printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 
 % Testing randomDirectedGraph.m ..................
 printf('testing randomDirectedGraph.m\n');
-
+tic
 for i=1:30
   p=rand;
   n = randi(40)+40;
@@ -1637,11 +1761,12 @@ for i=1:30
   assert(sum(adj)==0 || isDirected(adj))
   assert(size(adj),[n,n]);
 end
+printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 
 % Testing graphFromDegreeSequence.m ..............
 printf('testing graphFromDegreeSequence.m\n')
-
+tic
 for x=1:40
   adj = [0 1; 0 0];
   while not(isConnected(adj)); adj = randomGraph(randi(50)+50,rand); end
@@ -1649,12 +1774,13 @@ for x=1:40
   assert(isSimple(adjr),true)
   assert(degrees(adj),degrees(adjr))
 end
+printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 
 
 % Testing randomGraphFromDegreeSequence.m ........
 printf('testing randomGraphFromDegreeSequence.m\n')
-
+tic
 for x=1:40
   
   adj = [0 1; 0 0];
@@ -1666,12 +1792,13 @@ for x=1:40
   assert(isSimple(adjr),true)
   assert(degrees(adj),degrees(adjr))
 end
+printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 
 
 % Testing randomGraphDegreeDist.m ................
 printf('testing randomGraphDegreeDist.m\n')
-
+tic
 N = randi(80)+30;
 adj = randomGraphDegreeDist(N,'uniform');
 assert(numNodes(adj),N)
@@ -1689,7 +1816,7 @@ assert(isSimple(adj),true)
 [xpdf,ypdf,xcdf,ycdf,logk,logx]=pdfCdfRank(degrees(adj),'noplot');
 plot(xpdf, ypdf, color = 'b')
 hold off; hold on;
-
+    
 adj = randomGraphDegreeDist(N,'binomial');
 assert(numNodes(adj),N)
 assert(isSimple(adj),true)
@@ -1697,6 +1824,7 @@ assert(isSimple(adj),true)
 [xpdf,ypdf,xcdf,ycdf,logk,logx]=pdfCdfRank(degrees(adj),'noplot');
 plot(xpdf, ypdf, color = 'y')
 hold off; hold on;
+
 
 adj = randomGraphDegreeDist(N,'exponential');
 assert(numNodes(adj),N)
@@ -1718,13 +1846,14 @@ assert(isempty(adj),true)
 
 adj = randomGraphDegreeDist(N,'anything here');
 assert(isempty(adj),true)
+printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 
 
 % Testing randomModularGraph.m ...................
 printf('testing randomModularGraph.m\n');
-
-for x=1:20
+tic
+for x=1:10
   N = randi(50)+10;
   c = randi(5)+1;
   [adj, modules] = randomModularGraph(N,c,0.2,4);
@@ -1754,7 +1883,7 @@ assert( modules, mods )
 
 ratio = [];
 
-for x=1:200
+for x=1:100
   
   mods = 4;
   N = 100;
@@ -1798,12 +1927,12 @@ end
 hist(ratio,20)
 title('supposed to be centered around 10')
 hold off;
-
+printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % .... end of test of randomModularGraph.m .......
 
 % Testing buildSmaxGraph.m .......................
 printf('testing buildSmaxGraph.m\n');
-
+tic
 for x=1:50
   adj  = [];
   while not(isConnected(adj)); adj = randomGraph(20,0.1); end
@@ -1818,20 +1947,24 @@ for x=1:50
   elmax2 = buildSmaxGraph(degrees(adj));
   assert(elmax2,elmax1)
 end
+printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 
 % Testing PriceModel.m ...........................
 printf('testing PriceModel.m\n')
+tic
 for x=1:20
   randint = randi(10)+10;
   adj = PriceModel(randint);
   assert(isDirected(adj),true)
   assert(numNodes(adj),randint)    
 end
+printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 
 % Testing preferentialAttachment.m ...............
 printf('testing preferentialAttachment.m\n')
+tic
 for x=1:10
   el = preferentialAttachment(randi(10)+10,1);
   adj = edgeL2adj(el);
@@ -1844,20 +1977,24 @@ for x=1:10
   assert(numEdges(adj),1+2*(length(adj)-2))
     
 end
+printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 
 % Testing exponentialGrowthModel.m ...............
 printf('testing exponentialGrowthModel.m\n')
+tic
 for x=1:10
   el = exponentialGrowthModel(randi(100));
   adj=edgeL2adj(el);
   assert(isConnected(adj),true)
   assert(isTree(adj),true)
 end
+printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 
 % Testing masterEquation.m .......................
 printf('testing masterEquation.m\n')
+tic
 for x=1:30
   randint = randi(100)+5;
   adj = masterEquationGrowthModel(randint,1,0);
@@ -1870,11 +2007,12 @@ for x=1:30
   assert(isSimple(adj),true)
   
 end
+printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 
 % Testing newmanGastner.m ........................
 printf('testing newmanGastner.m\n')
-
+tic
 for x=1:10
   N = randi(100)+10;
   el = newmanGastner(N,rand,[],'off');  % no plot
@@ -1882,21 +2020,25 @@ for x=1:10
   assert(numNodes(adj),N);
   assert(isSimple(adj),true)
 end
+printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 
 
 % Testing fabrikantModel.m .......................
 printf('testing fabrikantModel.m\n')
+tic
 for x=1:20
   adj = fabrikantModel(randi(30)+10,rand*10,'off');
   assert(isConnected(adj),true)
   assert(isTree(adj),true)
   assert(isSimple(adj),true)
 end
+printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 
 % Testing DoddsWattsSabel.m ......................
 printf('testing DoddsWattsSabel.m\n')
+tic
 for x=1:40
   randint = randi(50)+2;
   m = randi(round(randint/4));
@@ -1906,19 +2048,21 @@ for x=1:40
   assert(isConnected(adj),true)
   assert(isSimple(adj),true)  
 end
+printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 
 % Testing nestedHierarchiesModel.m ...............
 printf('testing nestedHierarchiesModel.m\n')
-
+tic
 el = nestedHierarchiesModel(640,3,[10, 20, 40],10);
 adj = edgeL2adj(el);
 assert(isSimple(adj));
+printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 
 % Testing forestFireModel.m ......................
 printf('testing forestFireModel.m\n');
-
+tic
 for x=1:20
   randint = randi(20)+5;
   L = forestFireModel(randint,rand,10*rand);
@@ -1927,6 +2071,7 @@ for x=1:20
   assert(randint,numNodes(L))
 
 end
+printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 
 % ................................................
@@ -1936,7 +2081,7 @@ end
 
 % Testing simpleSpectralPartitioning.m ...........
 printf('testing simpleSpectralPartitioning.m\n')
-
+tic
 for xx=1:50  % do the randomized test 50 times
   n = randi(99)+11;   % number of nodes
   adj = randomModularGraph(n,4,0.1,3);  % random graph with n nodes
@@ -1953,10 +2098,12 @@ for xx=1:50  % do the randomized test 50 times
   end
   assert( sort(allnodes), 1:n )
 end
+printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 
 % Testing newmanGirvan.m .........................
 printf('testing newmanGirvan.m\n')
+tic
 [modules, moduleHist, Q] = newmanGirvan(T{4}{2},2);
 assert(modules{1}==[1,2,3])
 assert(modules{2}==[4,5,6])
@@ -1970,11 +2117,12 @@ assert(modules{2}==[2])
 assert(moduleHist{1}==[1,2,3,4,5])
 assert(moduleHist{2}==[1,3,4,5])
 assert(abs(Q+0.31250)<10^(-5))
+printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 
 % Testing newmanEigenvectorMethod.m ..............
 printf('testing newmanEigenvectorMethod.m\n')
-
+tic
 modules = newmanEigenvectorMethod(T{4}{2});
 assert(length(modules),2)
 assert(modules{1},[4,5,6])
@@ -2014,11 +2162,12 @@ for x=1:50
   end
    
 end
+printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 
 % Testing newmanCommFast.m .......................
 printf('testing newmanCommFast.m\n')
-
+tic
 [gH,Q]=newmanCommFast(bowtie);
 close all;
 assert(max(Q),Q(6-1));
@@ -2028,12 +2177,13 @@ close all;
 assert(length(gH),length(Q))
 [~,ind]=max(Q);
 assert(length(gH{ind}),4)
+printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 
 % Testing modularityMetric.m .....................
 printf('testing modularityMetric.m\n')
-
-for i=1:20
+tic
+for i=1:10
   
   adj = [0 1; 0 0];
   num_modules = randi([2,5]);
@@ -2052,11 +2202,12 @@ for i=1:20
   assert(Q0,modularityMetric(modules0,adj))
  
 end
+printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 
 % Testing louvainCommunityFinding.m ..............
 printf('testing louvainCommunityFinding.m\n');
-
+tic
 extended_bowtie0 = [1 2; 2 3; 3 2; 3 4; 4 5; 5 6; 4 6; 6 7; 7 8; 7 9; 8 9];
 extended_bowtie = [];
 for row=1:size(extended_bowtie0,1)
@@ -2109,6 +2260,7 @@ Adj(30,31) = 1; Adj(31,30) = 1;
 
 [modules,inmodule]=louvainCommunityFinding(Adj);
 assert(length(modules),4)
+printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 
 
@@ -2119,6 +2271,7 @@ assert(length(modules),4)
 
 % Testing pdfCdfRank.m ...........................
 printf('testing pdfCdfRank.m\n');
+tic
 adj = randomGraph(randi(30)+30,0.2);
 [xp,yp,xc,yc,lk,lx] = pdfCdfRank(degrees(adj),'off');
 assert(length(xp),length(xc))
@@ -2130,13 +2283,16 @@ assert(length(xp),length(xc))
 assert(length(xp),length(yp))
 assert(length(yp),length(yc))
 assert(length(lk),length(lx))
+printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 
 % Testing el2geom.m ..............................
 fprintf('testing el2geom.m\n')
+tic
 [el,p] = newmanGastner(1000,0.5,[],'off');
 elnew = [];
 for e=1:size(el,1); elnew = [elnew; el(e,1), el(e,2), randi(9), p(el(e,1),1), p(el(e,1),2), p(el(e,2),1), p(el(e,2),2)]; end
 figure
 el2geom(elnew)
+printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................

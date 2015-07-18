@@ -21,19 +21,19 @@ adj = zeros(length(Nseq)); % initialize adjacency matrix
 
 old_sum = 0;
 cnt=0;
-  
+
 while sum(stubs)>0   % while no more stubs are left to connect
-  
-  if sum(stubs)==2 && cnt>5  % rewire the last edge when stuck
-    
+      
+  if cnt>5                       % if rewiring did not work 5 times
+      
     el = adj2edgeL(adj);
     ind = find(stubs>0);
-    
     
     if length(ind) == 1; elr = rewireThisEdge([el; ind(1) ind(1) 1],ind(1),ind(1));  end
     if length(ind) == 2;  elr = rewireThisEdge([el; ind(1) ind(2) 1; ind(2) ind(1) 1],ind(1),ind(2)); end
     
-    if isempty(elr)           % restart algorithm completely
+    if length(ind)>2 || isempty(elr)           % restart algorithm
+      printf('randomGraphFromDegreeSequence(): restarting ...\n')
       stubs = Nseq;
       adj = zeros(length(Nseq));
       old_sum = 0;
