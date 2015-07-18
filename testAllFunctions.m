@@ -1011,17 +1011,36 @@ assert(closeness(T{13}{2}),[1/(1+1), 1/(1+1), 1/(1+1)]')
 
 
 % Testing nodeBetweenness.m ......................
-printf('testing nodeBetweenness.m\n')
+printf('testing nodeBetweenness.m and nodeBetweennessFaster\n')
 assert(nodeBetweenness([0 1; 1 0]),[0 0])
+assert(nodeBetweennessFaster([0 1; 1 0]),[0 0])
+
 assert(nodeBetweenness([1 1; 0 0]),[0 0])
+assert(nodeBetweennessFaster([1 1; 0 0]),[0 0])
+
 assert(nodeBetweenness([0 1 1; 1 0 0; 1 0 0]),[1/3 0 0])
+assert(nodeBetweennessFaster([0 1 1; 1 0 0; 1 0 0]),[1/3 0 0])
+
 assert(nodeBetweenness(T{4}{2}),[0 0 0.4 0.4 0 0])
+assert(nodeBetweennessFaster(T{4}{2}),[0 0 0.4 0.4 0 0])
+
 x = edgeL2adj(canonicalNets(2*randi(10)+2,'cycle'));
 bw = nodeBetweenness(x);
 assert(bw(1)*ones(1,length(bw)),bw)  % the betweennesses should be all the same
-x = edgeL2adj(canonicalNets(2*randi(10)+1,'cycle'));
-bw = nodeBetweenness(x);
+bw = nodeBetweennessFaster(x);
 assert(bw(1)*ones(1,length(bw)),bw)  % the betweennesses should be all the same
+
+L={}; L{1}=[2]; L{2}=[1,3,4]; L{3}=[2,5]; L{4}=[2,5]; L{5}=[3,4,6]; L{6}=[5];
+adj = adjL2adj(L);
+bw = nodeBetweenness(adj);
+bwF = nodeBetweennessFaster(adj);
+assert(bw,bwF)
+
+adj = [];
+while not(isConnected(adj)); adj = randomGraph(20,log(20)/20); end
+bw = nodeBetweenness(adj);
+bwF = nodeBetweennessFaster(adj);
+assert(norm(bw-bwF)<10^(-10))
 % ................................................
 
 

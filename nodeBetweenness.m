@@ -2,6 +2,9 @@
 % Betweenness centrality measure: number of shortest paths running through a vertex.
 % 
 % Note 1: Valid for a general graph (multiple shortest paths possible).
+% Note 2: Currently this function is quite slow, because of
+%         findAllShortestPaths.m. This is especially true for dense
+%         graphs.
 %
 % INPUTS: adjacency or distances matrix (nxn)
 % OUTPUTS: betweeness vector for all vertices (1xn)
@@ -17,9 +20,11 @@ betw = zeros(1,n);
 adjL = adj2adjL(adj);
 
 for i=1:n
+    uB = simpleDijkstra(adj,i);
     for j=1:n
         if i==j; continue; end
-        [allPaths, ~] = findAllShortestPaths(adjL,i,j, allPaths={},path=[],upperBound=length(adjL)-1);
+
+        [allPaths, ~] = findAllShortestPaths(adjL,i,j, uB(j), allPaths={},path=[]);
         spaths(i,j) = length(allPaths);
         
         % for all paths in allPaths, parse out the path:
@@ -35,5 +40,5 @@ for i=1:n
     end  % end of j=1:n
 end      % end of i=1:n
     
-    
+% this last step is just additional normalization, and is arbitrary 
 betw=betw/(2*nchoosek(n,2));

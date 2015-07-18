@@ -38,6 +38,8 @@ for p=1:steps-1
   
 end
 
+
+
 [J_st,step_ind] = min(J(:,s));               % the shortest path (min cost) from s to t
 route_st = [s, route(step_ind,s).path];      % the shortest path route from s to t
 J=J(sort(1:min([n,steps]),'descend'),:);

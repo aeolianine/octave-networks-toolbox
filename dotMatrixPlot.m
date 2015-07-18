@@ -8,7 +8,7 @@
 %
 % Other routines used: degrees.m, sortNodesByMaxNeighborDegree.m,
 %                      eigenCentrality.m, newmanEigenvectorMethod.m,
-%                      nodeBetweenness.m, newmanGirvan.m, closeness.m
+%                      nodeBetweennessFaster.m, newmanGirvan.m, closeness.m
 % GB: last updated, April 14 2015
 
 function [] = dotMatrixPlot(adj)
@@ -19,7 +19,7 @@ markersize=3;
 deg = degrees(adj);
 
 Yd = sortNodesByMaxNeighborDegree(adj); % degree centrality
-[~, Yb] = sort(nodeBetweenness(adj)); % node betweenness centrality
+[~, Yb] = sort(nodeBetweennessFaster(adj)); % node betweenness centrality
 [~,Yec] = sort(eigenCentrality(adj)); % eigen-centrality
 [~,Yc] = sort(closeness(adj)); % closeness
 
