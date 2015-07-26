@@ -6,6 +6,7 @@
 % INPUTS: adjacency or distances matrix, nxn
 % OUTPUTS: betweeness vector for all vertices (1xn)
 %
+% Other routines used: kneighbors.m
 % GB: July 18 2015
 
 function betw = nodeBetweennessFaster(adj)
