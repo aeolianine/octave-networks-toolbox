@@ -7,7 +7,6 @@
 %                     plt='on'/'off', if [], then 'off' is default
 % OUTPUTS: generated network (adjacency matrix) and plot [optional]
 %
-% Other functions used: simpleDijkstra.m
 % GB: last updated: November 14, 2012
 
 
