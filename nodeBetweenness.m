@@ -9,7 +9,7 @@
 % INPUTS: adjacency or distances matrix (nxn)
 % OUTPUTS: betweeness vector for all vertices (1xn)
 %
-% Other routines used: numNodes.m, findAllShortestPaths.m
+% Other routines used: numNodes.m, adj2adjL.m, findAllShortestPaths.m
 % GB: July 3, 2014
 
 function betw = nodeBetweenness(adj)

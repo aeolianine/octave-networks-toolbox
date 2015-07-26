@@ -7,7 +7,7 @@
 % INPUTS: edge list, el (mx3) and number of rewirings, k
 % OUTPUTS: rewired edge list
 %
-% Other routines used: degrees.m
+% Other routines used: degrees.m, edgeL2adj.m
 % GB: last updated, Sep 27 2012
 
 function el = rewireAssort(el,k)

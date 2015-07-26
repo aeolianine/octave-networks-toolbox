@@ -6,6 +6,8 @@
 %
 % INPUTS: edge list, el and number of rewirings, k (integer)
 % OUTPUTS: rewired edge list
+%
+% Other routines used: degrees.m, edgeL2adj.m
 % GB: last updated, Sep 27 2012
 
 function el = rewireDisassort(el,k)
