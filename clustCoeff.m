@@ -7,7 +7,8 @@
 % OUTPUT: the average clustering coefficient (aveC) and the
 %         clustering coefficient vector C per node (where mean(C) = aveC)
 %
-% Other routines used: degrees.m, isDirected.m, kneighbors.m, numEdges.m, subgraph.m
+% Other routines used: degrees.m, isDirected.m, kneighbors.m,
+% numEdges.m, subgraph.m
 % GB, Last updated: February 7, 2015
 
 function [aveC,C] = clustCoeff(adj)

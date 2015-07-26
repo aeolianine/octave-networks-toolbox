@@ -12,7 +12,7 @@
 % INPUTs: adjancency matrix, nxn
 % OUTPUTs: modules, and node community labels (inmodule)
 %
-% Other routines used: numEdges.m, kneighbors.m
+% Other routines used: numEdges.m, numNodes.m, kneighbors.m
 % GB: last updated, Oct 17 2012
 
 function [modules,inmodule] = louvainCommunityFinding(adj)
