@@ -1,4 +1,4 @@
-% Checks whether a graph is regular, i.e. whether every node has the same degree.
+% Check whether a graph is regular, i.e. whether every node has the same degree.
 %
 % INPUTS: adjacency matrix, nxn
 % OUTPUTS: Boolean, 0 or 1
