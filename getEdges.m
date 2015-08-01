@@ -1,4 +1,4 @@
-% Returns the list of edges for graph varying representation types
+% Return the list of edges for varying graph representation types
 % Inputs: graph structure (matrix or cell or struct) and type of structure (string)
 % Outputs: edge list, mx3 matrix, where the third column is edge weight
 % 

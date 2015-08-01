@@ -1,4 +1,4 @@
-% Returns the complement of a graph
+% Return the complement of a graph
 % The complement graph has the same nodes, but edges where the original graph doesn't and vice versa.
 % 
 % INPUTs: adj - original graph adjacency matrix, nxn

@@ -1,5 +1,6 @@
-% Computes the average degree of a node in a graph, defined as
-% 2 times the number of edges divided by the number of nodes (every edge is counted in degrees twice).
+% Compute the average degree of a node in a graph, defined as
+% 2 times the number of edges divided by the number of nodes 
+%          (every edge is counted towards the degrees twice).
 %
 % Inputs: adjacency matrix, nxn
 % Outputs: float, the average degree, a number between 0 and max(sum(adj))

@@ -1,4 +1,4 @@
-% Returns the total number of edges given the adjacency matrix
+% Return the total number of edges given the adjacency matrix
 % INPUTs: adjacency matrix, nxn
 % OUTPUTs: m - total number of edges/links
 %

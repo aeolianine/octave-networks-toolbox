@@ -2,7 +2,8 @@
 % This is also called the line graph, adjoint graph or the edges adjacency
 % 
 % INPUTs: adjacency (neighbor) list representation of the graph (see adj2adjL.m)
-% OUTPUTs: adj (neighbor) list of the corresponding dual graph and cell array of edges
+% OUTPUTs: adj (neighbor) list of the corresponding dual graph and
+%          cell array of [original] edges, i.e. the new nodes
 %
 % Note: This routine only works for undirected, simple graphs.
 % GB: last updated, Sep 23 2012

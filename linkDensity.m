@@ -1,4 +1,4 @@
-% Computes the link density of a graph, defined as the number of edges divided by 
+% Compute the link density of a graph, defined as the number of edges divided by 
 % number_of_nodes(number_of_nodes-1)/2 where the latter is the maximum possible number of edges.
 %
 % Inputs: adjacency matrix, nxn

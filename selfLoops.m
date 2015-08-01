@@ -1,4 +1,4 @@
-% Counts the number of self-loops in the graph
+% Count the number of self-loops in the graph
 %
 % INPUT: adjacency matrix, nxn
 % OUTPUT: integer, number of self-loops

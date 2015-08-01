@@ -2,7 +2,7 @@
 % 
 % Note 1: For a directed graph, leaf nodes are those with a single incoming edge
 % Note 2: There could be other definitions of leaves, for example: farthest away from a given root node
-% Note 3: Nodes with self-loops are not considered leaf nodes.
+% Note 3: Nodes with self-loops are not considered to be leaf nodes.
 %
 % Input: adjacency matrix, nxn
 % Output: indices of leaf nodes

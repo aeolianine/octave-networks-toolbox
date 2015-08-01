@@ -1,10 +1,10 @@
-% Returns the list of nodes for varying graph representation types
+% Return the list of nodes for varying graph representation types
 % Inputs: graph structure (matrix or cell or struct) and type of structure (string)
 %        'type' can be: 'adjacency','edgelist','adjlist' (neighbor list),'incidence' (incidence matrix)
 % Note 1: only the edge list allows/returns non-consecutive node indexing
 % Note 2: no build-in error check for graph structure
 %
-% Example representations of a directed 3-loop: 1->2->3->1
+% Example representations of a directed 3-cycle: 1->2->3->1
 %           'adj' - [0 1 0; 0 0 1; 1 0 0]
 %           'adjlist' - {1: [2], 2: [3], 3: [1]}
 %           'edgelist' - [1 2; 2 3; 3 1] or [1 2 1; 2 3 1; 3 1 1] (1 is the edge weight)
