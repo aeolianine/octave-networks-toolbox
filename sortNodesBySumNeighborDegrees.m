@@ -1,4 +1,4 @@
-% Sort nodes by degree, and where there's equality, 
+% Sort nodes by degree, and when there's equality, 
 % by sum of neighbor degrees and then neighbors' neighbors degree and so on
 % Ideas from s-max algorithm by Li et al 2005 "Towards a theory of scale-free graphs"
 % and Guo, Chen, Zhou, "Fingerprint for Network Topologies"

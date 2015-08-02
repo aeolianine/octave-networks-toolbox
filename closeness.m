@@ -1,4 +1,4 @@
-% Computes the closeness centrality for every vertex: 1/sum(dist to all other nodes)
+% Compute the closeness centrality for every vertex: 1/sum(dist to all other nodes)
 %
 % INPUTs: adjacency matrix, nxn
 % OUTPUTs: vector of closeness centralities, nx1

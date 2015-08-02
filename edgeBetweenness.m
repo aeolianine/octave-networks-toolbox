@@ -1,4 +1,5 @@
-% Edge betweenness routine, based on shortest paths.
+% Edge betweenness routine, based on the number of
+%            shortest paths going through an edge.
 % Source: Newman, Girvan, "Finding and evaluating community structure in networks"
 % Note: Valid for undirected graphs only.
 %

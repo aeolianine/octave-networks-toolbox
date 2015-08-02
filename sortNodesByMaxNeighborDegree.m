@@ -1,4 +1,4 @@
-% Sort nodes by degree, and where there's equality, by maximum neighbor degree
+% Sort nodes by degree, and when there's equality, by maximum neighbor degree
 % Ideas from Guo, Chen, Zhou, "Fingerprint for Network Topologies"
 %
 % INPUTS: adjacency matrix, 0s and 1s, nxn
