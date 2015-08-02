@@ -2,7 +2,7 @@
 % a threshold fraction "p" of pairs of nodes are at distance at most
 %                       "d". Can be non-integer using interpolation.
 %
-% Idea: Leskovec et al, "Graphs over Time: Densiﬁcation Laws,
+% Idea: Leskovec et al, "Graphs over Time: Densification Laws,
 %                     Shrinking Diameters and Possible Explanations"
 %
 % Input: adjacency matrix of graph and diameter threshold, p in [0,1]

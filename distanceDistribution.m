@@ -6,7 +6,7 @@
 % obtained by using  ddist(i)=length(find(dij<=i)); in line 28 instead.
 %
 % INPUTS: adjacency matrix, (nxn)
-% OUTPUTS: distribution vector ((n-1)x1): {k_i} where k_i is the 
+% OUTPUTS: distribution vector (n-1)x1: {k_i} where k_i is the 
 %                 number of node pairs at a distance i, normalized
 %
 % Other routines used: simpleDijkstra.m
