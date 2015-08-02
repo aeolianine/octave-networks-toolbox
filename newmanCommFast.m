@@ -3,7 +3,7 @@
 %                   structure in networks", Mark Newman
 %
 % INPUTs: adjacency matrix, nxn
-% OUTPUTs: group (cluster) formation over time, 
+% OUTPUTs: sequential group (cluster) formation, 
 %          modularity metric for each cluster breakdown
 %
 % Other functions used: numEdges.m
