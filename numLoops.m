@@ -2,7 +2,7 @@
 %      where L = num loops, m - num edges, n - num nodes, 
 %                      c - number of connected components
 % This is also known as the "cyclomatic number": the number of edges
-% that need to be removed so that the graph doesn't have cycles.
+% that needs to be removed so that the graph doesn't have cycles.
 %
 % INPUTS: adjacency matrix, nxn
 % OUTPUTs: number of independent loops (or cyclomatic number)
