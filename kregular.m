@@ -1,5 +1,5 @@
 % Create a k-regular graph.
-% Note: No solution for k and n both odd.
+% Note: No solution if k and n are both odd.
 %
 % INPUTs: n - # nodes, k - degree of each vertex
 % OUTPUTs: el - edge list of the k-regular undirected graph
