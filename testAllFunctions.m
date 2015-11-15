@@ -796,15 +796,23 @@ assert(isConnected(transpose(T{5}{2})),false)
 assert(isConnected(T{13}{2}),true)
 assert(isConnected(T{14}{2}),true)
 
-for x=1:10
-  adj = [0 1; 0 0];                % initialize
-  while isConnected(adj); adj = randomGraph(randi(30)+5,0.001); end
+for x=1:100
+  % test the connected case
+  adj = [0 1; 1 0];                % initialize
+  N = randi(100)+5;
+  while isConnected(adj) || sum(adj)==0; adj = randomGraph(N,log(N)/N); end
   assert(isConnected(adj),false)
+  assert(abs(algebraicConnectivity(adj)) <10^(-10),true)
   assert(transpose(isConnected(adj)),false)
+  assert(length(findConnComp(adj))>1, true)
   
-  while not(isConnected(adj)); adj = randomGraph(randi(30)+5,0.2); end
+  % test the not-connected case
+  adj = [0 1; 0 0];                % initialize
+  while not(isConnected(adj)); adj = randomGraph(N,log(N)/N); end
   assert(isConnected(adj),true)
+  assert(algebraicConnectivity(adj)>0,true)
   assert(transpose(isConnected(adj)),true)
+  assert(length(findConnComp(adj))==1, true)
   
 end
 printf('---Time ellapsed: %3f in minutes.\n', toc/60)
