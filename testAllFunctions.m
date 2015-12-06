@@ -925,6 +925,12 @@ assert(isit,true)
 assert(A, 1)
 assert(B, [2 3])
 
+% test using the signless Laplacian
+[~,E] = eig(signlessLaplacian(edgeL2adj(T{10}{2})));
+isit1 = false;
+if sum( abs(diag(E))<10^(-10) )==1; isit1 = true; end
+assert(isit, isit1)
+
 even_cycle = canonicalNets(2*randi(10),'cycle');
 [isit, A, B] = isBipartite(edgeL2adjL(even_cycle));
 assert(isit,true)
@@ -932,9 +938,22 @@ assert(length(A), length(B))
 assert(mod(A,2), ones(1,length(A)))
 assert(mod(B,2), zeros(1,length(B)))
 
+% test using the signless Laplacian
+[~,E] = eig(signlessLaplacian(edgeL2adj(even_cycle)));
+isit1 = false;
+if sum( abs(diag(E))<10^(-10) )==1; isit1 = true; end
+assert(isit, isit1)
+
 odd_cycle = canonicalNets(2*randi(10)+1,'cycle');
 assert(isBipartite(edgeL2adjL(odd_cycle)),false)
 printf('---Time ellapsed: %3f in minutes.\n', toc/60)
+
+% test using the signless Laplacian
+[~,E] = eig(signlessLaplacian(edgeL2adj(odd_cycle)));
+isit1 = false;
+if sum( abs(diag(E))<10^(-10) )==1; isit1 = true; end
+assert(isBipartite(edgeL2adjL(odd_cycle)), isit1)
+
 % ................................................
 
 % ................................................
@@ -1538,6 +1557,14 @@ printf('testing laplacianMatrix.m\n')
 tic
 assert(laplacianMatrix(T{4}{2}),[2 -1 -1 0 0 0; -1 2 -1 0 0 0; -1 -1 3 -1 0 0; 0 0 -1 3 -1 -1; 0 0 0 -1 2 -1; 0 0 0 -1 -1 2])
 assert(laplacianMatrix(T{13}{2}),[2 -1 -1; -1 2 -1; -1 -1 2])
+printf('---Time ellapsed: %3f in minutes.\n', toc/60)
+% ................................................
+
+% Testing signlessLaplacian.m ......................
+printf('testing signlessLaplacian.m\n')
+tic
+assert(signlessLaplacian(T{4}{2}),[2 1 1 0 0 0; 1 2 1 0 0 0; 1 1 3 1 0 0; 0 0 1 3 1 1; 0 0 0 1 2 1; 0 0 0 1 1 2])
+assert(signlessLaplacian(T{13}{2}),[2 1 1; 1 2 1; 1 1 2])
 printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 

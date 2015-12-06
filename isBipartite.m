@@ -6,7 +6,7 @@
 % Outputs: true/false (boolean), empty set (if false) or two sets of vertices
 %
 % Note: This only works for undirected graphs.
-% GB: last updated, Sep 24, 2012
+% GB: last updated, Dec 6, 2015
 
 function [isit,A,B]=isBipartite(L)
 
@@ -45,3 +45,19 @@ while not(isempty(queue))
   % ............................................
   
 end
+
+
+% Alternative for isBipartite(), without returning 
+% the two vertex sets.
+%
+% function [isit] = isBipartite(adj)
+%
+%    # This function uses the signlessLaplacian() function.
+%    # Note that instead of checking directly for zeros,
+%    # due to numeric approximation - the code checks for
+%    # really small positive numbers instead.
+%
+%    [~,E] = eig(signlessLaplacian(adj));
+%    isit = true;
+%    if sum( abs(diag(E))>10^(-10) )==size(adj,1); isit = false; end
+
