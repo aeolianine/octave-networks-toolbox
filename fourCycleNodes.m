@@ -1,4 +1,4 @@
-% Find cycles of length 4 in a graph; 
+% Find cycles of length 4 in a graph and return the node indices 
 % Note 1: Quite basic and slow.
 % Note 2: Assumes undirected graph.
 % 
@@ -9,7 +9,7 @@
 % Other functions used: adj2adjL.m
 % GB: last updated, Oct 5 2012
 
-function l4 = loops4(adj)
+function l4 = fourCycleNodes(adj)
 
 n = size(adj,1); % number of nodes
 L = adj2adjL(adj); % adjacency list or list of neighbors

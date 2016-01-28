@@ -1523,16 +1523,28 @@ assert(loops3(edgeL2adj(canonicalNets(4,'trilattice'))),2)
 printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 
-% Testing loops4.m ...............................
-printf('testing loops4.m\n')
+% Testing fourCycleNodes.m ...............................
+printf('testing fourCycleNodes.m\n')
 tic
-assert(loops4(T{4}{2}),{})
+assert(fourCycleNodes(fourCycle), {'1-2-3-4'})
+assert(fourCycleNodes(T{4}{2}),{})
 c4 = ones(4)-eye(4); % clique of size 4
-assert(loops4(c4),{'1-2-3-4'})
+assert(fourCycleNodes(c4),{'1-2-3-4'})
 c6 = ones(6)-eye(6); % clique of size 6
-assert(length(loops4(c6)),nchoosek(6,4))
+assert(length(fourCycleNodes(c6)),nchoosek(6,4))
 printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
+
+% Testing fourCycles.m ...........................
+printf('testing fourCycles.m\n')
+tic
+assert(fourCycles(fourCycle), 1)
+assert(fourCycles(T{4}{2}),0)
+assert(fourCycles(c4),3)
+c6 = ones(6)-eye(6); % clique of size 6
+printf('---Time ellapsed: %3f in minutes.\n', toc/60)
+
+# ................................................
 
 % Testing numStarMotifs.m ........................
 printf('testing numStarMotifs.m\n')
