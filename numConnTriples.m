@@ -4,7 +4,7 @@
 % INPUTs: adjacency matrix, nxn
 % OUTPUTs: integer - number of connected triples
 %
-% Other routines used: kneighbors.m, loops3.m
+% Other routines used: kneighbors.m, cycles3.m
 % GB: last updated, October 4, 2012
 
 function c=numConnTriples(adj)
@@ -17,7 +17,7 @@ for i=1:length(adj)
     c=c+nchoosek(length(neigh),2);
 end
 
-c=c-2*loops3(adj); % due to the symmetry triangles repeat 3 times
+c=c-2*cycles3(adj); % due to the symmetry triangles repeat 3 times
                    %                        in the nchoosek count
 
 
@@ -35,4 +35,4 @@ c=c-2*loops3(adj); % due to the symmetry triangles repeat 3 times
 %   c = c + nchoosek(length(neigh),2);
 % end
 % 
-% c = c - 2*loops3(adjL2adj(L));
+% c = c - 2*cycles3(adjL2adj(L));

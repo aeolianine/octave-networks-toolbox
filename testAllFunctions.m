@@ -1512,35 +1512,35 @@ assert(numLoops(T{18}{2}),1)
 printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 
-% Testing loops3.m ...............................
-printf('testing loops3.m\n')
+% Testing cycles3.m ...............................
+printf('testing cycles3.m\n')
 tic
-assert(loops3(T{4}{2}),2)
-assert(loops3(T{18}{2}),0)
-assert(loops3(T{13}{2}),1)
-assert(loops3(edgeL2adj(canonicalNets(randi(10)+3,'btree'))),0)
-assert(loops3(edgeL2adj(canonicalNets(4,'trilattice'))),2)
+assert(cycles3(T{4}{2}),2)
+assert(cycles3(T{18}{2}),0)
+assert(cycles3(T{13}{2}),1)
+assert(cycles3(edgeL2adj(canonicalNets(randi(10)+3,'btree'))),0)
+assert(cycles3(edgeL2adj(canonicalNets(4,'trilattice'))),2)
 printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 
-% Testing fourCycleNodes.m ...............................
-printf('testing fourCycleNodes.m\n')
+% Testing cycle4nodes.m ...............................
+printf('testing cycle4nodes.m\n')
 tic
-assert(fourCycleNodes(fourCycle), {'1-2-3-4'})
-assert(fourCycleNodes(T{4}{2}),{})
+assert(cycle4nodes(fourCycle), {'1-2-3-4'})
+assert(cycle4nodes(T{4}{2}),{})
 c4 = ones(4)-eye(4); % clique of size 4
-assert(fourCycleNodes(c4),{'1-2-3-4'})
+assert(cycle4nodes(c4),{'1-2-3-4'})
 c6 = ones(6)-eye(6); % clique of size 6
-assert(length(fourCycleNodes(c6)),nchoosek(6,4))
+assert(length(cycle4nodes(c6)),nchoosek(6,4))
 printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 
-% Testing fourCycles.m ...........................
-printf('testing fourCycles.m\n')
+% Testing cycles4.m ...........................
+printf('testing cycles4.m\n')
 tic
-assert(fourCycles(fourCycle), 1)
-assert(fourCycles(T{4}{2}),0)
-assert(fourCycles(c4),3)
+assert(cycles4(fourCycle), 1)
+assert(cycles4(T{4}{2}),0)
+assert(cycles4(c4),3)
 c6 = ones(6)-eye(6); % clique of size 6
 printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 
