@@ -1502,13 +1502,13 @@ assert(numConnTriples(T{18}{2}),4)
 printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 
-% Testing numLoops.m .............................
-printf('testing numLoops.m\n')
+% Testing numCycles.m .............................
+printf('testing numCycles.m\n')
 tic
-assert(numLoops(T{13}{2}),1)
-assert(numLoops(T{4}{2}),2)
-assert(numLoops(edgeL2adj(T{10}{2})),0)
-assert(numLoops(T{18}{2}),1)
+assert(numCycles(T{13}{2}),1)
+assert(numCycles(T{4}{2}),2)
+assert(numCycles(edgeL2adj(T{10}{2})),0)
+assert(numCycles(T{18}{2}),1)
 printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 
