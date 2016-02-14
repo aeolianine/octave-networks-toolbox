@@ -1,0 +1,51 @@
+% Function to find cycles of size 3.
+% Note 1: Works for directed and undirected graphs.
+% Note 2: Very slow, runs at O(N^3) time with brute force but works
+%
+% INPUTs: adjacency matrix, (square matrix of zeros and ones)
+% OUTPUTs: list (cell) of 3-cycles;
+% 
+% Erdem Yilmaz, January 20, 2016
+
+
+function res = loops3rev2(A)
+
+
+sA = size(A);
+if (sA(1) ~= sA(2))
+    disp('loops3rev(): Error - Input must be an adjacency matrix.');
+    return;
+end
+
+m=sA(1)^2;
+c=0;
+tloops = {};
+
+for i = 1:sA(1)
+    for j = 1:sA(1)
+        for k = 1:sA(1)
+
+           if A(i,j)==1 && A(j,k)==1 && A(k,i)==1
+
+               	du = sort([i j k]);
+               	du = strcat( num2str(du(1)),'-',num2str(du(2)),'-',num2str(du(3)) )
+
+                if sum(ismember(tloops,du))==0
+                    if (i~=k&&k~=j)
+                        c=c+1;
+                        tloops{c} = du;    
+                        disp(tloops{c})
+                    end
+
+                end
+                      
+           end
+        end
+    end
+end
+res = tloops;
+if (c==0)
+     disp('No cycles of size three.');
+else
+    disp(strcat('Number of 3-cycles:',num2str(c)));
+end
