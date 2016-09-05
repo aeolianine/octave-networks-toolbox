@@ -62,6 +62,8 @@ T{18} = {'4-cycle', fourCycle, 'adjacency', 1:4, [1 2; 1 4; 2 1; 2 3; 3 2; 3 4; 
 star = canonicalNets(5,'star');
 T{19} = {'5-star', star, 'edgelist', 1:5, [1 2; 1 3; 1 4; 1 5; 2 1; 3 1; 4 1; 5 1], 5, 4};
 
+
+
 % add another graph test here ....
 % ................................................
 
@@ -1522,6 +1524,23 @@ assert(cycles3(edgeL2adj(canonicalNets(randi(10)+3,'btree'))),0)
 assert(cycles3(edgeL2adj(canonicalNets(4,'trilattice'))),2)
 printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
+
+
+% Testing loops3rev2.m ...............................
+printf('testing loops3rev2.m\n')
+tic
+assert(loops3rev2(T{4}{2}),{'1-2-3','4-5-6'})
+assert(loops3rev2(T{18}{2}),{})
+assert(loops3rev2(T{13}{2}),{'1-2-3'})
+assert(loops3rev2(edgeL2adj(canonicalNets(randi(10)+3,'btree'))),{})
+assert(loops3rev2(edgeL2adj(canonicalNets(4,'trilattice'))),{'1-2-4','1-3-4'})
+assert(loops3rev2(T{16}{2}),{'1-2-3'})
+assert(loops3rev2(fourCycle),{})
+
+
+printf('---Time ellapsed: %3f in minutes.\n', toc/60)
+% ................................................
+
 
 % Testing cycle4nodes.m ...............................
 printf('testing cycle4nodes.m\n')
