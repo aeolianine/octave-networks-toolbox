@@ -15,7 +15,7 @@
 % OUTPUTs: a list {} of all shortest paths from "s" to "e", 
 %                                shorter than "upperBound"
 %
-% Note: Uses also kneighbors.m, DFS.m.
+% Other routines used: kneighbors.m, DFS.m
 % GB: last updated Oct 27 2014
 
 

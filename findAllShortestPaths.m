@@ -12,6 +12,7 @@
 % Note 1: Works for a un/directed, unweighted graph.
 % Note 2: This function uses recursion. It can be quite slow for
 %         dense graphs.
+% Other routines used: findAllShortestPaths.m
 % GB: last updated, July 15, 2015
 
 function [allPaths, upperBound] = findAllShortestPaths(adjL,s,t,upperBound, allPaths={}, path = [])

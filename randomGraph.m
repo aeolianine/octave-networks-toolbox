@@ -7,7 +7,7 @@
 %          E - fixed number of edges; if specified, p is irrelevant
 % OUTPUTS: adj - adjacency matrix of generated graph (symmetric), nxn
 %
-% Other routines: numEdges.m
+% Other routines used: numEdges.m
 % GB: last updated, Oct 20, 2012
 
 function adj = randomGraph(n,p,E)

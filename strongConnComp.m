@@ -10,6 +10,7 @@
 % OUTPUTs: updated tarjan.m variables: S, ind, v, GSCC
 % 
 % Note: Contains recursion.
+% Other routines used: strongConnComp.m
 % GB: last updated, Sep 22 2012
 
 function [GSCC,S,ind,v]=strongConnComp(vi,S,ind,v,L,GSCC)
