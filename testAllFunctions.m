@@ -363,7 +363,7 @@ printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 printf('testing multiEdges.m\n')
 tic
 assert(multiEdges(T{3}{2}),1)
-assert(multiEdges([0 2 1; 2 0 1; 1 1 0],1))  % triangle with one double edge
+assert(multiEdges([0 2 1; 2 0 1; 1 1 0]),1)  % triangle with one double edge
 assert(multiEdges([0 0 1; 2 0 0; 0 1 0]),1)  % directed triangle with 1 double edge
 assert(multiEdges(randomGraph(randi(15))),0)
 assert(multiEdges([0 0 1; 2 0 0; 0 2 0]),2)  % directed triangle with 2 double edges
@@ -446,7 +446,7 @@ printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % Testing giantComponent.m ......................
 printf('testing giantComponent.m\n')
 tic
-assert(giantComponent([0 1 0; 1 0 0; 0 0 0],3),[0 1; 1 0])
+assert(giantComponent([0 1 0; 1 0 0; 0 0 0]),[0 1; 1 0])
 
 clear modules
 modules{1}=[0];
@@ -977,9 +977,9 @@ assert(deg,[2 1 1])
 assert(indeg,[0 1 1])
 assert(outdeg,[2 0 0])
 
-assert(degrees(T{13}{2}, [2 2 2]))
-assert(degrees(T{14}{2}, [3 3 2]))
-assert(degrees(T{18}{2}, [3 3 3 3]))
+assert(degrees(T{13}{2}), [2 2 2])
+assert(degrees(T{14}{2}), [4 4 2])  % loops are counted twice
+assert(degrees(T{18}{2}), [2 2 2 2])
 
 assert([4 4 4],degrees([0 2 1; 0 0 1; 1 1 0]))
 printf('---Time ellapsed: %3f in minutes.\n', toc/60)
@@ -1242,7 +1242,7 @@ assert( pearson( edgeL2adj( canonicalNets(randi(5)+5,'star') ) ) ,-1 )
 for i=1:50
   if isComplete(adj); continue; end
   adj = randomGraph(randi(20)+3,rand);
-  assert( abs(pearson(adj)-pearsonW(adj))<10**(-6)  )
+  assert( abs(pearson(adj)-pearsonW(adj))<10^(-6)  )
 end
 % ................................................
 
