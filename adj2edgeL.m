@@ -3,15 +3,16 @@
 % INPUTS: adjacency matrix: nxn
 % OUTPUTS: edge list: mx3
 %
-% GB: last updated, Sep 24, 2012
+% Last updated: May 20, 2023
 
-function el=adj2edgeL(adj)
+function el = adj2edgeL(adj)
 
-n=length(adj); % number of nodes
-edges=find(adj>0); % indices of all edges
+    n = length(adj); % number of nodes
+    edges = find(adj > 0); % indices of all edges
 
-el=[];
-for e=1:length(edges)
-  [i,j]=ind2sub([n,n],edges(e)); % node indices of edge e  
-  el=[el; i j adj(i,j)];
-end
+    el = [];
+
+    for e = 1:length(edges)
+        [i, j] = ind2sub([n, n], edges(e)); % node indices of edge e
+        el = [el; i j adj(i, j)];
+    end

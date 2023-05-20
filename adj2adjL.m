@@ -5,10 +5,12 @@
 % INPUT: an adjacency matrix, nxn
 % OUTPUT: cell structure for adjacency list: x{i_1}=[j_1,j_2 ...]
 %
-% GB: last updated, September 24 2012
+% Last updated: May 20 2023
 
 function L = adj2adjL(adj)
 
-L=cell(length(adj),1);
+    L = cell(length(adj), 1);
 
-for i=1:length(adj); L{i}=find(adj(i,:)>0); end
+    for i = 1:length(adj)
+        L{i} = find(adj(i, :) > 0);
+    end

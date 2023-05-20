@@ -1,4 +1,4 @@
-octave-networks-toolbox: A set of graph/networks analysis functions in Octave, 2012-2015
+octave-networks-toolbox: A set of graph/networks analysis functions in Octave, 2012-2023
 
 Quick description
 -----------------
@@ -10,7 +10,7 @@ The original (2006-2011) version of these routines was written in Matlab, and is
 
 Installation
 ------------
-The code currently runs on GNU Octave version 3.6.4 with Gnuplot 4.6.3 (OSX) and GNU Octave 3.8.1 and 4.6.4 (Linux/Ubuntu). No specific library installation necessary. Dependencies between functions are documented in the function headers. The routines can be called directly from the Octave prompt, either in the same directory or from anywhere if the toolbox folder is added to the path. For example:
+The code currently runs on GNU Octave version 6.3.0. No specific library installation necessary. Dependencies between functions are documented in the function headers. The routines can be called directly from the Octave prompt, either in the same directory or from anywhere if the toolbox folder is added to the path. For example:
 
 octave:1> # running numNodes.m
 octave:1> numNodes([0 1 1; 1 0 1; 1 1 0])
@@ -22,7 +22,7 @@ With newer versions of Matlab, the Octave branch may not always be Matlab-compat
 
 Authorship
 ----------
-This code was originally written and posted by Gergana Bounova. It is undergoing continuous expansion and development. Collaborators are very welcome. Thank you for the many comments and bug reports so far! Contributions via email are usually mentioned in the function header. Contact via github/email for comments, questions, suggestions, corrections or simply fork.
+This code was originally written and posted by Gergana Bounova. It is undergoing continuous expansion and development. Collaborators are very welcome. Thank you for the many comments and bug reports so far! Contributions via email are usually mentioned in the function header. Please use github for comments, questions, suggestions, issues, bugs or simply fork.
 
 Organization
 ------------
@@ -38,7 +38,7 @@ If you want to cite this code, you can use DOI: 10.5281/zenodo.22398 (http://dx.
 
 License/Copyright
 -----------------
-Copyright (c) 2013-2015, Massachusetts Institute of Technology.
+Copyright (c) 2013-2023, Massachusetts Institute of Technology.
 All rights reserved.
 Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
 
