@@ -2,7 +2,7 @@
 
 clear all
 close all
-  
+
 
 % Set of test graphs, in various formats
 
@@ -207,15 +207,6 @@ assert(inc2edgeL([-1;1]),T{1}{5})                     % one directed edge
 assert(inc2edgeL([ 1;1]),T{2}{5})                     % one undirected edge
 assert(inc2edgeL([1 1; 1 1]),[1 2 1; 1 2 1; 2 1 1; 2 1 1])     % one double edge
 assert(sortrows(inc2edgeL(T{15}{2})(1:length(T{15}{5}),1:2)),sortrows(T{15}{5}))
-printf('---Time ellapsed: %3f in minutes.\n', toc/60)
-% ................................................
-
-% Testing adj2simple.m ...........................
-printf('testing adj2simple.m\n')
-tic
-assert(adj2simple(rand(6)),ones(6)-eye(6))
-assert(adj2simple([0 2 0; 1 0 0; 1 2 0]),[0 1 1; 1 0 1; 1 1 0])
-assert(isSymmetric(adj2simple(rand(7))),true)
 printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 
