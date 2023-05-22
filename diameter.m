@@ -4,12 +4,13 @@
 % OUTPUTS: network diameter
 %
 % Other routines used: simpleDijkstra.m
-% GB: last updated, Oct 8 2012
+% Last updated: Oct 8 2012
 
 function diam = diameter(adj)
 
-diam=0;
-for i=1:size(adj,1)
-    d=simpleDijkstra(adj,i);
-    diam = max([max(d),diam]);
-end
+    diam = 0;
+
+    for i = 1:size(adj, 1)
+        d = simpleDijkstra(adj, i);
+        diam = max([max(d), diam]);
+    end
