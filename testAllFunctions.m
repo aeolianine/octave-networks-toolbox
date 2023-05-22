@@ -210,13 +210,6 @@ assert(sortrows(inc2edgeL(T{15}{2})(1:length(T{15}{5}),1:2)),sortrows(T{15}{5}))
 printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 
-% Testing edgeL2simple.m .........................
-printf('testing edgeL2simple.m\n')
-tic
-assert(length(edgeL2simple([1 1 1; 2 2 1; 3 3 1])),0)
-assert(sortrows(edgeL2simple([1 2 1; 1 3 2; 4 5 1.4])),[1 2 1; 1 3 1; 2 1 1; 3 1 1; 4 5 1; 5 4 1])
-printf('---Time ellapsed: %3f in minutes.\n', toc/60)
-% ................................................
 
 % Testing symmetrize.m ...........................
 printf('testing symmetrize.m\n')
@@ -246,17 +239,6 @@ end
 
 assert(sortrows(symmetrizeEdgeL(T{1}{5}))(1:2,1:2), sortrows(T{2}{5})(1:2,1:2))
 assert(sortrows(symmetrizeEdgeL(T{6}{5}))(1:14,1:2), sortrows(T{4}{5})(1:14,1:2) )
-printf('---Time ellapsed: %3f in minutes.\n', toc/60)
-% ................................................
-
-% Testing addEdgeWeights.m .......................
-fprintf('testing addEdgeWeights.m\n')
-tic
-assert([1 2 2; 1 3 1; 3 4 3], addEdgeWeights([1 2 1; 1 2 1; 1 3 1; 3 4 2; 3 4 1]))
-assert([1 2 2; 2 3 4], addEdgeWeights([1 2 2; 2 3 4]))
-assert([1 2 1; 2 1 1], addEdgeWeights([1 2 1; 2 1 1]))
-assert([1 2 1; 2 1 1], addEdgeWeights([1 2 1; 2 1 1]))
-assert([1 2 1; 2 1 2], addEdgeWeights([1 2 1; 2 1 1; 2 1 1]))
 printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 
@@ -1639,22 +1621,6 @@ printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 
 
-% Testing weightedRandomSample.m .................
-printf('testing weightedRandomSample.m\n');
-tic
-for x=1:20
-  n=randi(10)+1;  % number of draws
-  P = [1:randi(7)+10];  % population to draw from
-  W = rand(1,length(P));
-  W = W/sum(W);         % normalize to create weights that sum to 1
-  s = weightedRandomSample(n,P,W);
-  assert(length(s),n)
-  assert(intersect(P,s),unique(s))   % test that all draws exist in the population                                     
-end
-printf('---Time ellapsed: %3f in minutes.\n', toc/60)
-% ................................................
-
-
 % ................................................
 % ......... graph models .........................
 % ................................................
@@ -2081,18 +2047,6 @@ printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 
 
-% Testing fabrikantModel.m .......................
-printf('testing fabrikantModel.m\n')
-tic
-for x=1:20
-  adj = fabrikantModel(randi(30)+10,rand*10,'off');
-  assert(isConnected(adj),true)
-  assert(isTree(adj),true)
-  assert(isSimple(adj),true)
-end
-printf('---Time ellapsed: %3f in minutes.\n', toc/60)
-% ................................................
-
 % Testing DoddsWattsSabel.m ......................
 printf('testing DoddsWattsSabel.m\n')
 tic
@@ -2348,7 +2302,9 @@ fprintf('testing el2geom.m\n')
 tic
 [el,p] = newmanGastner(1000,0.5,[],'off');
 elnew = [];
-for e=1:size(el,1); elnew = [elnew; el(e,1), el(e,2), randi(9), p(el(e,1),1), p(el(e,1),2), p(el(e,2),1), p(el(e,2),2)]; end
+for e=1:size(el,1); 
+  elnew = [elnew; el(e,1), el(e,2), randi(9), p(el(e,1),1), p(el(e,1),2), p(el(e,2),1), p(el(e,2),2)]; 
+end
 figure
 el2geom(elnew)
 printf('---Time ellapsed: %3f in minutes.\n', toc/60)

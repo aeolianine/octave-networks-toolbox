@@ -7,7 +7,7 @@
 % OUTPUTs: w - betweenness per edge, mx3
 %
 % Other routines used: adj2edgeL.m, numNodes.m, numEdges.m, kneighbors.m
-% Last modified, Sep 29, 2012
+% Last modified: Sep 29, 2012
 
 function ew = edgeBetweenness(adj)
 
@@ -17,11 +17,13 @@ function ew = edgeBetweenness(adj)
 
     ew = zeros(size(el, 1), 3); % edge betweenness - output
 
-    for s = 1:n% across all (source) nodes
+    for s = 1:n % across all (source) nodes
 
         % compute the distances and weights starting at source node i
-        d = inf(n, 1); w = inf(n, 1);
-        d(s) = 0; w(s) = 1; % source node distance and weight
+        d = inf(n, 1); 
+        w = inf(n, 1);
+        d(s) = 0; 
+        w(s) = 1; % source node distance and weight
         queue = [s]; % add to queue
         visited = [];
 
@@ -30,7 +32,7 @@ function ew = edgeBetweenness(adj)
             visited = [visited j];
             neigh = kneighbors(adj, j, 1); % find all adjacent nodes, 1 step away
 
-            for x = 1:length(neigh)% add to queue if unvisited
+            for x = 1:length(neigh) % add to queue if unvisited
                 nei = neigh(x);
 
                 if isempty(find(visited == nei)) && isempty(find(queue == nei));
@@ -43,10 +45,10 @@ function ew = edgeBetweenness(adj)
 
                 nei = neigh(x);
 
-                if d(nei) == inf% not assigned yet
+                if d(nei) == inf % not assigned yet
                     d(nei) = 1 + d(j);
                     w(nei) = w(j);
-                elseif d(nei) < inf && d(nei) == d(j) + 1% assigned already, add the new path
+                elseif d(nei) < inf && d(nei) == d(j) + 1 % assigned already, add the new path
                     w(nei) = w(nei) + w(j);
                 elseif d(nei) < inf && d(nei) < d(j) + 1
                     'do nothing';
@@ -95,7 +97,8 @@ function ew = edgeBetweenness(adj)
             for l = 1:length(leaves)
                 leaf = leaves(l);
                 neigh = kneighbors(adj, leaf, 1);
-                up_neigh = []; down_neigh = [];
+                up_neigh = []; 
+                down_neigh = [];
 
                 for x = 1:length(neigh)
 
@@ -127,7 +130,9 @@ function ew = edgeBetweenness(adj)
 
         end
 
-        for e = 1:size(ew, 1); ew(e, 3) = ew(e, 3) + eww(e, 3); end
+        for e = 1:size(ew, 1)
+            ew(e, 3) = ew(e, 3) + eww(e, 3);
+        end
 
     end
 

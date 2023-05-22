@@ -24,7 +24,7 @@ function allPaths = DFS(graph, s, e, allPaths = {}, path = [], upperBound = 5)
 
     if s == e
 
-        if length(path) - 1 <= upperBound% this can be modified to include edge weights [(1,2,{}),..]
+        if length(path) - 1 <= upperBound % this can be modified to include edge weights [(1,2,{}),..]
             allPaths{length(allPaths) + 1} = path;
         end
 
@@ -38,7 +38,7 @@ function allPaths = DFS(graph, s, e, allPaths = {}, path = [], upperBound = 5)
 
                 node = kneigh(node);
 
-                if length(find(path == node)) == 0% avoid cycles
+                if length(find(path == node)) == 0 % avoid cycles
                     allPaths = DFS(graph, node, e, allPaths, path, upperBound);
                 end
 

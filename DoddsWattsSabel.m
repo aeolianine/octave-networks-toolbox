@@ -24,10 +24,13 @@ function adj = DoddsWattsSabel(N, b, m, lam, ksi)
 
     while edges < m
         % pick two nodes at random
-        ind1 = randi(N); ind2 = randi(N);
+        ind1 = randi(N); 
+        ind2 = randi(N);
 
         % if same node or already connected, keep going
-        if ind1 == ind2 || adj(ind1, ind2) + adj(ind2, ind1) > 0; continue; end
+        if ind1 == ind2 || adj(ind1, ind2) + adj(ind2, ind1) > 0;
+            continue;
+        end
 
         % find di,dj and Dij
         [d1, path1] = dijkstra(adj0, ind1, 1); % adjacency, source, target
@@ -41,10 +44,8 @@ function adj = DoddsWattsSabel(N, b, m, lam, ksi)
 
                 di = p - 1; dj = p2 - 1; % di+dj is the the distance from ind1
                 % to ind2 along the backbone hierarchy
-                Dij = length(path1(p:length(path1))) - 1; % the level of the
-                % highest common
-                % node on the path
-                % to the root
+                Dij = length(path1(p:length(path1))) - 1; 
+                % the level of the highest common node on the path to the root
                 break
             end
 

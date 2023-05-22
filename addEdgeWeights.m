@@ -23,3 +23,11 @@ function elc = addEdgeWeights(el)
         end
 
     end
+
+
+%!test
+%!assert([1 2 2; 1 3 1; 3 4 3], addEdgeWeights([1 2 1; 1 2 1; 1 3 1; 3 4 2; 3 4 1]))
+%!assert([1 2 2; 2 3 4], addEdgeWeights([1 2 2; 2 3 4]))
+%!assert([1 2 1; 2 1 1], addEdgeWeights([1 2 1; 2 1 1]))
+%!assert([1 2 1; 2 1 1], addEdgeWeights([1 2 1; 2 1 1]))
+%!assert([1 2 1; 2 1 2], addEdgeWeights([1 2 1; 2 1 1; 2 1 1]))

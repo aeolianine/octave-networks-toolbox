@@ -21,7 +21,10 @@ function [aveC, C] = clustCoeff(adj)
     % multiplication change in the clust coeff formula
     % to reflect the edge count for directed/undirected graphs
     coeff = 2;
-    if isDirected(adj); coeff = 1; end
+
+    if isDirected(adj);
+        coeff = 1;
+    end
 
     for i = 1:n
 

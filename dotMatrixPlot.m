@@ -27,7 +27,11 @@ function [] = dotMatrixPlot(adj)
     modules = newmanEigenvectorMethod(adj);
     % sort modules by length
     mL = zeros(1, length(modules));
-    for i = 1:length(modules); mL(i) = length(modules{i}); end
+
+    for i = 1:length(modules);
+        mL(i) = length(modules{i});
+    end
+
     [~, Yms] = sort(mL);
 
     % sort nodes by degree inside modules
@@ -49,7 +53,11 @@ function [] = dotMatrixPlot(adj)
 
     % sort modules by length
     mL = zeros(1, length(mods));
-    for i = 1:length(mods); mL(i) = length(mods{i}); end
+
+    for i = 1:length(mods);
+        mL(i) = length(mods{i});
+    end
+
     [~, Yms] = sort(mL);
     Ymb = [];
 
