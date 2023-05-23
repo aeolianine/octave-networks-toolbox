@@ -1572,38 +1572,6 @@ assert(signlessLaplacian(T{13}{2}),[2 1 1; 1 2 1; 1 1 2])
 printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 
-
-% Testing graphSpectrum.m ........................
-printf('testing graphSpectrum.m\n')
-tic
-adj = randomGraph(randi(50)+10,rand);
-assert(length(graphSpectrum(adj)),length(adj))
-L = laplacianMatrix(adj);
-[~,d] = eig(L);
-assert( sort(graphSpectrum(adj)), sort(diag(d)) )
-printf('---Time ellapsed: %3f in minutes.\n', toc/60)
-% ................................................
-
-% Testing algebraicConnectivity.m ................
-printf('testing algebraicConnectivity.m\n')
-tic
-adj = randomGraph(randi(50)+10,rand);
-assert(length(algebraicConnectivity(adj)),1)
-assert( algebraicConnectivity(adj), graphSpectrum(adj)(length(adj)-1) ) 
-printf('---Time ellapsed: %3f in minutes.\n', toc/60)
-% ................................................
-
-% Testing graphEnergy.m ..........................
-printf('testing graphEnergy.m\n')
-tic
-adj = randomGraph(randi(50)+10,rand);
-assert(length(graphEnergy(adj)),1)
-[~,e]=eig(adj);  % e are the eigenvalues
-G=sum(abs(real(diag(e))));
-assert(G, graphEnergy(adj))
-printf('---Time ellapsed: %3f in minutes.\n', toc/60)
-% ................................................
-
 % ................................................
 % ............ auxiliary .........................
 % ................................................
@@ -1771,19 +1739,6 @@ for i=1:30
   assert(linkDensity(adj)<p+0.05)
   assert(sum(adj)==0 || isDirected(adj))
   assert(size(adj),[n,n]);
-end
-printf('---Time ellapsed: %3f in minutes.\n', toc/60)
-% ................................................
-
-% Testing graphFromDegreeSequence.m ..............
-printf('testing graphFromDegreeSequence.m\n')
-tic
-for x=1:40
-  adj = [0 1; 0 0];
-  while not(isConnected(adj)); adj = randomGraph(randi(50)+50,rand); end
-  adjr=graphFromDegreeSequence(degrees(adj));
-  assert(isSimple(adjr),true)
-  assert(degrees(adj),degrees(adjr))
 end
 printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................

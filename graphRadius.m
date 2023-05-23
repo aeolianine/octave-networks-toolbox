@@ -4,8 +4,8 @@
 % Outputs: graph radius
 %
 % Other routines used: vertexEccentricity.m
-% GB: last updated, Oct 10 2012
+% Last updated: Oct 10 2012
 
-function Rg=graphRadius(adj)
+function Rg = graphRadius(adj)
 
-Rg=min( vertexEccentricity(adj) );
+    Rg = min(vertexEccentricity(adj));
