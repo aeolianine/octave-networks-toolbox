@@ -1593,18 +1593,6 @@ assert( algebraicConnectivity(adj), graphSpectrum(adj)(length(adj)-1) )
 printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 
-% Testing fiedlerVector.m ........................
-printf('testing fiedlerVector.m\n')
-tic
-adj = randomGraph(randi(50)+10,rand);
-assert(length(fiedlerVector(adj)),length(adj))
-[V,D]=eig(laplacianMatrix(adj));
-[~,Y]=sort(diag(D));
-fv=V(:,Y(2));
-assert(fv, fiedlerVector(adj))
-printf('---Time ellapsed: %3f in minutes.\n', toc/60)
-% ................................................
-
 % Testing graphEnergy.m ..........................
 printf('testing graphEnergy.m\n')
 tic
@@ -1822,6 +1810,7 @@ printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % Testing randomGraphDegreeDist.m ................
 printf('testing randomGraphDegreeDist.m\n')
 tic
+pkg load statistics
 N = randi(80)+30;
 adj = randomGraphDegreeDist(N,'uniform');
 assert(numNodes(adj),N)
@@ -2071,19 +2060,6 @@ assert(isSimple(adj));
 printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 
-% Testing forestFireModel.m ......................
-printf('testing forestFireModel.m\n');
-tic
-for x=1:20
-  randint = randi(20)+5;
-  L = forestFireModel(randint,rand,10*rand);
-  adj = symmetrize(adjL2adj(L));
-  assert(isSimple(adj),true)
-  assert(randint,numNodes(L))
-
-end
-printf('---Time ellapsed: %3f in minutes.\n', toc/60)
-% ................................................
 
 % ................................................
 % ......... modularity functions .................

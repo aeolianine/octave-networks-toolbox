@@ -17,8 +17,6 @@
 % Last updated, May 20 2023
 
 function adj = randomGraphDegreeDist(n, distribution, W)
-
-    pkg load statistics
     
     adj = [];
     Nseq = 1; % ensure the while loop start
