@@ -8,22 +8,22 @@
 % OUTPUTS: Boolean variable, 0 or 1
 %
 % Other routines used: degrees.m, isDirected.m
-% GB: last updated, Sep 23, 2012
+% Last updated: Sep 23, 2012
 
-function S=isEulerian(adj)
+function S = isEulerian(adj)
 
-S=false;
+    S = false;
 
-[degs,indeg,outdeg]=degrees(adj);
-odd=find(mod(degs,2)==1);
+    [degs, indeg, outdeg] = degrees(adj);
+    odd = find(mod(degs, 2) == 1);
 
-if not(isDirected(adj)) && isempty(odd) % if undirected and all degrees are even
-  S=true;
+    if not(isDirected(adj)) && isempty(odd) % if undirected and all degrees are even
+        S = true;
 
-elseif isDirected(adj) && indeg==outdeg % directed and in-degrees equal out-degrees
-  S=true;
+    elseif isDirected(adj) && indeg == outdeg % directed and in-degrees equal out-degrees
+        S = true;
 
-elseif numel(odd)==2
-  printf('isEulerian.m: There is an Eulerian trail from node %2i to node %2i\n',odd(1),odd(2));
+    elseif numel(odd) == 2
+        printf('isEulerian.m: There is an Eulerian trail from node %2i to node %2i\n', odd(1), odd(2));
 
-end
+    end

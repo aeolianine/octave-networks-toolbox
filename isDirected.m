@@ -4,9 +4,12 @@
 % OUTPUTS: boolean variable, 0 or 1
 %
 % Note: one-liner alternative: S=not(isSymmetric(adj));
-% GB: last updated, Sep 23, 2012
+% Last updated: Sep 23, 2012
 
-function S=isDirected(adj)
+function S = isDirected(adj)
 
-S = true;
-if adj==transpose(adj); S = false; end
+    S = true;
+
+    if adj == transpose(adj)
+        S = false;
+    end

@@ -4,12 +4,14 @@
 % OUTPUTS: Boolean, 0 or 1
 %
 % Note: Defined for unweighted graphs only.
-% GB: last updated, Sep 23, 2012
+% Last updated: Sep 23, 2012
 
-function S=isRegular(adj)
+function S = isRegular(adj)
 
-S=false;
+    S = false;
 
-degs=sum(adj>0); % remove weights and sum columns
+    degs = sum(adj > 0); % remove weights and sum columns
 
-if degs == degs(1)*ones(size(degs)); S = true; end
+    if degs == degs(1) * ones(size(degs));
+        S = true;
+    end

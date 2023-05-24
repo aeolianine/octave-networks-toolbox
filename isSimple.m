@@ -4,10 +4,12 @@
 % OUTPUTs: S - a Boolean variable; true (1) or false (0)
 %
 % Other routines used: selfLoops.m, multiEdges.m, isDirected.m
-% GB: last updated, September 23, 2012
+% Last updated: September 23, 2012
 
 function S = isSimple(adj)
 
-S=true;
+    S = true;
 
-if isDirected(adj) || selfLoops(adj)>0 || multiEdges(adj)>0 || length(find(adj>1)); S=false; end
+    if isDirected(adj) || selfLoops(adj) > 0 || multiEdges(adj) > 0 || length(find(adj > 1));
+        S = false;
+    end
