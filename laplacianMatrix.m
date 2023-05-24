@@ -5,11 +5,12 @@
 % INPUTS: adjacency matrix, nxn
 % OUTPUTs: Laplacian matrix, nxn
 % 
-% GB: last updated, Oct 10 2012
+% Last updated: Oct 10 2012
 
 function L=laplacianMatrix(adj)
 
-L=diag(sum(adj))-adj;
+    L=diag(sum(adj))-adj;
+
 
 
 % NORMALIZED Laplacian .............

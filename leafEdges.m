@@ -8,15 +8,16 @@
 % Input: adjacency matrix, nxn
 % Output: set of leaf edges: a (num edges x 2) matrix where every row contains the leaf edge nodal indices
 %
-% GB: last updated, Sep 23, 2012
+% Last updated: Sep 23, 2012
 
+function edges = leafEdges(adj)
 
-function edges=leafEdges(adj)
+    adj = int8(adj > 0);
 
-adj=int8(adj>0);
+    lves = find(sum(adj) == 1); % same as leaf_nodes.m
 
-lves=find(sum(adj)==1);  % same as leaf_nodes.m
+    edges = [];
 
-edges=[];
-
-for i=1:length(lves); edges=[edges; find(adj(:,lves(i))==1),lves(i)]; end
+    for i = 1:length(lves)
+        edges = [edges; find(adj(:, lves(i)) == 1), lves(i)];
+    end

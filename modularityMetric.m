@@ -11,20 +11,21 @@
 %
 % Note: This computation makes sense for undirected graphs only.
 % Other functions used: numEdges.m
-% GB: last updated, October 16, 2012
+% Last updated: October 16, 2012
 
-function Q=modularityMetric(modules,adj)
+function Q = modularityMetric(modules, adj)
 
-nedges=numEdges(adj); % total number of edges
+    nedges = numEdges(adj); % total number of edges
 
-Q = 0;
-for m=1:length(modules)
+    Q = 0;
 
-  e_mm=numEdges(adj(modules{m},modules{m}))/nedges;
-  a_m=sum(sum(adj(:,modules{m})))/nedges - e_mm;
-  Q = Q + (e_mm - a_m^2);
-  
-end
+    for m = 1:length(modules)
+
+        e_mm = numEdges(adj(modules{m}, modules{m})) / nedges;
+        a_m = sum(sum(adj(:, modules{m}))) / nedges - e_mm;
+        Q = Q + (e_mm - a_m^2);
+
+    end
 
 
 %  % alternative: Q = sum_ij { 1/2m [Aij-kikj/2m]delta(ci,cj) } = 

@@ -1,4 +1,4 @@
-% Compute the link density of a graph, defined as the number of edges divided by 
+% Compute the link density of a graph, defined as the number of edges divided by
 % number_of_nodes(number_of_nodes-1)/2 where the latter is the maximum possible number of edges.
 %
 % Inputs: adjacency matrix, nxn
@@ -8,14 +8,16 @@
 % Note 2: Routine works for both directed and undirected graphs.
 %
 % Other routines used: numNodes.m, numEdges.m, isDirected.m
-% GB: last update Sep 19, 2012
+% Last update: Sep 19, 2012
 
+function d = linkDensity(adj)
 
-function d=linkDensity(adj)
+    n = numNodes(adj);
 
-n = numNodes(adj);
+    coeff = 2;
 
-coeff = 2;
-if isDirected(adj); coeff = 1; end
+    if isDirected(adj);
+        coeff = 1;
+    end
 
-d = coeff*numEdges(adj)/(n*(n-1));
+    d = coeff * numEdges(adj) / (n * (n - 1));

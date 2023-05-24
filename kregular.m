@@ -11,7 +11,10 @@ function el = kregular(n, k)
 
     el = [];
 
-    if k > n - 1; fprintf('a simple graph with n nodes and k>n-1 does not exist\n'); return; end
+    if k > n - 1
+        fprintf('a simple graph with n nodes and k>n-1 does not exist\n'); 
+        return; 
+    end
 
     if mod(k, 2) == 1 && mod(n, 2) == 1;
         fprintf('no solution for *n* and *k* both odd\n');
