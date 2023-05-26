@@ -5,19 +5,19 @@
 
 function prs = pearsonW(M)
 
-%calculates pearson degree correlation of M
-[rows,colms]=size(M);
-won=ones(rows,1);
-k=won'*M;
-ksum=won'*k';
-ksqsum=k*k';
-xbar=ksqsum/ksum;
-num=(won'*M-won'*xbar)*M*(M*won-xbar*won);
-M*(M*won-xbar*won);
-kkk=(k'-xbar*won).*(k'.^.5);
-denom=kkk'*kkk;
+    %calculates pearson degree correlation of M
+    [rows, colms] = size(M);
+    won = ones(rows, 1);
+    k = won' * M;
+    ksum = won' * k';
+    ksqsum = k * k';
+    xbar = ksqsum / ksum;
+    num = (won' * M - won' * xbar) * M * (M * won - xbar * won);
+    M * (M * won - xbar * won);
+    kkk = (k' - xbar * won) .* (k'.^.5);
+    denom = kkk' * kkk;
 
-prs=num/denom;
+    prs = num / denom;
 
 
 % ALTERNATIVE .... BETTER-DOCUMENTED .... see pearson.m ....
