@@ -5,21 +5,24 @@
 % INPUTs: adjacency list {} (1xn), k - star motif size
 % OUTPUTs: number of stars with k nodes (k-1 spokes)
 %
-% GB: last updated, Oct 5, 2012
+% Last updated: Oct 5, 2012
 
-function num = numStarMotifs(adjL,k)
+function num = numStarMotifs(adjL, k)
 
-num = 0;
+    num = 0;
 
-for i=1:length(adjL)
-  if length(adjL{i})>=(k-1); num = num + nchoosek(length(adjL{i}),k-1); end
-end
+    for i = 1:length(adjL)
 
+        if length(adjL{i}) >= (k - 1);
+            num = num + nchoosek(length(adjL{i}), k - 1);
+        end
 
+    end
 
+    
 % ALTERNATIVE
 % function num = numStarMotifs(adj,k)
-% 
+%
 % % INPUTs: adjacency matrix, k - star motif size
 % % OUTPUTs: number of stars with k nodes (k-1 spokes)
 %
@@ -28,5 +31,7 @@ end
 % num=0;
 %
 % for i=1:length(deg)
-%     if deg(i)>=(k-1); num=num+nchoosek(deg(i),k-1); end
+%     if deg(i)>=(k-1); 
+%         num=num+nchoosek(deg(i),k-1); 
+%     end
 % end

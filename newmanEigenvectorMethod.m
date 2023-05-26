@@ -1,7 +1,7 @@
 % Find the "optimal" number of communities given a network using an eigenvector method
-% Source: MEJ Newman: Finding community structure using the eigenvectors of matrices, 
+% Source: MEJ Newman: Finding community structure using the eigenvectors of matrices,
 %                                                               arXiv:physics/0605087
-          % Newman, "Modularity and community structure in networks", 
+% Newman, "Modularity and community structure in networks",
 %                                                     arxiv.org/pdf/physics/0602124v1
 %
 % Q=(s^T)Bs, Bij=Aij-kikj/2m
@@ -14,64 +14,64 @@
 % 2 compute eigenvector corresp. to largest eigenvalue
 % 3 separate into 2 modules based on signs in eigenvector
 % terminate when max eigenvalue is 0 for all subgraphs
-% 
+%
 % Other functions used: numEdges.m, degrees.m, subgraph.m, isConnected.m
 % GB: last modified, Oct 12, 2012
 
-function modules=newmanEigenvectorMethod(adj)
+function modules = newmanEigenvectorMethod(adj)
 
-modules={};
-n=length(adj);
-m=numEdges(adj);
-[deg,~,~]=degrees(adj);
-queue{1}=[1:n];   % append all nodes to the queue
+    modules = {};
+    n = length(adj);
+    m = numEdges(adj);
+    [deg, ~, ~] = degrees(adj);
+    queue{1} = [1:n]; % append all nodes to the queue
 
+    while length(queue) > 0% while there is always a divisible subgraph
 
-while length(queue)>0  % while there is always a divisible subgraph
-    
-    % compute modularity matrix- Bg
-    G=queue{1};            % nodes in current (sub)graph to partition
-    adjG=subgraph(adj,G);  % first adjG same as original adj
-        
-    [degG,~,~]=degrees(adjG);
-    Bg=zeros(length(G));
-    
-    for i=1:length(G)   % nodes are G(i)
-        for j=i:length(G)  % nodes are G(j)
-                      
-          % Bij = adj(G(i),G(j))-deg(G(i))*deg(G(j))/(2*m)
-          % delta_ij = (i==j)
-          % k_i^g - k_i (d_g)/2m = degG(i)-deg(G(i))*sum(degG)/(2*m)
-          Bg(i,j)=( adj(G(i),G(j))-deg(G(i))*deg(G(j))/(2*m) )-(i==j)*(degG(i)-deg(G(i))*sum(degG)/(2*m));
-          Bg(j,i)=Bg(i,j);
-          
+        % compute modularity matrix- Bg
+        G = queue{1}; % nodes in current (sub)graph to partition
+        adjG = subgraph(adj, G); % first adjG same as original adj
+
+        [degG, ~, ~] = degrees(adjG);
+        Bg = zeros(length(G));
+
+        for i = 1:length(G) % nodes are G(i)
+
+            for j = i:length(G) % nodes are G(j)
+
+                % Bij = adj(G(i),G(j))-deg(G(i))*deg(G(j))/(2*m)
+                % delta_ij = (i==j)
+                % k_i^g - k_i (d_g)/2m = degG(i)-deg(G(i))*sum(degG)/(2*m)
+                Bg(i, j) = (adj(G(i), G(j)) - deg(G(i)) * deg(G(j)) / (2 * m)) - (i == j) * (degG(i) - deg(G(i)) * sum(degG) / (2 * m));
+                Bg(j, i) = Bg(i, j);
+
+            end
+
         end
-    end
-    
-    [V,E]=eig(Bg);  % eigenvalues
-    
-    if abs(max(diag(E)))<=10^(-5) % terminate - indivisible
-        queue=queue(2:length(queue));
-        modules={modules{1:length(modules)} G};
-        continue
-    end
-    
-    [~,indmax]=max(diag(E));
-    u1=V(:,indmax);
-    comm1=find(u1>0); comm2=find(u1<0);  % indices in G
-    
-    if not(isConnected(adj(G(comm1),G(comm1)))) || not(isConnected(adj(G(comm2),G(comm2))))
-      
-      queue=queue(2:length(queue));   % remove(G)
-      modules={modules{1:length(modules)} G};            % keep original G as indivisible
-      % found disconnected subgraphs - do not explore this option
-      
-      continue
-    
-    end
 
+        [V, E] = eig(Bg); % eigenvalues
 
-    queue={queue{1:length(queue)}, G(comm1), G(comm2)};   % add comm1 and comm2 to the queue
-    queue=queue(2:length(queue));
-    
-end
+        if abs(max(diag(E))) <= 10^(-5)% terminate - indivisible
+            queue = queue(2:length(queue));
+            modules = {modules{1:length(modules)} G};
+            continue
+        end
+
+        [~, indmax] = max(diag(E));
+        u1 = V(:, indmax);
+        comm1 = find(u1 > 0); comm2 = find(u1 < 0); % indices in G
+
+        if not(isConnected(adj(G(comm1), G(comm1)))) || not(isConnected(adj(G(comm2), G(comm2))))
+
+            queue = queue(2:length(queue)); % remove(G)
+            modules = {modules{1:length(modules)} G}; % keep original G as indivisible
+            % found disconnected subgraphs - do not explore this option
+
+            continue
+
+        end
+
+        queue = {queue{1:length(queue)}, G(comm1), G(comm2)}; % add comm1 and comm2 to the queue
+        queue = queue(2:length(queue));
+
+    end
