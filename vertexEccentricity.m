@@ -4,11 +4,13 @@
 % Output: vector of eccentricities for all nodes, 1xn
 %
 % Other routines used: simpleDijkstra.m
-% GB: last updated, Oct 10, 2012
+% Last updated: Oct 10, 2012
 
-function ec=vertexEccentricity(adj)
+function ec = vertexEccentricity(adj)
 
-n=size(adj,1);
-ec=zeros(1,n);
+    n = size(adj, 1);
+    ec = zeros(1, n);
 
-for s=1:n; ec(s)=max( simpleDijkstra(adj,s) ); end
+    for s = 1:n;
+        ec(s) = max(simpleDijkstra(adj, s));
+    end

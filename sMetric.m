@@ -6,19 +6,19 @@
 % OUTPUTs: s-metric
 %
 % Other routines used: degrees.m
-% GB: last updated, Oct 1 2012
+% Last updated: Oct 1 2012
 
-function s=sMetric(adj)
+function s = sMetric(adj)
 
-[deg,~,~]=degrees(adj);
-edges=find(adj>0);
+    [deg, ~, ~] = degrees(adj);
+    edges = find(adj > 0);
 
-s=0;
-for e=1:length(edges)
-  [i,j]=ind2sub([length(adj),length(adj)],edges(e));
-  s=s+deg(i)*deg(j);
-end
+    s = 0;
 
+    for e = 1:length(edges)
+        [i, j] = ind2sub([length(adj), length(adj)], edges(e));
+        s = s + deg(i) * deg(j);
+    end
 
 % ALTERNATIVE ....................
 % [deg,~,~]=degrees(adj);

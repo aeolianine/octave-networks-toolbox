@@ -8,8 +8,8 @@
 %
 % Other routines used: cycles3.m, numConnTriples.m
 % Input/corrections by Dimitris Maniadakis.
-% GB, Last updated: February 6, 2015
+% Last updated: February 6, 2015
 
 function [C] = transitivity(adj)
 
-C=3*cycles3(adj)/(numConnTriples(adj)+2*cycles3(adj));
+    C = 3 * cycles3(adj) / (numConnTriples(adj) + 2 * cycles3(adj));
