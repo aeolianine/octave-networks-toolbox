@@ -1,9 +1,9 @@
-% Add multiple edges in an edge list
+% Add multiple edges in an edge list (sums the edge weights).
 %
 % INPUTS: original (non-compact) edge list
-% OUTPUTS: final compact edge list (no row repetitions)
+% OUTPUTS: final compact edge list (no (node1, node2) repetitions)
 %
-% Example: [1 2 2; 2 2 1; 4 5 1] -> [1 2 3; 4 5 1]
+% Example: [1 2 2; 1 2 1; 4 5 1] -> [1 2 3; 4 5 1]
 % Last updated: May 20 2023
 
 function elc = addEdgeWeights(el)
@@ -31,3 +31,8 @@ function elc = addEdgeWeights(el)
 %!assert([1 2 1; 2 1 1], addEdgeWeights([1 2 1; 2 1 1]))
 %!assert([1 2 1; 2 1 1], addEdgeWeights([1 2 1; 2 1 1]))
 %!assert([1 2 1; 2 1 2], addEdgeWeights([1 2 1; 2 1 1; 2 1 1]))
+%!assert(addEdgeWeights([1 2 2; 1 2 1; 4 5 1]), [1 2 3; 4 5 1])
+
+%!demo
+%! addEdgeWeights([1 2 1; 1 2 0.5; 2 3 1; 3 4 1; 3 4 3])  % add the first 2 and last 2 edges
+%! addEdgeWeights([1 2 1; 2 1 1; 3 4 1])   % output should be the same, no edges to add
