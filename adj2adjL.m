@@ -22,7 +22,7 @@ function L = adj2adjL(adj)
 %! T = load_test_graphs();
 %!assert(adj2adjL(T{4}{2}),T{9}{2}')     % "bowtie" graph
 %!assert(adj2adjL(T{16}{2}),T{17}{2}')   % directed 3-cycle
-%%!assert(adj2adjL(edgeL2adj(T{11}{2})),T{12}{2})   % this test fails because the dimensions are flipped
+%!test fail assert(adj2adjL(edgeL2adj(T{11}{2})),T{12}{2})   % this test fails only because the dimensions are flipped
 
 
 %!demo

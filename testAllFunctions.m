@@ -23,20 +23,7 @@ assert(adjL2adj( T{12}{2} ), edgeL2adj(T{11}{2}) )
 printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 
-
-% Testing adj2edgeL.m ............................
-printf('testing adj2edgeL.m\n')
-tic
-for i=1:length(T)
-    if not(strcmp( T{i}{3}, 'adjacency' )); continue; end
-    edgeL1 = sortrows( adj2edgeL(T{i}{2}) );
-    edgeL2 = sortrows( T{i}{5} );
-    
-    assert(edgeL1(:,1:2), edgeL2(:,1:2))
-end
-printf('---Time ellapsed: %3f in minutes.\n', toc/60)
-% ................................................
-
+ 
 % Testing edgeL2adj.m ............................
 printf('testing edgeL2adj.m\n')
 tic
@@ -49,21 +36,6 @@ for i=1:length(T)
     end
     assert(T{i}{2}, edgeL2adj( edgeL ))
 end
-printf('---Time ellapsed: %3f in minutes.\n', toc/60)
-% ................................................
-
-% Testing adj2inc.m ..............................
-printf('testing adj2inc.m\n')
-tic
-randint = randi(10)+1;
-assert(adj2inc(eye(randint)),eye(randint))
-
-assert(adj2inc(T{13}{2}), T{15}{2})   % directed 3-cycle
-
-% 1->2, 2->2, 3->1
-assert(adj2inc([0 1 0; 0 1 0; 1 0 0 ]),[-1 0 1; 1 1 0; 0 0 -1])
-assert(adj2inc([0 2; 0 0]),[-1 -1; 1 1])  % directed double edge
-assert(adj2inc(T{1}{2}), [-1 1]')          % one directed edge
 printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 
@@ -181,39 +153,6 @@ printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 
 
-% Testing getNodes.m .............................
-fprintf('testing getNodes.m\n')
-tic
-for i = 1:length(T);
-    assert(getNodes(T{i}{2}, T{i}{3}), T{i}{4});
-end
-% randomized test
-for i=1:10
-    n = randi(100);
-    adj = randomDirectedGraph(n);
-    assert(getNodes(randomDirectedGraph(n),'adjacency'), 1:n)
-    assert(getNodes(randomGraph(n),'adjacency'), 1:n)
-end
-fail(getNodes([],'rgegaerger'), "invalid graph type")
-printf('---Time ellapsed: %3f in minutes.\n', toc/60)
-% ................................................
-
-% Testing getEdges.m ............................
-printf('testing getEdges.m\n')
-tic
-for i=1:length(T)
-    edges1 = sortrows( T{i}{5} );
-    edges2 = sortrows( getEdges(T{i}{2},T{i}{3}) );
-    
-    assert( edges1(size(edges1)(1),1:2), edges2(size(edges2)(1),1:2) )
-end
-
-fail(getEdges([],'rgegfgdfgrger'), "invalid graph type")
-#assert(strcmp(getEdges([],'rgegfgdfgrger'),'invalid graph type'))
-printf('---Time ellapsed: %3f in minutes.\n', toc/60)
-% ...............................................
-
-
 % Testing numNodes.m ............................
 printf('testing numNodes.m\n')
 tic
@@ -263,7 +202,7 @@ printf('testing selfLoops.m\n')
 tic
 assert( selfLoops( edgeL2adj( T{8}{2} ) ), 1 )
 assert( selfLoops( T{14}{2} ), 2 )
-assert(selfLoops(bowtie),0)
+assert(selfLoops(T{4}{2}),0)
 printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ...............................................
 
@@ -1214,6 +1153,7 @@ printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % Testing shortestPathDP.m .......................
 printf('testing shortestPathDP.m\n')
 tic
+bowtie = T{4}{2}
 [Jb,rb,J,r]=shortestPathDP(T{4}{2},1,3,size(bowtie,1));
 assert(Jb,1)
 assert(rb,[1,3])

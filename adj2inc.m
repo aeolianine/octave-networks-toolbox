@@ -54,3 +54,19 @@ function inc = adj2inc(adj)
     end
 
     inc = inc';
+
+
+%!test
+%!shared T, randint
+%! T = load_test_graphs();
+%! randint = randi(10)+1;
+%!assert(adj2inc(eye(randint)),eye(randint))
+%!assert(adj2inc(T{13}{2}), T{15}{2})   % directed 3-cycle
+%!assert(adj2inc([0 1 0; 0 1 0; 1 0 0 ]),[-1 0 1; 1 1 0; 0 0 -1])
+%!assert(adj2inc([0 2; 0 0]),[-1 -1; 1 1])  % directed double edge
+%!assert(adj2inc(T{1}{2}), [-1 1]')          % one directed edge
+
+%!demo
+%! adj2inc([0 1 0; 1 0 0; 0 0 0])  % one undirected edge
+%! adj2inc([0 1 1; 1 0 0; 1 0 0])  % two undirected edges
+%! adj2inc([0 1 1; 0 0 0; 0 0 0])  % two directed edges

@@ -30,6 +30,17 @@ function edges = getEdges(graph, type)
     elseif strcmp(type, 'incidence')
         edges = sortrows(inc2edgeL(graph));
     else
-        printf('getEdges(): "type" input can only be\n "adj" (adjacency, nxn matrix)\n, "edgelist" (mx2 or mx3 matrix)\n, "adjlist" (list, nx1 cell)\n or "inc" incidence (nxm matrix)\n')
-        edges = 'invalid graph type';
+        error ('getEdges(): "type" input can only be "adjacency", "edgelist", "adjlist" or "incidence"')
     end
+
+
+%!test
+%!shared T
+%! T = load_test_graphs();
+%! for i=1:length(T)
+%!     edges1 = sortrows( T{i}{5} );
+%!     edges2 = sortrows( getEdges(T{i}{2},T{i}{3}) ); 
+%!     assert( edges1(size(edges1)(1),1:2), edges2(size(edges2)(1),1:2) )
+%! end
+
+%!test fail getEdges([], 'ergerggr')

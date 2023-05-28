@@ -25,6 +25,21 @@ function nodes = getNodes(graph, type)
     elseif strcmp(type, 'incidence')
         nodes = [1:size(graph, 1)];
     else
-        printf('getNodes(): "type" input can only be\n "adj" (adjacency, nxn matrix)\n, "edgelist" (mx2 or mx3 matrix)\n, "adjlist" (list, nx1 cell)\n or "inc" incidence (nxm matrix)\n')
-        nodes = 'invalid graph type';
+        error ('getNodes(): "type" input can only be "adjacency", "edgelist", "adjlist" or "incidence"') 
     end
+
+
+%!test
+%!shared T
+%! T = load_test_graphs();
+%! for i = 1:length(T);
+%!    assert(getNodes(T{i}{2}, T{i}{3}), T{i}{4});
+%! end
+%! for i=1:10
+%!     n = randi(100);
+%!     adj = randomDirectedGraph(n);
+%!     assert(getNodes(randomDirectedGraph(n),'adjacency'), 1:n)
+%!     assert(getNodes(randomGraph(n),'adjacency'), 1:n)
+%! end
+
+%!test fail getNodes([], 'ergergre')
