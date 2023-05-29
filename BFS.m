@@ -45,3 +45,70 @@ function T = BFS(adjL, s, t)
     end
 
     printf('BFS(): Target node not found.\n')
+
+
+
+%!test
+%!shared adjL, T, tt
+%! T = load_test_graphs();
+%! adjL = {1:2, 2:[]};
+%! tt = BFS(adjL, 1, 1);
+%!assert(tt, {[], []})
+
+%! tt = BFS(adjL, 1, 2);
+%!assert(tt{1}, 2)
+%!assert(length(tt),2)
+%!assert(class(tt),'cell')
+
+%! tt = BFS(adjL, 2, 2);
+%!assert(tt, {[],[]})
+
+%! tt = BFS(adjL, 2, 3);
+%!assert(tt, {[],[]})
+%!assert(length(tt),2)
+%!assert(class(tt),'cell')
+
+%! tt = BFS(adjL, 1, 3);
+%!assert(tt{1}, 2)
+%!assert(tt{2}, [])
+%!assert(length(tt),2)
+%!assert(class(tt),'cell')
+
+%! tt = BFS(T{9}{2}, 1, 4);
+%!assert(tt{1},[2 3])
+%!assert(tt{2},[])
+%!assert(tt{3},[4])
+%!assert(tt{4},[])
+%!assert(tt{5},[])
+%!assert(tt{6},[])
+
+%! tt = BFS(T{9}{2}, 2, 6);
+%!assert(tt{2},[1 3])
+%!assert(tt{1},[])
+%!assert(tt{3},[4])
+%!assert(tt{4},[5 6])
+%!assert(tt{5},[])
+%!assert(tt{6},[])
+
+%! tt = BFS(T{9}{2}, 5, 2);
+%!assert(tt{5},[4 6])
+%!assert(tt{6},[])
+%!assert(tt{4},[3])
+%!assert(tt{3},[1 2])
+%!assert(tt{2},[])
+%!assert(tt{1},[])
+
+%! tt = BFS(T{9}{2}, 5, 10);
+%!assert(tt{5},[4 6])
+%!assert(tt{6},[])
+%!assert(tt{4},[3])
+%!assert(tt{3},[1 2])
+%!assert(tt{2},[])
+%!assert(tt{1},[])
+
+
+%!demo
+%! % adjacency list representation of the bowtie graph (I>−<I)
+%! L = {[2, 3], [1, 3], [1, 2, 4], [3, 5, 6], [4, 6], [4, 5]}; 
+%! BFS(L, 1, 6)
+%! BFS(L, 5, 3)

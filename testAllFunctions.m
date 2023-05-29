@@ -14,16 +14,7 @@ T = load_test_graphs();
 % ... graph representation functions .............
 % ................................................
 
-% Testing adjL2adj.m .............................
-printf('testing adjL2adj.m\n')
-tic
-assert(adjL2adj( T{9}{2} ),T{4}{2} )      % "bowtie" graph
-assert(adjL2adj( T{17}{2} ),T{16}{2} )    % directed 3-cycle
-assert(adjL2adj( T{12}{2} ), edgeL2adj(T{11}{2}) )
-printf('---Time ellapsed: %3f in minutes.\n', toc/60)
-% ................................................
 
- 
 % Testing edgeL2adj.m ............................
 printf('testing edgeL2adj.m\n')
 tic
@@ -59,40 +50,6 @@ assert(inc2adj(inc)==[0 1 0; 0 0 0; 1 0 0])
 printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 
-
-% Testing adj2str.m ..............................
-printf('testing adj2str.m\n')
-tic
-assert(adj2str(ones(3)-eye(3)),'.2.3,.1.3,.1.2,')
-assert(adj2str(eye(3)),'.1,.2,.3,')
-assert(adj2str([0 2; 0 0]),'.2,,')
-
-assert(adj2str(T{4}{2}),'.2.3,.1.3,.1.2.4,.3.5.6,.4.6,.4.5,')
-assert(adj2str(T{16}{2}),'.2,.3,.1,')
-printf('---Time ellapsed: %3f in minutes.\n', toc/60)
-% ................................................
-
-
-% Testing str2adj.m ..............................
-printf('testing str2adj.m\n')
-tic
-assert(ones(3)-eye(3),str2adj('.2.3,.1.3,.1.2,'))
-assert(eye(3),str2adj('.1,.2,.3,'))
-assert([0 1 0; 0 0 0; 1 0 0 ],str2adj('.2,,.1,'))
-
-assert('.2.3,.1.3,.1.2.4,.3.5.6,.4.6,.4.5,', adj2str(T{4}{2}))
-assert('.2,.3,.1,', adj2str(T{16}{2}))
-printf('---Time ellapsed: %3f in minutes.\n', toc/60)
-% ................................................
-
-% Testing adjL2edgeL.m ...........................
-printf('testing adjL2edgeL.m\n')
-tic
-assert(adjL2edgeL(T{12}{2}),T{11}{5})           % directed 3-tree
-assert(sortrows(adjL2edgeL(T{9}{2}))(1:14,1:2),sortrows(T{4}{5}))   % bowtie graph
-assert(sortrows(adjL2edgeL(T{17}{2}))(1:3,1:2),T{16}{5})     % directed 3-cycle
-printf('---Time ellapsed: %3f in minutes.\n', toc/60)
-% ................................................
 
 % Testing edgeL2adjL.m ...........................
 printf('testing edgeL2adjL.m\n')
@@ -215,16 +172,6 @@ assert(multiEdges([0 2 1; 2 0 1; 1 1 0]),1)  % triangle with one double edge
 assert(multiEdges([0 0 1; 2 0 0; 0 1 0]),1)  % directed triangle with 1 double edge
 assert(multiEdges(randomGraph(randi(15))),0)
 assert(multiEdges([0 0 1; 2 0 0; 0 2 0]),2)  % directed triangle with 2 double edges
-printf('---Time ellapsed: %3f in minutes.\n', toc/60)
-% ...............................................
-
-
-% Testing averageDegree.m .......................
-printf('testing averageDegree.m\n')
-tic
-assert(averageDegree(T{2}{2}),1)
-assert(averageDegree(T{4}{2}),2+1.0/3)
-assert(averageDegree(T{18}{2}),2)
 printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ...............................................
 
@@ -532,65 +479,6 @@ allPaths = DFS([0 1 0 1; 1 0 1 0; 0 1 0 1; 1 0 1 0], 4, 2, allPaths = {}, path =
 assert(allPaths, {[4 1 2], [4 3 2]})
 printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ...............................................
-
-% Testing BFS.m .................................
-printf('testing BFS.m\n')
-tic
-adjL = {1:2, 2:[]};
-tt = BFS(adjL, 1, 1);
-assert(tt, {[], []})
-tt = BFS(adjL, 1, 2);
-assert(tt{1}, 2)
-assert(length(tt),2)
-assert(class(tt),'cell')
-
-tt = BFS(adjL, 2, 2);
-assert(tt, {[],[]})
-tt = BFS(adjL, 2, 3);
-assert(tt, {[],[]})
-assert(length(tt),2)
-assert(class(tt),'cell')
-
-tt = BFS(adjL, 1, 3);
-assert(tt{1}, 2)
-assert(tt{2}, [])
-assert(length(tt),2)
-assert(class(tt),'cell')
-
-tt = BFS(T{9}{2}, 1, 4);
-assert(tt{1},[2 3])
-assert(tt{2},[])
-assert(tt{3},[4])
-assert(tt{4},[])
-assert(tt{5},[])
-assert(tt{6},[])
-
-tt = BFS(T{9}{2}, 2, 6);
-assert(tt{2},[1 3])
-assert(tt{1},[])
-assert(tt{3},[4])
-assert(tt{4},[5 6])
-assert(tt{5},[])
-assert(tt{6},[])
-
-tt = BFS(T{9}{2}, 5, 2);
-assert(tt{5},[4 6])
-assert(tt{6},[])
-assert(tt{4},[3])
-assert(tt{3},[1 2])
-assert(tt{2},[])
-assert(tt{1},[])
-
-tt = BFS(T{9}{2}, 5, 10);
-assert(tt{5},[4 6])
-assert(tt{6},[])
-assert(tt{4},[3])
-assert(tt{3},[1 2])
-assert(tt{2},[])
-assert(tt{1},[])
-printf('---Time ellapsed: %3f in minutes.\n', toc/60)
-% ...............................................
-
 
 % ................................................
 % ........ diagnostic functions ..................
@@ -915,14 +803,6 @@ for x=1:100
 
   assert(pearson(edgeL2adj(eln))<=(pearson(edgeL2adj(el))-10^(-7)) | (pearson(edgeL2adj(eln))-10^(-7))<=pearson(edgeL2adj(el)))
 end
-printf('---Time ellapsed: %3f in minutes.\n', toc/60)
-% ................................................
-
-% Testing aveNeighborDeg.m .......................
-printf('testing aveNeighborDeg.m\n')
-tic
-assert(aveNeighborDeg(T{13}{2}),[2 2 2])
-assert(aveNeighborDeg(T{4}{2}),[2.5 2.5 7/3 7/3 2.5 2.5])
 printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 
@@ -1378,13 +1258,13 @@ printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % Testing loops3rev2.m ...............................
 printf('testing loops3rev2.m\n')
 tic
+fourCycle = T{18}{2};
 assert(loops3rev2(T{4}{2}),{'1-2-3','4-5-6'})
-assert(loops3rev2(T{18}{2}),{})
+assert(loops3rev2(fourCycle),{})
 assert(loops3rev2(T{13}{2}),{'1-2-3'})
 assert(loops3rev2(edgeL2adj(canonicalNets(randi(10)+3,'btree'))),{})
 assert(loops3rev2(edgeL2adj(canonicalNets(4,'trilattice'))),{'1-2-4','1-3-4'})
 assert(loops3rev2(T{16}{2}),{'1-2-3'})
-assert(loops3rev2(fourCycle),{})
 
 
 printf('---Time ellapsed: %3f in minutes.\n', toc/60)
@@ -1769,25 +1649,6 @@ hold off;
 printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % .... end of test of randomModularGraph.m .......
 
-% Testing buildSmaxGraph.m .......................
-printf('testing buildSmaxGraph.m\n');
-tic
-for x=1:50
-  adj  = [];
-  while not(isConnected(adj)); adj = randomGraph(20,0.1); end
-  sm = sMetric(adj);
-  elmax1 = buildSmaxGraph(degrees(adj));
-  adjmax1 = symmetrize(edgeL2adj(elmax1));
-  
-  smax = sMetric(adjmax1);
-  assert(degrees(adjmax1),degrees(adj))
-  assert(smax>=sm,true)
-  
-  elmax2 = buildSmaxGraph(degrees(adj));
-  assert(elmax2,elmax1)
-end
-printf('---Time ellapsed: %3f in minutes.\n', toc/60)
-% ................................................
 
 % Testing PriceModel.m ...........................
 printf('testing PriceModel.m\n')

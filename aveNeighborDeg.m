@@ -24,3 +24,17 @@ function ave_n_deg = aveNeighborDeg(adj)
         ave_n_deg(i) = sum(deg(neigh)) / deg(i);
 
     end
+
+
+%!test
+%!shared T
+%! T = load_test_graphs();
+%!assert(aveNeighborDeg(T{13}{2}),[2 2 2])
+%!assert(aveNeighborDeg(T{4}{2}),[2.5 2.5 7/3 7/3 2.5 2.5])
+
+%!demo
+%! adj = [0 1 1; 1 0 1; 1 1 0];   % undirected 3-cycle
+%! aveNeighborDeg(adj)
+%! bowtie=[0 1 1 0 0 0; 1 0 1 0 0 0; 1 1 0 1 0 0; 0 0 1 0 1 1; 0 0 0 1 0 1; 0 0 0 1 1 0];
+%! aveNeighborDeg(bowtie)
+%! aveNeighborDeg([0 1 1; 1 0 0; 1 0 0])

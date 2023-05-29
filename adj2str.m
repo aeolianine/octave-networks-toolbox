@@ -27,3 +27,18 @@ function str = adj2str(adj)
 
         str = strcat(str, ','); % close this node's neighbors list
     end
+
+
+%!test
+%!assert(adj2str(ones(3)-eye(3)),'.2.3,.1.3,.1.2,')
+%!assert(adj2str(eye(3)),'.1,.2,.3,')
+%!assert(adj2str([0 2; 0 0]),'.2,,')
+%!shared T
+%! T = load_test_graphs();
+%!assert(adj2str(T{4}{2}),'.2.3,.1.3,.1.2.4,.3.5.6,.4.6,.4.5,')
+%!assert(adj2str(T{16}{2}),'.2,.3,.1,')
+
+%!demo
+%! adj2str([0 1 1; 1 0 0; 1 0 0])  % undirected binary tree
+%! adj2str([0 1; 0 0])  % one directed edge
+%! adj2str ([1 0; 0 0])  % two disconnected nodes and a self-loop

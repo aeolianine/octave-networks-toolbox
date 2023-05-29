@@ -17,3 +17,9 @@ function a = algebraicConnectivity(adj)
 %! adj = randomGraph(randi(50)+10,rand);
 %! assert(length(algebraicConnectivity(adj)),1)
 %! assert( algebraicConnectivity(adj), graphSpectrum(adj)(length(adj)-1) ) 
+
+%!demo
+%! adj = [0 1 1 0 0 0; 1 0 1 0 0 0; 1 1 0 1 0 0; 0 0 1 0 1 1; 0 0 0 1 0 1; 0 0 0 1 1 0];
+%! algebraicConnectivity(adj)
+%! adj = [0 1 0; 1 0 0; 0 0 0]; % disconnected graph
+%! algebraicConnectivity(adj)

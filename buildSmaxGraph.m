@@ -188,3 +188,32 @@ function gA = buildSmaxGraph(deg)
         end
 
     end
+
+
+
+%!test
+%! for x=1:50
+%!   adj  = [];
+%!   while not(isConnected(adj)); adj = randomGraph(20,0.1); end
+%!   sm = sMetric(adj);
+%!   elmax1 = buildSmaxGraph(degrees(adj));
+%!   adjmax1 = symmetrize(edgeL2adj(elmax1));
+%!   
+%!   smax = sMetric(adjmax1);
+%!   assert(degrees(adjmax1),degrees(adj))
+%!   assert(smax>=sm,true)
+%!   
+%!   elmax2 = buildSmaxGraph(degrees(adj));
+%!   assert(elmax2,elmax1)
+%! end
+
+
+%!demo
+%! adj = [];
+%! while not(isConnected(adj)); adj = randomGraph(20 ,0.1); end
+%! sm = sMetric(adj);
+%! elmax = buildSmaxGraph(degrees(adj )); 
+%! adjmax = symmetrize(edgeL2adj(elmax));
+%! smax = sMetric(adjmax);
+%! assert(degrees(adjmax), degrees(adj))  % should have the same degree distribution 
+%! assert(smax>=sm,true) % verify that the ”s−max” graph has a higher s−metric 

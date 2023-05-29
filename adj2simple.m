@@ -18,3 +18,7 @@ function adj = adj2simple(adj)
 %!assert(adj2simple(rand(6)),ones(6)-eye(6))
 %!assert(adj2simple([0 2 0; 1 0 0; 1 2 0]),[0 1 1; 1 0 1; 1 1 0])
 %!assert(isSymmetric(adj2simple(rand(7))),true)
+
+%!demo
+%! adj2simple([1 0; 0 1])   % two self loops -> empty graph
+%! adj2simple([1 2 1; 2 0 1; 1 1 0])
