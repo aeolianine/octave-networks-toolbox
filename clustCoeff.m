@@ -38,3 +38,20 @@ function [aveC, C] = clustCoeff(adj)
     end
 
     aveC = sum(C) / n;
+
+
+%!test
+%!shared T, aveC, C
+%! T = load_test_graphs();
+%!assert(clustCoeff(T{13}{2}),1)
+%!assert(clustCoeff(edgeL2adj(T{10}{2})),0)
+%!assert(clustCoeff(edgeL2adj(canonicalNets(randi(10)+5,'tree',2))),0)
+%! [aveC,C] = clustCoeff(T{4}{2});
+%!assert(aveC,(4+2/3)/6)
+%!assert(C, [1 1 1/3 1/3 1 1]')
+
+%!demo
+%! [Cave, C] = clustCoeff([0 1 1; 1 0 1; 1 1 0])
+%! [Cave, C] = clustCoeff([0 1 1; 1 0 0; 1 0 0])
+%! adj = [0 1 1 0 0 0; 1 0 1 0 0 0; 1 1 0 1 0 0; 0 0 1 0 1 1; 0 0 0 1 0 1; 0 0 0 1 1 0];
+%! [Cave, C] = clustCoeff(adj)

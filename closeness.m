@@ -14,3 +14,17 @@ function C = closeness(adj)
     for i = 1:length(adj)
         C(i) = 1 / sum(simpleDijkstra(adj, i));
     end
+
+
+%!test
+%!shared T
+%! T = load_test_graphs();
+%!assert(closeness(T{4}{2})',[1/(1+1+2+3+3), 1/(1+1+2+3+3), 1/(1+1+1+2+2), 1/(1+1+1+2+2), 1/(1+1+2+3+3), 1/(1+1+2+3+3)])
+%!assert(closeness([0 1 1; 1 0 0; 1 0 0]),[0.5 1/3 1/3]')
+%!assert(closeness(T{13}{2}),[1/(1+1), 1/(1+1), 1/(1+1)]')
+
+%!demo
+%! bowtie=[0 1 1 0 0 0; 1 0 1 0 0 0; 1 1 0 1 0 0; 0 0 1 0 1 1; 0 0 0 1 0 1; 0 0 0 1 1 0];
+%! closeness(bowtie)
+%! adj = [0 1 1; 1 0 1; 1 1 0]; 
+%! closeness(adj)

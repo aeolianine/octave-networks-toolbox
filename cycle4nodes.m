@@ -46,3 +46,16 @@ function l4 = cycle4nodes(adj)
         end
 
     end
+
+
+%!test
+%!shared T
+%! T = load_test_graphs();
+%!assert(cycle4nodes(T{18}{2}), {'1-2-3-4'})
+%!assert(cycle4nodes(T{4}{2}),{})
+%!assert(cycle4nodes(ones(4)-eye(4)),{'1-2-3-4'})  % clique of size 4
+%!assert(length(cycle4nodes(ones(6)-eye(6))),nchoosek(6,4))  % clique of size 6
+
+%!demo
+%! cycle_four_nodes = [0 1 0 1; 1 0 1 0; 0 1 0 1; 1 0 1 0]; 
+%! cycle4nodes(cycle_four_nodes)

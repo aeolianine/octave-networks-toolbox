@@ -831,17 +831,6 @@ assert(sortNodesByMaxNeighborDegree(adjL2adj(T{17}{2})),[3, 2, 1]')
 printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 
-
-% Testing closeness.m ............................
-printf('testing closeness.m\n')
-tic
-assert(closeness(T{4}{2})',[1/(1+1+2+3+3), 1/(1+1+2+3+3), 1/(1+1+1+2+2), 1/(1+1+1+2+2), 1/(1+1+2+3+3), 1/(1+1+2+3+3)])
-assert(closeness([0 1 1; 1 0 0; 1 0 0]),[0.5 1/3 1/3]')
-assert(closeness(T{13}{2}),[1/(1+1), 1/(1+1), 1/(1+1)]')
-printf('---Time ellapsed: %3f in minutes.\n', toc/60)
-% ................................................
-
-
 % Testing nodeBetweenness.m ......................
 printf('testing nodeBetweenness.m and nodeBetweennessFaster\n')
 tic
@@ -913,19 +902,6 @@ adj = edgeL2adj( canonicalNets(randi(10)+2, 'cycle') );
 ec = v(:,size(adj,1));
 assert( eigenCentrality( adj ), ec )
 assert( norm( ec(1)*ones(length(ec),1) - ec) < 1*e^(-20) )
-printf('---Time ellapsed: %3f in minutes.\n', toc/60)
-% ................................................
-
-
-% Testing clustCoeff.m ...........................
-printf('testing clustCoeff.m\n')
-tic
-assert(clustCoeff(T{13}{2}),1)
-assert(clustCoeff(edgeL2adj(T{10}{2})),0)
-assert(clustCoeff(edgeL2adj(canonicalNets(randi(10)+5,'tree',2))),0)
-[aveC,C] = clustCoeff(T{4}{2});
-assert(aveC,(4+2/3)/6)
-assert(C, [1 1 1/3 1/3 1 1]')
 printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 
@@ -1243,17 +1219,6 @@ assert(numCycles(T{18}{2}),1)
 printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 
-% Testing cycles3.m ...............................
-printf('testing cycles3.m\n')
-tic
-assert(cycles3(T{4}{2}),2)
-assert(cycles3(T{18}{2}),0)
-assert(cycles3(T{13}{2}),1)
-assert(cycles3(edgeL2adj(canonicalNets(randi(10)+3,'btree'))),0)
-assert(cycles3(edgeL2adj(canonicalNets(4,'trilattice'))),2)
-printf('---Time ellapsed: %3f in minutes.\n', toc/60)
-% ................................................
-
 
 % Testing loops3rev2.m ...............................
 printf('testing loops3rev2.m\n')
@@ -1270,29 +1235,6 @@ assert(loops3rev2(T{16}{2}),{'1-2-3'})
 printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 
-
-% Testing cycle4nodes.m ...............................
-printf('testing cycle4nodes.m\n')
-tic
-assert(cycle4nodes(fourCycle), {'1-2-3-4'})
-assert(cycle4nodes(T{4}{2}),{})
-c4 = ones(4)-eye(4); % clique of size 4
-assert(cycle4nodes(c4),{'1-2-3-4'})
-c6 = ones(6)-eye(6); % clique of size 6
-assert(length(cycle4nodes(c6)),nchoosek(6,4))
-printf('---Time ellapsed: %3f in minutes.\n', toc/60)
-% ................................................
-
-% Testing cycles4.m ...........................
-printf('testing cycles4.m\n')
-tic
-assert(cycles4(fourCycle), 1)
-assert(cycles4(T{4}{2}),0)
-assert(cycles4(c4),3)
-c6 = ones(6)-eye(6); % clique of size 6
-printf('---Time ellapsed: %3f in minutes.\n', toc/60)
-
-# ................................................
 
 % Testing numStarMotifs.m ........................
 printf('testing numStarMotifs.m\n')
