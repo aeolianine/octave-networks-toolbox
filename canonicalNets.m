@@ -365,3 +365,89 @@ function el_hex = buildHexagonalLattice(n) % hexagonal lattice .......
     end
 
     el_hex = symmetrizeEdgeL(el_hex);
+
+
+
+%!test
+%!assert(strcmp(canonicalNets([],'rgegfgdfgrger'),'invalid network type'))
+%!shared N, b, adj
+%! for x=1:10
+%!   N = randi(50)+10;
+%!   adj = edgeL2adj(canonicalNets(N,'line'));
+%!   assert(numNodes(adj),N);
+%!   assert(isConnected(adj),true)
+%!   assert(degrees(adj),[1 2*ones(1,N-2) 1])
+%!   assert(isTree(adj),true)
+  
+%!   adj = edgeL2adj(canonicalNets(N,'cycle'));
+%!   assert(numNodes(adj),N);
+%!   assert(isConnected(adj),true)
+%!   assert(degrees(adj),2*ones(1,N))
+%!   assert(isTree(adj),false)
+  
+%!   adj = edgeL2adj(canonicalNets(N,'star'));
+%!   assert(numNodes(adj),N);
+%!   assert(isConnected(adj),true)
+%!   assert(degrees(adj),[N-1 ones(1,N-1)])
+%!   assert(isTree(adj),true)
+    
+%!   adj = edgeL2adj(canonicalNets(N,'clique'));
+%!   assert(numNodes(adj),N)
+%!   assert(isComplete(adj),true)
+%!   assert(degrees(adj),(N-1)*ones(1,N))
+  
+%!   adj = edgeL2adj(canonicalNets(N,'btree'));
+%!   assert(numNodes(adj),N)
+%!   assert(isTree(adj),true)
+%!   deg = degrees(adj);
+%!   assert(max(deg),3)
+%!   assert(deg(1),2)
+%!   assert(deg(N),1)
+  
+%!   b = randi([3,6]);
+%!   adj = edgeL2adj(canonicalNets(N,'tree',b));
+%!   assert(numNodes(adj),N)
+%!   assert(isTree(adj),true)
+%!   deg = degrees(adj);
+%!   assert(max(deg)<=b+1,true)
+%!   assert(deg(1),b)
+%!   assert(deg(N),1)
+  
+%!   assert(edgeL2adj(canonicalNets(N,'tree',2)), edgeL2adj(canonicalNets(N,'btree')))
+  
+%!   b = randi([3,6]);
+%!   adj = edgeL2adj(canonicalNets(N,'hierarchy',b));  
+%!   assert(numNodes(adj),N)
+%!   assert(isTree(adj),false)
+%!   deg = degrees(adj);
+%!   assert(max(deg)<=b+3,true)
+%!   assert(deg(1),b)
+  
+%!   adj = edgeL2adj(canonicalNets(N,'trilattice'));
+%!   assert(numNodes(adj),N)
+%!   assert(isTree(adj),false)
+%!   assert(isComplete(adj),false)
+%!   assert(max(degrees(adj))<=6,true)
+%!   assert(isConnected(adj),true)
+
+%!   adj = edgeL2adj(canonicalNets(N,'sqlattice'));
+%!   assert(numNodes(adj),N)
+%!   assert(isTree(adj),false)
+%!   assert(isComplete(adj),false)
+%!   assert(max(degrees(adj))<=4,true)
+%!   assert(isConnected(adj),true)
+
+%!   adj = edgeL2adj(canonicalNets(N,'hexlattice'));
+%!   assert(numNodes(adj),N)
+%!   assert(isTree(adj),false)
+%!   assert(isComplete(adj),false)
+%!   assert(max(degrees(adj))<=3,true)
+%!   assert(isConnected(adj),true)
+
+%! end
+
+
+%!demo
+%! canonicalNets(4, 'line')
+%! canonicalNets(4, 'tree', 3)
+%! canonicalNets(3, 'cycle')
