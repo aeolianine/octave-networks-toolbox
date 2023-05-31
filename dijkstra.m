@@ -58,3 +58,25 @@ function [dist, P] = dijkstra(adj, s, target)
     end
 
     P = S;
+
+
+%!test
+%!shared T, d, p
+%! T = load_test_graphs();
+%! [d,p]=dijkstra(T{4}{2},1,5);
+%!assert(d,3)
+%!assert(p,[1,3,4,5])
+
+%! [d,p]=dijkstra(T{13}{2},3,[]);
+%!assert(d,[1,1,0])
+%!assert(p,{[3,1],[3,2],[3]})
+
+%! [d,p] = dijkstra(T{18}{2},3,[]);
+%!assert(d,[2,1,0,1]);
+%!assert(p,{[3,2,1],[3,2],[3],[3,4]})
+
+%!demo
+%! bowtie=[0 1 1 0 0 0; 1 0 1 0 0 0; 1 1 0 1 0 0; 0 0 1 0 1 1; 0 0 0 1 0 1; 0 0 0 1 1 0];
+%! % distance and path from node 1 to node 2
+%! [d,P]=dijkstra(bowtie, 1, 2)
+%! [d,P]=dijkstra(bowtie, 5, 2)

@@ -447,39 +447,6 @@ end
 printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ...............................................
 
-% Testing DFS.m .................................
-printf('testing DFS.m\n')
-tic
-allPaths = DFS(T{1}{2}, 1, 2, allPaths = {}, path = [], upperBound = 2);
-assert(allPaths, {[1 2]})
-allPaths = DFS(T{1}{2}, 2, 1, allPaths = {}, path = [], upperBound = 2);
-assert(allPaths, {})
-
-allPaths = DFS(T{2}{2}, 1, 2, allPaths = {}, path = [], upperBound = 2);
-assert(allPaths, {[1 2]})
-allPaths = DFS(T{2}{2}, 2, 1, allPaths = {}, path = [], upperBound = 2);
-assert(allPaths, {[2 1]})
-
-allPaths = DFS(T{4}{2}, 1, 5, allPaths = {}, path = [], upperBound = 1);
-assert(allPaths, {})
-allPaths = DFS(T{4}{2}, 1, 5, allPaths = {}, path = [], upperBound = 3);
-assert(allPaths, {[1 3 4 5]})
-
-allPaths = DFS(T{5}{2}, 1, 5, allPaths = {}, path = [], upperBound = 4);
-assert(allPaths, {})
-allPaths = DFS(T{5}{2}, 1, 3, allPaths = {}, path = [], upperBound = 3);
-assert(allPaths, {[1 2 3], [1 3]})
-
-allPaths = DFS(T{5}{2}, 1, 3, allPaths = {}, path = [], upperBound = 1);
-assert(allPaths, {[1 3]})
-
-allPaths = DFS([0 1 0 1; 1 0 1 0; 0 1 0 1; 1 0 1 0], 1, 3, allPaths = {}, path = [], upperBound = 3);
-assert(allPaths, {[1 2 3], [1 4 3]})
-allPaths = DFS([0 1 0 1; 1 0 1 0; 0 1 0 1; 1 0 1 0], 4, 2, allPaths = {}, path = [], upperBound = 3);
-assert(allPaths, {[4 1 2], [4 3 2]})
-printf('---Time ellapsed: %3f in minutes.\n', toc/60)
-% ...............................................
-
 % ................................................
 % ........ diagnostic functions ..................
 % ................................................
@@ -698,28 +665,6 @@ assert(isBipartite(edgeL2adjL(odd_cycle)), isit1)
 % ........ centrality measures ...................
 % ................................................
 
-
-% Testing degrees.m ..............................
-printf('testing degrees.m\n')
-tic
-assert(degrees(T{1}{2}), [1 1])
-assert(degrees(T{2}{2}), [1 1])
-assert(degrees(T{3}{2}), [2 2])
-assert([2 2 3 3 2 2],degrees(T{4}{2}))
-assert([2 1 1],degrees(edgeL2adj(T{10}{2})))
-
-[deg,indeg,outdeg]=degrees(edgeL2adj(T{11}{2}));
-assert(deg,[2 1 1])
-assert(indeg,[0 1 1])
-assert(outdeg,[2 0 0])
-
-assert(degrees(T{13}{2}), [2 2 2])
-assert(degrees(T{14}{2}), [4 4 2])  % loops are counted twice
-assert(degrees(T{18}{2}), [2 2 2 2])
-
-assert([4 4 4],degrees([0 2 1; 0 0 1; 1 1 0]))
-printf('---Time ellapsed: %3f in minutes.\n', toc/60)
-% ................................................
 
 % Testing rewire.m ...............................
 printf('testing rewire.m\n')
@@ -992,17 +937,6 @@ printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % Testing dijkstra.m .............................
 printf('testing dijkstra.m\n')
 tic
-[d,p]=dijkstra(T{4}{2},1,5);
-assert(d,3)
-assert(p,[1,3,4,5])
-
-[d,p]=dijkstra(T{13}{2},3,[]);
-assert(d,[1,1,0])
-assert(p,{[3,1],[3,2],[3]})
-
-[d,p] = dijkstra(T{18}{2},3,[]);
-assert(d,[2,1,0,1]);
-assert(p,{[3,2,1],[3,2],[3],[3,4]})
 printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 
@@ -1103,22 +1037,6 @@ tic
 assert(kminNeighbors(T{4}{2},1,3),[5, 6])
 assert(kminNeighbors(T{4}{2},3,1),[1, 2, 4])
 assert(kminNeighbors(T{4}{2},3,2),[5, 6])
-printf('---Time ellapsed: %3f in minutes.\n', toc/60)
-% ................................................
-
-% Testing diameter.m .............................
-printf('testing diameter.m\n')
-tic
-assert(diameter(T{13}{2}),1)
-assert(diameter(T{4}{2}),3)
-
-el=canonicalNets(randi(10)+5,'line');
-adj = edgeL2adj(el);
-assert(diameter(adj),length(adj)-1)
-
-el=canonicalNets(randi(10)+5,'cycle');
-adj = edgeL2adj(el);
-assert(diameter(adj),floor(length(adj)/2))
 printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 
