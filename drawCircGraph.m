@@ -45,3 +45,9 @@ function [] = drawCircGraph(adj)
     axis([-1.15 1.15 -1.15 1.15])
     axis square
     axis off
+
+
+%!demo
+%! el = preferentialAttachment(60, 1); 
+%! adj = edgeL2adj(el);
+%! drawCircGraph(adj)

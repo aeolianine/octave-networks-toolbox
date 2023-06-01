@@ -61,3 +61,20 @@ function adj = DoddsWattsSabel(N, b, m, lam, ksi)
         end
 
     end
+
+
+%!test
+%! for x=1:40
+%!   randint = randi(50)+2;
+%!   m = randi(round(randint/4));
+%!   adj = DoddsWattsSabel(randint, 2, m, 10*rand, 10*rand);
+%!   assert(numEdges(adj), m+randint-1)
+%!   assert(isTree(adj), false)
+%!   assert(isConnected(adj), true)
+%!   assert(isSimple(adj), true)  
+%! end
+
+%!demo
+%! adj = DoddsWattsSabel(50, 3, 10, 15, 15);
+%! assert(numEdges(adj), 59)
+%! isSimple(adj)

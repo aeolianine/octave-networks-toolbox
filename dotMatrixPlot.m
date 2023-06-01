@@ -115,3 +115,8 @@ function [] = dotMatrixPlot(adj)
     axis([0 n 0 n]);
     set(gca, 'YDir', 'normal')
     axis square
+
+
+%!demo
+%! adj = randomModularGraph(21, 3, log(100)/100, 5);
+%! dotMatrixPlot(adj)

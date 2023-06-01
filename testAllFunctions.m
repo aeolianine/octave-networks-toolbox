@@ -1101,16 +1101,6 @@ assert(graphRadius(adj),(size(adj,1)-mod(size(adj,1),2))/2)
 printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 
-% Testing distanceDistribution.m .................
-printf('testing distanceDistribution.m\n')
-tic
-assert(distanceDistribution(T{4}{2}),[7/15, 4/15, 4/15, 0, 0])
-assert(distanceDistribution(T{13}{2}),[1, 0])
-assert(distanceDistribution(edgeL2adj(T{10}{2})),[2/3,1/3])
-printf('---Time ellapsed: %3f in minutes.\n', toc/60)
-% ................................................
-
-
 % ................................................
 % ....... simple motifs ..........................
 % ................................................
@@ -1488,21 +1478,6 @@ end
 printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 
-
-% Testing DoddsWattsSabel.m ......................
-printf('testing DoddsWattsSabel.m\n')
-tic
-for x=1:40
-  randint = randi(50)+2;
-  m = randi(round(randint/4));
-  adj = DoddsWattsSabel(randint,2,m,10*rand,10*rand);
-  assert(numEdges(adj),m+randint-1)
-  assert(isTree(adj),false)
-  assert(isConnected(adj),true)
-  assert(isSimple(adj),true)  
-end
-printf('---Time ellapsed: %3f in minutes.\n', toc/60)
-% ................................................
 
 % Testing nestedHierarchiesModel.m ...............
 printf('testing nestedHierarchiesModel.m\n')

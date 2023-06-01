@@ -30,3 +30,15 @@ function ddist = distanceDistribution(adj)
     for i = 1:n - 1;
         ddist(i) = length(find(dij == i)) / (n * (n - 1));
     end
+
+
+%!test
+%!shared T
+%! T = load_test_graphs();
+%!assert(distanceDistribution(T{4}{2}),[7/15, 4/15, 4/15, 0, 0])
+%!assert(distanceDistribution(T{13}{2}),[1, 0])
+%!assert(distanceDistribution(edgeL2adj(T{10}{2})),[2/3,1/3])
+
+%!demo
+%! bowtie=[0 1 1 0 0 0; 1 0 1 0 0 0; 1 1 0 1 0 0; 0 0 1 0 1 1; 0 0 0 1 0 1; 0 0 0 1 1 0];
+%! distanceDistribution(bowtie)
