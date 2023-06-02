@@ -141,3 +141,20 @@ function ew = edgeBetweenness(adj)
         ew(e, 2) = el(e, 2);
         ew(e, 3) = ew(e, 3) / n / (n - 1); % normalize by the total number of paths
     end
+
+
+%!test
+%!shared T, eb_bowtie
+%! T = load_test_graphs();
+%! eb_bowtie = adj2edgeL(T{4}{2});
+%! eb_bowtie(:,3) = [1/30; 4/30; 1/30; 4/30; 4/30; 4/30; 9/30; 9/30; 4/30; 4/30; 4/30; 1/30; 4/30; 1/30];
+%!assert(edgeBetweenness(T{4}{2}),eb_bowtie)
+%!assert(edgeBetweenness(T{13}{2}),[2 1 1/6; 3 1 1/6; 1 2 1/6; 3 2 1/6; 1 3 1/6; 2 3 1/6])
+%!assert(edgeBetweenness([0 1 1 0; 1 0 1 0; 1 1 0 1; 0 0 1 0]),[2 1 1/12; 3 1 1/6; 1 2 1/12; 3 2 1/6; 1 3 1/6; 2 3 1/6; 4 3 3/12; 3 4 3/12])
+
+%!demo
+%! % undirected 3−node cycle: all edges should have equal betweenness
+%! adj = [0 1 1; 1 0 1; 1 1 0];
+%! edgeBetweenness(adj)
+%! bowtie = [0 1 1 0 0 0; 1 0 1 0 0 0; 1 1 0 1 0 0; 0 0 1 0 1 1; 0 0 0 1 0 1; 0 0 0 1 1 0];
+%! edgeBetweenness(bowtie)
