@@ -21,3 +21,8 @@ function el = edgeL2simple(el)
 %!test
 %!assert(length(edgeL2simple([1 1 1; 2 2 1; 3 3 1])),0)
 %!assert(sortrows(edgeL2simple([1 2 1; 1 3 2; 4 5 1.4])),[1 2 1; 1 3 1; 2 1 1; 3 1 1; 4 5 1; 5 4 1])
+
+
+%!demo
+%! % remove a self−loop, a double edge and symmetrize 
+%! edgeL2simple([1 1 1; 1 2 1; 1 3 2])

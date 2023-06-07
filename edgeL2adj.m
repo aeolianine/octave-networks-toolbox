@@ -15,3 +15,22 @@ function adj = edgeL2adj(el)
     for i = 1:size(el, 1)
         adj(find(nodes == el(i, 1)), find(nodes == el(i, 2))) = el(i, 3);
     end
+
+
+%!test
+%!shared T
+%! T = load_test_graphs();
+%! for i=1:length(T)
+%!     if not(strcmp( T{i}{3}, 'adjacency' )); continue; end
+%!     edgeL = T{i}{5};
+%!     % adding 1s to get the expected edge list dimensions right
+%!     if size(edgeL)(2)==2
+%!         edgeL = [edgeL ones(size(edgeL)(1),1)];
+%!     end
+%!     assert(T{i}{2}, edgeL2adj( edgeL ))
+%! end
+
+
+%!demo
+%! edgeL2adj([1 2 1])
+%! edgeL2adj([1 1 1; 2 3 1])

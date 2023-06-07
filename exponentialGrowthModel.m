@@ -16,3 +16,21 @@ function el = exponentialGrowthModel(t)
         r = randi(i - 1);
         el = [el; i r 1; r i 1];
     end
+
+
+%!test
+%! for x=1:10
+%!   el = exponentialGrowthModel(randi(100));
+%!   adj=edgeL2adj(el);
+%!   assert(isConnected(adj),true)
+%!   assert(isTree(adj),true)
+%! end
+
+%!shared adj, el
+%! el = exponentialGrowthModel(99);
+%! adj = edgeL2adj(el);
+%!assert(numNodes(adj), 99)
+%!assert( isSimple(adj), true)
+
+%!demo
+%! el = exponentialGrowthModel(8)

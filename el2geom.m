@@ -4,6 +4,7 @@
 % INPUTS: extended edge list el[i,:]=[n1 n2 m x1 y1 x2 y2]
 % OUTPUTS: geometry plot, higher-weight links are thicker and lighter in color
 %
+% TODO: This function needs proper testing.
 % Note 1: m - edge weight; (x1,y1) are the Euclidean coordinates of n1, (x2,y2) - n2
 % Note 2: Easy to change colors and corresponding edge weight coloring
 %
@@ -57,3 +58,13 @@ function [] = el2geom(el)
 
     axis equal
     axis off
+
+
+%!demo
+%! [el,p] = newmanGastner(1000,0.5,[],'off');
+%! elnew = [];
+%! for e=1:size(el,1); 
+%!   elnew = [elnew; el(e,1), el(e,2), randi(9), p(el(e,1),1), p(el(e,1),2), p(el(e,2),1), p(el(e,2),2)]; 
+%! end
+%! figure
+%! el2geom(elnew)

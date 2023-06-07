@@ -15,22 +15,6 @@ T = load_test_graphs();
 % ................................................
 
 
-% Testing edgeL2adj.m ............................
-printf('testing edgeL2adj.m\n')
-tic
-for i=1:length(T)
-    if not(strcmp( T{i}{3}, 'adjacency' )); continue; end
-    edgeL = T{i}{5};
-    % adding 1s to get the expected edge list dimensions right
-    if size(edgeL)(2)==2
-        edgeL = [edgeL ones(size(edgeL)(1),1)];
-    end
-    assert(T{i}{2}, edgeL2adj( edgeL ))
-end
-printf('---Time ellapsed: %3f in minutes.\n', toc/60)
-% ................................................
-
-
 % Testing inc2adj.m ..............................
 printf('testing inc2adj.m\n')
 tic
@@ -50,15 +34,6 @@ assert(inc2adj(inc)==[0 1 0; 0 0 0; 1 0 0])
 printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 
-
-% Testing edgeL2adjL.m ...........................
-printf('testing edgeL2adjL.m\n')
-tic
-assert(edgeL2adjL(T{11}{5}),T{12}{2}')
-assert(edgeL2adjL(sortrows(T{4}{5})),T{9}{2}')
-assert(edgeL2adjL(T{16}{5}),T{17}{2}')
-printf('---Time ellapsed: %3f in minutes.\n', toc/60)
-% ................................................
 
 % Testing inc2edgeL.m ............................
 printf('testing inc2edgeL.m\n')
@@ -819,32 +794,6 @@ printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 
 
-% Testing eigenCentrality.m ......................
-printf('testing eigenCentrality.m\n')
-tic
-[v,~]=eig([0 1 1; 1 0 1; 1 1 0]);
-assert(eigenCentrality([0 1 1; 1 0 1; 1 1 0]),v(:,3))   % "3" is the number of nodes
-
-[v,~]=eig(T{4}{2});
-assert( eigenCentrality( T{4}{2} ),v(:,size(T{4}{2},1)) )
-
-[v,~]=eig(T{13}{2});
-assert( eigenCentrality( T{13}{2} ),v(:,size(T{13}{2},1)) )
-
-[v,~]=eig(T{18}{2});
-ec = v(:,size(T{18}{2},1));
-assert( eigenCentrality( T{18}{2} ), ec )
-assert( norm( ec(1)*ones(length(ec),1) - ec) < 1*e^(-20) )
-
-adj = edgeL2adj( canonicalNets(randi(10)+2, 'cycle') );
-[v,~]=eig(adj);
-ec = v(:,size(adj,1));
-assert( eigenCentrality( adj ), ec )
-assert( norm( ec(1)*ones(length(ec),1) - ec) < 1*e^(-20) )
-printf('---Time ellapsed: %3f in minutes.\n', toc/60)
-% ................................................
-
-
 % Testing transitivity.m .........................
 printf('testing transitivity.m\n')
 tic
@@ -1429,17 +1378,6 @@ end
 printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 
-% Testing exponentialGrowthModel.m ...............
-printf('testing exponentialGrowthModel.m\n')
-tic
-for x=1:10
-  el = exponentialGrowthModel(randi(100));
-  adj=edgeL2adj(el);
-  assert(isConnected(adj),true)
-  assert(isTree(adj),true)
-end
-printf('---Time ellapsed: %3f in minutes.\n', toc/60)
-% ................................................
 
 % Testing masterEquation.m .......................
 printf('testing masterEquation.m\n')
@@ -1692,18 +1630,5 @@ assert(length(xp),length(xc))
 assert(length(xp),length(yp))
 assert(length(yp),length(yc))
 assert(length(lk),length(lx))
-printf('---Time ellapsed: %3f in minutes.\n', toc/60)
-% ................................................
-
-% Testing el2geom.m ..............................
-fprintf('testing el2geom.m\n')
-tic
-[el,p] = newmanGastner(1000,0.5,[],'off');
-elnew = [];
-for e=1:size(el,1); 
-  elnew = [elnew; el(e,1), el(e,2), randi(9), p(el(e,1),1), p(el(e,1),2), p(el(e,2),1), p(el(e,2),2)]; 
-end
-figure
-el2geom(elnew)
 printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
