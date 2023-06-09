@@ -167,52 +167,6 @@ printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ...............................................
 
 
-% Testing findConnCompI.m ........................
-printf('testing findConnCompI.m\n')
-tic
-assert(findConnCompI(T{5}{2},1),[1,2,3])
-assert(findConnCompI(T{5}{2},2),[1,2,3])
-assert(findConnCompI(T{5}{2},3),[1,2,3])
-assert(findConnCompI(T{5}{2},4),[4,5,6])
-assert(findConnCompI(T{5}{2},5),[4,5,6])
-assert(findConnCompI(T{5}{2},6),[4,5,6])
-assert(findConnCompI([0 1 0; 1 0 0; 0 0 0],1),[1,2])
-assert(findConnCompI([0 1 0; 1 0 0; 0 0 0],2),[1,2])
-assert(findConnCompI([0 1 0; 1 0 0; 0 0 0],3),[3])
-printf('---Time ellapsed: %3f in minutes.\n', toc/60)
-% ...............................................
-
-
-% Testing findConnComp.m ........................
-printf('testing findConnComp.m\n')
-tic
-assert(findConnComp(T{5}{2}),{[1,2,3],[4,5,6]})
-
-clear modules
-modules{1}=[0];
-randint = randi(21);
-Adj = []; adj = [];
-
-% make up a matrix (Adj) of randint disconnected components (adj)
-for x=1:randint
-  randsecint = randi(5)+5;
-  
-  % remember the disconnected components in "modules"
-  lastnode = modules{length(modules)}(length(modules{length(modules)}));
-  modules{length(modules)+1} = [lastnode+1:lastnode+randsecint]; 
-  
-  % make sure adj is not empty, is connected and the number of nodes is "randsecint"
-  while isempty(adj) || not(isConnected(adj)) || not(length(adj)==randsecint); adj=randomGraph(randsecint,0.5); end
-
-  Adj(length(Adj)+1:length(Adj)+randsecint,length(Adj)+1:length(Adj)+randsecint)=adj; 
-end
-
-modules=modules(2:length(modules));
-assert(findConnComp(Adj),modules)
-printf('---Time ellapsed: %3f in minutes.\n', toc/60)
-% ...............................................
-
-
 % Testing giantComponent.m ......................
 printf('testing giantComponent.m\n')
 tic
@@ -905,61 +859,6 @@ assert(rb,[1,2])
 
 [Jb,rb,J,r]=shortestPathDP(edgeL2adj(T{11}{2}),2,3,3);
 assert(Jb,inf)
-printf('---Time ellapsed: %3f in minutes.\n', toc/60)
-% ................................................
-
-
-% Testing findAllShortestPaths.m .................
-printf('testing findAllShortestPaths.m\n')
-tic
-adjL = {}; adjL{1} = [2]; adjL{2} = [];  % 1-2 edge
-[allPaths, shortestPathLength] = findAllShortestPaths(adjL,1,2, 2, allPaths={});
-assert(shortestPathLength,1)
-assert(allPaths{1},'-1-2')
-assert(length(allPaths),1)
-
-[allPaths, shortestPathLength] = findAllShortestPaths(adjL,2,1, 2, allPaths={});
-assert(shortestPathLength,2)  % not updated, equal to length(adjL)-1
-assert(allPaths, {})
-assert(length(allPaths),0)
-
-% two alternative paths (1-2-4 and 1-3-4)
-adjL = {}; adjL{1} = [2,3]; adjL{2} = [4]; adjL{3} = [4]; adjL{4}=[];
-[allPaths, shortestPathLength] = findAllShortestPaths(adjL,1,4, 5, allPaths={});
-assert(shortestPathLength,2)
-assert(length(allPaths),2)
-assert(allPaths{1},'-1-2-4')
-assert(allPaths{2},'-1-3-4')
-
-[allPaths, shortestPathLength] = findAllShortestPaths(adjL,4,2, 4, allPaths={});
-assert(shortestPathLength,4) % not updated, equal to length(adjL)-1
-assert(length(allPaths),0)
-
-% a one-directional cycle
-adjL={}; adjL{1}=[2]; adjL{2}=[3]; adjL{3}=[4]; adjL{4}=[1];
-[allPaths, shortestPathLength] = findAllShortestPaths(adjL,1,4, 4, allPaths={});
-assert(shortestPathLength,3)
-assert(length(allPaths),1)
-assert(allPaths{1},'-1-2-3-4')
-
-[allPaths, shortestPathLength] = findAllShortestPaths(adjL,4,3, 4, allPaths={});
-assert(shortestPathLength,3)
-assert(length(allPaths),1)
-assert(allPaths{1},'-4-1-2-3')
-
-% undirected cycle
-adjL={}; adjL{1}=[2,4]; adjL{2}=[3,1]; adjL{3}=[2,4]; adjL{4}=[1,3];
-[allPaths, shortestPathLength] = findAllShortestPaths(adjL,2,4, 4, allPaths={});
-assert(shortestPathLength,2)
-assert(length(allPaths),2)
-assert(allPaths{1},'-2-1-4')
-assert(allPaths{2},'-2-3-4')
-
-[allPaths, shortestPathLength] = findAllShortestPaths(adjL,3,1, 3, allPaths={});
-assert(shortestPathLength,2)
-assert(length(allPaths),2)
-assert(allPaths{1},'-3-2-1')
-assert(allPaths{2},'-3-4-1')
 printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 

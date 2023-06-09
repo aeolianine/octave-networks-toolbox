@@ -21,3 +21,7 @@ function fv = fiedlerVector(adj)
 %! [~,Y]=sort(diag(D));
 %! fv=V(:,Y(2));
 %! assert(fv, fiedlerVector(adj))
+
+%!demo
+%! adj = [0 1 1 0 0 0; 1 0 1 0 0 0; 1 1 0 1 0 0; 0 0 1 0 1 1; 0 0 0 1 0 1; 0 0 0 1 1 0];
+%! fiedlerVector(adj)

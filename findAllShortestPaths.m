@@ -57,3 +57,63 @@ function [allPaths, upperBound] = findAllShortestPaths(adjL, s, t, upperBound, a
     end
 
     allPaths = setdiff(allPaths, path2remove);
+
+
+%!test
+%!shared adjL, shortestPathLength, allPaths
+%! adjL = {}; adjL{1} = [2]; adjL{2} = [];  % 1-2 edge
+%! [allPaths, shortestPathLength] = findAllShortestPaths(adjL,1,2, 2, allPaths={});
+%!assert(shortestPathLength,1)
+%!assert(allPaths{1},'-1-2')
+%!assert(length(allPaths),1)
+
+%! [allPaths, shortestPathLength] = findAllShortestPaths(adjL,2,1, 2, allPaths={});
+%!assert(shortestPathLength,2)  % not updated, equal to length(adjL)-1
+%!assert(allPaths, {})
+%!assert(length(allPaths),0)
+
+%! % two alternative paths (1-2-4 and 1-3-4)
+%! adjL = {}; adjL{1} = [2,3]; adjL{2} = [4]; adjL{3} = [4]; adjL{4}=[];
+%! [allPaths, shortestPathLength] = findAllShortestPaths(adjL,1,4, 5, allPaths={});
+%!assert(shortestPathLength,2)
+%!assert(length(allPaths),2)
+%!assert(allPaths{1},'-1-2-4')
+%!assert(allPaths{2},'-1-3-4')
+
+%! [allPaths, shortestPathLength] = findAllShortestPaths(adjL,4,2, 4, allPaths={});
+%!assert(shortestPathLength,4) % not updated, equal to length(adjL)-1
+%!assert(length(allPaths),0)
+
+%! % a one-directional cycle
+%! adjL={}; adjL{1}=[2]; adjL{2}=[3]; adjL{3}=[4]; adjL{4}=[1];
+%! [allPaths, shortestPathLength] = findAllShortestPaths(adjL,1,4, 4, allPaths={});
+%!assert(shortestPathLength,3)
+%!assert(length(allPaths),1)
+%!assert(allPaths{1},'-1-2-3-4')
+
+%! [allPaths, shortestPathLength] = findAllShortestPaths(adjL,4,3, 4, allPaths={});
+%!assert(shortestPathLength,3)
+%!assert(length(allPaths),1)
+%!assert(allPaths{1},'-4-1-2-3')
+
+%! % undirected cycle
+%! adjL={}; adjL{1}=[2,4]; adjL{2}=[3,1]; adjL{3}=[2,4]; adjL{4}=[1,3];
+%! [allPaths, shortestPathLength] = findAllShortestPaths(adjL,2,4, 4, allPaths={});
+%!assert(shortestPathLength,2)
+%!assert(length(allPaths),2)
+%!assert(allPaths{1},'-2-1-4')
+%!assert(allPaths{2},'-2-3-4')
+
+%! [allPaths, shortestPathLength] = findAllShortestPaths(adjL,3,1, 3, allPaths={});
+%!assert(shortestPathLength,2)
+%!assert(length(allPaths),2)
+%!assert(allPaths{1},'-3-2-1')
+%!assert(allPaths{2},'-3-4-1')
+
+%!demo
+%! L = {[2, 3], [1, 3], [1, 2, 4], [3, 5, 6], [4, 6], [4, 5]}; 
+%! findAllShortestPaths(L, 1, 6, 3)
+%! findAllShortestPaths(L, 5, 2, 3)
+%! L = {[2,4], [1,3], [2,4], [3,1]};
+%! findAllShortestPaths(L, 1, 3, 3)
+%! findAllShortestPaths(L, 4, 2, 3)

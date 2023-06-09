@@ -85,3 +85,11 @@ function L = forestFireModel(T, p, r)
 %!   assert(randint,numNodes(L))
 %! end
 %!
+
+
+%!demo
+%! L = forestFireModel(100, 0.2, 4); 
+%! adj = adjL2adj(L);
+%! adj = symmetrize(adj);
+%! numNodes(adj)
+%! isSimple(adj)

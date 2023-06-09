@@ -29,3 +29,23 @@ function comp = findConnCompI(adj, i)
     end
 
 end
+
+
+%!test
+%!shared T
+%! T = load_test_graphs();
+%!assert(findConnCompI(T{5}{2},1),[1,2,3])
+%!assert(findConnCompI(T{5}{2},2),[1,2,3])
+%!assert(findConnCompI(T{5}{2},3),[1,2,3])
+%!assert(findConnCompI(T{5}{2},4),[4,5,6])
+%!assert(findConnCompI(T{5}{2},5),[4,5,6])
+%!assert(findConnCompI(T{5}{2},6),[4,5,6])
+%!assert(findConnCompI([0 1 0; 1 0 0; 0 0 0],1),[1,2])
+%!assert(findConnCompI([0 1 0; 1 0 0; 0 0 0],2),[1,2])
+%!assert(findConnCompI([0 1 0; 1 0 0; 0 0 0],3),[3])
+
+%!demo
+%! % two disconnected three−node cycles 
+%! adj=[0 1 1 0 0 0; 1 0 1 0 0 0; 1 1 0 0 0 0; 0 0 0 0 1 1; 0 0 0 1 0 1; 0 0 0 1 1 0];
+%! findConnCompI(adj, 1)
+%! findConnCompI(adj, 5)

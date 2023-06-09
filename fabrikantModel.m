@@ -105,3 +105,7 @@ end
 %!   assert(isTree(adj),true)
 %!   assert(isSimple(adj),true)
 %! end
+
+
+%!demo
+%! [adj,p] = fabrikantModel(200,30,"on");

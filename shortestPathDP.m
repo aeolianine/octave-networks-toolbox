@@ -42,3 +42,10 @@ function [J_st, route_st, J, route] = shortestPathDP(L, s, t, steps)
     route_st = [s, route(step_ind, s).path]; % the shortest path route from s to t
     J = J(sort(1:min([n, steps]), 'descend'), :);
     route = route(sort(1:min([n, steps]), 'descend'), :);
+
+
+
+%!demo
+%! bowtie = [0 1 1 0 0 0; 1 0 1 0 0 0; 1 1 0 1 0 0; 0 0 1 0 1 1; 0 0 0 1 0 1; 0 0 0 1 1 0];
+%! [Jst, route_st, J, route]=shortestPathDP(bowtie, 1, 6, 1)
+%! [Jst, route_st, J, route]=shortestPathDP(bowtie, 1, 6, 3)
