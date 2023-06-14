@@ -44,3 +44,8 @@ function edges = getEdges(graph, type)
 %! end
 
 %!test fail getEdges([], 'ergerggr')
+
+%!demo
+%! getEdges([0 1 1; 1 0 1; 0 1 1], 'adjacency')
+%! adjL = {[2, 3], [1, 3], [1, 2, 4], [3, 5, 6], [4, 6], [4, 5]}; 
+%! getEdges(adjL, 'adjlist')

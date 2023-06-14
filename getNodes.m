@@ -43,3 +43,9 @@ function nodes = getNodes(graph, type)
 %! end
 
 %!test fail getNodes([], 'ergergre')
+
+%!demo
+%! getNodes([1 2 1] , 'edgelist')
+%! getNodes([0 1 1; 1 0 1; 1 1 0], 'adjacency')
+%! adjL ={[2, 3], [1, 3], [1, 2, 4], [3, 5, 6], [4, 6], [4, 5]};
+%! getNodes(adjL, 'adjlist')
