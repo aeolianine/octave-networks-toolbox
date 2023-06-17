@@ -12,3 +12,16 @@
 function adjC = graphComplement(adj)
 
     adjC = ones(size(adj)) - adj;
+
+
+%!test
+%!shared T, mat
+%! T = load_test_graphs();
+%! mat = [1 0 0 1 1 1; 0 1 0 1 1 1; 0 0 1 0 1 1; 1 1 0 1 0 0; 1 1 1 0 1 0; 1 1 1 0 0 1];
+%!assert(graphComplement(T{4}{2}),mat)
+%!assert(graphComplement(T{13}{2}),eye(3))
+%!assert(graphComplement([0 1 1; 1 0 0; 1 0 0]), [1 0 0; 0 1 1; 0 1 1])
+
+%!demo
+%! graphComplement([0 1; 1 0])
+%! graphComplement([0 1 1; 1 0 0; 1 0 0])

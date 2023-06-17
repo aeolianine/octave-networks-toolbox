@@ -36,3 +36,10 @@ function adj = graphFromDegreeSequence(seq)
 %!   assert(isSimple(adjr),true)
 %!   assert(degrees(adj),degrees(adjr))
 %! end
+
+%!demo
+%! adj = randomGraph(100 ,0.4);
+%! deg = degrees(adj );
+%! adjH = graphFromDegreeSequence(deg );
+%! % verify that the degree sequences of the two graphs are equal 
+%! assert(degrees(adjH),deg)

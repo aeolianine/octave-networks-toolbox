@@ -18,3 +18,9 @@ function s = graphSpectrum(adj)
 %! L = laplacianMatrix(adj);
 %! [~,d] = eig(L);
 %! assert( sort(graphSpectrum(adj)), sort(diag(d)) )
+
+%!demo
+%! graphSpectrum([0 1; 0 0])
+%! adj = [0 1 1 0 0 0; 1 0 1 0 0 0; 1 1 0 1 0 0; 0 0 1 0 1 1; 0 0 0 1 0 1; 0 0 0 1 1 0];
+%! graphSpectrum(adj)
+%! % Notice that the last value of the bowtie graph spectrum is essentially 0

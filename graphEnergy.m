@@ -20,3 +20,7 @@ function G = graphEnergy(adj)
 %! [~,e]=eig(adj);  % e are the eigenvalues
 %! G=sum(abs(real(diag(e))));
 %! assert(G, graphEnergy(adj))
+
+%!demo
+%! adj = [0 1 1 0 0 0; 1 0 1 0 0 0; 1 1 0 1 0 0; 0 0 1 0 1 1; 0 0 0 1 0 1; 0 0 0 1 1 0];
+%! graphEnergy(adj)

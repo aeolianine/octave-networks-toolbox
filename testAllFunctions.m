@@ -167,37 +167,6 @@ printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ...............................................
 
 
-% Testing giantComponent.m ......................
-printf('testing giantComponent.m\n')
-tic
-assert(giantComponent([0 1 0; 1 0 0; 0 0 0]),[0 1; 1 0])
-
-clear modules
-modules{1}=[0];
-randint = randi(10)+1;
-Adj = []; adj = [];
-
-% make up a matrix (Adj) of randint disconnected components (adj)
-for x=1:randint
-  randsecint = randi(10)+5;
-  lastnode = modules{length(modules)}(length(modules{length(modules)}));
-  modules{length(modules)+1} = [lastnode+1:lastnode+randsecint]; 
-  % make sure adj is not empty, is connected and the number of nodes is "randsecint"
-  while isempty(adj) || not(isConnected(adj)) || not(length(adj)==randsecint); adj=randomGraph(randsecint,0.5); end
-  Adj(length(Adj)+1:length(Adj)+randsecint,length(Adj)+1:length(Adj)+randsecint)=adj; 
-end
-
-modules=modules(2:length(modules));
-L = [];
-for m=1:length(modules); L = [L, length(modules{m})]; end;
-[maxL,maxind] = max(L);
-[GC, GCnodes] = giantComponent(Adj);
-assert(GC, subgraph(Adj,modules{maxind}))
-assert(GCnodes, modules{maxind})
-printf('---Time ellapsed: %3f in minutes.\n', toc/60)
-% ...............................................
-
-
 % Testing tarjan.m ..............................
 printf('testing tarjan.m\n')
 tic
@@ -297,33 +266,6 @@ end
 printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ...............................................
 
-% Testing graphComplement.m .....................
-printf('testing graphComplement.m\n')
-tic
-mat = [1 0 0 1 1 1; 0 1 0 1 1 1; 0 0 1 0 1 1; 1 1 0 1 0 0; 1 1 1 0 1 0; 1 1 1 0 0 1];
-assert(graphComplement(T{4}{2}),mat)
-assert(graphComplement(T{13}{2}),eye(3))
-assert(graphComplement([0 1 1; 1 0 0; 1 0 0]), [1 0 0; 0 1 1; 0 1 1])
-printf('---Time ellapsed: %3f in minutes.\n', toc/60)
-% ...............................................
-
-% Testing graphDual.m ...........................
-printf('testing graphDual.m\n')
-tic
-gd=graphDual(adj2adjL(T{4}{2}));
-gdT={};
-gdT{1}=[2,3]; gdT{2}=[1,3,4]; gdT{3}=[1,2,4]; gdT{4}=[2,3,5,6]; gdT{5}=[4,6,7]; gdT{6}=[4,5,7]; gdT{7}=[5,6];
-assert(gd,gdT)
-
-gd=graphDual(adj2adjL(T{13}{2}));
-gdT={};
-gdT{1}=[2,3]; gdT{2}=[1,3]; gdT{3}=[1,2];
-assert(gd,gdT)
-
-L={}; LT={}; L{1}=[2]; L{2}=[1]; LT{1}=[];
-assert(LT,graphDual(L))
-printf('---Time ellapsed: %3f in minutes.\n', toc/60)
-% ...............................................
 
 % Testing subgraph.m ............................
 fprintf('testing subgraph.m\n')
@@ -931,18 +873,6 @@ assert(vertexEccentricity(edgeL2adj(T{11}{2})), [1, inf, inf])
 printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 
-% Testing graphRadius.m ..........................
-printf('testing graphRadius.m\n')
-tic
-assert(graphRadius(T{4}{2}),2)
-assert(graphRadius(edgeL2adj(T{11}{2})),1)
-
-el = canonicalNets(randi(10)+10,'line');
-adj = edgeL2adj(el);
-assert(graphRadius(adj),(size(adj,1)-mod(size(adj,1),2))/2)
-printf('---Time ellapsed: %3f in minutes.\n', toc/60)
-% ................................................
-
 % ................................................
 % ....... simple motifs ..........................
 % ................................................
@@ -1414,7 +1344,7 @@ printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % Testing newmanCommFast.m .......................
 printf('testing newmanCommFast.m\n')
 tic
-[gH,Q]=newmanCommFast(bowtie);
+[gH,Q]=newmanCommFast(T{4}{2});
 close all;
 assert(max(Q),Q(6-1));
 
