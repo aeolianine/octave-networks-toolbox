@@ -28,3 +28,23 @@ function el = inc2edgeL(inc)
         end
 
     end
+
+
+%!test
+%!assert(inc2edgeL([1 0 0; 0 1 0; 0 0 1]),[1 1 1; 2 2 1; 3 3 1])  % three self-loops
+%!assert(inc2edgeL([-1 -1; 1 0; 0 1]),[1 2 1; 1 3 1])   % tree 3 nodes
+%!assert(inc2edgeL([1 1; 1 1]),[1 2 1; 1 2 1; 2 1 1; 2 1 1])     % one double edge
+
+%!shared T
+%! T = load_test_graphs();
+%!assert(inc2edgeL([-1;1]),T{1}{5})                     % one directed edge
+%!assert(inc2edgeL([ 1;1]),T{2}{5})                     % one undirected edge
+%!assert(sortrows(inc2edgeL(T{15}{2})(1:length(T{15}{5}),1:2)),sortrows(T{15}{5}))
+
+%!demo
+%! inc = [-1; 1]; % single directed edge
+%! inc2edgeL(inc) 
+%! inc = [1 0; 1 1; 0 1]; % two undirected edges
+%! inc2edgeL(inc) 
+%! inc = [-1 0; 1 -1; 0 1];  % two directed edges
+%! inc2edgeL(inc) 

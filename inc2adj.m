@@ -48,3 +48,33 @@ function adj = inc2adj(inc)
         end
 
     end
+
+
+%!test
+%!shared T
+%! T = load_test_graphs();
+%! randint = randi(10)+1;
+%! assert(inc2adj(eye(randint))==eye(randint))
+
+%!assert(inc2adj(ones(3) - eye(3)),ones(3) - eye(3))
+
+%! % 1->2, 2->2, 3->1
+%!assert([0 1 0; 0 1 0; 1 0 0 ],inc2adj([-1 0 1; 1 1 0; 0 0 -1]))
+%!assert([0 2; 0 0],inc2adj([-1 -1; 1 1]))  % directed double edge
+%!assert(T{1}{2}, inc2adj([-1 1]'))          % one directed edge
+
+%! % two edges (1->2, 3->1)
+%!assert(inc2adj([-1 1; 1 0; 0 -1])==[0 1 0; 0 0 0; 1 0 0])
+
+%!demo
+%! % an example in which the incidence happens to equal the adjacency 
+%! inc = [1 0 1; 1 1 0; 0 1 1];
+%! inc2adj(inc)
+
+%! % two directed edges
+%! inc = [-1 -1; 1 0; 0 1];
+%! inc2adj(inc)
+
+%! % one directed edge
+%! inc = [-1; 1]
+%! inc2adj(inc)

@@ -15,39 +15,6 @@ T = load_test_graphs();
 % ................................................
 
 
-% Testing inc2adj.m ..............................
-printf('testing inc2adj.m\n')
-tic
-randint = randi(10)+1;
-assert(inc2adj(eye(randint))==eye(randint))
-
-adj = ones(3) - eye(3);
-assert(inc2adj(adj),adj)
-
-% 1->2, 2->2, 3->1
-assert([0 1 0; 0 1 0; 1 0 0 ],inc2adj([-1 0 1; 1 1 0; 0 0 -1]))
-assert([0 2; 0 0],inc2adj([-1 -1; 1 1]))  % directed double edge
-assert(T{1}{2}, inc2adj([-1 1]'))          % one directed edge
-
-inc = [-1 1; 1 0; 0 -1];  % two edges (1->2, 3->1)
-assert(inc2adj(inc)==[0 1 0; 0 0 0; 1 0 0])
-printf('---Time ellapsed: %3f in minutes.\n', toc/60)
-% ................................................
-
-
-% Testing inc2edgeL.m ............................
-printf('testing inc2edgeL.m\n')
-tic
-assert(inc2edgeL([1 0 0; 0 1 0; 0 0 1]),[1 1 1; 2 2 1; 3 3 1])  % three self-loops
-assert(inc2edgeL([-1 -1; 1 0; 0 1]),[1 2 1; 1 3 1])   % tree 3 nodes
-assert(inc2edgeL([-1;1]),T{1}{5})                     % one directed edge
-assert(inc2edgeL([ 1;1]),T{2}{5})                     % one undirected edge
-assert(inc2edgeL([1 1; 1 1]),[1 2 1; 1 2 1; 2 1 1; 2 1 1])     % one double edge
-assert(sortrows(inc2edgeL(T{15}{2})(1:length(T{15}{5}),1:2)),sortrows(T{15}{5}))
-printf('---Time ellapsed: %3f in minutes.\n', toc/60)
-% ................................................
-
-
 % Testing symmetrize.m ...........................
 printf('testing symmetrize.m\n')
 tic
