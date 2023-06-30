@@ -27,3 +27,18 @@ function S = isEulerian(adj)
         printf('isEulerian.m: There is an Eulerian trail from node %2i to node %2i\n', odd(1), odd(2));
 
     end
+
+
+%!test
+%! adj = edgeL2adj(canonicalNets(10,'cycle'));
+%! assert(isEulerian(adj),true)
+
+%! adj = edgeL2adj(canonicalNets(10,'tree',3));
+%! assert(isEulerian(adj),false)
+
+%!demo
+%! % nodes have degree (2, 1, 1) respectively
+%! isEulerian([0 1 1; 1 0 0; 1 0 0])
+
+%! % in a 4−cycle every node has degree 2
+%! isEulerian([0 1 0 1; 1 0 1 0; 0 1 0 1; 1 0 1 0])

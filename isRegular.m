@@ -15,3 +15,30 @@ function S = isRegular(adj)
     if degs == degs(1) * ones(size(degs));
         S = true;
     end
+
+
+%!test
+%! adj = edgeL2adj(canonicalNets(20,'cycle'));
+%! assert(isRegular(adj),true)
+
+%! adj = edgeL2adj(canonicalNets(20,'tree',3));
+%! assert(isRegular(adj),false)
+
+%! assert(isRegular([0 1; 1 0]),true)
+%! assert(isRegular([0 0; 1 0]),false)
+
+%!demo
+%! % undirected binary tree
+%! adj = [0 1 1; 1 0 0; 1 0 0];
+%! isRegular(adj)
+
+%! % undirected 3−node cycle
+%! adj = [0 1 1; 1 0 1; 1 1 0]; 
+%! isRegular(adj)
+
+%! % same as above, but edges are weighted
+%! adj = [0 2 2; 2 0 2; 2 2 0];
+%! isRegular(adj)
+
+%! % a 4−node cycle
+%! isRegular([0 1 0 1; 1 0 1 0; 0 1 0 1; 1 0 1 0])

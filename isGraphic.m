@@ -32,3 +32,21 @@ function B = isGraphic(seq)
     end
 
     B = true;
+
+%!test
+%! for i=1:20
+%!     adj = giantComponent(randomGraph(randi(20)+1,0.5));
+%!     [deg,~,~] = degrees(adj);
+%!     assert(isGraphic(deg) | adj==0)
+%! end
+
+%!assert(isGraphic([0 1]), false)
+%!assert(isGraphic([2 1]), false)
+%!assert(isGraphic([1 1 4]), false)
+%!assert(isGraphic([1 4 4 100]), false)
+
+%!demo
+%! isGraphic([2 2 2])
+%! isGraphic([2 1 2])
+%! isGraphic([2 2 3 3 2 2])
+%! isGraphic([2 2 3 3 2 3])

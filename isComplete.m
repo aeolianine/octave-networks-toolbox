@@ -17,3 +17,20 @@ function S = isComplete(adj)
     if sum(adj) == ones(1, n) * (n - 1) || sum(adj) == ones(1, n) * n;
         S = true;
     end
+
+
+%!test
+%!assert(isComplete([0 1; 1 0]),true)
+%!shared T
+%! T = load_test_graphs();
+%!assert(isComplete(T{2}{2}),true)
+%!assert(isComplete(T{3}{2}),true)
+%!assert(isComplete(T{4}{2}),false)
+
+%! randint = randi(10)+10;
+%! adj = ones(randint)-eye(randint);
+%! assert(isComplete(adj),true)
+
+%!demo
+%! isComplete([0 1 1; 1 0 0; 1 0 0])
+%! isComplete([0 1 1; 1 0 1; 1 1 0])
