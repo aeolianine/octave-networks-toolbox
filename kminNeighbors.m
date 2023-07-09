@@ -19,3 +19,17 @@ function kneigh = kminNeighbors(adj, ind, k)
     end
 
     kneigh = setdiff(find(adjk(ind, :) > 0), [close_neighbors ind]);
+
+
+%!test
+%!shared T
+%! T = load_test_graphs();
+%!assert(kminNeighbors(T{4}{2},1,3),[5, 6])
+%!assert(kminNeighbors(T{4}{2},3,1),[1, 2, 4])
+%!assert(kminNeighbors(T{4}{2},3,2),[5, 6])
+
+%!demo
+%! bowtie=[0 1 1 0 0 0; 1 0 1 0 0 0; 1 1 0 1 0 0; 0 0 1 0 1 1; 0 0 0 1 0 1; 0 0 0 1 1 0];
+%! kminNeighbors(bowtie, 1, 1)
+%! kminNeighbors(bowtie, 1, 2)
+%! kminNeighbors(bowtie, 1, 3)

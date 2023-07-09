@@ -14,3 +14,20 @@ function kneigh = kneighbors(adj, ind, k)
     end;
 
     kneigh = find(adjk(ind, :) > 0);
+
+
+%!test
+%!shared T
+%! T = load_test_graphs();
+%!assert(kneighbors(T{4}{2},1,3),[1 2 3 4 5 6])
+%!assert(kneighbors(T{4}{2},3,1),[1 2 4])
+%!assert(kneighbors(T{13}{2},2,1),[1,3])
+%!assert(kneighbors(T{13}{2},1,2),[1,2,3])
+
+%!demo
+%! bowtie=[0 1 1 0 0 0; 1 0 1 0 0 0; 1 1 0 1 0 0; 0 0 1 0 1 1; 0 0 0 1 0 1; 0 0 0 1 1 0];
+%! kneighbors(bowtie, 1, 1)
+%! kneighbors(bowtie, 1, 2)
+%! kneighbors(bowtie, 1, 3)
+%! kneighbors(bowtie, 4, 2)
+

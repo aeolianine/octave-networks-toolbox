@@ -559,26 +559,6 @@ printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 
 
-% Testing kneighbors.m ...........................
-printf('testing kneighbors.m\n')
-tic
-assert(kneighbors(T{4}{2},1,3),[1 2 3 4 5 6])
-assert(kneighbors(T{4}{2},3,1),[1 2 4])
-assert(kneighbors(T{13}{2},2,1),[1,3])
-assert(kneighbors(T{13}{2},1,2),[1,2,3])
-printf('---Time ellapsed: %3f in minutes.\n', toc/60)
-% ................................................
-
-% Testing kminNeighbors.m ........................
-fprintf('testing kminNeighbors.m\n')
-tic
-assert(kminNeighbors(T{4}{2},1,3),[5, 6])
-assert(kminNeighbors(T{4}{2},3,1),[1, 2, 4])
-assert(kminNeighbors(T{4}{2},3,2),[5, 6])
-printf('---Time ellapsed: %3f in minutes.\n', toc/60)
-% ................................................
-
-
 % Testing avePathLength.m ........................
 printf('testing avePathLength.m\n')
 tic
@@ -709,22 +689,6 @@ printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ......... graph models .........................
 % ................................................
 
-
-% test kregular.m ................................
-printf('testing kregular.m\n');
-tic
-for x=1:30
-  
-  n = randi(20)+5;   % random integer between 6 and 25
-  k = randi(n-2)+1;  % randon integer between 2 and n-1
-  if mod(k,2)==1 && mod(n,2)==1; continue; end  % no solution for this case
-  el = kregular(n,k);
-  adj = edgeL2adj(el);
-  assert(degrees(adj),k*ones(1,length(adj)))
-
-end
-printf('---Time ellapsed: %3f in minutes.\n', toc/60)
-% ................................................
 
 % Testing randomGraph.m ..........................
 printf('testing randomGraph.m\n');

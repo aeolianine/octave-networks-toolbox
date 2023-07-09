@@ -70,3 +70,34 @@ function el = kregular(n, k)
     end
 
     el = symmetrizeEdgeL(el);
+
+
+%!test
+%! for x=1:30
+%!  
+%!   n = randi(20)+5;   % random integer between 6 and 25
+%!   k = randi(n-2)+1;  % randon integer between 2 and n-1
+%!   if mod(k,2)==1 && mod(n,2)==1; 
+%!     % no solution for this case
+%!     continue;  
+%!   end  
+%!   el = kregular(n,k);
+%!   adj = edgeL2adj(el);
+%!   assert(degrees(adj),k*ones(1,length(adj)))
+%! 
+%! end
+
+
+%!demo
+%! n = randi(9)+10;    % pick a random n
+%! k = randi([2, n-1]); % pick a random k
+%! 
+%! % no solution for both k and n odd
+%! if mod(k,2)==1 && mod(n,2)==1
+%!     n=n-1; 
+%! end
+%! 
+%! el = kregular(n, k);
+%! adj = edgeL2adj(el);
+%! % check that all degrees equal k
+%! assert(degrees(adj), k*ones(1,n))
