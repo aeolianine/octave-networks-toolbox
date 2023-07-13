@@ -21,3 +21,22 @@ function edges = leafEdges(adj)
     for i = 1:length(lves)
         edges = [edges; find(adj(:, lves(i)) == 1), lves(i)];
     end
+
+
+%!test
+%!shared T
+%! T = load_test_graphs();
+%!assert(leafEdges(edgeL2adj(T{10}{2})),[1,2;1,3])
+%!assert(leafEdges(edgeL2adj(T{10}{2})),[1,2;1,3])
+%!assert(length(leafEdges(T{13}{2})),0)
+%!assert(length(leafEdges(edgeL2adj([2,1,1;3,1,1]))),0)
+%!assert(length(leafEdges(T{4}{2})),0)
+%!assert(leafEdges(edgeL2adj(T{19}{2})),[1, 2; 1, 3; 1, 4; 1, 5])
+
+%!demo
+%! % a binary tree with two leaf edges/nodes 
+%!  adj = [0 1 1; 1 0 0; 1 0 0];
+%! leafEdges(adj)
+%! % a cycle has no leaf edges 
+%! adj = [0 1 1; 1 0 1; 1 1 0]; 
+%! leafEdges(adj)

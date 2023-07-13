@@ -29,3 +29,14 @@ function L=laplacianMatrix(adj)
 %     if ii==jj; L(ii,ii)=1; continue; end
 %     L(ii,jj)=-1/sqrt(deg(ii)*deg(jj));
 % end
+
+%!test
+%!shared T
+%! T = load_test_graphs();
+%!assert(laplacianMatrix(T{4}{2}),[2 -1 -1 0 0 0; -1 2 -1 0 0 0; -1 -1 3 -1 0 0; 0 0 -1 3 -1 -1; 0 0 0 -1 2 -1; 0 0 0 -1 -1 2])
+%!assert(laplacianMatrix(T{13}{2}),[2 -1 -1; -1 2 -1; -1 -1 2])
+
+%!demo
+%! % 3x3 identity matrix 
+%! adj = [0 1 1; 1 0 1; 1 1 0]; 
+%! laplacianMatrix(adj)

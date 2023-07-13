@@ -258,18 +258,6 @@ assert(leafNodes(edgeL2adj(T{19}{2})),[2,3,4,5])
 printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ...............................................
 
-% Testing leafEdges.m ...........................
-fprintf('testing leafEdges.m\n')
-tic
-assert(leafEdges(edgeL2adj(T{10}{2})),[1,2;1,3])
-assert(leafEdges(edgeL2adj(T{10}{2})),[1,2;1,3])
-assert(length(leafEdges(T{13}{2})),0)
-assert(length(leafEdges(edgeL2adj([2,1,1;3,1,1]))),0)
-assert(length(leafEdges(T{4}{2})),0)
-assert(leafEdges(edgeL2adj(T{19}{2})),[1, 2; 1, 3; 1, 4; 1, 5])
-printf('---Time ellapsed: %3f in minutes.\n', toc/60)
-% ...............................................
-
 % Testing minSpanTree.m .........................
 printf('testing minSpanTree.m\n')
 tic
@@ -668,13 +656,6 @@ printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ......... linear algebra routines ..............
 % ................................................
 
-% Testing laplacianMatrix.m ......................
-printf('testing laplacianMatrix.m\n')
-tic
-assert(laplacianMatrix(T{4}{2}),[2 -1 -1 0 0 0; -1 2 -1 0 0 0; -1 -1 3 -1 0 0; 0 0 -1 3 -1 -1; 0 0 0 -1 2 -1; 0 0 0 -1 -1 2])
-assert(laplacianMatrix(T{13}{2}),[2 -1 -1; -1 2 -1; -1 -1 2])
-printf('---Time ellapsed: %3f in minutes.\n', toc/60)
-% ................................................
 
 % Testing signlessLaplacian.m ......................
 printf('testing signlessLaplacian.m\n')
