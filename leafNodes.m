@@ -14,3 +14,21 @@ function leaves = leafNodes(adj)
     adj = int8(adj > 0);
 
     leaves = find(sum(adj) == 1);
+
+
+%!test
+%!shared T
+%! T = load_test_graphs();
+%!assert(leafNodes(edgeL2adj(T{10}{2})),[2,3])
+%!assert(leafNodes(edgeL2adj(T{11}{2})),[2,3])
+%!assert(length(leafNodes(T{13}{2})),0)
+%!assert(leafNodes(T{2}{2}),[1,2])
+%!assert(leafNodes(T{1}{2}),[2])
+%!assert(length(leafNodes(T{4}{2})),0)
+%!assert(leafNodes(edgeL2adj(T{19}{2})),[2,3,4,5])
+
+%!demo
+%! adj = [0 1 1; 1 0 0; 1 0 0];  % only ”1” is not a leaf node , because it has degree 2
+%! leafNodes(adj)
+%! adj = [0 1 1; 1 0 1; 1 1 0];  % a cycle has no leaf nodes
+%! leafNodes(adj)

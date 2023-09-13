@@ -79,23 +79,6 @@ printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ...............................................
 
 
-% Testing linkDensity.m .........................
-printf('testing linkDensity.m\n')
-tic
-randint = randi(101)+1;
-assert(linkDensity(edgeL2adj(canonicalNets(randint,'tree',2))),2/randint)
-
-for i=1:length(T)
-    if strcmp(T{i}{3},'adjacency')
-        coeff = 2;
-        if isDirected(T{i}{2}); coeff = 1; end
-        assert( linkDensity(T{i}{2}), coeff*T{i}{7}/(T{i}{6}*(T{i}{6}-1)) )
-    end
-end
-printf('---Time ellapsed: %3f in minutes.\n', toc/60)
-% ...............................................
-
-
 % Testing selfLoops.m ...........................
 printf('testing selfLoops.m\n')
 tic
@@ -245,18 +228,6 @@ assert(T{2}{2},subgraph(T{4}{2},[3,4]))
 printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ...............................................
 
-% Testing leafNodes.m ...........................
-fprintf('testing leafNodes.m\n')
-tic
-assert(leafNodes(edgeL2adj(T{10}{2})),[2,3])
-assert(leafNodes(edgeL2adj(T{11}{2})),[2,3])
-assert(length(leafNodes(T{13}{2})),0)
-assert(leafNodes(T{2}{2}),[1,2])
-assert(leafNodes(T{1}{2}),[2])
-assert(length(leafNodes(T{4}{2})),0)
-assert(leafNodes(edgeL2adj(T{19}{2})),[2,3,4,5])
-printf('---Time ellapsed: %3f in minutes.\n', toc/60)
-% ...............................................
 
 % Testing minSpanTree.m .........................
 printf('testing minSpanTree.m\n')
@@ -618,22 +589,6 @@ assert(numCycles(T{13}{2}),1)
 assert(numCycles(T{4}{2}),2)
 assert(numCycles(edgeL2adj(T{10}{2})),0)
 assert(numCycles(T{18}{2}),1)
-printf('---Time ellapsed: %3f in minutes.\n', toc/60)
-% ................................................
-
-
-% Testing loops3rev2.m ...............................
-printf('testing loops3rev2.m\n')
-tic
-fourCycle = T{18}{2};
-assert(loops3rev2(T{4}{2}),{'1-2-3','4-5-6'})
-assert(loops3rev2(fourCycle),{})
-assert(loops3rev2(T{13}{2}),{'1-2-3'})
-assert(loops3rev2(edgeL2adj(canonicalNets(randi(10)+3,'btree'))),{})
-assert(loops3rev2(edgeL2adj(canonicalNets(4,'trilattice'))),{'1-2-4','1-3-4'})
-assert(loops3rev2(T{16}{2}),{'1-2-3'})
-
-
 printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 
@@ -1079,65 +1034,6 @@ for i=1:10
 end
 printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
-
-% Testing louvainCommunityFinding.m ..............
-printf('testing louvainCommunityFinding.m\n');
-tic
-extended_bowtie0 = [1 2; 2 3; 3 2; 3 4; 4 5; 5 6; 4 6; 6 7; 7 8; 7 9; 8 9];
-extended_bowtie = [];
-for row=1:size(extended_bowtie0,1)
-  extended_bowtie = [extended_bowtie; extended_bowtie0(row,:) 1];
-end
-clear extended_bowtie0
-extended_bowtie = symmetrizeEdgeL(extended_bowtie);
-adj = edgeL2adj(extended_bowtie);
-
-[modules,inmodule]=louvainCommunityFinding(adj);
-assert(length(modules),3)
-assert([inmodule{1},inmodule{2},inmodule{3}],[1,1,1]*inmodule{1})
-assert([inmodule{4},inmodule{5},inmodule{6}],[1,1,1]*inmodule{4})
-assert([inmodule{7},inmodule{8},inmodule{9}],[1,1,1]*inmodule{7})
-
-[modules,inmodule]=louvainCommunityFinding(bowtie);
-assert(length(modules),2)
-assert([inmodule{1},inmodule{2},inmodule{3}],[1,1,1]*inmodule{1})
-assert([inmodule{4},inmodule{5},inmodule{6}],[1,1,1]*inmodule{4})
-
-% concatenate 4 complete graphs: 
-adj = ones(10,10)-eye(10);
-Adj = zeros(40,40);
-
-Adj(1:10,1:10)=adj;
-Adj(11:20,11:20)=adj;
-Adj(21:30,21:30)=adj;
-Adj(31:40,31:40)=adj;
-
-Adj(10,11) = 1; Adj(11,10) = 1;
-Adj(20,21) = 1; Adj(21,20) = 1;
-Adj(30,31) = 1; Adj(31,30) = 1;
-
-[modules,inmodule]=louvainCommunityFinding(Adj);
-assert(length(modules),4)
-
-% concatenate 4 dense graphs
-adj = [0 1; 0 0];
-while not(isConnected(adj)); adj = randomGraph(10,0.9); end
-Adj = zeros(40,40);
-
-Adj(1:10,1:10)=adj;
-Adj(11:20,11:20)=adj;
-Adj(21:30,21:30)=adj;
-Adj(31:40,31:40)=adj;
-
-Adj(10,11) = 1; Adj(11,10) = 1;
-Adj(20,21) = 1; Adj(21,20) = 1;
-Adj(30,31) = 1; Adj(31,30) = 1;
-
-[modules,inmodule]=louvainCommunityFinding(Adj);
-assert(length(modules),4)
-printf('---Time ellapsed: %3f in minutes.\n', toc/60)
-% ................................................
-
 
 % ................................................
 % ......... simple matrix/graph viz ..............

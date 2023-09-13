@@ -63,3 +63,20 @@ function res = loops3rev2(A)
     else
         disp(strcat('Number of 3-cycles:', num2str(c)));
     end
+
+
+%!test
+%!shared T, fourCycle
+%! T = load_test_graphs();
+%! fourCycle = T{18}{2};
+%!assert(loops3rev2(T{4}{2}),{'1-2-3','4-5-6'})
+%!assert(loops3rev2(fourCycle),{})
+%!assert(loops3rev2(T{13}{2}),{'1-2-3'})
+%!assert(loops3rev2(edgeL2adj(canonicalNets(randi(10)+3,'btree'))),{})
+%!assert(loops3rev2(edgeL2adj(canonicalNets(4,'trilattice'))),{'1-2-4','1-3-4'})
+%!assert(loops3rev2(T{16}{2}),{'1-2-3'})
+
+%!demo
+%! T = load_test_graphs();
+%! loops3rev2(T{4}{2})
+%! loops3rev2(T{18}{2})
