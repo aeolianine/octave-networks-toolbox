@@ -41,3 +41,20 @@ function tr = minSpanTree(adj)
         rem_nodes = setdiff(rem_nodes, j);
 
     end
+
+
+%!test
+%! for x=1:100
+%!   adj = [0 1; 0 0];                % initialize
+%!   while not(isConnected(adj)); adj = randomGraph(randi(30)+5,rand); end
+%!   
+%!   tr = minSpanTree(adj);
+%!   assert(isTree(tr),true)
+%!   assert(length(tr),length(adj));  % tree should have the same
+%!                                    % number of nodes as adj
+%! end
+
+%!demo
+%! bowtie = [0 1 1 0 0 0; 1 0 1 0 0 0; 1 1 0 1 0 0; 0 0 1 0 1 1; 0 0 0 1 0 1; 0 0 0 1 1 0];
+%! minSpanTree(bowtie)
+%! minSpanTree([0 1 1; 1 0 0; 1 0 1])

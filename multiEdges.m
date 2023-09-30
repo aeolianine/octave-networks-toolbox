@@ -22,3 +22,19 @@ function mE = multiEdges(adj)
     else
         mE = length(find(adj > 1));
     end
+
+
+%!test
+%!shared T
+%! T = load_test_graphs();
+%!assert(multiEdges(T{3}{2}),1)
+%!assert(multiEdges([0 2 1; 2 0 1; 1 1 0]),1)  % triangle with one double edge
+%!assert(multiEdges([0 0 1; 2 0 0; 0 1 0]),1)  % directed triangle with 1 double edge
+%!assert(multiEdges(randomGraph(randi(15))),0)
+%!assert(multiEdges([0 0 1; 2 0 0; 0 2 0]),2)  % directed triangle with 2 double edges
+
+
+%!demo
+%! multiEdges([0 2; 0 0])  # one directed double edge
+%! multiEdges([0 2; 2 0])  # undirected double edge
+%! multiEdges([1 1 0; 1 0 0; 0 0 0])  # no multi-edges

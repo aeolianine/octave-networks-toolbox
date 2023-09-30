@@ -127,3 +127,23 @@ function Q = Qfn(modules, adj)% ....... same as modularityMetric.m ........
 
         Q = Q + (e_mm - a_m^2);
     end
+
+
+%!test
+%!shared T
+%! T = load_test_graphs();
+%! [gH,Q]=newmanCommFast(T{4}{2});
+%! close all;
+%! assert(max(Q),Q(6-1));
+%! 
+%! [gH,Q]=newmanCommFast(randomModularGraph(100,4,0.1,5));
+%! close all;
+%! assert(length(gH),length(Q))
+%! [~,ind]=max(Q);
+%! assert(length(gH{ind}),4)
+
+%!demo
+%! bowtie = [0 1 1 0 0 0; 1 0 1 0 0 0; 1 1 0 1 0 0; 0 0 1 0 1 1; 0 0 0 1 0 1; 0 0 0 1 1 0];
+%! [groups_history, Q]=newmanCommFast(bowtie);
+%! length(groups_history)
+%! groups_history{5}

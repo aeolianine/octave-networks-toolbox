@@ -52,3 +52,27 @@ function adj = masterEquationGrowthModel(n, m, a)
 
     adj = adj > 0; % no multi-edges
     adj = adj - diag(diag(adj)); % remove self-loops
+
+
+
+%!test
+%! for x=1:30
+%!  randint = randi(100)+5;
+%!  adj = masterEquationGrowthModel(randint,1,0);
+%!  assert(isTree(adj),true)
+%!  
+%!  adj = masterEquationGrowthModel(randint,2,0);
+%!  assert(isTree(adj),false)
+%!  
+%!  adj = masterEquationGrowthModel(randint,2,2);
+%!  assert(isSimple(adj),true)
+%!  
+%! end
+
+
+%!demo
+%! adj = masterEquationGrowthModel(100, 1, 0);
+%! isTree(adj)
+%! adj = masterEquationGrowthModel(99, 2, 1);
+%! isSimple(adj)
+%! numNodes(adj)

@@ -98,3 +98,12 @@ function eL = nestedHierarchiesModel(N, L, G, kbar, rho)
         end
 
         eL = symmetrizeEdgeL(eL);
+
+
+%!test
+%! el = nestedHierarchiesModel(640, 3, [10, 20, 40], 10);
+%! adj = edgeL2adj(el);
+%! assert(isSimple(adj));
+
+%!demo
+%! el = nestedHierarchiesModel(640, 3, [10, 20, 40], 16, 1);

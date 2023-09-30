@@ -89,18 +89,6 @@ printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ...............................................
 
 
-% Testing multiEdges.m ..........................
-printf('testing multiEdges.m\n')
-tic
-assert(multiEdges(T{3}{2}),1)
-assert(multiEdges([0 2 1; 2 0 1; 1 1 0]),1)  % triangle with one double edge
-assert(multiEdges([0 0 1; 2 0 0; 0 1 0]),1)  % directed triangle with 1 double edge
-assert(multiEdges(randomGraph(randi(15))),0)
-assert(multiEdges([0 0 1; 2 0 0; 0 2 0]),2)  % directed triangle with 2 double edges
-printf('---Time ellapsed: %3f in minutes.\n', toc/60)
-% ...............................................
-
-
 % Testing numConnComp.m .........................
 printf('testing numConnComp.m\n')
 tic
@@ -225,22 +213,6 @@ assert(T{13}{2},subgraph(T{4}{2},[4,5,6]))
 assert(T{2}{2},subgraph(T{4}{2},[4,5]))
 assert(T{2}{2},subgraph(T{4}{2},[1,2]))
 assert(T{2}{2},subgraph(T{4}{2},[3,4]))
-printf('---Time ellapsed: %3f in minutes.\n', toc/60)
-% ...............................................
-
-
-% Testing minSpanTree.m .........................
-printf('testing minSpanTree.m\n')
-tic
-for x=1:100
-  adj = [0 1; 0 0];                % initialize
-  while not(isConnected(adj)); adj = randomGraph(randi(30)+5,rand); end
-  
-  tr = minSpanTree(adj);
-  assert(isTree(tr),true)
-  assert(length(tr),length(adj));  % tree should have the same
-                                   % number of nodes as adj
-end
 printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ...............................................
 
@@ -862,24 +834,6 @@ printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 
 
-% Testing masterEquation.m .......................
-printf('testing masterEquation.m\n')
-tic
-for x=1:30
-  randint = randi(100)+5;
-  adj = masterEquationGrowthModel(randint,1,0);
-  assert(isTree(adj),true)
-  
-  adj = masterEquationGrowthModel(randint,2,0);
-  assert(isTree(adj),false)
-  
-  adj = masterEquationGrowthModel(randint,2,2);
-  assert(isSimple(adj),true)
-  
-end
-printf('---Time ellapsed: %3f in minutes.\n', toc/60)
-% ................................................
-
 % Testing newmanGastner.m ........................
 printf('testing newmanGastner.m\n')
 tic
@@ -890,16 +844,6 @@ for x=1:10
   assert(numNodes(adj),N);
   assert(isSimple(adj),true)
 end
-printf('---Time ellapsed: %3f in minutes.\n', toc/60)
-% ................................................
-
-
-% Testing nestedHierarchiesModel.m ...............
-printf('testing nestedHierarchiesModel.m\n')
-tic
-el = nestedHierarchiesModel(640,3,[10, 20, 40],10);
-adj = edgeL2adj(el);
-assert(isSimple(adj));
 printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 
@@ -950,90 +894,6 @@ assert(abs(Q+0.31250)<10^(-5))
 printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 
-% Testing newmanEigenvectorMethod.m ..............
-printf('testing newmanEigenvectorMethod.m\n')
-tic
-modules = newmanEigenvectorMethod(T{4}{2});
-assert(length(modules),2)
-assert(modules{1},[4,5,6])
-assert(modules{2},[1,2,3])
-
-for x=1:50
-  adj = randomGraph(randi(10)+5,1);
-  Adj = zeros(4*length(adj));
-  Adj(1:length(adj),1:length(adj))=adj;
-  Adj(length(adj)+1:2*length(adj),length(adj)+1:2*length(adj))=adj;
-  Adj(2*length(adj)+1:3*length(adj),2*length(adj)+1:3*length(adj))=adj;
-  Adj(3*length(adj)+1:4*length(adj),3*length(adj)+1:4*length(adj))=adj;
-
-  Adj(5,length(adj)+5)=1; Adj(length(adj)+5,5)=1; 
-  Adj(length(adj)+6,2*length(adj)+6)=1; Adj(2*length(adj)+6,length(adj)+6)=1; 
-  Adj(2*length(adj)+7,3*length(adj)+7)=1; Adj(3*length(adj)+7,2*length(adj)+7)=1; 
-  Adj(3*length(adj)+1,1)=1; Adj(1,3*length(adj)+1)=1; 
-
-  modules = newmanEigenvectorMethod(Adj);
-  assert(length(modules),4)
-
-  prescribed = randi(6)+2;
-  
-  n = randi(50)+50;
-  adj = [];
-  while not(isConnected(adj)); adj = randomModularGraph(n,prescribed,0.9*log(n)/n,2+0.3*rand); end
-  modules = newmanEigenvectorMethod(adj);
-  
-  sumnodes = 0;
-  for m=1:length(modules); sumnodes = sumnodes + length(modules{m}); end
-  assert(sumnodes,n)
-  
-  for m1=1:length(modules)
-    for m2=m1+1:length(modules)
-      assert(length(intersect(modules{m1},modules{m2})),0)     
-    end
-  end
-   
-end
-printf('---Time ellapsed: %3f in minutes.\n', toc/60)
-% ................................................
-
-% Testing newmanCommFast.m .......................
-printf('testing newmanCommFast.m\n')
-tic
-[gH,Q]=newmanCommFast(T{4}{2});
-close all;
-assert(max(Q),Q(6-1));
-
-[gH,Q]=newmanCommFast(randomModularGraph(100,4,0.1,5));
-close all;
-assert(length(gH),length(Q))
-[~,ind]=max(Q);
-assert(length(gH{ind}),4)
-printf('---Time ellapsed: %3f in minutes.\n', toc/60)
-% ................................................
-
-% Testing modularityMetric.m .....................
-printf('testing modularityMetric.m\n')
-tic
-for i=1:10
-  
-  adj = [0 1; 0 0];
-  num_modules = randi([2,5]);
-  while not(isConnected(adj)); adj = randomModularGraph(30,num_modules,0.1,3); end
- 
-  % compare to newmanCommFast
-  [mH,Q1] = newmanCommFast(adj);
-  close all;
-  Q2 = [];
-  for m=1:length(mH); Q2 = [Q2 modularityMetric(mH{m},adj)]; end
-  
-  assert(Q1,Q2)
-
-  % compare to the newman-girvan routine
-  [modules0,~,Q0] = newmanGirvan(adj,num_modules);
-  assert(Q0,modularityMetric(modules0,adj))
- 
-end
-printf('---Time ellapsed: %3f in minutes.\n', toc/60)
-% ................................................
 
 % ................................................
 % ......... simple matrix/graph viz ..............

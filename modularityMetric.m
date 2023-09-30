@@ -55,3 +55,36 @@ function Q = modularityMetric(modules, adj)
 %     
 %    end
 %  end
+
+
+%!test
+%! for i = 1:10
+%! 
+%!     adj = [0 1; 0 0];
+%!     num_modules = randi([2, 5]);
+%! 
+%!     while not(isConnected(adj));
+%!         adj = randomModularGraph(30, num_modules, 0.1, 3);
+%!     end
+%! 
+%!     % compare to newmanCommFast
+%!     [mH, Q1] = newmanCommFast(adj);
+%!     close all;
+%!     Q2 = [];
+%! 
+%!     for m = 1:length(mH);
+%!         Q2 = [Q2 modularityMetric(mH{m}, adj)];
+%!     end
+%! 
+%!     assert(Q1, Q2)
+%! 
+%!     % compare to the newman-girvan routine
+%!     [modules0, ~, Q0] = newmanGirvan(adj, num_modules);
+%!     assert(Q0, modularityMetric(modules0, adj))
+%! 
+%! end
+
+
+%!demo
+%! bowtie = [0 1 1 0 0 0; 1 0 1 0 0 0; 1 1 0 1 0 0; 0 0 1 0 1 1; 0 0 0 1 0 1; 0 0 0 1 1 0];
+%! Q = modularityMetric({[1, 2, 3], [4, 5, 6]} , bowtie)
