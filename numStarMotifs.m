@@ -35,3 +35,19 @@ function num = numStarMotifs(adjL, k)
 %         num=num+nchoosek(deg(i),k-1); 
 %     end
 % end
+
+%!test
+%!shared T
+%! T = load_test_graphs();
+%!assert(numStarMotifs(T{9}{2},3),4+6)
+%!assert(numStarMotifs(T{9}{2},4),2)
+%!assert(numStarMotifs(T{9}{2},5),0)
+%!assert(numStarMotifs(adj2adjL(T{13}{2}),3),3)
+%!assert(numStarMotifs(adj2adjL(T{13}{2}),2),6)
+%!assert(numStarMotifs(T{9}{2},1),6)   % trivial case
+
+%!demo
+%! s = numStarMotifs({[2, 3, 4]}, 3)
+%! bowtie_adjL = {[2, 3], [1, 3], [1, 2, 4], [3, 5, 6], [4, 6], [4, 5]};
+%! s = numStarMotifs(bowtie_adjL, 4)
+%! s = numStarMotifs(bowtie_adjL, 5)

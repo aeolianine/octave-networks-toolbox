@@ -62,3 +62,21 @@ function [el, points] = newmanGastner(n, beta, points, plt)
     end
 
     %print test.pdf
+
+
+%!test
+%! for x=1:10
+%!   N = randi(100)+10;
+%!   el = newmanGastner(N,rand,[],'off');  % no plot
+%!   adj = symmetrize(edgeL2adj(el));
+%!   assert(numNodes(adj),N);
+%!   assert(isSimple(adj),true)
+%! end
+
+
+%!demo
+%! N = randi(100)+10;
+%! el = newmanGastner(N, rand, [], 'off');  # no plot, random point coordinates
+%! adj = symmetrize(edgeL2adj(el));
+%! assert(numNodes(adj), N)
+%! assert(isSimple(adj), true)

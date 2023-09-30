@@ -39,3 +39,25 @@ function c = numConnTriples(adj)
     % end
     %
     % c = c - 2*cycles3(adjL2adj(L));
+
+
+%!test
+%!shared T
+%! T = load_test_graphs();
+%!assert(numConnTriples(T{4}{2}),6)
+%!assert(numConnTriples(T{13}{2}),1)
+%!assert(numConnTriples(edgeL2adj(T{10}{2})),1)
+%!assert(numConnTriples(T{2}{2}),0)
+%!assert(numConnTriples(T{18}{2}),4)
+
+%!demo
+%! cycle3 = [0 1 1; 1 0 1; 1 1 0];
+%! numConnTriples(cycle3)
+%! % ans = 1
+%! adj = [0 1 0; 1 0 0; 0 0 0];
+%! numConnTriples(adj)
+%! % ans = 0
+%! bowtie = [0 1 1 0 0 0; 1 0 1 0 0 0; 1 1 0 1 0 0; 0 0 1 0 1 1; 0 0 0 1 0 1; 0 0 0 1 1 0];
+%! numConnTriples(bowtie)
+
+

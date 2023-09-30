@@ -20,3 +20,21 @@ function m = numEdges(adj)
         m = sum(sum(adj));
 
     end
+
+
+%!test
+%!shared T
+%! T = load_test_graphs();
+%! for i=1:length(T)
+%!     if strcmp(T{i}{3},'adjacency')
+%!         assert( numEdges(T{i}{2}), T{i}{7} )
+%!     end
+%! end
+
+%!demo
+%! n = randi(100);
+%! e = randi([1, n-1]);
+%! adj = randomGraph(n, [], e);
+%! assert(numEdges(adj), e)
+%! bowtie = [0 1 1 0 0 0; 1 0 1 0 0 0; 1 1 0 1 0 0; 0 0 1 0 1 1; 0 0 0 1 0 1; 0 0 0 1 1 0];
+%! numEdges(bowtie)

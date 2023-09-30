@@ -69,3 +69,13 @@ function betw = nodeBetweennessFaster(adj)
 
     % this last step is just additional normalization, and is arbitrary
     betw = betw / (2 * nchoosek(size(adj, 1), 2));
+
+
+%!test
+%! test nodeBetweenness  # same tests as for "nodeBetweenness.m"
+
+%!demo
+%! bowtie = [0 1 1 0 0 0; 1 0 1 0 0 0; 1 1 0 1 0 0; 0 0 1 0 1 1; 0 0 0 1 0 1; 0 0 0 1 1 0];
+%! nodeBetweennessFaster(bowtie)
+%! nodeBetweennessFaster([0 1 1; 1 0 1; 1 1 0])
+%! nodeBetweennessFaster([0 1 1; 1 0 0; 1 0 0])

@@ -52,55 +52,12 @@ printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 
 
-% Testing numNodes.m ............................
-printf('testing numNodes.m\n')
-tic
-randint = randi(101);
-assert(numNodes(randomGraph(randint)),randint)
-
-for i=1:length(T)
-    if strcmp(T{i}{3},'adjacency')
-        assert( numNodes(T{i}{2}), T{i}{6} )
-    end
-end
-printf('---Time ellapsed: %3f in minutes.\n', toc/60)
-% ...............................................
-
-
-% Testing numEdges.m ...........................
-printf('testing numEdges.m\n')
-tic
-for i=1:length(T)
-    if strcmp(T{i}{3},'adjacency')
-        assert( numEdges(T{i}{2}), T{i}{7} )
-    end
-end
-printf('---Time ellapsed: %3f in minutes.\n', toc/60)
-% ...............................................
-
-
 % Testing selfLoops.m ...........................
 printf('testing selfLoops.m\n')
 tic
 assert( selfLoops( edgeL2adj( T{8}{2} ) ), 1 )
 assert( selfLoops( T{14}{2} ), 2 )
 assert(selfLoops(T{4}{2}),0)
-printf('---Time ellapsed: %3f in minutes.\n', toc/60)
-% ...............................................
-
-
-% Testing numConnComp.m .........................
-printf('testing numConnComp.m\n')
-tic
-assert(numConnComp(T{5}{2}),2)
-
-randint = randi(51);
-Adj=zeros(randint*30);
-for x=1:randint
-  adj=randomGraph(30,0.5);
-  Adj(30*(x-1)+1:30*x,30*(x-1)+1:30*x)=adj;
-end
-assert(numConnComp(Adj),randint)
 printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ...............................................
 
@@ -332,48 +289,6 @@ assert(sortNodesByMaxNeighborDegree(adjL2adj(T{17}{2})),[3, 2, 1]')
 printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 
-% Testing nodeBetweenness.m ......................
-printf('testing nodeBetweenness.m and nodeBetweennessFaster\n')
-tic
-assert(nodeBetweenness([0 1; 1 0]),[0 0])
-assert(nodeBetweennessFaster([0 1; 1 0]),[0 0])
-
-assert(nodeBetweenness([1 1; 0 0]),[0 0])
-assert(nodeBetweennessFaster([1 1; 0 0]),[0 0])
-
-assert(nodeBetweenness([0 1 1; 1 0 0; 1 0 0]),[1/3 0 0])
-assert(nodeBetweennessFaster([0 1 1; 1 0 0; 1 0 0]),[1/3 0 0])
-
-assert(nodeBetweenness(T{4}{2}),[0 0 0.4 0.4 0 0])
-assert(nodeBetweennessFaster(T{4}{2}),[0 0 0.4 0.4 0 0])
-
-x = edgeL2adj(canonicalNets(2*randi(10)+2,'cycle'));
-bw = nodeBetweenness(x);
-assert(bw(1)*ones(1,length(bw)),bw)  % the betweennesses should be all the same
-bw = nodeBetweennessFaster(x);
-assert(bw(1)*ones(1,length(bw)),bw)  % the betweennesses should be all the same
-
-L={}; L{1}=[2]; L{2}=[1,3,4]; L{3}=[2,5]; L{4}=[2,5]; L{5}=[3,4,6]; L{6}=[5];
-adj = adjL2adj(L);
-bw = nodeBetweenness(adj);
-bwF = nodeBetweennessFaster(adj);
-assert(bw,bwF)
-
-adj = [];
-while not(isConnected(adj)); adj = randomGraph(20,log(20)/20); end
-bw = nodeBetweenness(adj);
-bwF = nodeBetweennessFaster(adj);
-assert(norm(bw-bwF)<10^(-10))
-printf('---Time ellapsed: %3f in minutes.\n', toc/60)
-% ................................................
-
-
-% Testing edgeBetweenness.m ......................
-printf('testing edgeBetweenness.m\n')
-tic
-printf('---Time ellapsed: %3f in minutes.\n', toc/60)
-% ................................................
-
 
 % Testing transitivity.m .........................
 printf('testing transitivity.m\n')
@@ -542,42 +457,6 @@ printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ....... simple motifs ..........................
 % ................................................
 
-
-% Testing numConnTriples.m .......................
-printf('testing numConnTriples.m\n')
-tic
-assert(numConnTriples(T{4}{2}),6)
-assert(numConnTriples(T{13}{2}),1)
-assert(numConnTriples(edgeL2adj(T{10}{2})),1)
-assert(numConnTriples(T{2}{2}),0)
-assert(numConnTriples(T{18}{2}),4)
-printf('---Time ellapsed: %3f in minutes.\n', toc/60)
-% ................................................
-
-% Testing numCycles.m .............................
-printf('testing numCycles.m\n')
-tic
-assert(numCycles(T{13}{2}),1)
-assert(numCycles(T{4}{2}),2)
-assert(numCycles(edgeL2adj(T{10}{2})),0)
-assert(numCycles(T{18}{2}),1)
-printf('---Time ellapsed: %3f in minutes.\n', toc/60)
-% ................................................
-
-
-% Testing numStarMotifs.m ........................
-printf('testing numStarMotifs.m\n')
-tic
-assert(numStarMotifs(T{9}{2},3),4+6)
-assert(numStarMotifs(T{9}{2},4),2)
-assert(numStarMotifs(T{9}{2},5),0)
-
-assert(numStarMotifs(adj2adjL(T{13}{2}),3),3)
-assert(numStarMotifs(adj2adjL(T{13}{2}),2),6)
-
-assert(numStarMotifs(T{9}{2},1),6)   % trivial case
-printf('---Time ellapsed: %3f in minutes.\n', toc/60)
-% ................................................
 
 % ................................................
 % ......... linear algebra routines ..............
@@ -834,20 +713,6 @@ printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 
 
-% Testing newmanGastner.m ........................
-printf('testing newmanGastner.m\n')
-tic
-for x=1:10
-  N = randi(100)+10;
-  el = newmanGastner(N,rand,[],'off');  % no plot
-  adj = symmetrize(edgeL2adj(el));
-  assert(numNodes(adj),N);
-  assert(isSimple(adj),true)
-end
-printf('---Time ellapsed: %3f in minutes.\n', toc/60)
-% ................................................
-
-
 % ................................................
 % ......... modularity functions .................
 % ................................................
@@ -872,25 +737,6 @@ for xx=1:50  % do the randomized test 50 times
   end
   assert( sort(allnodes), 1:n )
 end
-printf('---Time ellapsed: %3f in minutes.\n', toc/60)
-% ................................................
-
-% Testing newmanGirvan.m .........................
-printf('testing newmanGirvan.m\n')
-tic
-[modules, moduleHist, Q] = newmanGirvan(T{4}{2},2);
-assert(modules{1}==[1,2,3])
-assert(modules{2}==[4,5,6])
-assert(moduleHist{1}==[1,2,3,4,5,6])
-assert(moduleHist{2}==[1,2,3])
-assert(abs(Q-0.20408)<10^(-5))
-
-[modules, moduleHist, Q] = newmanGirvan(edgeL2adj(T{19}{2}),2);
-assert(modules{1}==[1,3,4,5])
-assert(modules{2}==[2])
-assert(moduleHist{1}==[1,2,3,4,5])
-assert(moduleHist{2}==[1,3,4,5])
-assert(abs(Q+0.31250)<10^(-5))
 printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 

@@ -78,3 +78,26 @@ function [modules, module_hist, Q] = newmanGirvan(adj, k)
 
         Q = Q + (e_mm - a_m^2);
     end
+
+
+%!test
+%!shared T
+%! T = load_test_graphs();
+%! [modules, moduleHist, Q] = newmanGirvan(T{4}{2},2);
+%! assert(modules{1}==[1,2,3])
+%! assert(modules{2}==[4,5,6])
+%! assert(moduleHist{1}==[1,2,3,4,5,6])
+%! assert(moduleHist{2}==[1,2,3])
+%! assert(abs(Q-0.20408)<10^(-5))
+
+%!test
+%! [modules, moduleHist, Q] = newmanGirvan(edgeL2adj(T{19}{2}),2);
+%! assert(modules{1}==[1,3,4,5])
+%! assert(modules{2}==[2])
+%! assert(moduleHist{1}==[1,2,3,4,5])
+%! assert(moduleHist{2}==[1,3,4,5])
+%! assert(abs(Q+0.31250)<10^(-5))
+
+%!demo
+%! bowtie = [0 1 1 0 0 0; 1 0 1 0 0 0; 1 1 0 1 0 0; 0 0 1 0 1 1; 0 0 0 1 0 1; 0 0 0 1 1 0];
+%! modules = newmanGirvan(bowtie, 2)
