@@ -319,21 +319,6 @@ printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 
 
-% Testing pearson.m ..............................
-printf('testing pearson.m\n')
-tic
-assert(pearson( edgeL2adj(T{10}{2}) ),-1)
-assert(pearson( edgeL2adj(T{19}{2}) ),-1)
-assert( pearson( edgeL2adj( canonicalNets(randi(5)+5,'star') ) ) ,-1 )
-
-% test via pearsonW.m (Whitney routine)
-for i=1:50
-  if isComplete(adj); continue; end
-  adj = randomGraph(randi(20)+3,rand);
-  assert( abs(pearson(adj)-pearsonW(adj))<10^(-6)  )
-end
-% ................................................
-
 % Testing richClubMetric.m .......................
 printf('testing richClubMetric.m\n')
 assert(richClubMetric(randomGraph(randi(5)+5,rand),12),0)
@@ -682,37 +667,6 @@ printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % .... end of test of randomModularGraph.m .......
 
 
-% Testing PriceModel.m ...........................
-printf('testing PriceModel.m\n')
-tic
-for x=1:20
-  randint = randi(10)+10;
-  adj = PriceModel(randint);
-  assert(isDirected(adj),true)
-  assert(numNodes(adj),randint)    
-end
-printf('---Time ellapsed: %3f in minutes.\n', toc/60)
-% ................................................
-
-% Testing preferentialAttachment.m ...............
-printf('testing preferentialAttachment.m\n')
-tic
-for x=1:10
-  el = preferentialAttachment(randi(10)+10,1);
-  adj = edgeL2adj(el);
-  assert(isTree(adj),true)
-  assert(isSimple(adj),true)
-  
-  randint = randi(30)+5;
-  el = preferentialAttachment(randint,2);
-  adj = edgeL2adj(el);
-  assert(numEdges(adj),1+2*(length(adj)-2))
-    
-end
-printf('---Time ellapsed: %3f in minutes.\n', toc/60)
-% ................................................
-
-
 % ................................................
 % ......... modularity functions .................
 % ................................................
@@ -737,28 +691,5 @@ for xx=1:50  % do the randomized test 50 times
   end
   assert( sort(allnodes), 1:n )
 end
-printf('---Time ellapsed: %3f in minutes.\n', toc/60)
-% ................................................
-
-
-% ................................................
-% ......... simple matrix/graph viz ..............
-% ................................................
-
-
-% Testing pdfCdfRank.m ...........................
-printf('testing pdfCdfRank.m\n');
-tic
-adj = randomGraph(randi(30)+30,0.2);
-[xp,yp,xc,yc,lk,lx] = pdfCdfRank(degrees(adj),'off');
-assert(length(xp),length(xc))
-assert(length(xp),length(yp))
-assert(length(yp),length(yc))
-assert(length(lk),length(lx))
-[xp,yp,xc,yc,lk,lx] = pdfCdfRank(degrees(adj),'off', bin=5);
-assert(length(xp),length(xc))
-assert(length(xp),length(yp))
-assert(length(yp),length(yc))
-assert(length(lk),length(lx))
 printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................

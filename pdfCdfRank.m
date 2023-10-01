@@ -52,3 +52,24 @@ function [xpdf, ypdf, xcdf, ycdf, logk, logx] = pdfCdfRank(x, plt='off', bin = [
         title('rank')
         axis('tight')
     end
+
+
+%!test
+%!shared adj
+%! adj = randomGraph(randi(30)+30,0.2);
+%! [xp,yp,xc,yc,lk,lx] = pdfCdfRank(degrees(adj),'off');
+%! assert(length(xp),length(xc))
+%! assert(length(xp),length(yp))
+%! assert(length(yp),length(yc))
+%! assert(length(lk),length(lx))
+
+%!test
+%! [xp,yp,xc,yc,lk,lx] = pdfCdfRank(degrees(adj),'off', bin=5);
+%! assert(length(xp),length(xc))
+%! assert(length(xp),length(yp))
+%! assert(length(yp),length(yc))
+%! assert(length(lk),length(lx))
+
+%!demo
+%! adj = randomGraph(1000, 0.2);
+%! pdfCdfRank(degrees(adj),'on');

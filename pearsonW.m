@@ -51,3 +51,10 @@ function prs = pearsonW(M)
 % 
 % % Pearson coefficient formula
 % r = (sumjk - sumjplusk^2/m)/(sumj2plusk2-sumjplusk^2/m);
+
+
+%!test
+%! test pearson
+
+%!demo
+%! demo pearson

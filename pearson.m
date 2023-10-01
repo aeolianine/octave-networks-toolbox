@@ -32,3 +32,28 @@ function r = pearson(M)
 
     % Pearson coefficient formula
     r = (sumjk - sumjplusk^2 / m) / (sumj2plusk2 - sumjplusk^2 / m);
+
+
+%!test
+%!shared T
+%! T = load_test_graphs();
+%!assert(pearson(edgeL2adj(T{10}{2})), -1)
+%!assert(pearson(edgeL2adj(T{19}{2})), -1)
+%!assert(pearson(edgeL2adj(canonicalNets(randi(5)+5,'star'))), -1)
+
+%!test
+%! % test via pearsonW.m (Whitney routine)
+%! adj = [1 1; 1 1];
+%! for i=1:50
+%!   if isComplete(adj); continue; end
+%!   adj = randomGraph(randi(20)+3,rand);
+%!   assert( abs(pearson(adj)-pearsonW(adj))<10^(-6)  )
+%! end
+
+%!demo
+%! adj = [0 1 1 1 1; 1 0 0 0 0; 1 0 0 0 0; 1 0 0 0 0; 1 0 0 0 0];
+%! pearson(adj)
+%! pearsonW(adj)
+%! bowtie = [0 1 1 0 0 0; 1 0 1 0 0 0; 1 1 0 1 0 0; 0 0 1 0 1 1; 0 0 0 1 0 1; 0 0 0 1 1 0];
+%! pearson(bowtie)
+%! pearsonW(bowtie)

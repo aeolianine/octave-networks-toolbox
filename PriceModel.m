@@ -41,3 +41,17 @@ function adj = PriceModel(n)
     end
 
     adj = adj - diag(diag(adj)); % remove self-loops
+
+
+%!test
+%! for x=1:20
+%!   randint = randi(10)+10;
+%!   adj = PriceModel(randint);
+%!   assert(isDirected(adj),true)
+%!   assert(numNodes(adj),randint)    
+%! end
+
+%!demo
+%! n = randi(10)+10;
+%! adj = PriceModel(n);
+%! assert(numNodes(adj),n)
