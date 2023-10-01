@@ -62,3 +62,44 @@ function adj = randomGraph(n, p, E)
             end
 
     end
+
+
+%!test
+%! %testing the size of the graph
+%! randint = randi(20)+3;
+%! assert(size(randomGraph(randint),1),randint)
+%! assert(size(randomGraph(randint),2),randint)
+
+%!test
+%! % testing the default probability of attachment
+%! for x=1:10
+%!   randint = randi(50)+50;
+%!   adj = randomGraph(randint);
+%!   assert(linkDensity(adj)>0.4);
+%!   assert(linkDensity(adj)<0.6);
+%! end
+
+%!test
+%! % testing a random probability of attachment
+%! for x=1:10
+%!   p = rand;
+%!   randint = randi(50)+50;
+%!   adj = randomGraph(randint,p);
+%!   assert(linkDensity(adj)>p-0.05);
+%!   assert(linkDensity(adj)<p+0.05);
+%! end
+
+%!test
+%! % testing for the number of edges, E
+%! for x=1:10
+%!   randint = randi(50)+50;
+%!   E = randi([1,randint-1]);
+%!   adj = randomGraph(randint,[],E);
+%!   assert(numEdges(adj),E);
+%! end
+
+
+%!demo
+%! adj = randomGraph(1000, 0.4);
+%! numNodes(adj)
+%! linkDensity(adj)

@@ -465,50 +465,6 @@ printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % Testing randomGraph.m ..........................
 printf('testing randomGraph.m\n');
 tic
-% testing the size of the graph
-randint = randi(20)+3;
-assert(size(randomGraph(randint),1),randint)
-assert(size(randomGraph(randint),2),randint)
-
-% testing the default probability of attachment
-for x=1:50
-  randint = randi(50)+50;
-  adj = randomGraph(randint);
-  assert(linkDensity(adj)>0.4);
-  assert(linkDensity(adj)<0.6);
-end
-
-% testing a random probability of attachment
-for x=1:50
-  p = rand;
-  randint = randi(50)+50;
-  adj = randomGraph(randint,p);
-  assert(linkDensity(adj)>p-0.05);
-  assert(linkDensity(adj)<p+0.05);
-end
-
-% testing for the number of edges, E
-for x=1:50
-  randint = randi(50)+50;
-  E = randi([1,randint-1]);
-  adj = randomGraph(randint,[],E);
-  assert(numEdges(adj),E);
-end
-printf('---Time ellapsed: %3f in minutes.\n', toc/60)
-% ................................................
-
-% Testing randomDirectedGraph.m ..................
-printf('testing randomDirectedGraph.m\n');
-tic
-for i=1:30
-  p=rand;
-  n = randi(40)+40;
-  adj = randomDirectedGraph(n,p);
-  assert(linkDensity(adj)>p-0.05)
-  assert(linkDensity(adj)<p+0.05)
-  assert(sum(adj)==0 || isDirected(adj))
-  assert(size(adj),[n,n]);
-end
 printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 

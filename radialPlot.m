@@ -148,3 +148,10 @@ function [] = radialPlot(adj, i0)
     
     axis tight
     axis off
+
+
+%!demo
+%! el = preferentialAttachment(100, 1);
+%! adj = edgeL2adj(el);
+%! radialPlot(adj);
+%! radialPlot(adj, 4);

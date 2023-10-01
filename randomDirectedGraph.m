@@ -34,3 +34,20 @@ function adj = randomDirectedGraph(n,p)
       end
 
 end
+
+
+%!test
+%! for i=1:30
+%!   p=rand;
+%!   n = randi(40)+40;
+%!   adj = randomDirectedGraph(n,p);
+%!   assert(linkDensity(adj)>p-0.05)
+%!   assert(linkDensity(adj)<p+0.05)
+%!   assert(sum(adj)==0 || isDirected(adj))
+%!   assert(size(adj),[n,n]);
+%! end
+
+%!demo
+%! adj = randomDirectedGraph(200, 0.3);
+%! isDirected(adj)
+%! linkDensity(adj)
