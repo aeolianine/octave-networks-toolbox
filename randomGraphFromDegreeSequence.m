@@ -34,7 +34,7 @@ function adj = randomGraphFromDegreeSequence(Nseq)
                 elr = rewireThisEdge([el; ind(1) ind(2) 1; ind(2) ind(1) 1], ind(1), ind(2));
             end
 
-            if length(ind) > 2 || isempty(elr)% restart algorithm
+            if length(ind) > 2 || isempty(elr) % restart algorithm
                 printf('randomGraphFromDegreeSequence(): restarting ...\n')
                 stubs = Nseq;
                 adj = zeros(length(Nseq));
@@ -80,3 +80,23 @@ function adj = randomGraphFromDegreeSequence(Nseq)
         stubs(n2) = stubs(n2) - 1;
 
     end
+
+
+%!test
+%! for x=1:40
+%!   
+%!   adj = [0 1; 0 0];
+%!   N = randi(50)+10;
+%!   while not(isConnected(adj)); 
+%!     adj = randomGraph(N,log(N)/N); 
+%!   end
+%!   
+%!   adjr = randomGraphFromDegreeSequence(degrees(adj));
+%!   
+%!   assert(isSimple(adjr),true)
+%!   assert(degrees(adj),degrees(adjr))
+%! end
+
+%!demo
+%! randomGraphFromDegreeSequence([2 2 3 3 2 2])
+%! randomGraphFromDegreeSequence([2 2 3 3 2 2])

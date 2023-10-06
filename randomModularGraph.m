@@ -85,3 +85,91 @@ function [adj, modules] = randomModularGraph(n, c, p, r, labels)
         end
 
     end
+
+
+
+%!test
+%! for x=1:10
+%!   N = randi(50)+10;
+%!   c = randi(5)+1;
+%!   [adj, modules] = randomModularGraph(N,c,0.2,4);
+%!   assert(numNodes(adj),N)
+%!   assert(length(modules),c)
+%! end
+
+%!test
+%! % ..... testing with fixed labels ................
+%! [adj, modules] = randomModularGraph(5,2,0.2,0.9,[1,1,2,3,4]);
+%! mods = {}; mods{1} = [1,2]; mods{2} = [3]; mods{3} = [4]; mods{4} = 5;
+%! assert(modules, mods)
+%! [adj, modules] = randomModularGraph(6,0,0.2,0.8,[1,1,1,2,2,2]);
+%! mods = {}; mods{1} = [1,2,3]; mods{2} = [4,5,6];
+%! assert(modules, mods)
+%! [adj, modules] = randomModularGraph(4,0,0.2,0.5,[1,2,3,4]);
+%! mods = {}; mods{1} = 1; mods{2} = 2; mods{3} = 3; mods{4} = 4;
+%! assert(modules, mods)
+%! [adj, modules] = randomModularGraph(4,0,0.2,0.5,[1,1,1,1]);
+%! mods = {}; mods{1} = [1,2,3,4];
+%! assert(modules, mods)
+%! [adj, modules] = randomModularGraph(75,4,0.2,0.5,[ones(1,20),2*ones(1,20),3*ones(1,20),4*ones(1,15)]);
+%! mods = {}; mods{1} = [1:20]; mods{2} = [21:40]; mods{3} = [41:60]; mods{4} = [61:75];
+%! assert(modules, mods)
+
+
+%!test
+%! % ... testing the in/out-degree ratio distribution ......
+%! ratio = [];
+%! for x=1:100
+%!   
+%!   mods = 4;
+%!   N = 100;
+%!   dens = log(N)/N;  % threshold of connectivity
+%!   
+%!   adj = [];
+%!   while not(isConnected(adj)); 
+%!     [adj,modules] = randomModularGraph(N,mods,dens,10); 
+%!   end
+%!   
+%!   for M=1:mods
+%! 
+%!     kin = [];
+%!     kout = [];
+%!     
+%!     for node=1:length(modules{M})
+%!       i = modules{M}(node);
+%! 
+%!       ss = 0;
+%!       for c=1:length(modules)
+% !        if c == M; continue; end
+%!         ss += sum(adj(i,modules{c}));
+%!       end
+%!   
+%!       if ss==0; ss=0.01; end
+%!       
+%!       kin = [kin sum(adj(i,modules{M}))];
+%!       kout = [kout ss];
+%! 
+%!       
+%!     end
+%!     
+%!     kin = sum(kin)/length(kin);
+%!     kout = sum(kout)/length(kout);
+%!     
+%!     ratio = [ratio kin/kout];
+%!   end
+%!  
+%!   assert(length(modules),mods)
+%!   assert(length(adj),N)
+%! end
+%! 
+%! hist(ratio,20)
+%! title('supposed to be centered around 10')
+%! hold off;
+
+
+%!demo
+%! [adj, modules] = randomModularGraph(100, 4, 0.1, 0.9);
+%! assert(numNodes(adj), 100)
+%! assert(length(modules), 4)
+%! [adj, modules] = randomModularGraph(4, 4, 0.1, 0.5, [1, 1, 2, 2]);
+%! assert(length(modules), 2)

@@ -74,3 +74,63 @@ function adj = randomGraphDegreeDist(n, distribution, W)
     end
 
     adj = randomGraphFromDegreeSequence(Nseq);
+
+
+
+%!test
+%!shared N
+%! pkg load statistics
+%! N = randi(80)+30;
+%! adj = randomGraphDegreeDist(N,'uniform');
+%! assert(numNodes(adj),N)
+%! assert(isSimple(adj),true)
+%! [xpdf,ypdf,xcdf,ycdf,logk,logx]=pdfCdfRank(degrees(adj),'noplot');
+%! plot(xpdf, ypdf, color = 'k')
+%! text(5,0.01,strcat('constructing graphs with different degree distributions, N=  ', num2str(N)))
+%! hold off; hold on;
+
+%!test
+%! adj = randomGraphDegreeDist(N,'normal');
+%! assert(numNodes(adj),N)
+%! assert(isSimple(adj),true)
+%! [xpdf,ypdf,xcdf,ycdf,logk,logx]=pdfCdfRank(degrees(adj),'noplot');
+%! plot(xpdf, ypdf, color = 'b')
+%! hold off; hold on;
+    
+%!test
+%! adj = randomGraphDegreeDist(N,'binomial');
+%! assert(numNodes(adj),N)
+%! assert(isSimple(adj),true)
+%! [xpdf,ypdf,xcdf,ycdf,logk,logx]=pdfCdfRank(degrees(adj),'noplot');
+%! plot(xpdf, ypdf, color = 'y')
+%! hold off; hold on;
+
+%!test
+%! adj = randomGraphDegreeDist(N,'exponential');
+%! assert(numNodes(adj),N)
+%! assert(isSimple(adj),true)
+%! [xpdf,ypdf,xcdf,ycdf,logk,logx]=pdfCdfRank(degrees(adj),'noplot');
+%! plot(xpdf, ypdf, color = 'r')
+%! legend('uniform','normal','binomial','exponential')
+%! hold off;
+
+%!test
+%! adj = randomGraphDegreeDist(6,'custom',[1/5 1/5 1/5 1/5 1/5]);
+%! assert(numNodes(adj),6)
+%! assert(isSimple(adj),true)
+
+%!test
+%! adj = randomGraphDegreeDist(N,'custom');
+%! assert(isempty(adj),true)
+
+%!test
+%! adj = randomGraphDegreeDist(N,'anything here');
+%! assert(isempty(adj),true)
+
+
+%!demo
+%! adj = randomGraphDegreeDist(20, 'uniform');
+%! numNodes(adj)
+%! degrees(adj)
+%! randomGraphDegreeDist(3, 'custom', [1/2 1/2])
+%! randomGraphDegreeDist(3, 'custom', [1/2 1/2])
