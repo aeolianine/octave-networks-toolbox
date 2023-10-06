@@ -58,3 +58,28 @@ function el = rewire(el, k)
         end
 
     end
+
+
+%!test
+%! for x=1:100
+%!   
+%!   el = adj2edgeL(randomGraph(randi(10)+10,0.4));
+%!   deg = degrees(edgeL2adj(el));
+%!   rew = randi(5);
+%!   eln = rewire(el,rew);
+%!   degn = degrees(edgeL2adj(eln));
+%!   
+%!   assert(deg,degn)
+%!   eq = eln(:,1:2) == el(:,1:2);
+%!   preservedEdges = sum(sum(transpose(eq))==2);
+%!   assert( preservedEdges >= size(eln)(1) - 4*rew )
+%! 
+%! end
+
+
+%!demo
+%! adj = randomGraph(20, 0.4);
+%! elr = rewire(adj2edgeL(adj), 5);
+%! adjr = edgeL2adj(elr);
+%! assert(degrees(adj), degrees(adjr))
+%! assert(isequal(adjr, adj), false)

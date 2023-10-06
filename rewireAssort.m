@@ -47,3 +47,25 @@ function el = rewireAssort(el, k)
         rew = rew + 1;
 
     end
+
+
+%!test
+%! for x=1:100
+%!   adj = [0 0; 0 0];
+%!   
+%!   while not(isConnected(adj)); adj = randomGraph(randi(10)+10,0.4); end
+%!   el = adj2edgeL(adj);
+%!   eln = rewireAssort(el,randi(5));
+%! 
+%!   adjn = edgeL2adj(eln);
+%!   assert(degrees(adj),degrees(adjn))
+%! 
+%!   assert(pearson(edgeL2adj(eln))>=(pearson(edgeL2adj(el))-10^(-7)) | (pearson(edgeL2adj(eln))-10^(-7))>=pearson(edgeL2adj(el)))
+%! end
+
+%!demo
+%! adj = randomGraph(20, 0.4);
+%! elr = rewireAssort(adj2edgeL(adj), 5);
+%! adjr = edgeL2adj(elr);
+%! assert(degrees(adj), degrees(adjr))
+%! assert(pearson(adjr)>=pearson(adj), true)

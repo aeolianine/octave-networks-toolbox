@@ -74,3 +74,38 @@ function el = rewireThisEdge(el, i1, i2)
         el(inds2, :) = [edge2(2), edge1(2), 1];
 
     end
+
+
+%!test
+%! for x=1:100
+%!   
+%!   adj = [0 1; 0 0];
+%!   while not(isConnected(adj)); adj = randomGraph(randi(10)+10,0.3); end
+%!   el = adj2edgeL(adj);
+%!   deg = degrees(edgeL2adj(el));
+%!   
+%!   edgeind = randi([1,length(el)]);
+%!   eln = rewireThisEdge(el,el(edgeind,1),el(edgeind,2));
+%!   if isempty(eln); continue; end  % could not rewire, eln=[]
+%!   
+%!   adjn = edgeL2adj(eln);
+%!   degn = degrees(adjn);
+%!   
+%!   assert(deg,degn)
+%!   assert(isSimple(adjn),true)
+%! 
+%!   eq = eln(:,1:2) == el(:,1:2);
+%!   preservedEdges = sum(sum(transpose(eq))==2);
+%!   assert( preservedEdges == size(eln)(1) - 4 )
+%! 
+%! end
+
+
+%!demo
+%! bowtie_edgeL=[1 2 1; 1 3 1; 2 1 1; 2 3 1; 3 1 1; 3 2 1; 3 4 1; 4 3 1; 4 5 1; 4 6 1; 5 4 1; 5 6 1; 6 4 1; 6 5 1];
+%! % rewire the 1 −> 3 edge
+%! elr = rewireThisEdge(bowtie_edgeL, 1, 3)
+%! adj = edgeL2adj(bowtie_edgeL);
+%! adjr = edgeL2adj(elr);
+%! % check that the degree sequences of the two matrices are the same
+%! assert(degrees(adj), degrees(adjr))

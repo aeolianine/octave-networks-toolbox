@@ -179,92 +179,6 @@ printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
 
 
-% Testing rewire.m ...............................
-printf('testing rewire.m\n')
-tic
-for x=1:100
-  
-  el = adj2edgeL(randomGraph(randi(10)+10,0.4));
-  deg = degrees(edgeL2adj(el));
-  rew = randi(5);
-  eln = rewire(el,rew);
-  degn = degrees(edgeL2adj(eln));
-  
-  assert(deg,degn)
-  eq = eln(:,1:2) == el(:,1:2);
-  preservedEdges = sum(sum(transpose(eq))==2);
-  assert( preservedEdges >= size(eln)(1) - 4*rew )
-
-end
-printf('---Time ellapsed: %3f in minutes.\n', toc/60)
-% ................................................
-
-% Testing rewireThisEdge.m .......................
-printf('testing rewireThisEdge.m\n')
-tic
-for x=1:100
-  
-  adj = [0 1; 0 0];
-  while not(isConnected(adj)); adj = randomGraph(randi(10)+10,0.3); end
-  el = adj2edgeL(adj);
-  deg = degrees(edgeL2adj(el));
-  
-  edgeind = randi([1,length(el)]);
-  eln = rewireThisEdge(el,el(edgeind,1),el(edgeind,2));
-  if isempty(eln); continue; end  % could not rewire, eln=[]
-  
-  adjn = edgeL2adj(eln);
-  degn = degrees(adjn);
-  
-  assert(deg,degn)
-  assert(isSimple(adjn),true)
-
-  eq = eln(:,1:2) == el(:,1:2);
-  preservedEdges = sum(sum(transpose(eq))==2);
-  assert( preservedEdges == size(eln)(1) - 4 )
-
-end
-printf('---Time ellapsed: %3f in minutes.\n', toc/60)
-% ................................................
-
-% Testing rewireAssort.m .........................
-printf('testing rewireAssort.m\n')
-tic
-for x=1:100
-  adj = [0 0; 0 0];
-  
-  while not(isConnected(adj)); adj = randomGraph(randi(10)+10,0.4); end
-  el = adj2edgeL(adj);
-  eln = rewireAssort(el,randi(5));
-
-  adjn = edgeL2adj(eln);
-  assert(degrees(adj),degrees(adjn))
-
-  assert(pearson(edgeL2adj(eln))>=(pearson(edgeL2adj(el))-10^(-7)) | (pearson(edgeL2adj(eln))-10^(-7))>=pearson(edgeL2adj(el)))
-end
-printf('---Time ellapsed: %3f in minutes.\n', toc/60)
-% ................................................
-
-
-% Testing rewireDisassort.m ......................
-printf('testing rewireDisassort.m\n')
-tic
-for x=1:100
-  adj = [0 0; 0 0];
-  
-  while not(isConnected(adj)); adj = randomGraph(randi(10)+10,0.4); end
-  el = adj2edgeL(adj);
-  eln = rewireDisassort(el,randi(5));
-
-  adjn = edgeL2adj(eln);
-  assert(degrees(adj),degrees(adjn))
-
-  assert(pearson(edgeL2adj(eln))<=(pearson(edgeL2adj(el))-10^(-7)) | (pearson(edgeL2adj(eln))-10^(-7))<=pearson(edgeL2adj(el)))
-end
-printf('---Time ellapsed: %3f in minutes.\n', toc/60)
-% ................................................
-
-
 % Testing sortNodesBySumNeighborDegrees.m ........
 printf('testing sortNodesBySumNeighborDegrees.m\n')
 tic
@@ -316,18 +230,6 @@ adj = [0 2 1; 2 0 1; 1 1 0];
 wC = weightedClustCoeff(adj);
 assert(wC, [1 1 1]')
 printf('---Time ellapsed: %3f in minutes.\n', toc/60)
-% ................................................
-
-
-% Testing richClubMetric.m .......................
-printf('testing richClubMetric.m\n')
-assert(richClubMetric(randomGraph(randi(5)+5,rand),12),0)
-assert(richClubMetric(T{4}{2},2),linkDensity(T{4}{2}))
-assert(richClubMetric(T{4}{2},3),1)
-assert(richClubMetric(T{4}{2},4),0)
-
-mat = [0 1 1 0; 1 0 1 0; 1 1 0 1; 0 0 1 0];
-assert(richClubMetric(mat,2),1)
 % ................................................
 
 % Testing sMetric.m ..............................
@@ -455,18 +357,6 @@ assert(signlessLaplacian(T{4}{2}),[2 1 1 0 0 0; 1 2 1 0 0 0; 1 1 3 1 0 0; 0 0 1 
 assert(signlessLaplacian(T{13}{2}),[2 1 1; 1 2 1; 1 1 2])
 printf('---Time ellapsed: %3f in minutes.\n', toc/60)
 % ................................................
-
-
-% ................................................
-% ......... graph models .........................
-% ................................................
-
-
-% Testing randomModularGraph.m ...................
-printf('testing randomModularGraph.m\n');
-tic
-printf('---Time ellapsed: %3f in minutes.\n', toc/60)
-% .... end of test of randomModularGraph.m .......
 
 
 % ................................................
