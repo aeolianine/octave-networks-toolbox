@@ -28,3 +28,20 @@ function I = sortNodesBySumNeighborDegrees(adj)
 
     [sortmat, I] = sortrows(degmat);
     I = I(end:-1:1);
+
+
+%!test
+%!shared T
+%! T = load_test_graphs();
+%!assert(sortNodesBySumNeighborDegrees(T{1}{2}),[1, 2]')
+%!assert(sortNodesBySumNeighborDegrees(T{2}{2}),[2, 1]')
+%!assert(sortNodesBySumNeighborDegrees(T{4}{2}),[4,3,6,5,2,1]')  
+%!assert(sortNodesBySumNeighborDegrees(edgeL2adj(T{10}{2})),[1, 3, 2]')
+%!assert(sortNodesBySumNeighborDegrees(T{13}{2}),[3, 2, 1]')
+%!assert(sortNodesBySumNeighborDegrees(adjL2adj(T{17}{2})),[3, 2, 1]')
+
+%!demo
+%! bowtie=[0 1 1 0 0 0; 1 0 1 0 0 0; 1 1 0 1 0 0; 0 0 1 0 1 1; 0 0 0 1 0 1; 0 0 0 1 1 0];
+%! sortNodesBySumNeighborDegrees(bowtie)
+%! adj = [0 1 1 0; 1 0 1 0; 1 1 0 1; 0 0 1 0];
+%! sortNodesBySumNeighborDegrees(adj)

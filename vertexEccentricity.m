@@ -14,3 +14,18 @@ function ec = vertexEccentricity(adj)
     for s = 1:n;
         ec(s) = max(simpleDijkstra(adj, s));
     end
+
+
+%!test
+%!shared T
+%! T = load_test_graphs();
+%!assert(vertexEccentricity(T{4}{2}),[3,3,2,2,3,3])
+%!assert(vertexEccentricity(T{13}{2}),[1,1,1])
+%!assert(vertexEccentricity(T{1}{2}),[1,inf])
+%!assert(vertexEccentricity(edgeL2adj(T{11}{2})), [1, inf, inf])
+
+%!demo
+%! bowtie=[0 1 1 0 0 0; 1 0 1 0 0 0; 1 1 0 1 0 0; 0 0 1 0 1 1; 0 0 0 1 0 1; 0 0 0 1 1 0];
+%! vertexEccentricity(bowtie)
+%! adj = [0 1; 0 0];
+%! vertexEccentricity(adj)

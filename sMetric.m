@@ -33,3 +33,18 @@ function s = sMetric(adj)
 %     end
 % end
 % ................................
+
+%!test
+%!shared T
+%! T = load_test_graphs();
+%!assert(sMetric(T{13}{2}),2*12)
+%!assert(sMetric(T{4}{2}),2*41)
+%!assert(sMetric(edgeL2adj(T{11}{2})),4)
+%!assert(sMetric(T{1}{2}),1)
+
+%!demo
+%! cycle3 = [0 1 1; 1 0 1; 1 1 0];
+%! sMetric(cycle3)
+%! one_edge = [0 1; 0 0];
+%! sMetric(one_edge)
+%! sMetric([0 1; 1 0])

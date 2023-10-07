@@ -45,3 +45,15 @@ function adj = str2adj(str)
         adj(i, str2num(neigh(dots(length(dots)) + 1:length(neigh)))) = 1;
 
     end
+
+
+%!test
+%!assert(str2adj('.2.3,.1.3,.1.2.3,') == [0 1 1; 1 0 1; 1 1 1])
+%!assert(str2adj(',,')==[0 0; 0 0])
+%!assert(str2adj(',')==[0])
+%!assert(str2adj('.2,,')==[0 1; 0 0])
+
+%!demo
+%! str2adj('.2.3,.1.3,.1.2,')  % a three−node undirected cycle
+%! str2adj('.1,,') % a self −loop and a disconnected node
+%! str2adj(',,,,') % an empty 4x4 adjacency matrix

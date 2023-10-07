@@ -44,3 +44,7 @@ function s = weightedRandomSample(n, P, W)
 %!      assert(length(s), n)
 %!      assert(intersect(P, s), unique(s))% test that all draws exist in the population
 %!  end
+
+
+%!demo
+%! weightedRandomSample(2, [1,2,3,9], [0.1, 0.2, 0.3, 0.4])

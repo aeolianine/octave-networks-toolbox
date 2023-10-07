@@ -44,6 +44,33 @@ function [J_st, route_st, J, route] = shortestPathDP(L, s, t, steps)
     route = route(sort(1:min([n, steps]), 'descend'), :);
 
 
+%!test
+%!shared T, bowtie
+%! T = load_test_graphs();
+%! bowtie = T{4}{2};
+%! [Jb,rb,J,r]=shortestPathDP(bowtie,1,3,size(bowtie,1));
+%! assert(Jb,1)
+%! assert(rb,[1,3])
+
+%!test
+%! [Jb,rb,J,r]=shortestPathDP(bowtie,1,4,size(bowtie,1));
+%! assert(Jb,2)
+%! assert(rb,[1,3,4])
+
+%!test
+%! [Jb,rb,J,r]=shortestPathDP(bowtie,1,5,size(bowtie,1));
+%! assert(Jb,3)
+%! assert(rb,[1,3,4,5])
+
+%!test
+%! [Jb,rb,J,r]=shortestPathDP(edgeL2adj(T{11}{2}),1,2,3);
+%! assert(Jb,1)
+%! assert(rb,[1,2])
+
+%!test
+%! [Jb,rb,J,r]=shortestPathDP(edgeL2adj(T{11}{2}),2,3,3);
+%! assert(Jb,inf)
+
 
 %!demo
 %! bowtie = [0 1 1 0 0 0; 1 0 1 0 0 0; 1 1 0 1 0 0; 0 0 1 0 1 1; 0 0 0 1 0 1; 0 0 0 1 1 0];

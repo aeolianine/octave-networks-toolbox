@@ -55,3 +55,5 @@ function [GSCC, S, ind, v] = strongConnComp(vi, S, ind, v, L, GSCC)
         GSCC{length(GSCC) + 1} = SCC;
 
     end
+
+end

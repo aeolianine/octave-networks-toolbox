@@ -29,3 +29,19 @@ function I = sortNodesByMaxNeighborDegree(adj)
 
     [sortmat, I] = sortrows(degmat); % increasing sorting
     I = I(end:-1:1); % decreasing sorting
+
+%!test
+%!shared T
+%! T = load_test_graphs();
+%!assert(sortNodesByMaxNeighborDegree(T{2}{2}),[2, 1]')
+%!assert(sortNodesByMaxNeighborDegree(T{4}{2}),[4,3,6,5,2,1]')  
+%!assert(sortNodesByMaxNeighborDegree(edgeL2adj(T{10}{2})),[1, 3, 2]')
+%!assert(sortNodesByMaxNeighborDegree(T{13}{2}),[3, 2, 1]')
+%!assert(sortNodesByMaxNeighborDegree(adjL2adj(T{17}{2})),[3, 2, 1]')
+
+%!demo
+%! adj = [0 1 1 1; 1 0 0 0; 1 0 0 0; 1 0 0 0];
+%! sortNodesByMaxNeighborDegree(adj)
+%! adj = edgeL2adj(canonicalNets(10, 'tree', 3));
+%! v = sortNodesByMaxNeighborDegree(adj);
+%! v'

@@ -27,3 +27,26 @@ function d = simpleDijkstra(adj, s)
 
         T = setdiff(T, T(ind));
     end
+
+
+%!test
+%!shared T
+%! T = load_test_graphs();
+%!assert(simpleDijkstra(T{4}{2},1),[0, 1, 1, 2, 3, 3])
+%!assert(simpleDijkstra(T{4}{2},3),[1, 1, 0, 1, 2, 2])
+
+%!test
+%! mat = [0 3.5 0 1; 3.5 0 1 0; 0 1 0 1.4; 1 0 1.4 0];
+%! assert(simpleDijkstra(mat,1),[0, 3.4, 2.4, 1])
+
+%!test
+%!assert(simpleDijkstra(edgeL2adj(T{11}{2}),1),[0, 1, 1])
+%!assert(simpleDijkstra(edgeL2adj(T{11}{2}),2),[inf, 0, inf])
+
+
+%!demo
+%! adj = [0 1; 0 0];
+%! simpleDijkstra(adj, 1)
+%! simpleDijkstra(adj, 2)
+%! adj = [0 1 1; 1 0 0; 1 0 0];
+%! simpleDijkstra(adj, 2)
