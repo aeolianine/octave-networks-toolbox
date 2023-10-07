@@ -12,10 +12,20 @@ The original (2006-2011) version of these routines was written in Matlab, and is
 
 The code currently runs on GNU Octave version 6.3.0. No specific library installation necessary. Dependencies between functions are documented in the function headers. The routines can be called directly from the Octave prompt, either in the same directory or from anywhere if the toolbox folder is added to the path. For example:
 
-```bash
-octave:1> # running numNodes.m
+```matlab
+octave:1> % running numNodes.m
 octave:1> numNodes([0 1 1; 1 0 1; 1 1 0])
 ans =  3
+```
+
+To run tests:
+```matlab
+octave:10> % test a single function
+octave:10> test numEdges  
+PASSES 1 out of 1 test
+octave:11>
+octave:11> % test all functions
+octave:11> oruntests
 ```
 
 ## Matlab compatibility
@@ -32,11 +42,11 @@ The functions are organized in 11 categories: basic routines, diagnostic routine
 
 ## Documentation
 
-Documentation is available in the Functions Manual (https://github.com/aeolianine/octave-networks-toolbox/blob/master/functions_manual.pdf). The manual contains general background information, function headers, code examples, and references. For some functions, additional background, definitions or derivations are included. 
+Documentation is available in the [Functions Manual](https://github.com/aeolianine/octave-networks-toolbox/blob/master/functions_manual.pdf). The manual contains general background information, function headers, code examples, and references. For some functions, additional background, definitions or derivations are included. 
 
 ## Citation
 
-If you want to cite this code, you can use DOI: 10.5281/zenodo.22398 (http://dx.doi.org/10.5281/zenodo.22398). This citation refers to the second release, as of August 2 2015.
+If you want to cite this code, you can use DOI: [10.5281/zenodo.22398](http://dx.doi.org/10.5281/zenodo.22398). This citation refers to the second release, from August 2 2015.
 
 ## License/Copyright
 
