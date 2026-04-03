@@ -5,6 +5,9 @@
 %             where di is the degree of the ith node
 % Outputs: adjacency matrix, nxn
 %
+% Note: This algorithm symmetrizes the adjacency matrix,
+% so it only works for undirected graphs.
+%
 % Last updated: Oct 21 2012
 
 function adj = graphFromDegreeSequence(seq)
@@ -36,6 +39,11 @@ function adj = graphFromDegreeSequence(seq)
 %!   assert(isSimple(adjr),true)
 %!   assert(degrees(adj),degrees(adjr))
 %! end
+%!
+%! deg_directed = [0 1];
+%! adj=graphFromDegreeSequence(deg_directed);
+%! assert(not(isequal(degrees(adj),deg_directed)))
+
 
 %!demo
 %! adj = randomGraph(100 ,0.4);
